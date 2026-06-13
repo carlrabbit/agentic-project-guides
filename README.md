@@ -44,3 +44,18 @@ Guide artifacts use semantic versioning.
 - `PATCH`: clarification, typo, examples, or non-semantic wording.
 
 See `meta/VERSIONING.md`.
+
+
+## Version 0.2.0 additions
+
+Version 0.2.0 adds the operational prompt library and the `.guide-sync/` deferred documentation synchronization queue.
+
+Use `templates/PROMPTS.md` to select a planning prompt for:
+
+- migration to guide system v0.1.0;
+- migration from guide system v0.1.0 to v0.2.0;
+- empty project initialization;
+- milestone planning by execution mode;
+- documentation synchronization passes.
+
+Use `meta/DOCUMENTATION-SYNC-MODEL.md` and `templates/guide-sync-hint.md` to add repository-local synchronization hints under `.guide-sync/pending/` in product repositories. Ordinary implementation agents must ignore `.guide-profile.json` and `.guide-sync/` unless explicitly assigned guide migration or documentation synchronization work.
