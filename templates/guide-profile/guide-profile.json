@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "guideSystem": {
+    "repository": "carlrabbit/agentic-project-guides",
+    "version": "0.1.0"
+  },
+  "appliedProfiles": [
+    {
+      "id": "base",
+      "version": "0.1.0"
+    }
+  ],
+  "repositoryRole": "capability-provider",
+  "maturityStage": "implementation-ready",
+  "executionModel": {
+    "defaultImplementationMode": "ai-executed-human-reviewed",
+    "documentationSync": "separate-pass",
+    "releaseReadiness": "separate-pass"
+  },
+  "activeDocumentationLayers": [
+    "engineering",
+    "milestones",
+    "specs"
+  ],
+  "inactiveDocumentationLayers": [
+    "tbps",
+    "issue-templates",
+    "repository-guide-copies"
+  ]
+}
