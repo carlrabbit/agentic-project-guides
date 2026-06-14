@@ -1,21 +1,14 @@
-# ADR-0005 — Use Migrations Instead of Generic Upgrades
+# 0005 — Use Migrations Instead of Generic Upgrades
 
 ## Status
 
 Accepted.
 
-## Context
-
-Simple instructions such as "upgrade to the latest guide" do not work once repositories have profiles, roles, maturity stages, and selected modules.
-
 ## Decision
 
-Guide updates are applied through profile-aware migration documents.
-
-Migration documents classify changes as required, conditional, deprecated, manual-review, or no-op.
+Guide updates are applied through profile-aware migration documents, not broad implementation instructions.
 
 ## Consequences
 
-- Repository updates become plan-driven.
-- Agents can apply focused migration milestones.
-- Not every guide change affects every repository.
+- The guide system keeps methodology outside product repository truth.
+- Planning, execution, documentation synchronization, and migration remain separate task modes.

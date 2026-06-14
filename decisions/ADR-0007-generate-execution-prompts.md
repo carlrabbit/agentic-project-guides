@@ -1,4 +1,4 @@
-# 0004 — Separate Provider and Consumer Responsibilities
+# 0007 — Generate Execution Prompts from Planning Work
 
 ## Status
 
@@ -6,7 +6,7 @@ Accepted.
 
 ## Decision
 
-Capability providers validate the capability implementation. Capability consumers use the capability to validate authored products.
+Planning prompts must emit a concise execution prompt for the later implementation agent so disconnected agents can hand off without shared chat state.
 
 ## Consequences
 

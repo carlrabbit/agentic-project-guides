@@ -6,14 +6,15 @@ Authoritative for guide-system versioning.
 
 ## Versioned artifacts
 
-The following artifacts are versioned independently:
+The following artifacts are versioned independently when useful:
 
 - guide system;
 - base guides;
 - profiles;
 - project-type guides;
 - migrations;
-- templates.
+- templates;
+- prompt families.
 
 ## Semantic versioning
 
@@ -25,29 +26,24 @@ MAJOR
   Existing repositories likely need migration planning.
 
 MINOR
-  New optional guide module, profile, maturity stage, building block, or guidance.
-  Existing repositories do not require immediate migration.
+  New optional guide module, profile, maturity stage, building block, prompt family, or guidance.
+  Existing repositories do not require immediate migration unless they use the affected workflow.
 
 PATCH
   Clarification, typo, example improvement, or non-semantic wording.
   No repository migration expected.
 ```
 
-## Change metadata
+## Changelog rules
 
-Every meaningful guide change should declare:
+Each minor or major version entry should state:
 
-```text
-Migration required: yes/no
-Affected profiles
-Affected repository roles
-Affected maturity stages
-Affected documentation layers
-Affected validation tiers
-```
+- migration required: yes/no/conditional;
+- affected areas;
+- affected product repositories;
+- required migration;
+- conditional migration;
+- deprecated concepts;
+- manual review points.
 
-## Product repository traceability
-
-Use `.guide-profile.json` when traceability is needed.
-
-Do not use Markdown documentation inside product repositories to explain the guide system unless the repository itself is a guide repository.
+This lets latest-version migration prompts inspect `CHANGELOG.md` and construct repository-specific migration plans.

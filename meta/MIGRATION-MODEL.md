@@ -1,26 +1,30 @@
 # Migration Model
 
-## Status
+Guide updates are applied through profile-aware migrations, not vague implementation instructions.
 
-Authoritative for guide and repository migrations.
+Do not ask implementation agents to simply "upgrade to the latest guide".
 
-## Purpose
+Allowed planning prompt:
 
-Guide updates are applied through profile-aware migrations, not vague upgrade instructions.
+```text
+Plan migration to the latest available guide-system version.
+```
 
-Do not ask agents to simply "upgrade to the latest guide".
+The planning agent must resolve the latest version explicitly from the guide repository, inspect changelog and migration documents, and create a repository-specific migration package.
 
 ## Migration flow
 
 ```text
 1. Identify current guide profile metadata.
-2. Identify target guide profile metadata.
-3. Assess repository state.
-4. Create a migration plan.
-5. Classify changes.
-6. Apply migration steps as focused milestones.
-7. Run validation.
-8. Run documentation sync.
+2. Resolve latest guide-system version.
+3. Read changelog and relevant migrations.
+4. Assess repository state.
+5. Create a migration plan.
+6. Classify changes.
+7. Create implementation-ready migration package.
+8. Generate execution prompt.
+9. Run implementation.
+10. Run documentation sync.
 ```
 
 ## Change classification
@@ -32,21 +36,3 @@ Do not ask agents to simply "upgrade to the latest guide".
 | Deprecated | Remove or stop referencing. |
 | Manual review | Requires human or documentation-agent judgment. |
 | No-op | Intentionally not applicable. |
-
-## Migration document structure
-
-A migration document should include:
-
-```text
-Source profile/version
-Target profile/version
-Affected repository roles
-Affected maturity stages
-Required changes
-Conditional changes
-Deprecated concepts
-Manual review points
-Validation expectations
-Documentation sync expectations
-Rollback notes
-```

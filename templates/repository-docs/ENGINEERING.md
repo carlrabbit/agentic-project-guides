@@ -1,7 +1,5 @@
 # Engineering
 
-## Purpose
-
 This document defines this repository's local engineering commands, validation tiers, and tooling rules.
 
 ## Canonical commands
@@ -23,7 +21,5 @@ This document defines this repository's local engineering commands, validation t
 | 3 | PR integration validation | GitHub workflows. |
 | 4 | Release validation | Repository-specific. |
 | 5 | Human review validation | Repository-specific. |
-
-## Rule
 
 Use the validation tier named by the milestone or task.

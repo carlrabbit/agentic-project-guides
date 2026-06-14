@@ -1,6 +1,10 @@
-# Prompt — Plan an AI-Assisted Milestone
+# Prompt — Migrate Guide-System Usage from v0.1.0 to v0.2.0
 
-Our planning task is to create an implementation-ready milestone package for an AI-assisted milestone: `{milestone}`.
+Use this version-specific prompt only when an exact v0.2.0 target is required.
+
+Prefer `templates/prompts/update-to-latest-guide-system.md` for normal work.
+
+Our planning task is to create an implementation-ready migration milestone package for adopting guide system v0.2.0 in a repository that already uses or is being migrated to v0.1.0.
 
 The active guide authority is external:
 
@@ -18,6 +22,14 @@ If the target repository contains `.guide-profile.json`, use it as guide-selecti
 
 If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
 
+Target the v0.2.0 additions:
+
+- prompt template library;
+- `.guide-sync/pending/` deferred documentation synchronization queue;
+- documentation-sync model;
+- ADR-0006;
+- ordinary implementation agents ignore `.guide-profile.json` and `.guide-sync/`.
+
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
@@ -25,64 +37,6 @@ There is no direct synchronization between the planning AI and the implementatio
 Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
-
-## Repository inspection
-
-Inspect the target repository before writing files. Read the minimum required target-repository documentation, usually:
-
-- `README.md`;
-- `AGENTS.md`;
-- `.guide-profile.json` if present;
-- `docs/TERMINOLOGY.md`;
-- `docs/SPECS.md`;
-- relevant `docs/specs/*`;
-- `docs/ENGINEERING.md`;
-- relevant `docs/engineering/*`;
-- relevant existing milestones and decisions.
-
-Treat `docs/research/` and old copied guides as non-authoritative legacy material unless explicitly marked otherwise.
-
-## Required milestone document
-
-Create exactly one primary milestone document under `docs/milestones/`.
-
-The milestone must include:
-
-1. goal;
-2. repository role and maturity assumptions;
-3. execution mode;
-4. scope;
-5. non-goals;
-6. focus areas;
-7. implementation constraints;
-8. required authority documents;
-9. files or areas likely affected;
-10. validation tiers and concrete repository commands;
-11. acceptance criteria;
-12. direct documentation impact;
-13. deferred documentation synchronization hints;
-14. human review requirements if applicable;
-15. out-of-scope guide migration work if applicable.
-
-## Deferred documentation synchronization hints
-
-If deferred documentation work must survive handoff, create one or more files under:
-
-```text
-.guide-sync/pending/
-```
-
-Do not require the implementation agent to read `.guide-sync/`.
-
-## Provider versus consumer distinction
-
-Do not confuse implementing a capability with using that capability.
-
-Capability-provider repositories validate capability implementation. Capability-consumer repositories use capabilities for product validation. Mixed/dogfood repositories may do both, but dogfood scope must be bounded.
-
-## Mode requirements
-
-Execution mode: `ai-assisted`. Scope should be medium. Focus areas should be coherent but leave explicit checkpoints where human input may be needed.
 
 ## Deliverable
 

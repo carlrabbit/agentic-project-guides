@@ -1,5 +1,7 @@
 # Agentic Project Guides
 
+Version: 0.3.0
+
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
 The guide system is intentionally separate from product repositories.
@@ -32,30 +34,30 @@ profiles/                     Reusable project profiles.
 project-types/                More specific project-type guides built from profiles.
 decisions/                    Decision records for the guide system itself.
 migrations/                   Profile-aware guide/repository migration documents.
-templates/                    Reusable templates for generated repository documentation.
+templates/                    Reusable templates and prompts.
 ```
+
+## Version 0.3.0 additions
+
+Version 0.3.0 adds execution handoff prompts and generic latest-version migration/adoption prompts.
+
+New standard prompts include:
+
+- `templates/prompts/adopt-latest-guide-system.md`
+- `templates/prompts/update-to-latest-guide-system.md`
+- `templates/prompts/execute-planned-milestone.md`
+- `templates/prompts/execute-engineering-migration.md`
+- `templates/prompts/execute-documentation-sync.md`
+- `templates/prompts/execute-release-readiness.md`
+
+Planning prompts should now emit a filled execution prompt in chat for the later implementation agent.
 
 ## Versioning
 
 Guide artifacts use semantic versioning.
 
 - `MAJOR`: breaking guide model change; repository migration likely required.
-- `MINOR`: new optional profile, building block, maturity stage, or guidance.
+- `MINOR`: new optional profile, building block, maturity stage, prompt family, or guidance.
 - `PATCH`: clarification, typo, examples, or non-semantic wording.
 
 See `meta/VERSIONING.md`.
-
-
-## Version 0.2.0 additions
-
-Version 0.2.0 adds the operational prompt library and the `.guide-sync/` deferred documentation synchronization queue.
-
-Use `templates/PROMPTS.md` to select a planning prompt for:
-
-- migration to guide system v0.1.0;
-- migration from guide system v0.1.0 to v0.2.0;
-- empty project initialization;
-- milestone planning by execution mode;
-- documentation synchronization passes.
-
-Use `meta/DOCUMENTATION-SYNC-MODEL.md` and `templates/guide-sync-hint.md` to add repository-local synchronization hints under `.guide-sync/pending/` in product repositories. Ordinary implementation agents must ignore `.guide-profile.json` and `.guide-sync/` unless explicitly assigned guide migration or documentation synchronization work.

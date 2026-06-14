@@ -10,8 +10,10 @@ The prompt templates are guide-system methodology. They should live in this guid
 
 | Task | Prompt |
 |---|---|
-| Migrate an old guide-based repository to guide system v0.1.0 | `templates/prompts/migration-to-guide-system-v0.1.0.md` |
-| Migrate guide-system usage from v0.1.0 to v0.2.0 | `templates/prompts/migration-v0.1.0-to-v0.2.0.md` |
+| Adopt latest guide system from any old local setup/engineering guide model | `templates/prompts/adopt-latest-guide-system.md` |
+| Update from any existing guide-system version to latest | `templates/prompts/update-to-latest-guide-system.md` |
+| Migrate an old guide-based repository to guide system v0.1.0 | `templates/prompts/version-specific/migration-to-guide-system-v0.1.0.md` |
+| Migrate guide-system usage from v0.1.0 to v0.2.0 | `templates/prompts/version-specific/migration-v0.1.0-to-v0.2.0.md` |
 | Prepare a completely empty new project | `templates/prompts/new-empty-project.md` |
 | Plan a human-led milestone | `templates/prompts/milestone-human-led.md` |
 | Plan an AI-assisted milestone | `templates/prompts/milestone-ai-assisted.md` |
@@ -20,20 +22,25 @@ The prompt templates are guide-system methodology. They should live in this guid
 | Plan an engineering migration milestone | `templates/prompts/milestone-engineering-migration.md` |
 | Plan a documentation sync milestone/package | `templates/prompts/milestone-documentation-sync.md` |
 | Plan a release-readiness milestone | `templates/prompts/milestone-release-readiness.md` |
+| Execute a planned milestone | `templates/prompts/execute-planned-milestone.md` |
+| Execute an engineering migration | `templates/prompts/execute-engineering-migration.md` |
+| Execute documentation synchronization | `templates/prompts/execute-documentation-sync.md` |
+| Execute release readiness | `templates/prompts/execute-release-readiness.md` |
 | Perform a documentation synchronization pass | `templates/prompts/documentation-sync-pass.md` |
 
 ## Common rule
 
 Planning prompts may read the external guide repository. Implementation agents should not be required to read the guide repository. Milestones must list only target-repository authority documents required for implementation.
 
-## Sync hints
+## Execution prompts
 
-Planning prompts must write deferred documentation synchronization hints to:
+Planning prompts should emit a filled execution prompt in chat for the later implementation agent.
 
-```text
-.guide-sync/pending/
-```
+Execution prompts should tell the implementation agent to:
 
-when those hints must survive handoff to another agent.
-
-Documentation-sync prompts consume and clean up those hints.
+- start from the primary milestone document;
+- read only authority documents listed in that milestone;
+- ignore `.guide-profile.json` and `.guide-sync/` unless the task explicitly requires them;
+- not read the external guide repository;
+- not perform broad documentation synchronization unless the execution mode is documentation-sync;
+- run the validation tier and concrete commands specified in the milestone.

@@ -5,7 +5,6 @@ Our task is to perform a documentation synchronization pass for the target repos
 The active guide authority is external:
 
 - Guide repository: `carlrabbit/agentic-project-guides`
-- Guide system version: `0.2.0`
 
 Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
