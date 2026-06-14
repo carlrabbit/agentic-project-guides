@@ -5,7 +5,6 @@ Our planning task is to create a documentation synchronization milestone package
 The active guide authority is external:
 
 - Guide repository: `carlrabbit/agentic-project-guides`
-- Guide system version: `0.2.0`
 
 Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
@@ -23,7 +22,9 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready milestone package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+
+Also generate a concise execution prompt in chat for the later implementation agent.
 
 ## Repository inspection
 
@@ -81,13 +82,7 @@ Capability-provider repositories validate capability implementation. Capability-
 
 ## Mode requirements
 
-Execution mode: `documentation-sync`.
-
-Use this mode for broad documentation normalization, cross-reference cleanup, public-doc synchronization, terminology cleanup, guide-profile migration cleanup, and sync-hint resolution.
-
-This milestone may read `.guide-sync/pending/`.
-
-Do not include implementation source changes unless documentation metadata cannot be updated safely without them.
+Execution mode: `documentation-sync`. This milestone may read `.guide-sync/pending/`. Do not include implementation source changes unless documentation metadata cannot be updated safely without them.
 
 ## Deliverable
 
@@ -101,5 +96,5 @@ After creating the ZIP, respond with:
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profile, role, maturity, and execution mode;
-5. implementation-agent hints;
+5. a filled execution prompt for the later implementation agent;
 6. documentation-sync hints and the `.guide-sync/pending/` files created.

@@ -1,14 +1,6 @@
 # Maturity Model
 
-## Status
-
-Authoritative for repository maturity stages.
-
-## Purpose
-
 Maturity stages prevent premature documentation, release, and validation obligations.
-
-## Stages
 
 | Stage | Meaning |
 |---|---|
@@ -20,8 +12,4 @@ Maturity stages prevent premature documentation, release, and validation obligat
 | `release-ready` | Public API, packages, docs, samples, and release validation are complete enough for release. |
 | `published-maintenance` | Compatibility, migration, deprecation, and release discipline dominate. |
 
-## Rule
-
 Do not apply release-ready obligations to exploration or implementation-ready repositories.
-
-Do not apply public-documentation obligations until there is a real public surface or public-preview target.

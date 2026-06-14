@@ -1,16 +1,6 @@
 # Milestone Execution Model
 
-## Status
-
-Authoritative for milestone execution modes.
-
-## Purpose
-
 Milestone size and detail should be selected by execution mode, design maturity, validation strength, and review model.
-
-AI-executed milestones may be larger than human-sized work packages when design authority is stable.
-
-## Execution modes
 
 | Mode | Meaning |
 |---|---|
@@ -22,29 +12,4 @@ AI-executed milestones may be larger than human-sized work packages when design 
 | `engineering-migration` | Changes command contracts, scripts, CI, or validation infrastructure. |
 | `release-readiness` | Prepares public release artifacts, docs, packages, and release validation. |
 
-## Milestone sizing rule
-
-Small milestones are useful when design risk is high.
-
-Larger AI-executed milestones are appropriate when:
-
-- specs are normalized;
-- architecture decisions are stable;
-- acceptance criteria are explicit;
-- validation tiers are defined;
-- documentation sync is separated from implementation.
-
-## Required milestone fields
-
-Milestones should declare:
-
-```text
-Execution mode
-Scope size
-Implementation autonomy
-Required authority documents
-Non-goals
-Validation tier
-Documentation responsibility
-Human review expectations
-```
+Planning prompts generate milestones. Execution prompts tell the later implementation agent how to consume the milestone without re-planning.

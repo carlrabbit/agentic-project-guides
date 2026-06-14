@@ -1,13 +1,6 @@
-# Prompt — Prepare a Completely Empty New Project
+# Prompt — Update Repository to Latest Agentic Project Guide System
 
-Our planning task is to create a repository initialization package for a completely empty new project:
-
-- Project name: `{project-name}`
-- Project type/profile: `{project-type-or-profile}`
-- Repository role: `{repository-role}`
-- Maturity stage: `{maturity-stage}`
-- Public/private status: `{public-private-status}`
-- Primary stack: `{primary-stack}`
+Our planning task is to create an implementation-ready migration package for updating a repository from any existing `carlrabbit/agentic-project-guides` version to the latest available guide-system version.
 
 The active guide authority is external:
 
@@ -25,29 +18,71 @@ If the target repository contains `.guide-profile.json`, use it as guide-selecti
 
 If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
 
-Resolve the latest guide-system version from `carlrabbit/agentic-project-guides` before creating files.
+## Resolve current and latest guide versions
 
-## Goal
+Read the target repository's `.guide-profile.json` if present to identify the current recorded guide-system version.
 
-Create a ZIP that can be unpacked into an empty repository to establish the initial project documentation and planning substrate.
+Then inspect the guide repository to determine the latest guide-system version.
 
-Usually include:
+Read at minimum:
 
-```text
-README.md
-AGENTS.md
-.guide-profile.json
-.guide-sync/pending/.gitkeep
-docs/TERMINOLOGY.md
-docs/SPECS.md
-docs/ENGINEERING.md
-docs/MILESTONES.md
-docs/milestones/M0001-initialization.md
-```
+- `README.md`;
+- `CHANGELOG.md`;
+- `meta/VERSIONING.md`;
+- `meta/MIGRATION-MODEL.md`;
+- all migration documents newer than the current recorded version;
+- relevant decisions;
+- `templates/PROMPTS.md`.
 
-Add specs, architecture docs, decisions, public docs, or engineering docs only when required for the selected project type and maturity stage.
+State both versions explicitly in the chat response and in the migration milestone.
 
-Do not include copied guide documents.
+Do not assume a hard-coded latest version.
+
+## Target use case
+
+Use this prompt when the target repository already has one or more of:
+
+- `.guide-profile.json`;
+- `.guide-sync/`;
+- localized docs shaped by the external guide system;
+- no copied guides as active authority;
+- prior migration to `carlrabbit/agentic-project-guides`.
+
+## Repository inspection
+
+Inspect the target repository before writing files.
+
+Usually read:
+
+- `.guide-profile.json`;
+- `.guide-sync/pending/` if present;
+- `README.md`;
+- `AGENTS.md`;
+- `docs/ENGINEERING.md`;
+- `docs/MILESTONES.md`;
+- relevant milestone, spec, decision, public-doc, and engineering docs.
+
+## Required output
+
+Create one migration milestone under `docs/milestones/`.
+
+Update `.guide-profile.json` only if the migration plan includes that change.
+
+Create `.guide-sync/pending/` hints for deferred documentation synchronization.
+
+Do not copy guide documents into the target repository.
+
+Do not perform broad implementation work.
+
+## Migration classification
+
+Classify migration work as:
+
+- required;
+- conditional;
+- deprecated;
+- manual-review;
+- no-op.
 
 ## Planning/implementation separation
 

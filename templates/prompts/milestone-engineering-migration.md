@@ -5,7 +5,6 @@ Our planning task is to create an implementation-ready engineering migration mil
 The active guide authority is external:
 
 - Guide repository: `carlrabbit/agentic-project-guides`
-- Guide system version: `0.2.0`
 
 Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
@@ -23,7 +22,9 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready milestone package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+
+Also generate a concise execution prompt in chat for the later implementation agent.
 
 ## Repository inspection
 
@@ -81,13 +82,7 @@ Capability-provider repositories validate capability implementation. Capability-
 
 ## Mode requirements
 
-Execution mode: `engineering-migration`.
-
-Use this mode for command contracts, build/test infrastructure, repository layout, validation tiers, CI behavior, package/release substrate, or guide-system migrations.
-
-Classify work as required, conditional, deprecated, manual-review, or no-op when the milestone migrates from an older model.
-
-Do not mix unrelated product feature implementation into the migration.
+Execution mode: `engineering-migration`. Use for command contracts, build/test infrastructure, repository layout, validation tiers, CI behavior, package/release substrate, or guide-system migrations.
 
 ## Deliverable
 
@@ -101,5 +96,5 @@ After creating the ZIP, respond with:
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profile, role, maturity, and execution mode;
-5. implementation-agent hints;
+5. a filled execution prompt for the later implementation agent;
 6. documentation-sync hints and the `.guide-sync/pending/` files created.
