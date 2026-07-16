@@ -1,42 +1,49 @@
 # Prompt — Execute Planned Milestone
 
-You are the implementation agent for this repository.
+You are the implementation agent. Planning is complete.
 
-A planning/documentation agent has already created an implementation-ready milestone package. Do not redo planning.
-
-Unpack or use the provided milestone package, then start with:
+Start with:
 
 ```text
 {primary-milestone-path}
 ```
 
-Read only:
-
-1. the primary milestone document;
-2. the authority documents explicitly listed in that milestone;
-3. source and test files needed for the focus areas.
+Read only the milestone, its listed authority documents, and relevant source/test files.
 
 Do not read the external guide repository.
 
-Do not treat old copied setup or engineering guides as authority.
+Do not read `.guide-profile.json`, `.guide-sync/`, or `.review/` unless the milestone explicitly requires them.
 
-Do not read `.guide-profile.json` or `.guide-sync/` unless the milestone explicitly says this is guide migration, documentation synchronization, engineering migration, or release-readiness work.
+Implement only the milestone scope.
 
-Implement only the milestone scope and focus areas.
+## Validation
 
-Do not broaden scope.
+Use the validation tier, execution mode, and concrete commands specified by the milestone.
 
-Do not perform broad documentation synchronization.
+When a validation command exposes `--plan-json` in a constrained execution environment:
 
-Update direct documentation only when the milestone says it is required for implementation correctness.
+1. run the plan command;
+2. execute each shard separately;
+3. do not use the long no-argument aggregate command;
+4. run the verifier;
+5. treat verifier success as aggregate authority.
 
-Use the validation tier and concrete commands specified in the milestone.
+Do not claim aggregate success from partial output.
 
-When finished, report:
+Do not use backgrounding, `nohup`, `disown`, `setsid`, output redirection, or larger shell timeouts to escape a hard harness lifetime.
+
+## Human review
+
+When Tier 5 is active, produce or update the evidence requested by the milestone and run the specified review commands. Do not fabricate approval.
+
+## Completion report
+
+Report:
 
 - implemented focus areas;
-- files changed;
-- validation commands run and results;
+- changed files;
+- validation shards and verifier results;
 - direct documentation changes;
-- deferred documentation sync hints, if any;
-- blockers or deviations from the milestone.
+- review evidence or unresolved review requests;
+- deferred documentation sync hints;
+- blockers and deviations.

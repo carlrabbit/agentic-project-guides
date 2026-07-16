@@ -1,20 +1,8 @@
 # Agentic Project Guides
 
-Version: 0.3.0
+Version: 0.5.0
 
-This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
-
-The guide system is intentionally separate from product repositories.
-
-Product repositories should contain localized project truth only:
-
-- `README.md`
-- `AGENTS.md`
-- `docs/*`
-- `eng/*`
-- source, tests, samples, and artifacts
-
-Product repositories should not contain copied setup guides, engineering guides, or meta guides as operational documentation.
+This repository contains a versioned guide system for AI-first project setup, engineering, planning, implementation handoff, documentation synchronization, human review, migration, and validation.
 
 ## Core rule
 
@@ -25,39 +13,34 @@ Planning and documentation-sync work may use the guides.
 Implementation work uses localized project documentation only.
 ```
 
+## v0.4.0 capability additions
+
+- repository-local human review workflow;
+- review requests, records, evidence, and blocking semantics;
+- canonical `eng/` commands for review operations;
+- thin Bash and PowerShell launchers over shared tested implementation;
+- explicit declaration and testing of platform support.
+
+## v0.5.0 capability additions
+
+- constrained agent execution model;
+- resumable validation suites;
+- bounded validation shards;
+- atomic fingerprinted validation receipts;
+- machine-readable validation plans;
+- fast aggregate verification;
+- explicit rejection of backgrounding or shell tricks as a remedy for hard harness lifetimes.
+
 ## Repository structure
 
 ```text
-meta/                         Meta-level guide system rules.
-base/                         Base setup, engineering, agent, and documentation-sync guides.
-profiles/                     Reusable project profiles.
-project-types/                More specific project-type guides built from profiles.
-decisions/                    Decision records for the guide system itself.
-migrations/                   Profile-aware guide/repository migration documents.
-templates/                    Reusable templates and prompts.
+meta/
+base/
+profiles/
+project-types/
+decisions/
+migrations/
+templates/
 ```
 
-## Version 0.3.0 additions
-
-Version 0.3.0 adds execution handoff prompts and generic latest-version migration/adoption prompts.
-
-New standard prompts include:
-
-- `templates/prompts/adopt-latest-guide-system.md`
-- `templates/prompts/update-to-latest-guide-system.md`
-- `templates/prompts/execute-planned-milestone.md`
-- `templates/prompts/execute-engineering-migration.md`
-- `templates/prompts/execute-documentation-sync.md`
-- `templates/prompts/execute-release-readiness.md`
-
-Planning prompts should now emit a filled execution prompt in chat for the later implementation agent.
-
-## Versioning
-
-Guide artifacts use semantic versioning.
-
-- `MAJOR`: breaking guide model change; repository migration likely required.
-- `MINOR`: new optional profile, building block, maturity stage, prompt family, or guidance.
-- `PATCH`: clarification, typo, examples, or non-semantic wording.
-
-See `meta/VERSIONING.md`.
+See `CHANGELOG.md` and `templates/PROMPTS.md`.

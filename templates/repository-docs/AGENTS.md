@@ -4,33 +4,37 @@
 
 Read:
 
-- `docs/ENGINEERING.md`
-- the relevant milestone section or task description
-- relevant specs under `docs/specs/`
-- relevant source and test files
+- `docs/ENGINEERING.md`;
+- the relevant milestone or task;
+- authority documents listed by that milestone;
+- relevant source and test files.
 
 Use canonical `eng/` commands only.
 
-## Conditional reading
+## Coordination metadata
 
-Read public docs only when changing public behavior, package behavior, diagnostics, samples, or consumer-facing usage.
+During ordinary implementation, ignore unless explicitly in scope:
 
-Read architecture and decisions only when changing durable subsystem boundaries or design rationale.
+- `.guide-profile.json`;
+- `.guide-sync/`;
+- `.review/`.
 
-Read workflow docs only when changing CI, release, or workflow behavior.
+Read `.review/` only when the milestone activates Tier 5 review, requests review evidence, or requires review validation.
 
-## Ignored Coordination Metadata
+## Constrained execution
 
-Do not read or modify these files during ordinary implementation work unless the task explicitly says it is guide migration, milestone planning, documentation synchronization, release readiness, or release documentation work:
+When a validation command exposes `--plan-json`, do not run its long aggregate mode in a constrained agent environment.
 
-- `.guide-profile.json`
-- `.guide-sync/`
+Run each planned shard in a separate invocation and finish with `--verify`.
 
-These files are for planning and documentation synchronization agents. They are not implementation authority.
+Do not claim aggregate success from partial logs.
+
+Do not attempt to bypass execution limits with `nohup`, backgrounding, `disown`, `setsid`, or shell timeout changes.
 
 ## Do not
 
-- Do not invent build, test, package, or release commands.
-- Do not perform broad documentation synchronization unless requested.
-- Do not treat external guide documents as repository authority.
-- Do not add copied guide documents to this repository.
+- invent commands;
+- broaden scope;
+- perform broad documentation synchronization unless requested;
+- treat external guide documents as repository authority;
+- put complex project semantics into shell launchers.

@@ -1,25 +1,51 @@
 # Engineering
 
-This document defines this repository's local engineering commands, validation tiers, and tooling rules.
+## Canonical command interface
 
-## Canonical commands
+`eng/` is the stable engineering API.
 
-```text
-./eng/restore.sh
-./eng/build.sh
-./eng/test.sh
-./eng/check.sh
-```
+Platform launchers remain thin. Complex logic belongs in tested application code.
 
 ## Validation tiers
 
-| Tier | Purpose | Command |
-|---|---|---|
-| 0 | Edit sanity | Repository-specific. |
-| 1 | Focused validation | Repository-specific. |
-| 2 | Standard local validation | `./eng/check.sh` |
-| 3 | PR integration validation | GitHub workflows. |
-| 4 | Release validation | Repository-specific. |
-| 5 | Human review validation | Repository-specific. |
+| Tier | Purpose |
+|---|---|
+| 0 | Edit sanity |
+| 1 | Focused validation |
+| 2 | Standard local validation |
+| 3 | PR integration validation |
+| 4 | Release validation |
+| 5 | Human review validation |
 
-Use the validation tier named by the milestone or task.
+## Validation execution modes
+
+```text
+direct
+resumable-sharded
+CI-only
+human-review
+```
+
+## Human review commands
+
+When activated:
+
+```text
+./eng/review-list.sh
+./eng/review-request.sh
+./eng/review-record.sh
+./eng/review-check.sh
+```
+
+## Resumable suite contract
+
+When activated:
+
+```text
+./eng/<suite>.sh --list
+./eng/<suite>.sh --plan-json
+./eng/<suite>.sh --shard <id>
+./eng/<suite>.sh --verify
+```
+
+Aggregate success is established by `--verify`, not by partial output from a long wrapper.

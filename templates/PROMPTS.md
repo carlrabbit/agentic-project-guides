@@ -1,46 +1,30 @@
 # Prompt Templates
 
-## Purpose
+## Planning
 
-This index lists standard prompts for using the guide system in disconnected planning, implementation, migration, and documentation synchronization workflows.
+- `prompts/adopt-latest-guide-system.md`
+- `prompts/update-to-latest-guide-system.md`
+- `prompts/new-empty-project.md`
+- milestone planning prompts by execution mode
 
-The prompt templates are guide-system methodology. They should live in this guide repository, not in product repositories.
+## Execution
 
-## Prompt selection
+- `prompts/execute-planned-milestone.md`
+- `prompts/execute-engineering-migration.md`
+- `prompts/execute-documentation-sync.md`
+- `prompts/execute-release-readiness.md`
 
-| Task | Prompt |
-|---|---|
-| Adopt latest guide system from any old local setup/engineering guide model | `templates/prompts/adopt-latest-guide-system.md` |
-| Update from any existing guide-system version to latest | `templates/prompts/update-to-latest-guide-system.md` |
-| Migrate an old guide-based repository to guide system v0.1.0 | `templates/prompts/version-specific/migration-to-guide-system-v0.1.0.md` |
-| Migrate guide-system usage from v0.1.0 to v0.2.0 | `templates/prompts/version-specific/migration-v0.1.0-to-v0.2.0.md` |
-| Prepare a completely empty new project | `templates/prompts/new-empty-project.md` |
-| Plan a human-led milestone | `templates/prompts/milestone-human-led.md` |
-| Plan an AI-assisted milestone | `templates/prompts/milestone-ai-assisted.md` |
-| Plan an AI-executed, human-reviewed milestone | `templates/prompts/milestone-ai-executed-human-reviewed.md` |
-| Plan a broad AI-executed milestone | `templates/prompts/milestone-ai-executed-broad.md` |
-| Plan an engineering migration milestone | `templates/prompts/milestone-engineering-migration.md` |
-| Plan a documentation sync milestone/package | `templates/prompts/milestone-documentation-sync.md` |
-| Plan a release-readiness milestone | `templates/prompts/milestone-release-readiness.md` |
-| Execute a planned milestone | `templates/prompts/execute-planned-milestone.md` |
-| Execute an engineering migration | `templates/prompts/execute-engineering-migration.md` |
-| Execute documentation synchronization | `templates/prompts/execute-documentation-sync.md` |
-| Execute release readiness | `templates/prompts/execute-release-readiness.md` |
-| Perform a documentation synchronization pass | `templates/prompts/documentation-sync-pass.md` |
+## v0.5.0 execution rule
 
-## Common rule
+Planning prompts should declare validation execution mode.
 
-Planning prompts may read the external guide repository. Implementation agents should not be required to read the guide repository. Milestones must list only target-repository authority documents required for implementation.
+When a milestone uses resumable validation, its execution prompt must tell the implementation agent to:
 
-## Execution prompts
+1. run `--plan-json`;
+2. execute every shard in a separate invocation;
+3. stop on real shard failure;
+4. run `--verify`;
+5. report the verifier result;
+6. never infer success from partial aggregate output.
 
-Planning prompts should emit a filled execution prompt in chat for the later implementation agent.
-
-Execution prompts should tell the implementation agent to:
-
-- start from the primary milestone document;
-- read only authority documents listed in that milestone;
-- ignore `.guide-profile.json` and `.guide-sync/` unless the task explicitly requires them;
-- not read the external guide repository;
-- not perform broad documentation synchronization unless the execution mode is documentation-sync;
-- run the validation tier and concrete commands specified in the milestone.
+Human review and documentation synchronization remain separate repository-local workflows under `.review/` and `.guide-sync/`.

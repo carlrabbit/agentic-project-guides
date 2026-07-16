@@ -1,80 +1,59 @@
 # Changelog
 
-## 0.3.0
+## 0.5.0
 
 Migration required: conditional.
 
 Affected areas:
 
-- prompt templates;
-- planning/execution handoff;
-- generic migration/adoption prompts;
-- guide-system migration workflow.
-
-Affected product repositories:
-
-- repositories using disconnected planning and implementation agents;
-- repositories still using old copied setup/engineering guides;
-- repositories already using `.guide-profile.json` and needing update to the latest guide-system version.
+- validation execution;
+- agent runtime constraints;
+- engineering command host;
+- milestone planning and execution prompts;
+- validation reporting.
 
 Added:
 
-- execution prompt templates for planned milestones, engineering migration, documentation sync, and release readiness;
-- generic prompt for adopting the latest guide system from any old local setup/engineering guide model;
-- generic prompt for updating from any existing guide-system version to the latest guide-system version;
-- ADR-0007 for generated execution prompts;
-- ADR-0008 for latest-version migration prompts;
-- migration document for guide system v0.2.0 to v0.3.0.
+- `meta/CONSTRAINED-EXECUTION-MODEL.md`;
+- resumable validation suite model;
+- validation receipt and plan templates;
+- ADR-0014 through ADR-0018;
+- migration from v0.4.0 to v0.5.0;
+- prompt rules for sharded execution and fast verification.
 
 Conditional migration:
 
-- update planning workflow to emit execution prompts in chat;
-- replace version-pair prompt usage with the generic latest-version adoption/update prompts when appropriate;
-- keep version-specific migration documents as source material, not the default user prompt.
+- convert aggregate validation commands that may exceed agent runtime limits;
+- expose `--list`, `--plan-json`, `--shard`, and `--verify` modes;
+- add atomic, fingerprinted receipts;
+- move non-trivial receipt and fingerprint logic into tested .NET code.
 
 Deprecated:
 
-- planning packages that provide a milestone zip but no execution prompt for the implementation agent;
-- asking an implementation agent to "upgrade to latest" directly.
+- one long process as the only proof of aggregate validation;
+- claiming aggregate success from partial logs;
+- attempting to escape a hard execution harness lifetime with `nohup`, backgrounding, `setsid`, or larger shell timeouts.
 
-Manual review:
+## 0.4.0
 
-- verify whether existing planning prompts should be replaced by latest-version prompts;
-- verify whether implementation agents are still asked to read the external guide repository.
-
-## 0.2.0
+Migration required: conditional.
 
 Added:
 
-- prompt template library under `templates/prompts/`;
-- `templates/PROMPTS.md` prompt selection index;
-- `.guide-sync/` deferred documentation synchronization model;
-- `templates/guide-sync-hint.md`;
-- ADR-0006 for the guide sync hints queue;
-- migration document for guide system v0.1.0 to v0.2.0;
-- migration planning prompt for v0.1.0 to v0.2.0;
-- standard prompts for empty project initialization, milestone planning execution modes, and documentation sync passes.
+- `meta/HUMAN-REVIEW-MODEL.md`;
+- `meta/ENGINEERING-COMMAND-MODEL.md`;
+- repository-local `.review/` model;
+- review command templates;
+- thin cross-platform launchers over shared .NET engineering implementation;
+- ADR-0009 through ADR-0013;
+- migration from v0.3.0 to v0.4.0.
 
-Changed:
+Conditional migration:
 
-- agent instruction template tells ordinary implementation agents to ignore `.guide-profile.json` and `.guide-sync/` unless explicitly assigned guide migration or documentation synchronization work.
+- activate `.review/` when Tier 5 human review is used;
+- move complex shell logic into tested .NET commands;
+- add PowerShell launchers only when native Windows is an actively tested platform.
 
-## 0.1.0
+## 0.3.0
 
-Initial guide-system skeleton.
-
-Includes:
-
-- meta guide;
-- profile model;
-- maturity model;
-- repository role model;
-- validation model;
-- milestone execution model;
-- migration model;
-- documentation layer model;
-- base setup and engineering guides;
-- initial dotnet-library and artifact-first-runtime profiles;
-- initial agentic-2d-game-engine project-type guide;
-- initial decision records;
-- starter templates.
+Added execution handoff prompts and generic latest-version migration/adoption prompts.
