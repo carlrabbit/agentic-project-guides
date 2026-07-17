@@ -2,10 +2,13 @@
   "schemaVersion": 1,
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "0.5.0"
+    "version": "0.5.1"
   },
   "appliedProfiles": [
-    { "id": "base", "version": "0.5.0" }
+    {
+      "id": "base",
+      "version": "0.5.1"
+    }
   ],
   "repositoryRole": "capability-provider",
   "maturityStage": "implementation-ready",
@@ -13,21 +16,22 @@
     "defaultImplementationMode": "ai-executed-human-reviewed",
     "documentationSync": "separate-pass",
     "releaseReadiness": "separate-pass",
-    "constrainedExecution": "supported"
+    "constrainedExecution": "supported-when-required"
   },
   "engineeringCommands": {
     "canonicalInterface": "eng",
-    "implementation": "direct-launchers",
+    "implementation": "repository-specific",
     "supportedLaunchers": ["bash"],
     "testedPlatforms": ["linux"]
   },
-  "humanReview": {
-    "enabled": false,
-    "recordsPath": ".review/records",
-    "pendingPath": ".review/pending"
-  },
-  "validation": {
-    "resumableSuites": false,
-    "receiptRoot": "artifacts/validation"
-  }
+  "activeDocumentationLayers": [
+    "engineering",
+    "milestones",
+    "specs"
+  ],
+  "inactiveDocumentationLayers": [
+    "tbps",
+    "issue-templates",
+    "repository-guide-copies"
+  ]
 }

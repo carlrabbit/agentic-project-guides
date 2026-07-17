@@ -1,59 +1,54 @@
 # Changelog
 
-## 0.5.0
+## 0.5.1
 
-Migration required: conditional.
+Migration required: recommended for guide repositories updated to v0.5.0; conditional for product repositories where shortened prompts were already used.
 
 Affected areas:
 
-- validation execution;
-- agent runtime constraints;
-- engineering command host;
-- milestone planning and execution prompts;
-- validation reporting.
+- planning prompt completeness;
+- migration prompt completeness;
+- execution handoff prompt completeness;
+- documentation-sync handoff;
+- human-review requirements;
+- constrained-execution validation requirements.
+
+Fixed:
+
+- restored full repository inspection requirements;
+- restored ZIP deliverable boundaries;
+- restored required milestone content;
+- restored authority-document routing;
+- restored provider/consumer distinction;
+- restored direct versus deferred documentation impact;
+- restored `.guide-sync/pending/` handling;
+- restored chat response requirements;
+- restored quality-bar checks;
+- retained v0.4.0 human-review and engineering-command requirements;
+- retained v0.5.0 constrained-execution and resumable-validation requirements.
 
 Added:
 
-- `meta/CONSTRAINED-EXECUTION-MODEL.md`;
-- resumable validation suite model;
-- validation receipt and plan templates;
-- ADR-0014 through ADR-0018;
-- migration from v0.4.0 to v0.5.0;
-- prompt rules for sharded execution and fast verification.
+- `migrations/guide-system-v0.5.0-to-v0.5.1.md`;
+- `migrations/repair-shortened-prompt-application.md`;
+- `templates/prompts/repair-v0.5.0-shortened-prompt-application.md`.
 
-Conditional migration:
+Special migration path:
 
-- convert aggregate validation commands that may exceed agent runtime limits;
-- expose `--list`, `--plan-json`, `--shard`, and `--verify` modes;
-- add atomic, fingerprinted receipts;
-- move non-trivial receipt and fingerprint logic into tested .NET code.
+If a product repository was already planned or migrated using the shortened v0.5.0 `update-to-latest-guide-system.md` prompt, run the repair planning prompt. It inspects the repository for omitted migration work and creates a focused corrective milestone package.
 
 Deprecated:
 
-- one long process as the only proof of aggregate validation;
-- claiming aggregate success from partial logs;
-- attempting to escape a hard execution harness lifetime with `nohup`, backgrounding, `setsid`, or larger shell timeouts.
+- abbreviated prompt templates that depend on the planning agent reconstructing omitted methodology from context.
+
+## 0.5.0
+
+Added constrained-execution and resumable-validation guidance.
 
 ## 0.4.0
 
-Migration required: conditional.
-
-Added:
-
-- `meta/HUMAN-REVIEW-MODEL.md`;
-- `meta/ENGINEERING-COMMAND-MODEL.md`;
-- repository-local `.review/` model;
-- review command templates;
-- thin cross-platform launchers over shared .NET engineering implementation;
-- ADR-0009 through ADR-0013;
-- migration from v0.3.0 to v0.4.0.
-
-Conditional migration:
-
-- activate `.review/` when Tier 5 human review is used;
-- move complex shell logic into tested .NET commands;
-- add PowerShell launchers only when native Windows is an actively tested platform.
+Added repository-local human review and cross-platform engineering command guidance.
 
 ## 0.3.0
 
-Added execution handoff prompts and generic latest-version migration/adoption prompts.
+Added execution prompts and generic latest-version adoption/update prompts.

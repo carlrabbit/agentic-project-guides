@@ -1,6 +1,6 @@
-# Prompt — Update Repository to Latest Agentic Project Guide System
+# Prompt — Repair Repository After Shortened v0.5.0 Prompt Application
 
-Our planning task is to create an implementation-ready migration package for updating a repository from any existing `carlrabbit/agentic-project-guides` version to the latest available guide-system version.
+Our planning task is to assess and repair a repository that may have been migrated or planned using an unintentionally shortened v0.5.0 prompt template.
 
 The active guide authority is external:
 
@@ -20,106 +20,78 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 If the target repository contains `.review/`, treat it as repository-local human-review state. Read it only when the milestone requires human review, engineering migration, documentation synchronization, or release readiness.
 
-## Resolve current and latest guide versions
+## Context
 
-Read the target repository's `.guide-profile.json` if present to identify the current recorded guide-system version.
+The v0.5.0 update package abbreviated several prompt templates and omitted important operational requirements. The repository may still be correct; do not assume it is broken.
 
-Then inspect the guide repository to determine the latest available version.
+Perform a focused assessment and create a corrective migration package only for missing or incomplete obligations.
 
-Read at minimum:
+## Guide version resolution
 
-- `README.md`;
+Inspect the guide repository and confirm that the latest version is at least v0.5.1.
+
+Read:
+
 - `CHANGELOG.md`;
-- `meta/VERSIONING.md`;
-- `meta/MIGRATION-MODEL.md`;
-- all migration documents newer than the current version;
-- relevant decisions;
-- `templates/PROMPTS.md`.
-
-State both the current and resolved latest versions in the chat response and in the migration milestone.
-
-Do not assume a hard-coded latest version.
+- `migrations/guide-system-v0.5.0-to-v0.5.1.md`;
+- `migrations/repair-shortened-prompt-application.md`;
+- the corrected prompt templates;
+- relevant meta models and ADRs.
 
 ## Repository inspection
 
-Inspect the target repository before writing files.
-
-Usually read:
+Inspect:
 
 - `.guide-profile.json`;
-- `.guide-sync/pending/` if present;
-- `.review/` if present and relevant;
+- `.guide-sync/pending/`;
+- `.review/`;
 - `README.md`;
 - `AGENTS.md`;
 - `docs/TERMINOLOGY.md`;
 - `docs/SPECS.md`;
-- relevant `docs/specs/*`;
 - `docs/ENGINEERING.md`;
-- relevant `docs/engineering/*`;
 - `docs/MILESTONES.md`;
-- relevant milestones, decisions, architecture docs, public docs, workflows, and command scripts.
+- the milestone or migration package generated from the shortened prompt;
+- relevant specs, decisions, command scripts, and validation suites.
 
-Treat copied guides under `docs/research/` as non-authoritative unless explicitly marked otherwise.
+## Assessment areas
 
-## Required output
+Check whether the shortened prompt caused omissions in:
 
-Create exactly one migration milestone under `docs/milestones/`.
-
-The milestone must include:
-
-- current and target guide-system versions;
-- repository role and maturity;
-- applicable profiles;
-- execution mode;
-- required, conditional, deprecated, manual-review, and no-op changes;
-- authority documents;
-- likely affected files;
+- repository role and maturity classification;
+- guide profile selection;
+- authority-document routing;
+- milestone goal, scope, non-goals, and focus areas;
+- provider/consumer distinction;
+- direct versus deferred documentation impact;
+- `.guide-sync/pending/` hints;
+- human-review applicability, evidence, and blocking behavior;
 - validation tiers and concrete commands;
-- human-review requirements;
-- constrained-execution implications;
-- direct documentation impact;
-- deferred `.guide-sync/pending/` hints;
-- acceptance criteria;
-- rollback or recovery notes where appropriate.
+- constrained-runtime handling;
+- resumable-validation plan, shards, receipts, and verifier;
+- execution prompt generation;
+- migration classification;
+- chat handoff requirements.
 
-Update `.guide-profile.json` only if the migration package includes that change.
+## Output
 
-Create `.guide-sync/pending/` hints for deferred documentation synchronization.
+Create one focused corrective milestone under `docs/milestones/`.
 
-Do not copy guide documents into the target repository.
+Classify every assessed area as:
 
-Do not perform broad implementation work.
+- required repair;
+- conditional repair;
+- already satisfied;
+- manual review;
+- no-op.
 
-## Human review
+Do not recreate or broadly rewrite correct repository files.
 
-Determine whether migration items require human judgment, including:
+Create `.guide-sync/pending/` hints only for deferred documentation work.
 
-- public API decisions;
-- platform-support claims;
-- review-policy choices;
-- fingerprint-scope choices;
-- deletion of historical documentation;
-- release or compatibility changes.
+Create `.review/pending/` requests only when actual human judgment is required.
 
-When human review is required, define:
-
-- review class;
-- blocking behavior;
-- evidence;
-- completion condition;
-- expected repository location under `.review/`.
-
-## Constrained execution
-
-Inspect engineering commands for long aggregate wrappers or agent-harness sensitivity.
-
-When migration validation may exceed runtime limits, require resumable validation with:
-
-- `--plan-json`;
-- bounded `--shard <id>` commands;
-- atomic fingerprinted receipts;
-- fast `--verify`;
-- no inference from partial output.
+Update `.guide-profile.json` to v0.5.1 only when the corrective migration includes that step.
 
 ## Planning/implementation separation
 
