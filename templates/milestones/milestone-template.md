@@ -10,7 +10,7 @@
 | Documentation sync | deferred |
 | Local validation | Tier 1 focused validation |
 | Integration validation | Tier 3 PR workflows |
-| Human review | required after implementation |
+| Human review | <none|recommended|required|blocking> |
 
 ## Goal
 
@@ -24,10 +24,10 @@
 
 <Non-goals>
 
-## Required authority
+## Required Authority
 
 - <Relevant spec>
-- <Relevant engineering doc>
+- <Relevant engineering document>
 
 ## Focus Areas
 
@@ -43,8 +43,34 @@ Validation:
 
 Documentation impact:
 
-## Documentation policy
+## Human Review
 
-Implementation updates directly contradicted specs only.
+Applicability:
+
+Review class:
+
+Canonical review ID:
+
+Review subject:
+
+Required evidence:
+
+Acceptance criteria:
+
+Reviewer role:
+
+Waiver policy:
+
+Milestone completion command:
+
+```text
+./eng/review-check.sh --milestone <milestone-id>
+```
+
+Human review belongs only to this milestone. After milestone completion, the record is historical evidence and is not revalidated by later changes.
+
+## Documentation Policy
+
+Implementation updates directly contradicted authority documents only.
 
 Broad documentation normalization is handled by a separate documentation-sync pass.

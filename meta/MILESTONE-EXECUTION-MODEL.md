@@ -1,24 +1,46 @@
 # Milestone Execution Model
 
-Milestone size and detail are selected by execution mode, design maturity, validation strength, runtime constraints, and review model.
+## Status
+
+Authoritative for milestone execution modes and milestone completion gates.
+
+## Execution modes
 
 | Mode | Meaning |
 |---|---|
 | `human-led` | Human actively drives implementation decisions. |
 | `ai-assisted` | Human implements or steers; AI assists. |
-| `ai-executed-human-reviewed` | AI implements; human reviews the result. |
-| `ai-executed-broad` | AI performs a larger implementation with stable authority and strong validation. |
+| `ai-executed-human-reviewed` | AI performs implementation; human reviews declared milestone evidence. |
+| `ai-executed-broad` | AI performs a larger implementation or migration with strong authority and validation. |
 | `documentation-sync` | Broad documentation normalization pass. |
-| `engineering-migration` | Command, validation, CI, or repository engineering changes. |
-| `release-readiness` | Release artifacts, public docs, packages, and release gates. |
+| `engineering-migration` | Changes command contracts, scripts, CI, or validation infrastructure. |
+| `release-readiness` | Prepares release artifacts, docs, packages, and release validation. |
 
-Milestones should declare:
+## Milestone completion
 
-- execution mode;
-- scope size and autonomy;
-- authority documents;
-- direct versus deferred documentation impact;
-- validation tier;
-- validation execution mode;
-- human review applicability and evidence;
-- runtime constraints and resumable suite commands when applicable.
+A milestone defines its own completion gates.
+
+Possible gates include:
+
+- focused automated validation;
+- standard local validation;
+- PR integration validation;
+- release validation;
+- human review of milestone evidence;
+- documentation directly required for implementation correctness.
+
+Human review is not inherited indefinitely by the project.
+
+When a milestone requires human review, it must define:
+
+- review class;
+- applicability: recommended, required, or blocking;
+- canonical review ID or allocation rule;
+- review subject;
+- evidence to be produced;
+- acceptance criteria;
+- human reviewer role when relevant;
+- completion behavior;
+- waiver policy when applicable.
+
+After the milestone completes, its review records are historical evidence. Future milestones decide independently whether new review is required.

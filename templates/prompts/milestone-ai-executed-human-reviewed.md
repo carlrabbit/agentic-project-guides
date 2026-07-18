@@ -34,7 +34,7 @@ Create an implementation-ready package. The later implementation agent must be a
 4. implement the focus areas;
 5. run the specified validation tiers;
 6. handle constrained execution using resumable validation when required;
-7. complete required human review or report its blocking status;
+7. complete the current milestone's required human review or report its blocking status;
 8. finish without reconstructing planning context or reading the external guide repository.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
@@ -124,17 +124,30 @@ Do not require the implementation agent to read `.guide-sync/`.
 
 ## Human review
 
-Determine whether automated validation can decide acceptance.
+Determine whether automated validation can decide acceptance for this milestone's outputs.
+
+Human review is owned by this milestone and acts only as a milestone completion gate. It must not be designed as a persistent project-wide approval.
 
 When human review applies, specify:
 
 - applicability: none, recommended, required, or blocking;
 - review class;
+- canonical review ID or allocation rule;
+- owning milestone ID and milestone path;
 - review subject;
 - required evidence;
-- review request/record locations under `.review/`;
-- re-review triggers;
-- milestone completion behavior.
+- acceptance criteria;
+- reviewer role when relevant;
+- acceptable decisions for completion;
+- waiver policy, if any;
+- review request and record locations under `.review/`;
+- the exact milestone-scoped review-check command.
+
+Do not define generic future-commit staleness or perpetual re-review triggers.
+
+Repository revision and evidence fingerprints may be recorded for provenance, but completed approval becomes historical evidence after this milestone completes.
+
+If future work may need review, state that the future milestone must declare its own review rather than reopening this milestone's completed record.
 
 ## Constrained execution and validation
 
@@ -170,7 +183,7 @@ Prefer medium-to-large coherent vertical slices rather than tiny human-sized tas
 
 The AI may implement across multiple components when acceptance criteria and validation are clear.
 
-Human review occurs after implementation or at explicit blocking checkpoints. It must not be implied or left as an informal chat expectation.
+Human review occurs during this milestone at explicit checkpoints or before milestone completion. After completion, its record is historical and is not revalidated by later milestones.
 
 ## Deliverable
 
@@ -201,7 +214,7 @@ The package is acceptable only if:
 - validation expectations are tiered and concrete;
 - direct documentation updates are separated from deferred synchronization;
 - provider and consumer responsibilities are not blurred;
-- human-review requirements are explicit when automation cannot decide acceptance;
+- human-review requirements are explicit, milestone-owned, and limited to the current milestone when automation cannot decide acceptance;
 - long validation is made resumable when the execution environment may terminate long-running commands;
 - aggregate success is never inferred from partial output;
 - old copied guides are not treated as active authority;

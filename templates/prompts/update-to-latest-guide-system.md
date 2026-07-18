@@ -92,22 +92,20 @@ Do not perform broad implementation work.
 
 ## Human review
 
-Determine whether migration items require human judgment, including:
+Inspect whether the target repository uses human review and which guide version shaped that implementation.
 
-- public API decisions;
-- platform-support claims;
-- review-policy choices;
-- fingerprint-scope choices;
-- deletion of historical documentation;
-- release or compatibility changes.
+For migration to the latest guide version:
 
-When human review is required, define:
+- require pending reviews to identify one owning milestone;
+- treat human review as a milestone completion gate;
+- preserve completed records as historical evidence;
+- remove generic repository-wide approval staleness;
+- do not require humans to reapprove completed milestones because later commits occurred;
+- keep canonical IDs and ephemeral interactive aliases;
+- require milestone-scoped `review-check` behavior;
+- classify ambiguous legacy pending requests as manual-review migration items.
 
-- review class;
-- blocking behavior;
-- evidence;
-- completion condition;
-- expected repository location under `.review/`.
+When the migration milestone itself requires human judgment, create a review request owned by the migration milestone. Do not create an ongoing project-wide review gate.
 
 ## Constrained execution
 
@@ -133,7 +131,7 @@ Create an implementation-ready package. The later implementation agent must be a
 4. implement the focus areas;
 5. run the specified validation tiers;
 6. handle constrained execution using resumable validation when required;
-7. complete required human review or report its blocking status;
+7. complete the current migration milestone's required human review or report its blocking status;
 8. finish without reconstructing planning context or reading the external guide repository.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
@@ -167,7 +165,7 @@ The package is acceptable only if:
 - validation expectations are tiered and concrete;
 - direct documentation updates are separated from deferred synchronization;
 - provider and consumer responsibilities are not blurred;
-- human-review requirements are explicit when automation cannot decide acceptance;
+- human-review requirements are explicit and milestone-scoped when automation cannot decide acceptance;
 - long validation is made resumable when the execution environment may terminate long-running commands;
 - aggregate success is never inferred from partial output;
 - old copied guides are not treated as active authority;

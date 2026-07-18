@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "0.5.1"
+    "version": "0.6.0"
   },
   "appliedProfiles": [
     {
       "id": "base",
-      "version": "0.5.1"
+      "version": "0.6.0"
     }
   ],
   "repositoryRole": "capability-provider",
@@ -16,13 +16,17 @@
     "defaultImplementationMode": "ai-executed-human-reviewed",
     "documentationSync": "separate-pass",
     "releaseReadiness": "separate-pass",
-    "constrainedExecution": "supported-when-required"
+    "humanReview": "milestone-scoped"
   },
   "engineeringCommands": {
     "canonicalInterface": "eng",
     "implementation": "repository-specific",
-    "supportedLaunchers": ["bash"],
-    "testedPlatforms": ["linux"]
+    "supportedLaunchers": [
+      "bash"
+    ],
+    "testedPlatforms": [
+      "linux"
+    ]
   },
   "activeDocumentationLayers": [
     "engineering",

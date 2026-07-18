@@ -1,51 +1,32 @@
 # Engineering
 
-## Canonical command interface
-
-`eng/` is the stable engineering API.
-
-Platform launchers remain thin. Complex logic belongs in tested application code.
-
-## Validation tiers
-
-| Tier | Purpose |
-|---|---|
-| 0 | Edit sanity |
-| 1 | Focused validation |
-| 2 | Standard local validation |
-| 3 | PR integration validation |
-| 4 | Release validation |
-| 5 | Human review validation |
-
-## Validation execution modes
-
-```text
-direct
-resumable-sharded
-CI-only
-human-review
-```
-
 ## Human review commands
 
-When activated:
+When the human-review module is active:
 
 ```text
-./eng/review-list.sh
-./eng/review-request.sh
-./eng/review-record.sh
-./eng/review-check.sh
+./eng/review-list.sh [--milestone <id>] [filters]
+./eng/review-show.sh <review-id-or-alias>
+./eng/review-request.sh --milestone <id> ...
+./eng/review-record.sh <review-id-or-alias> <decision> ...
+./eng/review-reopen.sh <review-id-or-alias> ...
+./eng/review-check.sh --milestone <id>
 ```
 
-## Resumable suite contract
+Human review is a completion gate for the milestone that owns the request.
 
-When activated:
+`review-check` must be run with explicit milestone context. It validates only that milestone's required reviews.
+
+Completed review records are historical evidence. They are not revalidated after later commits and are not a perpetual project-wide quality gate.
+
+`review-list` may display ephemeral numeric aliases and write an ignored alias map under:
 
 ```text
-./eng/<suite>.sh --list
-./eng/<suite>.sh --plan-json
-./eng/<suite>.sh --shard <id>
-./eng/<suite>.sh --verify
+artifacts/review/session/aliases.json
 ```
 
-Aggregate success is established by `--verify`, not by partial output from a long wrapper.
+Aliases are only short-lived interactive conveniences.
+
+Canonical review IDs are required in automation, milestones, requests, records, and committed artifacts.
+
+A stale alias must fail and instruct the human to run `review-list` again.

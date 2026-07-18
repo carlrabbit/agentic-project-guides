@@ -1,6 +1,8 @@
 # Prompt — Plan a Release Readiness Milestone
 
-Our planning task is to create a release-readiness milestone package: `{milestone}`.
+Our planning task is to create an implementation-ready release-readiness milestone package for:
+
+`{milestone}`
 
 The active guide authority is external:
 
@@ -8,93 +10,119 @@ The active guide authority is external:
 
 Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, and release readiness.
+Use the guide system only for planning, migration, documentation synchronization, review, and release readiness.
 
 Target repository documentation must contain project truth only.
 
-If the target repository contains old copied setup or engineering guides, treat them as legacy/non-authoritative unless the repository explicitly marks them as active project documentation.
+If the target repository contains `.guide-profile.json`, use it as guide-selection metadata. Ordinary implementation agents must not be required to read it.
 
-If the target repository contains `.guide-profile.json`, use it as guide-selection metadata. Ordinary implementation agents must not be required to read `.guide-profile.json`.
+If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata.
 
-If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
+If the target repository contains `.review/`, inspect it only for active reviews owned by this release-readiness milestone or unresolved migration state that directly blocks it.
 
 ## Planning/implementation separation
 
-There is no direct synchronization between the planning AI and the implementation AI.
+There is no direct synchronization between the planning AI and implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+Create a complete package that allows the later agent to start from the primary milestone, read only listed authority, perform release-readiness work, run the specified validation, produce evidence, and stop at any required human gate without reconstructing planning context.
 
-Also generate a concise execution prompt in chat for the later implementation agent.
+Generate a filled execution prompt in chat.
 
 ## Repository inspection
 
-Inspect the target repository before writing files. Read the minimum required target-repository documentation, usually:
+Inspect the minimum relevant repository state, usually:
 
 - `README.md`;
 - `AGENTS.md`;
-- `.guide-profile.json` if present;
-- `docs/TERMINOLOGY.md`;
-- `docs/SPECS.md`;
-- relevant `docs/specs/*`;
-- `docs/ENGINEERING.md`;
-- relevant `docs/engineering/*`;
-- relevant existing milestones and decisions.
+- `.guide-profile.json`;
+- release and packaging engineering docs;
+- public API policy and baselines;
+- public documentation contract and sources;
+- samples and package-smoke configuration;
+- release workflows;
+- relevant milestones and decisions;
+- `.guide-sync/pending/` items affecting the release surface;
+- `.review/` items owned by the current release milestone.
 
-Treat `docs/research/` and old copied guides as non-authoritative legacy material unless explicitly marked otherwise.
+## Deliverable boundary
 
-## Required milestone document
+Create a planning package, not an implementation patch.
 
-Create exactly one primary milestone document under `docs/milestones/`.
-
-The milestone must include:
-
-1. goal;
-2. repository role and maturity assumptions;
-3. execution mode;
-4. scope;
-5. non-goals;
-6. focus areas;
-7. implementation constraints;
-8. required authority documents;
-9. files or areas likely affected;
-10. validation tiers and concrete repository commands;
-11. acceptance criteria;
-12. direct documentation impact;
-13. deferred documentation synchronization hints;
-14. human review requirements if applicable;
-15. out-of-scope guide migration work if applicable.
-
-## Deferred documentation synchronization hints
-
-If deferred documentation work must survive handoff, create one or more files under:
+The ZIP may contain:
 
 ```text
-.guide-sync/pending/
+docs/milestones/M00XX-release-readiness.md
+docs/specs/...
+docs/decisions/...
+docs/engineering/...
+.review/pending/...
+.guide-sync/pending/...
+public-docs/...
 ```
 
-Do not require the implementation agent to read `.guide-sync/`.
+Include only files required to make release-readiness implementation unambiguous.
 
-## Provider versus consumer distinction
+Do not include source code, generated packages, workflow implementations, TBPs, issue templates, or copied guide documents.
 
-Do not confuse implementing a capability with using that capability.
+## Milestone requirements
 
-Capability-provider repositories validate capability implementation. Capability-consumer repositories use capabilities for product validation. Mixed/dogfood repositories may do both, but dogfood scope must be bounded.
+The primary milestone must include:
 
-## Mode requirements
+1. release target and intended version;
+2. repository maturity and profile assumptions;
+3. release scope and non-goals;
+4. package, API, documentation, sample, diagnostic, and website surfaces in scope;
+5. authority documents;
+6. focus areas;
+7. validation tiers and concrete commands;
+8. constrained-execution handling;
+9. release evidence requirements;
+10. human-review requirements;
+11. direct documentation impact;
+12. deferred documentation sync items;
+13. acceptance criteria;
+14. publish operations explicitly excluded unless requested.
 
-Execution mode: `release-readiness`. Use for package smoke, public API checks, public documentation, samples, release notes, versioning, website/publication, and release validation.
+## Human review
 
-## Deliverable
+A release review belongs to this release-readiness milestone.
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+It may review:
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
+- release candidate artifacts;
+- package contents;
+- user-facing documentation;
+- compatibility decisions;
+- visual or UX release evidence;
+- release notes.
 
-After creating the ZIP, respond with:
+Specify the canonical review ID, class, evidence, acceptance criteria, reviewer role, blocking behavior, and milestone-scoped review-check command.
+
+If the release candidate changes before this milestone completes, updated evidence may require another decision in the same active review.
+
+After the milestone completes, the review is historical evidence. It is not a perpetual approval of future repository state or future releases.
+
+## Validation
+
+Use Tier 4 release validation when applicable.
+
+When long validation supports resumable execution, require `--plan-json`, bounded shards, receipts, and a fast verifier.
+
+Do not infer release readiness from partial output.
+
+## Chat response
+
+After creating the ZIP, provide:
 
 1. download link;
-2. included file list;
-3. reason each file is included;
-4. confirmed or inferred profile, role, maturity, and execution mode;
-5. a filled execution prompt for the later implementation agent;
-6. documentation-sync hints and the `.guide-sync/pending/` files created.
+2. file list;
+3. reason for each file;
+4. resolved profile, role, maturity, and execution mode;
+5. filled execution prompt;
+6. release evidence and human-review expectations;
+7. deferred documentation sync hints;
+8. commands expected for local, CI, release, and review validation.
+
+## Quality bar
+
+The package is acceptable only if the release target is unambiguous, publish operations are not accidentally performed, validation is concrete, review is milestone-scoped, required public surfaces are covered, and the implementation agent does not need to read the external guide repository.

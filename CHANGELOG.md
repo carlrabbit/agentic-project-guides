@@ -1,54 +1,84 @@
 # Changelog
 
-## 0.5.1
+## 0.6.0
 
-Migration required: recommended for guide repositories updated to v0.5.0; conditional for product repositories where shortened prompts were already used.
+Migration required: conditional.
 
 Affected areas:
 
-- planning prompt completeness;
-- migration prompt completeness;
-- execution handoff prompt completeness;
-- documentation-sync handoff;
-- human-review requirements;
-- constrained-execution validation requirements.
+- human-review model;
+- milestone completion gates;
+- review request and record templates;
+- review command semantics;
+- milestone planning prompts;
+- implementation execution prompts;
+- validation guidance.
 
-Fixed:
+### Changed
 
-- restored full repository inspection requirements;
-- restored ZIP deliverable boundaries;
-- restored required milestone content;
-- restored authority-document routing;
-- restored provider/consumer distinction;
-- restored direct versus deferred documentation impact;
-- restored `.guide-sync/pending/` handling;
-- restored chat response requirements;
-- restored quality-bar checks;
-- retained v0.4.0 human-review and engineering-command requirements;
-- retained v0.5.0 constrained-execution and resumable-validation requirements.
+Human review is now milestone-scoped.
 
-Added:
+A review answers:
 
-- `migrations/guide-system-v0.5.0-to-v0.5.1.md`;
-- `migrations/repair-shortened-prompt-application.md`;
-- `templates/prompts/repair-v0.5.0-shortened-prompt-application.md`.
+```text
+Was the evidence produced for this milestone acceptable when the milestone completed?
+```
 
-Special migration path:
+It does not establish ongoing project-wide approval.
 
-If a product repository was already planned or migrated using the shortened v0.5.0 `update-to-latest-guide-system.md` prompt, run the repair planning prompt. It inspects the repository for omitted migration work and creates a focused corrective milestone package.
+Approved review records:
 
-Deprecated:
+- remain historical evidence;
+- do not become stale after later commits;
+- are not revalidated against future repository state;
+- do not require repeated human approval.
 
-- abbreviated prompt templates that depend on the planning agent reconstructing omitted methodology from context.
+`review-check` now validates required reviews for a named active milestone.
+
+### Retained
+
+- review classes;
+- repository-local `.review/` state;
+- canonical review IDs;
+- ephemeral numeric aliases for interactive use;
+- thin `eng/` launchers over shared tested implementation;
+- constrained-execution and resumable-validation models.
+
+### Removed from the generic model
+
+- perpetual approval validity;
+- repository-wide fingerprint-based review staleness;
+- re-review triggers caused by later unrelated commits;
+- treating historical approvals as current project quality gates;
+- requiring completed reviews to be reopened after subsequent work.
+
+### Conditional migration
+
+Repositories that already implemented the previous review model should:
+
+- bind every pending review to one active milestone;
+- stop invalidating approved records because repository state changed;
+- change `review-check` to require `--milestone <id>` or an equivalent explicit milestone context;
+- preserve completed records as historical evidence;
+- remove generic stale/re-review behavior from review commands and templates;
+- decide how to classify legacy pending requests that do not identify a milestone.
+
+### No-op
+
+Repositories that do not use human review require no product-repository change.
+
+## 0.5.2
+
+Added ephemeral numeric aliases for interactive human-review commands while retaining canonical review IDs as durable identity.
+
+## 0.5.1
+
+Restored full operational prompt templates after abbreviated replacements were introduced in v0.5.0.
 
 ## 0.5.0
 
-Added constrained-execution and resumable-validation guidance.
+Added constrained agent execution and resumable validation suites.
 
 ## 0.4.0
 
-Added repository-local human review and cross-platform engineering command guidance.
-
-## 0.3.0
-
-Added execution prompts and generic latest-version adoption/update prompts.
+Added repository-local human review and cross-platform engineering command architecture.
