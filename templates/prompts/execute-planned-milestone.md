@@ -2,7 +2,7 @@
 
 You are the implementation agent for this repository.
 
-A planning/documentation agent has already created an implementation-ready milestone package. Do not redo planning.
+A planning phase has already converted the work into a ready milestone. Do not redo planning.
 
 Unpack or use the provided package, then start with:
 
@@ -16,27 +16,50 @@ Read only:
 
 1. the primary milestone document;
 2. the authority documents explicitly listed in that milestone;
-3. source and test files needed for the focus areas.
+3. source and test files needed to implement and validate the change.
 
 Do not read the external guide repository.
+
+Do not require the planning conversation or planning-agent scratch work.
 
 Do not treat old copied setup or engineering guides as authority.
 
 Do not read `.guide-profile.json`, `.guide-sync/`, or `.review/` unless the milestone explicitly requires them.
 
+## Implementation ownership
+
+Inspect the live repository and derive the concrete implementation yourself.
+
+You own local implementation mechanics including files, types, functions, refactorings, test structure, and implementation sequence where the ready milestone does not constrain them.
+
+Prefer the smallest coherent change that satisfies the milestone target state and acceptance criteria. Follow established repository patterns where they do not conflict with the milestone.
+
+Do not expect planning to provide exhaustive file lists or line-by-line edits.
+
+## Planning boundary
+
+Treat the ready milestone's decisions, constraints, non-goals, authority, acceptance criteria, and validation policy as resolved.
+
+Do not silently reopen or broaden them.
+
+If implementation reveals a material unresolved decision that could change architecture, semantics, compatibility, scope, acceptance criteria, or validation policy:
+
+1. stop the affected work;
+2. identify the exact decision required and evidence that exposed it;
+3. report the smallest useful set of options or constraints;
+4. return the milestone to planning rather than inventing project policy.
+
+Local implementation choices that stay within the milestone contract do not require escalation.
+
 ## Execution rules
 
-Implement only the milestone scope and focus areas.
-
-Do not broaden scope.
-
-Do not redo architecture or planning decisions already made authoritative by the package.
+Implement only the milestone scope.
 
 Do not perform broad documentation synchronization.
 
-Update direct documentation only when the milestone says it is required for implementation correctness.
+Update direct documentation only when required for implementation correctness or explicitly required by the milestone.
 
-Use canonical repository commands from `eng/`.
+Use canonical repository commands from `eng/` when present.
 
 ## Human review
 
@@ -55,12 +78,7 @@ When the milestone requires human review:
 - after the human decision, run `./eng/review-check.sh --milestone <milestone-id>` or the repository's documented equivalent;
 - do not reopen or revalidate completed reviews from earlier milestones because repository state changed.
 
-If the reviewer records `changes-requested`:
-
-1. implement the requested correction within milestone scope;
-2. regenerate or update the evidence;
-3. report that the same active milestone review needs another human decision;
-4. preserve the decision history.
+If the reviewer records `changes-requested`, correct the implementation within milestone scope, regenerate evidence, and preserve the decision history. If the requested change would alter the ready milestone contract, escalate back to planning.
 
 If the required human decision cannot be obtained in the current execution context, stop at the review gate and report the exact pending review ID and evidence. Do not claim milestone completion.
 
@@ -83,7 +101,7 @@ Do not claim aggregate success from partial child output.
 
 ## Validation
 
-Run the validation tier and concrete commands specified in the milestone.
+Run the validation tier and concrete commands specified in the milestone plus repository-standard validation that is directly applicable to the changed area.
 
 If the milestone specifies CI-only validation, report local validation separately and do not claim CI success before it runs.
 
@@ -93,7 +111,7 @@ If the milestone includes blocking human review, automated validation success al
 
 When finished, report:
 
-- implemented focus areas;
+- implemented outcome;
 - files changed;
 - validation commands run and results;
 - resumable shard and verifier results, if applicable;
@@ -102,6 +120,6 @@ When finished, report:
 - human-review requests owned by this milestone;
 - evidence paths and human decisions currently recorded;
 - result of the milestone-scoped review check;
-- blockers or deviations from the milestone.
+- blockers, deviations, or planning escalations.
 
 Do not report prior milestone reviews as stale or requiring reapproval.

@@ -1,58 +1,59 @@
 # Agentic Project Guides
 
-Version: 0.6.0
+Version: 0.7.0
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
 The guide system is intentionally separate from product repositories.
 
-Product repositories contain localized project truth. Planning, migration, documentation synchronization, and guide authoring may use this guide repository. Ordinary implementation agents work from localized repository authority documents and implementation-ready milestone packages.
+Product repositories contain localized project truth. Planning, migration, documentation synchronization, and guide authoring may use this guide repository. Ordinary implementation agents work from localized repository authority documents and implementation-ready milestones.
 
 ## Core rule
 
 ```text
 Guides live here.
 Projects contain project truth.
-Planning produces implementation-ready packages and execution prompts.
-Implementation follows localized project authority.
+Milestones are planned before they are implemented.
+Planning resolves uncertainty and produces a ready milestone.
+Implementation derives concrete edits from the live repository and the ready milestone.
 Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
 
-## Version 0.6.0
+## Version 0.7.0
 
-Version 0.6.0 corrects and simplifies the human-review model.
+Version 0.7.0 makes planning and implementation explicit, separate phases of milestone work regardless of which human or model performs either phase.
 
-Human review is now explicitly a milestone-scoped completion gate:
+The lifecycle is:
 
-- a review belongs to one milestone;
-- it evaluates evidence produced for that milestone;
-- approval permits that milestone to complete;
-- completed review records are immutable historical evidence;
-- later commits do not make completed reviews stale;
-- later milestones declare their own review requirements when needed;
-- `review-check` validates one active milestone, not perpetual project-wide approval.
+```text
+draft/planning -> ready -> implementing -> done
+```
 
-The review classes remain available:
+Planning owns:
 
-- semantic;
-- visual;
-- UX;
-- creative;
-- security;
-- public API;
-- release;
-- migration;
-- artifact quality.
+- repository inspection needed to understand the change;
+- architectural, semantic, compatibility, and scope decisions;
+- target state, constraints, non-goals, and acceptance criteria;
+- required authority documents;
+- validation and human-review gates.
 
-Ephemeral numeric aliases from v0.5.2 remain supported for interactive commands. Canonical review IDs remain the only durable identity.
+Implementation owns:
+
+- inspection of the live source and tests needed to perform the change;
+- concrete file, type, function, and refactoring choices not fixed by planning;
+- implementation, testing, iteration, and evidence production.
+
+An implementation agent must not reconstruct or silently reopen resolved planning decisions. If implementation discovers a material unresolved architectural, semantic, compatibility, or scope decision, the milestone returns to planning rather than allowing the implementation phase to invent new project policy.
+
+Execution modes such as `human-led`, `ai-assisted`, and `ai-executed-human-reviewed` remain available and are orthogonal to lifecycle phase.
 
 ## Upgrade
 
 Use:
 
 ```text
-migrations/guide-system-v0.5.2-to-v0.6.0.md
+migrations/guide-system-v0.6.0-to-v0.7.0.md
 ```
 
-The migration includes correction guidance for repositories that implemented repository-wide review staleness or fingerprint revalidation.
+The migration is primarily a workflow and milestone-contract update. Existing project truth does not need to be rewritten merely to adopt the two-phase lifecycle.

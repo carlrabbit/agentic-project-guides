@@ -15,7 +15,8 @@ It does not define a single universal repository template. Instead, it defines h
 ```text
 Guide repository owns methodology.
 Product repositories contain project truth.
-Implementation agents read product repository documentation only.
+Milestones separate planning from implementation.
+Implementation agents read product repository documentation and ready milestones only.
 Planning and documentation-sync agents may use this guide system.
 ```
 
@@ -43,15 +44,36 @@ or:
 base + artifact-first-runtime + capability-provider role + implementation-ready maturity
 ```
 
-## Planning/execution separation
+## Planning/implementation separation
 
-Planning agents may read this guide repository.
+Milestone work has two distinct phases independent of the human, model, interface, or tool used for either phase.
 
-Planning agents create:
+Planning agents may read this guide repository. They inspect enough product-repository truth to resolve implementation-affecting uncertainty and produce a ready milestone.
 
-- milestone packages;
+Planning owns decisions that materially affect:
+
+- architecture;
+- semantics;
+- compatibility;
+- scope and non-goals;
+- acceptance criteria;
+- validation and review policy.
+
+Planning may create or update durable project-truth documents when those decisions need repository authority.
+
+Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
+
+Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not read this guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
+
+The implementation handoff must not depend on the planning conversation. Everything required to execute must exist in the ready milestone or its referenced project authority.
+
+If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, or validation decision, the milestone returns to planning. Implementation must not silently create new project policy.
+
+Planning agents may also create:
+
 - documentation packages;
 - migration packages;
-- execution prompts for later implementation agents.
+- optional overlays when planning itself requires repository-relative file additions, replacements, moves, or deletions;
+- concise execution prompts when a disconnected execution interface benefits from one.
 
-Implementation agents execute the plan. They should not read this guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
+An overlay is a transport mechanism, not a second source of planning authority.

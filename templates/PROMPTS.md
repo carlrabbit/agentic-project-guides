@@ -6,6 +6,16 @@ This index lists standard prompts for disconnected planning, implementation, mig
 
 Prompt templates are guide-system methodology. They live in the guide repository, not in product repositories.
 
+## Two-phase milestone rule in v0.7.0
+
+Coding milestones are planned before implementation regardless of execution mode or model choice.
+
+Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty and produces a ready milestone.
+
+Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, and validates.
+
+Implementation does not require the planning conversation and escalates material unresolved decisions back to planning.
+
 ## Prompt selection
 
 | Task | Prompt |
@@ -20,13 +30,24 @@ Prompt templates are guide-system methodology. They live in the guide repository
 | Plan an engineering migration milestone | `templates/prompts/milestone-engineering-migration.md` |
 | Plan a documentation synchronization milestone | `templates/prompts/milestone-documentation-sync.md` |
 | Plan a release-readiness milestone | `templates/prompts/milestone-release-readiness.md` |
-| Execute a planned milestone | `templates/prompts/execute-planned-milestone.md` |
+| Execute a ready milestone | `templates/prompts/execute-planned-milestone.md` |
 | Execute an engineering migration | `templates/prompts/execute-engineering-migration.md` |
 | Execute documentation synchronization | `templates/prompts/execute-documentation-sync.md` |
 | Execute release readiness | `templates/prompts/execute-release-readiness.md` |
 | Perform a documentation synchronization pass | `templates/prompts/documentation-sync-pass.md` |
 
-## Human-review rule in v0.6.0
+## Planning prompt requirements
+
+Planning prompts may differ by execution mode, but for coding milestones they must converge on the same ready-milestone boundary:
+
+- resolve implementation-affecting uncertainty;
+- record durable decisions in project truth when needed;
+- define target state, constraints, non-goals, acceptance criteria, and validation;
+- list authority the executor actually needs;
+- avoid exhaustive mechanical edit instructions unless contractually significant;
+- ensure the executor does not need the planning conversation or external guide repository.
+
+## Human-review rule
 
 Human review is a completion gate owned by one milestone.
 

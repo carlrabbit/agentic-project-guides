@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.7.0
+
+Migration required: recommended for repositories using milestone-driven coding workflows; otherwise no-op.
+
+Affected areas:
+
+- milestone lifecycle;
+- planning/implementation boundary;
+- milestone template;
+- implementation execution prompt;
+- meta-guide doctrine;
+- prompt guidance.
+
+### Changed
+
+Coding milestones now have an explicit two-phase lifecycle:
+
+```text
+draft/planning -> ready -> implementing -> done
+```
+
+Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty.
+
+Implementation begins from a ready milestone, re-inspects the live repository, derives concrete implementation mechanics, implements, tests, and validates.
+
+Execution mode is orthogonal to lifecycle phase. The guide system does not encode particular model tiers as durable execution modes.
+
+### Simplified
+
+The generic milestone contract now emphasizes:
+
+- goal and target state;
+- scope and non-goals;
+- resolved decisions and constraints;
+- required project authority;
+- acceptance criteria;
+- validation;
+- milestone-owned human review when applicable;
+- an explicit escalation boundary.
+
+Exhaustive file lists, predicted class changes, and detailed edit sequences are no longer generic milestone requirements unless they are themselves contractually significant.
+
+### Added
+
+- explicit `ready` milestone semantics;
+- implementation ownership of local code/test mechanics;
+- return-to-planning behavior for material unresolved decisions;
+- `migrations/guide-system-v0.6.0-to-v0.7.0.md`.
+
+### Retained
+
+- external guide authority and localized project truth;
+- existing execution modes;
+- deferred documentation synchronization;
+- milestone-scoped human review;
+- constrained execution and resumable validation.
+
 ## 0.6.0
 
 Migration required: conditional.
