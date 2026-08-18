@@ -52,7 +52,7 @@ Read `.review/`, `.guide-sync/`, workflows, research, public docs, or legacy cop
 
 Treat `docs/research/` and copied guides as non-authoritative unless explicitly marked otherwise.
 
-Use `.guide-profile.json` as guide-selection metadata only. Ordinary implementation agents must not be required to read it.
+Use `.guide-profile.json` as guide-selection and planning metadata only. Ordinary implementation agents must not be required to read it.
 
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
 
@@ -71,26 +71,57 @@ Use the special planning prompts for engineering migration, documentation synchr
 
 Execution profile is orthogonal to lifecycle phase. Every coding milestone still crosses the same `ready` boundary before implementation.
 
+Execution profile does not describe model strength. Do not introduce `strong`, `frontier`, or similar execution profiles to compensate for unresolved planning.
+
+## Baseline implementation model
+
+Determine the project's baseline implementation model from `.guide-profile.json` when that metadata is present.
+
+The default ChatGPT-focused guide profile uses:
+
+```text
+GPT-5.6 Luna
+```
+
+A project may intentionally configure another baseline model.
+
+Planning must target the configured baseline when deciding whether the milestone is `ready`.
+
+The purpose of the milestone is to make difficult project-level reasoning a planning responsibility so the baseline implementation model can execute the result reliably.
+
+Do not solve baseline-model limitations by:
+
+- selecting a stronger executor for an otherwise under-specified milestone;
+- adding model-capability tiers to the milestone;
+- converting the milestone into exhaustive line-by-line implementation instructions.
+
+Instead, resolve the decisions that materially affect the project contract and make completion observable.
+
+If planning cannot settle a material decision without additional evidence, create a focused diagnostic or investigation milestone whose target state is that evidence. Use the result to return to planning and produce or revise the final implementation milestone.
+
+Large execution volume is not by itself a reason to require a stronger model. Shape large work using coherent scope, bounded operations, resumable validation, and explicit evidence.
+
 ## Ready milestone boundary
 
-The milestone is ready only when implementation can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy.
+The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy.
 
 The ready milestone must contain, as applicable:
 
 1. goal;
 2. target state;
 3. execution profile and `ready` lifecycle state;
-4. scope;
-5. non-goals;
-6. resolved decisions and constraints;
-7. required project authority;
-8. acceptance criteria;
-9. validation tiers, concrete commands, and validation execution mode;
-10. direct documentation impact;
-11. deferred documentation synchronization hints;
-12. human-review requirements;
-13. constrained-runtime requirements;
-14. escalation boundary for unresolved material decisions.
+4. baseline implementation model or an explicit statement that the project default applies;
+5. scope;
+6. non-goals;
+7. resolved decisions and constraints;
+8. required project authority;
+9. acceptance criteria;
+10. validation tiers, concrete commands, and validation execution mode;
+11. direct documentation impact;
+12. deferred documentation synchronization hints;
+13. human-review requirements;
+14. constrained-runtime requirements;
+15. escalation boundary for unresolved material decisions.
 
 Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, and human-review gates in addition to automated tests.
 
@@ -99,6 +130,20 @@ Do not require exhaustive file lists, predicted class/function changes, or detai
 If the source work item uses focus areas, workstreams, or similar decomposition, do not turn them into an exhaustive edit allowlist unless that restriction is genuinely part of the contract.
 
 Do not retain planning scratch work, rejected alternatives, or discussion history merely because they were useful while reaching the decision. Preserve a rejected alternative only when knowing that rejection is necessary to prevent a likely incorrect implementation.
+
+## Baseline-executability audit
+
+Before marking the milestone `ready`, explicitly verify that:
+
+- architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy are settled to the degree required by the work;
+- remaining choices are local implementation mechanics rather than new project policy;
+- acceptance criteria let the executor distinguish correct completion from partial implementation;
+- subjective acceptance is routed to human review instead of being left as vague executor judgment;
+- required external dependencies and capabilities are known;
+- large or long-running work has an execution/validation shape the baseline model can complete safely;
+- no stronger implementation model is being relied on to resolve uncertainty that belongs in planning.
+
+If any item fails, keep the milestone in `draft/planning` or create a diagnostic milestone. Do not mark it `ready` merely because implementation could probably make progress.
 
 ## Additional authority documents
 
@@ -175,7 +220,7 @@ After creating the ZIP, respond with:
 
 1. download link;
 2. included file list and purpose;
-3. confirmed or inferred profile, role, maturity, and execution profile;
+3. confirmed or inferred profile, role, maturity, execution profile, and baseline implementation model;
 4. primary ready-milestone path;
 5. concise handoff note for the disconnected implementation agent when useful;
 6. documentation-sync hints created;
@@ -191,6 +236,7 @@ The package is acceptable only if:
 
 - the goal and target state are unambiguous;
 - material architectural, semantic, compatibility, scope, acceptance, and validation decisions are resolved;
+- the milestone is executable by the configured baseline implementation model without relying on model escalation for unresolved project-level reasoning;
 - constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
 - required project authority is explicit;
 - acceptance criteria are observable or verifiable and cover the actual milestone outcome;

@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.7.1
+Version: 0.7.2
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -15,6 +15,7 @@ Guides live here.
 Projects contain project truth.
 Milestones are planned before they are implemented.
 Planning resolves uncertainty and produces a ready milestone.
+A ready milestone must be executable by the project's baseline implementation model.
 Implementation derives concrete edits from the live repository and the ready milestone.
 The executor owns milestone closure, not only code production and test execution.
 Validation success is evidence, not milestone completion by itself.
@@ -22,25 +23,25 @@ Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
 
-## Version 0.7.1
+## Version 0.7.2
 
-Version 0.7.1 strengthens milestone closure semantics for implementation agents.
+Version 0.7.2 makes baseline-model executability part of the `ready` milestone boundary.
 
-The lifecycle remains:
+For the default ChatGPT-focused profile, the baseline implementation model is GPT-5.6 Luna.
 
-```text
-draft/planning -> ready -> implementing -> done
-```
+The purpose is not to make milestones tiny or prescribe implementation line by line. Planning should perform the difficult project-level reasoning and leave the implementation agent a bounded contract whose remaining choices are local implementation mechanics.
 
-Implementation now follows an explicit completion loop:
+A milestone is not `ready` when its executor would still need to make a material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy. In that case planning continues, or a focused diagnostic milestone is planned first when evidence must be gathered before the final implementation contract can be decided.
+
+The guide does not introduce `strong` or `frontier` execution tiers. Execution profiles such as `human-led`, `ai-assisted`, `ai-executed-human-reviewed`, and `ai-executed-broad` continue to describe autonomy and review expectations rather than model capability.
+
+Large or cross-cutting work can still be baseline-executable when its decisions are settled, its boundaries are explicit, and its validation is sufficiently deterministic or resumable.
+
+The v0.7.1 closure contract remains unchanged:
 
 ```text
 implement -> validate -> completion audit -> continue or terminate
 ```
-
-After implementation and validation, the executor must audit all milestone obligations and continue resolving anything it can complete in the current execution context.
-
-Passing tests, successful compilation, or completing listed focus areas does not by itself establish milestone completion.
 
 An implementation run terminates only as:
 
@@ -48,18 +49,12 @@ An implementation run terminates only as:
 - `AWAITING HUMAN REVIEW` — all agent-resolvable work is complete and a required human decision remains;
 - `BLOCKED` — completion requires unavailable external capability or a material planning decision the executor cannot make.
 
-Scope guardrails prevent unrelated product expansion but do not prohibit supporting edits necessary to satisfy the milestone contract. Focus areas and workstreams are guidance rather than edit allowlists unless explicitly made contractual.
-
-No additional engineering commands are required by v0.7.1.
-
-Execution profiles such as `human-led`, `ai-assisted`, and `ai-executed-human-reviewed` remain orthogonal to lifecycle phase.
-
 ## Upgrade
 
-From v0.7.0, use:
+From v0.7.1, use:
 
 ```text
-migrations/guide-system-v0.7.0-to-v0.7.1.md
+migrations/guide-system-v0.7.1-to-v0.7.2.md
 ```
 
-The migration is a focused execution-contract correction. It does not require new engineering commands or broad project-documentation changes.
+The migration primarily changes planning and milestone-readiness semantics. The canonical v0.7.1 execution prompt remains compatible and does not require replacement merely to adopt v0.7.2.

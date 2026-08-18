@@ -13,13 +13,31 @@ For ordinary milestone-driven development, use only these two prompts:
 1. `templates/prompts/plan-milestone.md` during planning;
 2. `templates/prompts/execute-milestone.md` after the milestone is `ready`.
 
-Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, validates, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
+Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. It also establishes that the resulting milestone is executable by the project's baseline implementation model.
+
+Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, validates, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
 
 Execution profile is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
 
 Implementation does not require the planning conversation and escalates material unresolved decisions back to planning.
 
 Passing tests or successful implementation does not by itself complete a milestone. The executor owns milestone closure and must continue resolving every agent-resolvable milestone obligation before terminating.
+
+## Baseline-model readiness rule
+
+The project's baseline implementation model is planning metadata. The default ChatGPT-focused guide profile uses GPT-5.6 Luna.
+
+A coding milestone is `ready` only when that baseline model can execute the contract without inventing a new material decision about architecture, semantics, compatibility, scope, acceptance, validation, or human-review policy.
+
+The guide does not use `strong`, `frontier`, or similar model-capability execution tiers as a normal remedy for incomplete planning.
+
+Planning should perform the difficult project-level reasoning, make completion observable, and leave local implementation mechanics to the executor.
+
+If a material decision requires additional evidence, plan a diagnostic or investigation milestone first. Use its evidence to return to planning and produce the final implementation-ready milestone.
+
+Baseline executability does not require tiny milestones. Large coherent work remains valid when decisions are settled and execution or validation can be bounded, sharded, or resumed safely.
+
+Special planning workflows that produce coding or repository-change milestones inherit this same `ready` boundary unless they explicitly define a non-implementation workflow.
 
 ## Repository setup and guide-system maintenance
 
@@ -57,6 +75,8 @@ draft/planning -> ready -> implementing -> done
 ```
 
 Planning owns decisions that materially affect architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy.
+
+Planning also owns the judgment that the milestone can be executed by the configured baseline implementation model without unresolved project-level reasoning.
 
 Implementation owns concrete files, types, functions, refactorings, test structure, implementation sequence, supporting edits required by the contract, validation, and completion audit where those choices remain inside the ready milestone contract.
 
@@ -104,6 +124,7 @@ When modifying a prompt, preserve the applicable:
 - deliverable boundaries;
 - milestone content requirements;
 - authority routing;
+- baseline-model readiness rules;
 - validation and documentation-sync rules;
 - chat response requirements;
 - quality criteria;

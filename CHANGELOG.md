@@ -1,5 +1,73 @@
 # Changelog
 
+## 0.7.2
+
+Migration required: recommended for repositories using AI implementation agents; otherwise no-op when existing milestone planning already guarantees baseline-model executability.
+
+Affected areas:
+
+- `ready` milestone semantics;
+- planning responsibility;
+- baseline implementation model metadata;
+- canonical planning prompt;
+- milestone template;
+- milestone execution model;
+- prompt index;
+- guide-profile version metadata.
+
+### Added
+
+Milestone readiness now includes a baseline-executability requirement.
+
+For the default ChatGPT-focused guide profile, the baseline implementation model is GPT-5.6 Luna.
+
+Planning must make the milestone executable by the configured baseline implementation model without requiring that executor to invent a new material decision about:
+
+- architecture;
+- semantics or behavior;
+- compatibility;
+- scope or non-goals;
+- acceptance criteria;
+- validation policy;
+- human-review policy;
+- project-level invariants.
+
+The baseline model is planning metadata. Ordinary implementation agents still work from the ready milestone and referenced project authority rather than `.guide-profile.json`.
+
+### Clarified
+
+- difficult project-level reasoning belongs in planning;
+- a stronger implementation model is not the normal remedy for an under-specified milestone;
+- `strong`, `frontier`, and similar model-capability execution tiers are not part of the generic guide model;
+- execution profiles continue to describe autonomy and review expectations rather than model strength;
+- baseline executability requires decision completeness, not line-by-line implementation prescription;
+- large coherent milestones remain valid when decisions are settled and execution or validation can be bounded or resumed;
+- if material decisions require new evidence, planning may create a diagnostic milestone first and then return to planning for the final implementation milestone.
+
+### Retained
+
+The v0.7.1 execution contract remains unchanged:
+
+```text
+implement -> validate -> completion audit -> continue or terminate
+```
+
+Implementation still terminates only as:
+
+- `COMPLETE`;
+- `AWAITING HUMAN REVIEW`;
+- `BLOCKED`.
+
+The milestone-scoped human-review model and ephemeral interactive review aliases remain unchanged.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.1-to-v0.7.2.md
+```
+
 ## 0.7.1
 
 Migration required: recommended for repositories using AI or disconnected implementation agents; otherwise no-op.

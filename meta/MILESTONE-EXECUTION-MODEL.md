@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, execution completion, and milestone completion gates.
+Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, baseline-executor readiness, execution completion, and milestone completion gates.
 
 ## Milestone lifecycle
 
@@ -14,7 +14,7 @@ draft/planning -> ready -> implementing -> done
 
 `draft/planning` means material implementation-affecting uncertainty may still exist.
 
-`ready` means planning has resolved the decisions that would materially change architecture, semantics, compatibility, scope, acceptance, or validation. The milestone is a self-contained implementation contract together with the project authority it references.
+`ready` means planning has resolved the decisions that would materially change architecture, semantics, compatibility, scope, acceptance, or validation, and has established that the project's baseline implementation model can execute the milestone without making a new material project-level decision. The milestone is a self-contained implementation contract together with the project authority it references.
 
 `implementing` means the executor may determine concrete implementation mechanics from the live repository but must not silently change resolved milestone decisions.
 
@@ -38,13 +38,61 @@ A ready milestone defines, as applicable:
 - direct documentation impact;
 - deferred documentation synchronization;
 - human-review gates;
-- known exceptional implementation constraints.
+- known exceptional implementation constraints;
+- baseline-executor readiness.
 
 Planning may create or update project-truth documents when a decision must become durable authority before implementation.
 
 Detailed file lists, class designs, edit sequences, and speculative implementation steps are not required unless they are themselves part of the architectural or compatibility contract.
 
 If a milestone uses focus areas, workstreams, or similar decomposition, those describe expected concentration of work. They are not an exhaustive edit allowlist unless the milestone explicitly makes them contractual.
+
+## Baseline implementation model and `ready` boundary
+
+Each project may define a baseline implementation model as planning metadata.
+
+The default ChatGPT-focused guide profile uses:
+
+```text
+GPT-5.6 Luna
+```
+
+Projects may intentionally configure another baseline implementation model. The guide does not require every project to use the same model.
+
+The baseline implementation model is not a per-milestone capability tier. It is the normal executor that planning targets when deciding whether a milestone is ready.
+
+A milestone is baseline-executable when the configured baseline implementation model can use the ready milestone, referenced project authority, live repository, and normal repository tooling to complete the work without inventing a new material decision about:
+
+- architecture;
+- semantics or behavior;
+- public or persisted compatibility;
+- scope or non-goals;
+- acceptance criteria;
+- validation policy;
+- human-review policy;
+- project-level invariants.
+
+Planning owns the reasoning needed to reach that state.
+
+Do not compensate for incomplete planning by selecting a `strong`, `frontier`, or similar stronger implementation tier. Such capability tiers are not part of the generic execution model.
+
+Do not compensate by turning the milestone into a line-by-line patch plan. Baseline executability requires decision completeness and observable completion criteria, not pre-implementation of local mechanics in prose.
+
+If a material decision cannot be resolved until more evidence exists, planning should define a focused diagnostic or investigation milestone whose target state is the required evidence. After that evidence exists, return to planning and produce or revise the final implementation milestone.
+
+Baseline executability does not imply that milestones must be small. Large coherent migrations, transformations, or cross-cutting implementations may be ready when:
+
+- project-level decisions are settled;
+- boundaries and invariants are explicit;
+- remaining implementation choices are local mechanics;
+- long-running work can be bounded, sharded, or resumed where necessary;
+- validation gives reliable completion evidence.
+
+Execution volume and reasoning uncertainty are different concerns. Use constrained-execution and resumable-validation mechanisms for volume; use planning for unresolved project-level reasoning.
+
+The baseline model may still discover unexpected repository facts during implementation. If those facts can be handled through local mechanics within the ready contract, implementation continues. If they expose a material unresolved decision, the affected work returns to planning.
+
+Ordinary implementation agents do not need to read `.guide-profile.json` to discover the baseline model. Planning uses that metadata to establish readiness; the ready milestone and referenced project authority remain the implementation contract.
 
 ## Implementation phase
 
@@ -168,6 +216,8 @@ Execution profile is orthogonal to lifecycle phase and describes who or what per
 | `ai-executed-broad` | AI performs a larger coherent implementation with strong autonomy and validation. |
 
 A repository may use different humans, models, tools, or interfaces for planning and implementation without changing the milestone contract.
+
+Execution profiles do not encode model strength. In particular, the generic guide does not add `strong` or `frontier` execution profiles. Baseline-model readiness is decided during planning before any AI-executed milestone becomes `ready`.
 
 ## Workflow types
 

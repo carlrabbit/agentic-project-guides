@@ -6,6 +6,8 @@
 |---|---|
 | Lifecycle state | ready |
 | Mode | ai-executed-human-reviewed |
+| Baseline implementation model | <project baseline; default GPT-5.6 Luna> |
+| Baseline executor readiness | confirmed |
 | Scope size | medium-large |
 | Implementation autonomy | high |
 | Documentation sync | deferred |
@@ -35,6 +37,18 @@
 - <Invariant or implementation constraint.>
 
 Do not prescribe concrete implementation mechanics here unless they are part of the required project contract.
+
+## Baseline Executor Readiness
+
+This milestone is `ready` only when the project's baseline implementation model can execute it without making a new material decision about architecture, semantics, compatibility, scope, acceptance criteria, or validation policy.
+
+Planning must resolve those decisions before implementation. Remaining implementation freedom should consist of local code, test, refactoring, sequencing, and supporting-work choices that fit the contract.
+
+Do not compensate for incomplete planning by requiring a stronger implementation-model tier or by turning the milestone into a line-by-line implementation script.
+
+If material evidence must be gathered before the final implementation contract can be decided, plan a focused diagnostic milestone first and return the resulting evidence to planning.
+
+Large coherent work is allowed when the contract is settled and execution or validation can be bounded or resumed safely.
 
 ## Required Authority
 
