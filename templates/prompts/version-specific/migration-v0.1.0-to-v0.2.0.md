@@ -2,7 +2,7 @@
 
 Use this version-specific prompt only when an exact v0.2.0 target is required.
 
-Prefer `templates/prompts/update-to-latest-guide-system.md` for normal work.
+Prefer `templates/prompts/update-guide-system.md` for normal work.
 
 Our planning task is to create an implementation-ready migration milestone package for adopting guide system v0.2.0 in a repository that already uses or is being migrated to v0.1.0.
 
