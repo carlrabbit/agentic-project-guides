@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Adopt the explicit two-phase milestone lifecycle introduced in v0.7.0 without rewriting valid project truth or introducing model-specific workflow rules.
+Adopt the explicit two-phase milestone lifecycle and simplified prompt surface introduced in v0.7.0 without rewriting valid project truth or introducing model-specific workflow rules.
 
 ## Core change
 
@@ -47,6 +47,33 @@ Remove or avoid planning residue that is not needed for execution:
 - detailed implementation sequences the executor can derive from the repository;
 - dependencies on the planning chat transcript.
 
+## Canonical prompt surface
+
+The normal v0.7.0 prompt surface is:
+
+```text
+templates/prompts/
+  plan-milestone.md
+  execute-milestone.md
+  new-project.md
+  adopt-guide-system.md
+  update-guide-system.md
+  special/
+  version-specific/
+```
+
+For normal development:
+
+1. use `templates/prompts/plan-milestone.md` during planning;
+2. apply any planning-time overlay needed to establish the ready repository state;
+3. use `templates/prompts/execute-milestone.md` during implementation.
+
+Do not keep separate user-facing planning prompts solely for human-led, AI-assisted, broad-AI, or AI-executed-human-reviewed execution profiles. Select execution profile inside planning.
+
+Special workflows such as engineering migration, documentation synchronization, and release readiness live under `templates/prompts/special/`.
+
+Historical or exact-target migration and repair prompts live under `templates/prompts/version-specific/` and are not normal current entry points.
+
 ## Planning workflow
 
 Planning should inspect enough repository truth to resolve decisions safely.
@@ -56,6 +83,10 @@ Planning may create or update specs, architecture, decisions, or engineering doc
 Planning may produce an overlay ZIP when repository-relative additions, replacements, moves, or deletions are needed before implementation. The overlay is transport, not separate authority.
 
 A coding milestone becomes `ready` only when implementation can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy.
+
+The ready milestone plus referenced project authority is the durable handoff.
+
+A bespoke per-milestone execution prompt is not required. The canonical `execute-milestone.md` prompt supplies execution methodology. A planning interface may still provide a concise handoff note containing the milestone path or overlay application instructions.
 
 ## Implementation workflow
 
@@ -72,24 +103,33 @@ Do not require the executor to read:
 
 If implementation discovers a material unresolved decision, stop the affected work and return the milestone to planning with the decision and evidence. Do not silently broaden or reinterpret the milestone.
 
-## Execution modes
+## Lifecycle, execution profile, and workflow type
 
-Retain existing execution modes. They remain orthogonal to lifecycle phase.
+Keep these concepts distinct:
 
-Do not add model names such as Sol, Terra, or Luna to durable milestone execution modes merely to adopt v0.7.0.
+- lifecycle phase: `planning`, `ready`, `implementing`, `done`;
+- execution profile: who or what performs implementation and with what autonomy/review expectations;
+- workflow type: ordinary milestone work, migration, documentation synchronization, release readiness, or another specialized workflow.
+
+Execution profile is orthogonal to lifecycle phase.
+
+Migration, documentation synchronization, and release readiness are workflow types, not execution modes.
+
+Do not add model names such as Sol, Terra, or Luna to durable execution profiles merely to adopt v0.7.0.
 
 ## Documentation migration
 
 Do not rewrite project-truth documentation solely to describe the guide methodology.
 
-Update repository-local agent or milestone workflow documentation only when it currently instructs implementation agents to perform architectural planning, reconstruct planning context, read the external guide system, or depend on detailed planning transcripts.
+Update repository-local agent or milestone workflow documentation only when it currently instructs implementation agents to perform architectural planning, reconstruct planning context, read the external guide system, depend on detailed planning transcripts, or select obsolete prompt variants.
 
 ## Validation
 
 After migration, verify that a fresh coding milestone can follow this path:
 
-1. planning inspects the repository and resolves material decisions;
+1. planning uses the canonical planning entry point and resolves material decisions;
 2. the ready milestone and referenced project authority contain the durable handoff;
-3. a disconnected implementation agent can determine concrete edits from the live repository;
+3. a disconnected implementation agent can start from the canonical execution prompt and determine concrete edits from the live repository;
 4. implementation can validate completion without the planning transcript;
-5. material unresolved decisions have an explicit path back to planning.
+5. material unresolved decisions have an explicit path back to planning;
+6. obsolete top-level prompt names are not referenced by current operational guidance.
