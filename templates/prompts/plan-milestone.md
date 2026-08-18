@@ -1,4 +1,4 @@
-# Prompt — Plan an AI-Executed, Human-Reviewed Milestone
+# Prompt — Plan Milestone
 
 Our planning task is to convert the following work into a ready milestone for a disconnected implementation phase:
 
@@ -55,6 +55,21 @@ Treat `docs/research/` and copied guides as non-authoritative unless explicitly 
 Use `.guide-profile.json` as guide-selection metadata only. Ordinary implementation agents must not be required to read it.
 
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
+
+## Execution profile
+
+Select the execution profile during planning rather than choosing a different planning prompt.
+
+For ordinary coding milestones, choose the mode that best describes who will execute and how much implementation autonomy is appropriate:
+
+- `human-led`;
+- `ai-assisted`;
+- `ai-executed-human-reviewed`;
+- `ai-executed-broad`.
+
+Use the special planning prompts for engineering migration, documentation synchronization, or release-readiness work when their specialized authority and completion rules apply.
+
+Execution mode is orthogonal to lifecycle phase. Every coding milestone still crosses the same `ready` boundary before implementation.
 
 ## Ready milestone boundary
 
@@ -134,14 +149,6 @@ For resumable suites, specify the plan command, shard contract, receipt location
 
 Distinguish capability-provider validation from capability-consumer product validation. Mixed/dogfood scope must be bounded and explicit.
 
-## Mode requirements
-
-Execution mode: `ai-executed-human-reviewed`.
-
-Prefer coherent vertical slices rather than artificially tiny human-sized tasks when design authority is stable.
-
-Execution mode does not change the planning/implementation boundary: planning resolves the contract; implementation chooses mechanics within it.
-
 ## Deliverable
 
 Create a downloadable ZIP archive containing only new or replacement repository-relative files needed to make the milestone ready. If moves or deletions cannot be represented directly, include concise application instructions rather than preserving obsolete files.
@@ -170,6 +177,7 @@ The package is acceptable only if:
 - validation is concrete;
 - implementation can derive local mechanics from the live repository without the planning conversation;
 - implementation is not burdened with planning scratch work or speculative edit instructions;
+- the selected execution profile is explicit and appropriate to the work;
 - human-review requirements are milestone-owned and explicit when automation cannot decide acceptance;
 - long validation is resumable where required;
 - old copied guides are not treated as active authority;

@@ -2,72 +2,84 @@
 
 ## Purpose
 
-This index lists standard prompts for disconnected planning, implementation, migration, documentation synchronization, review, and release workflows.
+This index is the entry point for guide-system prompt selection.
 
 Prompt templates are guide-system methodology. They live in the guide repository, not in product repositories.
 
-## Two-phase milestone rule in v0.7.0
+## Normal development workflow
 
-Coding milestones are planned before implementation regardless of execution mode or model choice.
+For ordinary milestone-driven development, use only these two prompts:
 
-Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty and produces a ready milestone.
+1. `templates/prompts/plan-milestone.md` during planning;
+2. `templates/prompts/execute-milestone.md` after the milestone is `ready`.
 
-Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, and validates.
+Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, and validates.
+
+Execution mode is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
 
 Implementation does not require the planning conversation and escalates material unresolved decisions back to planning.
 
-## Prompt selection
+## Repository setup and guide-system maintenance
 
 | Task | Prompt |
 |---|---|
-| Adopt latest guide system from any older local guide model | `templates/prompts/adopt-latest-guide-system.md` |
-| Update from any existing guide-system version to latest | `templates/prompts/update-to-latest-guide-system.md` |
-| Prepare a completely empty new project | `templates/prompts/new-empty-project.md` |
-| Plan a human-led milestone | `templates/prompts/milestone-human-led.md` |
-| Plan an AI-assisted milestone | `templates/prompts/milestone-ai-assisted.md` |
-| Plan an AI-executed, human-reviewed milestone | `templates/prompts/milestone-ai-executed-human-reviewed.md` |
-| Plan a broad AI-executed milestone | `templates/prompts/milestone-ai-executed-broad.md` |
-| Plan an engineering migration milestone | `templates/prompts/milestone-engineering-migration.md` |
-| Plan a documentation synchronization milestone | `templates/prompts/milestone-documentation-sync.md` |
-| Plan a release-readiness milestone | `templates/prompts/milestone-release-readiness.md` |
-| Execute a ready milestone | `templates/prompts/execute-planned-milestone.md` |
-| Execute an engineering migration | `templates/prompts/execute-engineering-migration.md` |
-| Execute documentation synchronization | `templates/prompts/execute-documentation-sync.md` |
-| Execute release readiness | `templates/prompts/execute-release-readiness.md` |
-| Perform a documentation synchronization pass | `templates/prompts/documentation-sync-pass.md` |
+| Prepare a completely new project | `templates/prompts/new-project.md` |
+| Adopt the guide system in a repository using an older or unrelated local guide model | `templates/prompts/adopt-guide-system.md` |
+| Update a repository already using the guide system to the latest version | `templates/prompts/update-guide-system.md` |
 
-## Planning prompt requirements
+## Special workflows
 
-Planning prompts may differ by execution mode, but for coding milestones they must converge on the same ready-milestone boundary:
+Special prompts exist only where the work has materially different authority, scope, or completion semantics.
 
-- resolve implementation-affecting uncertainty;
-- record durable decisions in project truth when needed;
-- define target state, constraints, non-goals, acceptance criteria, and validation;
-- list authority the executor actually needs;
-- avoid exhaustive mechanical edit instructions unless contractually significant;
-- ensure the executor does not need the planning conversation or external guide repository.
+| Task | Prompt |
+|---|---|
+| Plan an engineering migration | `templates/prompts/special/plan-engineering-migration.md` |
+| Plan documentation synchronization | `templates/prompts/special/plan-documentation-sync.md` |
+| Plan release readiness | `templates/prompts/special/plan-release-readiness.md` |
+| Perform a documentation synchronization pass | `templates/prompts/special/documentation-sync-pass.md` |
+
+Ready milestones produced by special planning still use `templates/prompts/execute-milestone.md` unless the special prompt explicitly defines a non-implementation workflow.
+
+## Version-specific prompts
+
+`templates/prompts/version-specific/` contains historical migration and repair prompts that are relevant only when an exact old guide-system version or historical correction path is required.
+
+Do not select a version-specific prompt for normal adoption or update work. Prefer `adopt-guide-system.md` or `update-guide-system.md`.
+
+## Two-phase milestone rule
+
+Coding milestones follow:
+
+```text
+draft/planning -> ready -> implementing -> done
+```
+
+Planning owns decisions that materially affect architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy.
+
+Implementation owns concrete files, types, functions, refactorings, test structure, and implementation sequence where those choices remain inside the ready milestone contract.
+
+A material unresolved decision prevents `ready` status. If such a decision is discovered during implementation, the affected work returns to planning.
 
 ## Human-review rule
 
 Human review is a completion gate owned by one milestone.
 
-Planning prompts must define review class, evidence, canonical ID, blocking behavior, and completion command for the current milestone.
+Planning defines review applicability, class, evidence, identity, blocking behavior, and completion command when human judgment is required.
 
-Execution prompts must not fabricate approval and must stop at a blocking review when human action is unavailable.
+Implementation must not fabricate approval and must stop at a blocking review when human action is unavailable.
 
-Completed review records are historical evidence and must not be revalidated because later commits changed the repository.
+Completed review records are historical evidence and are not revalidated because later commits changed the repository.
 
 ## Prompt preservation rule
 
-Minor and patch updates must extend or correct complete operational prompt templates. They must not replace them with abbreviated summaries unless the abbreviated prompt is intentionally introduced as a separate variant.
+Operational prompt templates must remain complete. Do not replace them with abbreviated summaries unless the abbreviated prompt is intentionally introduced as a separate variant.
 
-When modifying a prompt:
+When modifying a prompt, preserve the applicable:
 
-- preserve repository inspection rules;
-- preserve deliverable boundaries;
-- preserve milestone content requirements;
-- preserve authority routing;
-- preserve validation and documentation-sync rules;
-- preserve chat response requirements;
-- preserve quality criteria;
-- integrate new concepts into the full existing body.
+- repository inspection rules;
+- deliverable boundaries;
+- milestone content requirements;
+- authority routing;
+- validation and documentation-sync rules;
+- chat response requirements;
+- quality criteria.
