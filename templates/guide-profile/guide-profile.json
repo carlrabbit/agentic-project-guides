@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "0.6.0"
+    "version": "0.7.1"
   },
   "appliedProfiles": [
     {
       "id": "base",
-      "version": "0.6.0"
+      "version": "0.7.1"
     }
   ],
   "repositoryRole": "capability-provider",

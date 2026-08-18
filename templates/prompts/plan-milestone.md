@@ -28,7 +28,7 @@ Planning owns decisions that materially affect:
 - acceptance criteria;
 - validation and human-review policy.
 
-The implementation phase owns concrete files, types, functions, refactorings, test structure, and implementation sequence where those choices do not change the resolved contract.
+The implementation phase owns concrete files, types, functions, refactorings, test structure, implementation sequence, supporting edits required by the contract, validation, and completion audit where those choices do not change the resolved contract.
 
 Do not require the implementation agent to reconstruct planning context or read the external guide repository.
 
@@ -60,7 +60,7 @@ Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordi
 
 Select the execution profile during planning rather than choosing a different planning prompt.
 
-For ordinary coding milestones, choose the mode that best describes who will execute and how much implementation autonomy is appropriate:
+For ordinary coding milestones, choose the profile that best describes who will execute and how much implementation autonomy is appropriate:
 
 - `human-led`;
 - `ai-assisted`;
@@ -69,7 +69,7 @@ For ordinary coding milestones, choose the mode that best describes who will exe
 
 Use the special planning prompts for engineering migration, documentation synchronization, or release-readiness work when their specialized authority and completion rules apply.
 
-Execution mode is orthogonal to lifecycle phase. Every coding milestone still crosses the same `ready` boundary before implementation.
+Execution profile is orthogonal to lifecycle phase. Every coding milestone still crosses the same `ready` boundary before implementation.
 
 ## Ready milestone boundary
 
@@ -85,14 +85,18 @@ The ready milestone must contain, as applicable:
 6. resolved decisions and constraints;
 7. required project authority;
 8. acceptance criteria;
-9. validation tiers, concrete commands, and execution mode;
+9. validation tiers, concrete commands, and validation execution mode;
 10. direct documentation impact;
 11. deferred documentation synchronization hints;
 12. human-review requirements;
 13. constrained-runtime requirements;
 14. escalation boundary for unresolved material decisions.
 
+Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, and human-review gates in addition to automated tests.
+
 Do not require exhaustive file lists, predicted class/function changes, or detailed implementation sequences unless those details are themselves architecturally or compatibly significant.
+
+If the source work item uses focus areas, workstreams, or similar decomposition, do not turn them into an exhaustive edit allowlist unless that restriction is genuinely part of the contract.
 
 Do not retain planning scratch work, rejected alternatives, or discussion history merely because they were useful while reaching the decision. Preserve a rejected alternative only when knowing that rejection is necessary to prevent a likely incorrect implementation.
 
@@ -149,6 +153,20 @@ For resumable suites, specify the plan command, shard contract, receipt location
 
 Distinguish capability-provider validation from capability-consumer product validation. Mixed/dogfood scope must be bounded and explicit.
 
+## Implementation closure expectation
+
+The ready milestone must support an executor that owns milestone closure.
+
+The implementation phase will:
+
+```text
+implement -> validate -> completion audit -> continue or terminate
+```
+
+Do not design the milestone so that passing tests is the only implied completion condition when other obligations exist.
+
+The executor must be able to determine from the milestone and referenced project authority whether the outcome is actually complete, awaiting required human review, or externally blocked.
+
 ## Deliverable
 
 Create a downloadable ZIP archive containing only new or replacement repository-relative files needed to make the milestone ready. If moves or deletions cannot be represented directly, include concise application instructions rather than preserving obsolete files.
@@ -157,13 +175,15 @@ After creating the ZIP, respond with:
 
 1. download link;
 2. included file list and purpose;
-3. confirmed or inferred profile, role, maturity, and execution mode;
+3. confirmed or inferred profile, role, maturity, and execution profile;
 4. primary ready-milestone path;
-5. concise execution prompt for the disconnected implementation agent;
+5. concise handoff note for the disconnected implementation agent when useful;
 6. documentation-sync hints created;
 7. human-review items and evidence expectations;
 8. constrained-execution instructions if applicable;
 9. any unresolved issue that prevents the milestone from being marked ready.
+
+The canonical implementation methodology is `templates/prompts/execute-milestone.md`; the handoff does not need to recreate that prompt.
 
 ## Quality bar
 
@@ -171,10 +191,10 @@ The package is acceptable only if:
 
 - the goal and target state are unambiguous;
 - material architectural, semantic, compatibility, scope, acceptance, and validation decisions are resolved;
-- constraints and non-goals prevent likely scope drift;
+- constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
 - required project authority is explicit;
-- acceptance criteria are observable or verifiable;
-- validation is concrete;
+- acceptance criteria are observable or verifiable and cover the actual milestone outcome;
+- validation is concrete but is not confused with milestone completion;
 - implementation can derive local mechanics from the live repository without the planning conversation;
 - implementation is not burdened with planning scratch work or speculative edit instructions;
 - the selected execution profile is explicit and appropriate to the work;

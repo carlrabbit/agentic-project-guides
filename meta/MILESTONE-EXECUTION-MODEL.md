@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, and milestone completion gates.
+Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, execution completion, and milestone completion gates.
 
 ## Milestone lifecycle
 
@@ -20,7 +20,7 @@ draft/planning -> ready -> implementing -> done
 
 `done` means the milestone acceptance and completion gates have been satisfied.
 
-If implementation discovers an unresolved decision that could materially alter architecture, semantics, compatibility, scope, acceptance, or validation, stop and return the milestone to planning. Local implementation choices that do not alter those boundaries remain implementation-owned.
+If implementation discovers an unresolved decision that could materially alter architecture, semantics, compatibility, scope, acceptance, or validation, stop the affected work and return that decision to planning. Local implementation choices that do not alter those boundaries remain implementation-owned.
 
 ## Planning phase
 
@@ -44,21 +44,117 @@ Planning may create or update project-truth documents when a decision must becom
 
 Detailed file lists, class designs, edit sequences, and speculative implementation steps are not required unless they are themselves part of the architectural or compatibility contract.
 
+If a milestone uses focus areas, workstreams, or similar decomposition, those describe expected concentration of work. They are not an exhaustive edit allowlist unless the milestone explicitly makes them contractual.
+
 ## Implementation phase
 
 Implementation begins only from a ready milestone.
 
+The executor's objective is to drive the milestone to a valid terminal execution outcome, not merely to produce code or pass tests.
+
 The executor:
 
-- reads the milestone and explicitly required project authority;
+- starts with the milestone and explicitly required project authority;
 - inspects the live source and tests needed for the change;
+- may inspect additional repository-local material needed to implement or prove a milestone obligation;
 - derives the concrete implementation plan;
 - follows established repository patterns where the milestone leaves implementation freedom;
-- implements the smallest coherent change satisfying the target state;
-- runs the specified validation and fixes attributable failures;
-- produces required evidence and completion reporting.
+- performs all implementation and supporting work required by the milestone contract;
+- avoids unrelated product expansion;
+- runs the specified validation and fixes agent-resolvable failures;
+- produces required evidence and artifacts;
+- performs a mandatory completion audit;
+- continues working while any unsatisfied milestone obligation is agent-resolvable.
 
 The executor does not need the planning conversation, external guide repository, rejected alternatives, or planning-agent scratch work.
+
+The instruction to remain within milestone scope forbids unrelated expansion. It does not forbid supporting edits necessary to satisfy the milestone goal, target state, acceptance criteria, validation, documentation, artifact, migration, cleanup, or review obligations.
+
+## Execution loop
+
+Implementation follows this loop:
+
+```text
+implement
+  -> validate
+  -> completion audit
+  -> fix every agent-resolvable gap
+  -> repeat as needed
+  -> terminal execution outcome
+```
+
+Tests and automated checks are evidence used by the completion audit. They are not a substitute for it.
+
+A successful build or test suite must not become an implicit stopping condition when other milestone obligations remain unsatisfied.
+
+## Completion audit
+
+Before terminating an implementation run, the executor must audit all applicable milestone obligations, including:
+
+- goal;
+- target state;
+- scope-required behavior;
+- every acceptance criterion;
+- required validation and evidence;
+- required artifacts or generated outputs;
+- direct documentation obligations;
+- required migrations, cleanup, or compatibility work;
+- human-review gates;
+- constraints and invariants;
+- supporting work discovered during implementation that is necessary for completion.
+
+If an unsatisfied obligation can be resolved in the current execution context without changing the ready milestone contract, implementation continues.
+
+If a required human decision is the only remaining gate, execution terminates as `AWAITING HUMAN REVIEW`.
+
+If completion requires unavailable external capability or a material planning decision the executor is not authorized to make, execution terminates as `BLOCKED` with the exact dependency or decision identified.
+
+## Success semantics
+
+Implementation success, validation success, and milestone completion are distinct:
+
+| Concept | Meaning |
+|---|---|
+| Implementation success | The intended implementation exists. |
+| Validation success | The required automated checks pass. |
+| Milestone completion | Every applicable milestone obligation and completion gate is satisfied. |
+
+Implementation success does not imply validation success.
+
+Validation success does not imply milestone completion.
+
+Only milestone completion permits the milestone to transition to `done`.
+
+## Terminal execution outcomes
+
+An implementation run terminates only with one of these outcomes:
+
+### `COMPLETE`
+
+All applicable milestone obligations are satisfied and no blocking review or external dependency remains.
+
+The milestone may transition to `done`.
+
+### `AWAITING HUMAN REVIEW`
+
+All implementation and other agent-resolvable completion work is complete, but a required human review decision remains.
+
+The milestone remains active until the review gate is resolved.
+
+### `BLOCKED`
+
+Completion requires something the implementation agent cannot resolve in the current execution context.
+
+Examples include:
+
+- unavailable credentials or permissions;
+- unavailable required infrastructure or external services;
+- inaccessible required dependencies or artifacts;
+- a material architectural, semantic, compatibility, scope, acceptance, or validation decision that must return to planning.
+
+Ordinary implementation work, failing tests, missing documentation, incomplete artifacts, or other agent-resolvable obligations are not blockers.
+
+These are terminal outcomes for the current implementation run, not additional durable milestone lifecycle states. `AWAITING HUMAN REVIEW` and `BLOCKED` leave the milestone active.
 
 ## Execution profiles
 
@@ -107,8 +203,9 @@ Possible gates include:
 - standard local validation;
 - PR integration validation;
 - release validation;
-- human review of milestone evidence;
-- documentation directly required for implementation correctness.
+- required artifact production;
+- direct documentation obligations;
+- human review of milestone evidence.
 
 Human review is not inherited indefinitely by the project.
 

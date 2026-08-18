@@ -1,5 +1,77 @@
 # Changelog
 
+## 0.7.1
+
+Migration required: recommended for repositories using AI or disconnected implementation agents; otherwise no-op.
+
+Affected areas:
+
+- milestone execution objective;
+- completion audit;
+- terminal execution outcomes;
+- executor scope and reading boundaries;
+- canonical execution prompt;
+- milestone execution model;
+- guide-profile version metadata.
+
+### Corrected
+
+The implementation agent now owns milestone closure, not only implementation and validation.
+
+Execution follows:
+
+```text
+implement -> validate -> completion audit -> continue or terminate
+```
+
+Passing tests, successful compilation, or completion of listed focus areas is not sufficient by itself to claim milestone completion.
+
+The executor must continue resolving every unsatisfied milestone obligation that is agent-resolvable in the current execution context.
+
+### Added
+
+A mandatory completion audit checks all applicable milestone obligations, including:
+
+- goal and target state;
+- acceptance criteria;
+- required validation and evidence;
+- required artifacts or generated outputs;
+- direct documentation obligations;
+- migrations, cleanup, and compatibility work;
+- human-review gates;
+- constraints and invariants;
+- supporting work discovered during implementation that is necessary for completion.
+
+Implementation runs terminate only as:
+
+- `COMPLETE`;
+- `AWAITING HUMAN REVIEW`;
+- `BLOCKED`.
+
+`COMPLETE` requires actual milestone completion, not merely implementation or validation success.
+
+`BLOCKED` is intentionally narrow and is not used for work the agent can continue fixing itself.
+
+### Clarified
+
+- implementation success, validation success, and milestone completion are distinct concepts;
+- scope guardrails prohibit unrelated product expansion but permit supporting work necessary to satisfy the milestone contract;
+- focus areas and workstreams are guidance rather than edit allowlists unless explicitly contractual;
+- implementation may inspect additional repository-local material when necessary to implement or prove a milestone requirement;
+- `AWAITING HUMAN REVIEW` and `BLOCKED` are terminal outcomes for the current execution run, not new durable milestone lifecycle states.
+
+### Not added
+
+v0.7.1 does not add generic `milestone-show`, `milestone-check`, or `milestone-complete` engineering commands. Closure remains part of the executor contract and may use repository-specific commands when they already exist.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.0-to-v0.7.1.md
+```
+
 ## 0.7.0
 
 Migration required: recommended for repositories using milestone-driven coding workflows; otherwise no-op.

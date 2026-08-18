@@ -13,11 +13,13 @@ For ordinary milestone-driven development, use only these two prompts:
 1. `templates/prompts/plan-milestone.md` during planning;
 2. `templates/prompts/execute-milestone.md` after the milestone is `ready`.
 
-Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, and validates.
+Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, validates, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
 
-Execution mode is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
+Execution profile is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
 
 Implementation does not require the planning conversation and escalates material unresolved decisions back to planning.
+
+Passing tests or successful implementation does not by itself complete a milestone. The executor owns milestone closure and must continue resolving every agent-resolvable milestone obligation before terminating.
 
 ## Repository setup and guide-system maintenance
 
@@ -56,9 +58,31 @@ draft/planning -> ready -> implementing -> done
 
 Planning owns decisions that materially affect architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy.
 
-Implementation owns concrete files, types, functions, refactorings, test structure, and implementation sequence where those choices remain inside the ready milestone contract.
+Implementation owns concrete files, types, functions, refactorings, test structure, implementation sequence, supporting edits required by the contract, validation, and completion audit where those choices remain inside the ready milestone contract.
 
 A material unresolved decision prevents `ready` status. If such a decision is discovered during implementation, the affected work returns to planning.
+
+## Closure rule
+
+Implementation follows:
+
+```text
+implement -> validate -> completion audit -> continue or terminate
+```
+
+The implementation run terminates only as:
+
+- `COMPLETE`;
+- `AWAITING HUMAN REVIEW`;
+- `BLOCKED`.
+
+`COMPLETE` means all applicable milestone obligations and completion gates are satisfied.
+
+`AWAITING HUMAN REVIEW` means all agent-resolvable work is complete and a required human decision remains.
+
+`BLOCKED` means completion requires unavailable external capability or a material planning decision the executor cannot make. Agent-resolvable failures are not blockers.
+
+These execution outcomes do not add new durable milestone lifecycle states.
 
 ## Human-review rule
 
@@ -82,4 +106,5 @@ When modifying a prompt, preserve the applicable:
 - authority routing;
 - validation and documentation-sync rules;
 - chat response requirements;
-- quality criteria.
+- quality criteria;
+- completion-audit and terminal-outcome rules.
