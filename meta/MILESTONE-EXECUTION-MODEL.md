@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for milestone lifecycle, execution modes, planning/implementation separation, and milestone completion gates.
+Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, and milestone completion gates.
 
 ## Milestone lifecycle
 
@@ -34,7 +34,7 @@ A ready milestone defines, as applicable:
 - implementation constraints and invariants;
 - required authority documents;
 - acceptance criteria;
-- validation commands and execution mode;
+- validation commands and validation execution mode;
 - direct documentation impact;
 - deferred documentation synchronization;
 - human-review gates;
@@ -60,21 +60,42 @@ The executor:
 
 The executor does not need the planning conversation, external guide repository, rejected alternatives, or planning-agent scratch work.
 
-## Execution modes
+## Execution profiles
 
-Execution mode is orthogonal to lifecycle phase.
+Execution profile is orthogonal to lifecycle phase and describes who or what performs implementation and with what autonomy or review expectations.
 
-| Mode | Meaning |
+| Profile | Meaning |
 |---|---|
 | `human-led` | Human actively drives implementation decisions. |
 | `ai-assisted` | Human implements or steers; AI assists. |
 | `ai-executed-human-reviewed` | AI performs implementation; human reviews declared milestone evidence. |
-| `ai-executed-broad` | AI performs a larger implementation or migration with strong authority and validation. |
-| `documentation-sync` | Broad documentation normalization pass. |
-| `engineering-migration` | Changes command contracts, scripts, CI, or validation infrastructure. |
-| `release-readiness` | Prepares release artifacts, docs, packages, and release validation. |
+| `ai-executed-broad` | AI performs a larger coherent implementation with strong autonomy and validation. |
 
 A repository may use different humans, models, tools, or interfaces for planning and implementation without changing the milestone contract.
+
+## Workflow types
+
+Workflow type describes the kind of work being planned. It is separate from lifecycle phase and execution profile.
+
+Examples include:
+
+- ordinary product or library milestone work;
+- engineering migration;
+- documentation synchronization;
+- release readiness.
+
+Special workflow types may use dedicated planning prompts because they have different authority, scope, or completion semantics. When they result in coding or repository changes, they still converge on the same ready-milestone boundary and use the canonical implementation phase unless their workflow explicitly requires a different executor contract.
+
+## Validation execution mode
+
+Validation execution mode describes how required validation runs, for example:
+
+- direct;
+- resumable-sharded;
+- CI-only;
+- human-review-gated.
+
+Validation execution mode must not be confused with execution profile or workflow type.
 
 ## Milestone completion
 
