@@ -9,9 +9,10 @@ Affected areas:
 - milestone lifecycle;
 - planning/implementation boundary;
 - milestone template;
-- implementation execution prompt;
-- meta-guide doctrine;
-- prompt guidance.
+- canonical planning and execution prompts;
+- prompt directory structure;
+- meta-guide and migration terminology;
+- migration guidance.
 
 ### Changed
 
@@ -25,7 +26,9 @@ Planning resolves material architectural, semantic, compatibility, scope, accept
 
 Implementation begins from a ready milestone, re-inspects the live repository, derives concrete implementation mechanics, implements, tests, and validates.
 
-Execution mode is orthogonal to lifecycle phase. The guide system does not encode particular model tiers as durable execution modes.
+Execution profile is orthogonal to lifecycle phase. The guide system does not encode particular model tiers as durable execution modes.
+
+Migration, documentation synchronization, and release readiness are workflow types, not execution modes.
 
 ### Simplified
 
@@ -42,6 +45,31 @@ The generic milestone contract now emphasizes:
 
 Exhaustive file lists, predicted class changes, and detailed edit sequences are no longer generic milestone requirements unless they are themselves contractually significant.
 
+The normal prompt surface is now:
+
+```text
+templates/prompts/
+  plan-milestone.md
+  execute-milestone.md
+  new-project.md
+  adopt-guide-system.md
+  update-guide-system.md
+  special/
+  version-specific/
+```
+
+For normal development, use `plan-milestone.md` followed by `execute-milestone.md`.
+
+The old human-led, AI-assisted, broad-AI, and AI-executed-human-reviewed planning prompt variants are no longer separate user-facing entry points. Execution profile is selected during planning.
+
+Special planning workflows live under `templates/prompts/special/`. Historical and exact-target migration/repair prompts live under `templates/prompts/version-specific/`.
+
+### Handoff model
+
+The ready milestone plus referenced project authority is the durable planning-to-implementation handoff.
+
+`templates/prompts/execute-milestone.md` is the canonical execution methodology. Planning may provide a concise handoff note or overlay application instructions, but it does not need to regenerate a bespoke execution prompt for each milestone.
+
 ### Added
 
 - explicit `ready` milestone semantics;
@@ -52,7 +80,7 @@ Exhaustive file lists, predicted class changes, and detailed edit sequences are 
 ### Retained
 
 - external guide authority and localized project truth;
-- existing execution modes;
+- existing execution profiles;
 - deferred documentation synchronization;
 - milestone-scoped human review;
 - constrained execution and resumable validation.
