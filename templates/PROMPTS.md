@@ -13,9 +13,9 @@ For ordinary milestone-driven development, use only these two prompts:
 1. `templates/prompts/plan-milestone.md` during planning;
 2. `templates/prompts/execute-milestone.md` after the milestone is `ready`.
 
-Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. It also establishes that the resulting milestone is executable by the project's baseline implementation model.
+Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. It also establishes that the resulting milestone is executable and execution-tractable by the project's baseline implementation model.
 
-Implementation reads the ready milestone and localized project authority, inspects the live repository, derives concrete implementation mechanics, implements, validates, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
+Implementation reads the ready milestone and localized project authority, inspects the live repository, decomposes the work into bounded execution work packages, persists coverage/progress in `.execution/<milestone-id>.md`, implements, validates, reconciles the milestone against live evidence, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
 
 Execution profile is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
 
@@ -23,11 +23,23 @@ Implementation does not require the planning conversation and escalates material
 
 Passing tests or successful implementation does not by itself complete a milestone. The executor owns milestone closure and must continue resolving every agent-resolvable milestone obligation before terminating.
 
+## Stable implementation handoff
+
+The ready milestone plus referenced project authority is the durable semantic handoff.
+
+Use `templates/prompts/execute-milestone.md` as the canonical execution methodology.
+
+Do not generate bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent files that duplicate the canonical prompt, milestone acceptance criteria, or project authority.
+
+Overlay/archive application instructions and a short note identifying the primary ready-milestone path are valid transport context. They are not a second execution contract.
+
 ## Baseline-model readiness rule
 
 The project's baseline implementation model is planning metadata. The default ChatGPT-focused guide profile uses GPT-5.6 Luna.
 
 A coding milestone is `ready` only when that baseline model can execute the contract without inventing a new material decision about architecture, semantics, compatibility, scope, acceptance, validation, or human-review policy.
+
+Readiness also includes execution tractability: long implementation volume must be decomposable by the executor into bounded coherent work packages whose coverage/progress can be persisted and recovered from repository-local state.
 
 The guide does not use `strong`, `frontier`, or similar model-capability execution tiers as a normal remedy for incomplete planning.
 
@@ -35,7 +47,7 @@ Planning should perform the difficult project-level reasoning, make completion o
 
 If a material decision requires additional evidence, plan a diagnostic or investigation milestone first. Use its evidence to return to planning and produce the final implementation-ready milestone.
 
-Baseline executability does not require tiny milestones. Large coherent work remains valid when decisions are settled and execution or validation can be bounded, sharded, or resumed safely.
+Baseline executability does not require tiny milestones. Large coherent work remains valid when decisions are settled, obligations are explicit, implementation can be decomposed into bounded work packages, and validation can be bounded, sharded, or resumed safely.
 
 Special planning workflows that produce coding or repository-change milestones inherit this same `ready` boundary unless they explicitly define a non-implementation workflow.
 
@@ -76,18 +88,43 @@ draft/planning -> ready -> implementing -> done
 
 Planning owns decisions that materially affect architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy.
 
-Planning also owns the judgment that the milestone can be executed by the configured baseline implementation model without unresolved project-level reasoning.
+Planning also owns the judgment that the milestone can be executed by the configured baseline implementation model without unresolved project-level reasoning and that its implementation volume is execution-tractable.
 
-Implementation owns concrete files, types, functions, refactorings, test structure, implementation sequence, supporting edits required by the contract, validation, and completion audit where those choices remain inside the ready milestone contract.
+Implementation owns concrete files, types, functions, refactorings, test structure, execution work packages, implementation sequence, supporting edits required by the contract, persistent execution progress, validation, and completion audit where those choices remain inside the ready milestone contract.
 
 A material unresolved decision prevents `ready` status. If such a decision is discovered during implementation, the affected work returns to planning.
+
+Execution decomposition does not introduce another durable lifecycle phase.
+
+## Execution-state rule
+
+For AI-executed coding milestones, implementation creates or reconciles:
+
+```text
+.execution/<milestone-id>.md
+```
+
+before production edits.
+
+The ledger maps milestone obligations to bounded work packages and evidence. It is operational state only and cannot amend the milestone or referenced authority.
+
+A small milestone may use one work package. Do not skip persistent execution state merely because the milestone appears simple.
+
+Update the ledger after coherent work packages and their relevant validation. On resume or after context compaction, reread the milestone and ledger before continuing.
 
 ## Closure rule
 
 Implementation follows:
 
 ```text
-implement -> validate -> completion audit -> continue or terminate
+read milestone and authority
+-> execution decomposition
+-> create/reconcile execution ledger
+-> implement/validate/update ledger by work package
+-> freshly reread milestone
+-> reconcile milestone <-> ledger <-> repository/evidence
+-> completion audit
+-> continue or terminate
 ```
 
 The implementation run terminates only as:
@@ -96,7 +133,7 @@ The implementation run terminates only as:
 - `AWAITING HUMAN REVIEW`;
 - `BLOCKED`.
 
-`COMPLETE` means all applicable milestone obligations and completion gates are satisfied.
+`COMPLETE` means the fresh reconciliation and completion audit establish all applicable milestone obligations and completion gates.
 
 `AWAITING HUMAN REVIEW` means all agent-resolvable work is complete and a required human decision remains.
 
@@ -124,8 +161,9 @@ When modifying a prompt, preserve the applicable:
 - deliverable boundaries;
 - milestone content requirements;
 - authority routing;
-- baseline-model readiness rules;
+- baseline-model readiness and execution-tractability rules;
+- execution-ledger and resume rules;
 - validation and documentation-sync rules;
 - chat response requirements;
 - quality criteria;
-- completion-audit and terminal-outcome rules.
+- final reconciliation, completion-audit, and terminal-outcome rules.

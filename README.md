@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.7.2
+Version: 0.7.3
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -16,6 +16,8 @@ Projects contain project truth.
 Milestones are planned before they are implemented.
 Planning resolves uncertainty and produces a ready milestone.
 A ready milestone must be executable by the project's baseline implementation model.
+Implementation begins by decomposing the ready milestone into bounded execution work packages.
+AI executors persist coverage and progress in a repository-local execution ledger.
 Implementation derives concrete edits from the live repository and the ready milestone.
 The executor owns milestone closure, not only code production and test execution.
 Validation success is evidence, not milestone completion by itself.
@@ -23,27 +25,43 @@ Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
 
-## Version 0.7.2
+## Version 0.7.3
 
-Version 0.7.2 makes baseline-model executability part of the `ready` milestone boundary.
+Version 0.7.3 adds execution tractability and persistent execution state to the implementation contract.
 
-For the default ChatGPT-focused profile, the baseline implementation model is GPT-5.6 Luna.
-
-The purpose is not to make milestones tiny or prescribe implementation line by line. Planning should perform the difficult project-level reasoning and leave the implementation agent a bounded contract whose remaining choices are local implementation mechanics.
-
-A milestone is not `ready` when its executor would still need to make a material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy. In that case planning continues, or a focused diagnostic milestone is planned first when evidence must be gathered before the final implementation contract can be decided.
-
-The guide does not introduce `strong` or `frontier` execution tiers. Execution profiles such as `human-led`, `ai-assisted`, `ai-executed-human-reviewed`, and `ai-executed-broad` continue to describe autonomy and review expectations rather than model capability.
-
-Large or cross-cutting work can still be baseline-executable when its decisions are settled, its boundaries are explicit, and its validation is sufficiently deterministic or resumable.
-
-The v0.7.1 closure contract remains unchanged:
+A ready milestone remains the semantic implementation contract. The executor does not redo architectural planning, but before production edits it converts the milestone into bounded implementation work packages and creates:
 
 ```text
-implement -> validate -> completion audit -> continue or terminate
+.execution/<milestone-id>.md
 ```
 
-An implementation run terminates only as:
+The execution ledger is operational state, not project authority. It maps milestone obligations and acceptance criteria to work packages, tracks status, and records concrete evidence. Its purpose is to make long implementation runs resumable and to prevent completion from depending on conversational memory.
+
+The implementation loop is now:
+
+```text
+read milestone and authority
+-> execution decomposition
+-> create/reconcile execution ledger
+-> implement a work package
+-> validate it
+-> update ledger
+-> repeat
+-> reread milestone from disk
+-> reconcile milestone <-> ledger <-> repository/evidence
+-> final validation and completion audit
+-> terminal outcome
+```
+
+Before `COMPLETE`, the executor must freshly reread the milestone from disk and prove coverage of every applicable acceptance criterion and completion obligation. A checked ledger row without supporting repository state or evidence is not proof.
+
+Planning still owns project-level decisions. Large coherent milestones do not need to be split merely because they contain substantial implementation volume, but they must be tractable as bounded execution work packages for the baseline implementation model.
+
+Planning handoff is also simplified. Do not generate bespoke per-milestone `EXECUTE-Mxxx.md` files that duplicate the canonical execution methodology or repeat milestone authority. Overlay application instructions and a short handoff identifying the ready milestone remain valid transport artifacts.
+
+No new engineering commands are introduced by v0.7.3.
+
+The terminal outcomes remain:
 
 - `COMPLETE` — every applicable milestone obligation and completion gate is satisfied;
 - `AWAITING HUMAN REVIEW` — all agent-resolvable work is complete and a required human decision remains;
@@ -51,10 +69,8 @@ An implementation run terminates only as:
 
 ## Upgrade
 
-From v0.7.1, use:
+From v0.7.2, use:
 
 ```text
-migrations/guide-system-v0.7.1-to-v0.7.2.md
+migrations/guide-system-v0.7.2-to-v0.7.3.md
 ```
-
-The migration primarily changes planning and milestone-readiness semantics. The canonical v0.7.1 execution prompt remains compatible and does not require replacement merely to adopt v0.7.2.

@@ -1,5 +1,97 @@
 # Changelog
 
+## 0.7.3
+
+Migration required: recommended for repositories using AI-executed coding milestones; otherwise no-op for workflows that do not use the canonical AI implementation prompt.
+
+Affected areas:
+
+- implementation execution shape;
+- baseline execution tractability;
+- persistent implementation progress;
+- final completion reconciliation;
+- canonical planning and execution prompts;
+- milestone execution model and template;
+- planning-to-implementation handoff;
+- guide-profile version metadata.
+
+### Corrected
+
+The v0.7.1 completion audit made milestone closure the executor objective, but long runs could still rely too heavily on conversational working memory until the final audit.
+
+v0.7.3 makes requirement coverage and implementation progress explicit throughout execution rather than reconstructing them retrospectively after implementation and validation.
+
+### Added
+
+AI-executed coding milestones now begin with implementation-owned execution decomposition.
+
+Before production edits, the executor creates or reconciles:
+
+```text
+.execution/<milestone-id>.md
+```
+
+The execution ledger maps milestone obligations and acceptance criteria to bounded work packages, tracks progress, records required validation, and stores concrete evidence/resume state.
+
+A small milestone may use one work package. AI executors do not skip the ledger merely because work appears simple.
+
+The ledger is operational implementation state, not project authority. It cannot amend or reinterpret the ready milestone.
+
+After each coherent work package and relevant validation, the executor updates the ledger.
+
+On context compaction, interruption, or resume, the executor rereads the milestone and ledger before continuing.
+
+### Strengthened completion
+
+Before `COMPLETE`, the executor must freshly reread the primary milestone from disk and reconcile:
+
+```text
+milestone obligations
+<-> execution ledger
+<-> live repository and concrete evidence
+```
+
+A checked ledger row is not proof by itself. Unsupported or stale completion claims must be reopened and resolved.
+
+The existing completion audit and terminal outcomes remain in force after this reconciliation.
+
+### Planning and readiness
+
+Baseline-model readiness now includes execution tractability in addition to decision completeness.
+
+Large coherent milestones may remain single semantic milestones when:
+
+- material project-level decisions are settled;
+- obligations are explicit and observable;
+- implementation can derive bounded coherent work packages without reopening planning;
+- long-running progress can be recovered from repository-local operational state;
+- validation/evidence can establish completion reliably.
+
+Planning does not pre-author the execution ledger or detailed implementation task list.
+
+### Handoff cleanup
+
+Planning must not generate bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent files that duplicate the canonical execution prompt, milestone acceptance criteria, or referenced project authority.
+
+The normal disconnected handoff is the ready milestone plus referenced authority and the stable `templates/prompts/execute-milestone.md` methodology. Overlay application instructions and a concise milestone-path handoff remain valid transport artifacts.
+
+### Not added
+
+v0.7.3 does not add:
+
+- a new durable milestone lifecycle phase;
+- generic milestone/ledger/checklist engineering commands;
+- model-strength execution tiers;
+- planner-authored line-by-line implementation plans.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.2-to-v0.7.3.md
+```
+
 ## 0.7.2
 
 Migration required: recommended for repositories using AI implementation agents; otherwise no-op when existing milestone planning already guarantees baseline-model executability.

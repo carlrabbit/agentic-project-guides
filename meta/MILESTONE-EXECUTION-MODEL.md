@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, baseline-executor readiness, execution completion, and milestone completion gates.
+Authoritative for milestone lifecycle, execution profiles, planning/implementation separation, workflow classification, baseline-executor readiness, execution tractability, persistent execution state, execution completion, and milestone completion gates.
 
 ## Milestone lifecycle
 
@@ -16,7 +16,7 @@ draft/planning -> ready -> implementing -> done
 
 `ready` means planning has resolved the decisions that would materially change architecture, semantics, compatibility, scope, acceptance, or validation, and has established that the project's baseline implementation model can execute the milestone without making a new material project-level decision. The milestone is a self-contained implementation contract together with the project authority it references.
 
-`implementing` means the executor may determine concrete implementation mechanics from the live repository but must not silently change resolved milestone decisions.
+`implementing` means the executor may determine concrete implementation mechanics from the live repository but must not silently change resolved milestone decisions. For AI-executed milestones, implementation includes execution decomposition and persistent repository-local progress state.
 
 `done` means the milestone acceptance and completion gates have been satisfied.
 
@@ -46,6 +46,8 @@ Planning may create or update project-truth documents when a decision must becom
 Detailed file lists, class designs, edit sequences, and speculative implementation steps are not required unless they are themselves part of the architectural or compatibility contract.
 
 If a milestone uses focus areas, workstreams, or similar decomposition, those describe expected concentration of work. They are not an exhaustive edit allowlist unless the milestone explicitly makes them contractual.
+
+Planning must structure acceptance criteria and completion obligations clearly enough that implementation can map them to concrete execution work and evidence. Planning does not pre-author the executor's local task list.
 
 ## Baseline implementation model and `ready` boundary
 
@@ -85,14 +87,32 @@ Baseline executability does not imply that milestones must be small. Large coher
 - project-level decisions are settled;
 - boundaries and invariants are explicit;
 - remaining implementation choices are local mechanics;
-- long-running work can be bounded, sharded, or resumed where necessary;
+- milestone obligations can be mapped during implementation into bounded coherent work packages;
+- long-running implementation can recover from repository-local execution state rather than depending on conversational memory;
+- long-running validation can be bounded, sharded, or resumed where necessary;
 - validation gives reliable completion evidence.
 
-Execution volume and reasoning uncertainty are different concerns. Use constrained-execution and resumable-validation mechanisms for volume; use planning for unresolved project-level reasoning.
+Execution volume and reasoning uncertainty are different concerns. Use planning for unresolved project-level reasoning. Use execution decomposition and persistent execution state for long implementation volume. Use constrained-execution and resumable-validation mechanisms for long validation volume.
 
 The baseline model may still discover unexpected repository facts during implementation. If those facts can be handled through local mechanics within the ready contract, implementation continues. If they expose a material unresolved decision, the affected work returns to planning.
 
 Ordinary implementation agents do not need to read `.guide-profile.json` to discover the baseline model. Planning uses that metadata to establish readiness; the ready milestone and referenced project authority remain the implementation contract.
+
+## Execution tractability
+
+Decision completeness is necessary but not sufficient for reliable AI execution.
+
+Planning must also establish that the milestone's implementation volume is tractable for the baseline executor. A milestone is execution-tractable when:
+
+- its obligations are explicit and observable;
+- implementation can group those obligations into bounded coherent work packages without making new project-level decisions;
+- work-package progress can be externalized into repository-local operational state;
+- validation/evidence can be associated with the relevant obligations;
+- an interrupted or compacted implementation session can reconstruct current execution state from the milestone, ledger, repository, and evidence.
+
+Execution tractability does not require planning to predict the concrete work-package decomposition. That decomposition belongs to implementation because it depends on the live repository and local mechanics.
+
+A large milestone should be split into multiple milestones when it is semantically incoherent, has independently valuable target states, or contains unresolved decisions that should be planned separately. It should not be split merely to compensate for the absence of persistent implementation state.
 
 ## Implementation phase
 
@@ -105,12 +125,14 @@ The executor:
 - starts with the milestone and explicitly required project authority;
 - inspects the live source and tests needed for the change;
 - may inspect additional repository-local material needed to implement or prove a milestone obligation;
-- derives the concrete implementation plan;
+- derives concrete execution work packages and implementation mechanics;
+- creates or reconciles persistent execution coverage/progress state for AI-executed milestones;
 - follows established repository patterns where the milestone leaves implementation freedom;
 - performs all implementation and supporting work required by the milestone contract;
 - avoids unrelated product expansion;
 - runs the specified validation and fixes agent-resolvable failures;
 - produces required evidence and artifacts;
+- freshly reconciles milestone obligations against execution state and repository evidence before completion;
 - performs a mandatory completion audit;
 - continues working while any unsatisfied milestone obligation is agent-resolvable.
 
@@ -118,26 +140,99 @@ The executor does not need the planning conversation, external guide repository,
 
 The instruction to remain within milestone scope forbids unrelated expansion. It does not forbid supporting edits necessary to satisfy the milestone goal, target state, acceptance criteria, validation, documentation, artifact, migration, cleanup, or review obligations.
 
+## Execution decomposition
+
+For AI-executed coding milestones, implementation has two internal stages without adding a new durable lifecycle phase.
+
+Stage 1 is execution decomposition. Before production edits, the executor:
+
+1. rereads the ready milestone and required authority;
+2. inspects enough live repository state to locate implementation surfaces;
+3. maps every applicable acceptance criterion and completion obligation to at least one bounded work package or explicit gate;
+4. maps required validation to the relevant work packages/gates;
+5. creates or reconciles `.execution/<milestone-id>.md`;
+6. verifies that no work package requires reopening a settled material decision.
+
+Stage 2 is iterative implementation of those work packages.
+
+Execution decomposition may choose files, types, tests, refactorings, local sequencing, and other implementation mechanics. It must not amend architecture, semantics, compatibility, scope, acceptance, validation policy, or human-review policy already settled by planning.
+
+A small milestone may consist of one work package. AI-executed milestones do not skip persistent execution state merely because the work initially appears simple.
+
+## Persistent execution ledger
+
+The canonical repository-local ledger path is:
+
+```text
+.execution/<milestone-id>.md
+```
+
+The ledger is mutable operational state, not project authority.
+
+It records at least:
+
+- primary milestone path;
+- acceptance/completion obligation coverage;
+- bounded work packages;
+- work-package/obligation status;
+- required validation gates;
+- concrete evidence for completed obligations;
+- a concise resume point while work remains.
+
+A ledger row marked `done` is a claim about progress, not acceptance authority. Repository state and concrete evidence must independently establish the mapped obligation.
+
+The executor updates the ledger after each coherent work package and relevant validation.
+
+After context compaction, interruption, or session resume, the executor rereads the primary milestone and execution ledger before continuing and reconciles them with the live repository where necessary.
+
+The ledger is required while an AI-executed milestone is active. Retention after milestone completion is repository policy. Removing a completed ledger does not invalidate independently established milestone evidence.
+
+No generic engineering command is required to create, update, check, or complete the ledger.
+
 ## Execution loop
 
 Implementation follows this loop:
 
 ```text
-implement
-  -> validate
-  -> completion audit
-  -> fix every agent-resolvable gap
+read milestone and authority
+  -> execution decomposition
+  -> create/reconcile execution ledger
+  -> implement coherent work package
+  -> focused validation
+  -> update ledger and evidence
   -> repeat as needed
+  -> freshly reread milestone from disk
+  -> reconcile milestone <-> ledger <-> repository/evidence
+  -> final validation
+  -> completion audit
   -> terminal execution outcome
 ```
 
-Tests and automated checks are evidence used by the completion audit. They are not a substitute for it.
+Tests and automated checks are evidence used by the execution ledger and completion audit. They are not substitutes for milestone reconciliation.
 
-A successful build or test suite must not become an implicit stopping condition when other milestone obligations remain unsatisfied.
+A successful build, test suite, or validation shard must not become an implicit stopping condition when other milestone obligations remain unsatisfied.
+
+## Final reconciliation
+
+Before a `COMPLETE` outcome, the executor must freshly reread the primary milestone from disk rather than relying on conversational memory or the ledger's summary.
+
+It then reconciles:
+
+```text
+milestone obligations
+<-> execution ledger
+<-> live repository and concrete evidence
+```
+
+For every applicable acceptance criterion and completion obligation, the executor must identify the claimed execution coverage and verify it against actual repository state or evidence.
+
+Unsupported, stale, or merely asserted `done` states must be reopened. Newly discovered agent-resolvable gaps become active execution work and the loop continues.
+
+Final reconciliation also confirms that every required validation gate has current evidence and that no agent-resolvable ledger item remains.
 
 ## Completion audit
 
-Before terminating an implementation run, the executor must audit all applicable milestone obligations, including:
+After final reconciliation and required validation, the executor audits all applicable milestone obligations, including:
 
 - goal;
 - target state;
@@ -151,7 +246,7 @@ Before terminating an implementation run, the executor must audit all applicable
 - constraints and invariants;
 - supporting work discovered during implementation that is necessary for completion.
 
-If an unsatisfied obligation can be resolved in the current execution context without changing the ready milestone contract, implementation continues.
+If an unsatisfied obligation can be resolved in the current execution context without changing the ready milestone contract, implementation continues and the ledger is updated.
 
 If a required human decision is the only remaining gate, execution terminates as `AWAITING HUMAN REVIEW`.
 
@@ -159,15 +254,18 @@ If completion requires unavailable external capability or a material planning de
 
 ## Success semantics
 
-Implementation success, validation success, and milestone completion are distinct:
+Implementation success, work-package completion, validation success, and milestone completion are distinct:
 
 | Concept | Meaning |
 |---|---|
 | Implementation success | The intended implementation exists. |
+| Work-package completion | A bounded implementation outcome and its mapped evidence are established. |
 | Validation success | The required automated checks pass. |
 | Milestone completion | Every applicable milestone obligation and completion gate is satisfied. |
 
-Implementation success does not imply validation success.
+Implementation success does not imply work-package completion.
+
+Work-package completion does not imply aggregate validation success.
 
 Validation success does not imply milestone completion.
 
@@ -179,7 +277,7 @@ An implementation run terminates only with one of these outcomes:
 
 ### `COMPLETE`
 
-All applicable milestone obligations are satisfied and no blocking review or external dependency remains.
+The milestone has been freshly reread, milestone-to-ledger-to-repository/evidence reconciliation succeeded, all applicable milestone obligations are satisfied, required validation is current, and no blocking review or external dependency remains.
 
 The milestone may transition to `done`.
 
@@ -200,7 +298,7 @@ Examples include:
 - inaccessible required dependencies or artifacts;
 - a material architectural, semantic, compatibility, scope, acceptance, or validation decision that must return to planning.
 
-Ordinary implementation work, failing tests, missing documentation, incomplete artifacts, or other agent-resolvable obligations are not blockers.
+Ordinary implementation work, failing tests, missing documentation, incomplete artifacts, incomplete ledger items, or other agent-resolvable obligations are not blockers.
 
 These are terminal outcomes for the current implementation run, not additional durable milestone lifecycle states. `AWAITING HUMAN REVIEW` and `BLOCKED` leave the milestone active.
 
@@ -218,6 +316,8 @@ Execution profile is orthogonal to lifecycle phase and describes who or what per
 A repository may use different humans, models, tools, or interfaces for planning and implementation without changing the milestone contract.
 
 Execution profiles do not encode model strength. In particular, the generic guide does not add `strong` or `frontier` execution profiles. Baseline-model readiness is decided during planning before any AI-executed milestone becomes `ready`.
+
+Persistent execution-ledger requirements apply to AI-executed coding milestones regardless of whether the profile is `ai-executed-human-reviewed` or `ai-executed-broad`.
 
 ## Workflow types
 

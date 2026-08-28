@@ -8,6 +8,7 @@
 | Mode | ai-executed-human-reviewed |
 | Baseline implementation model | <project baseline; default GPT-5.6 Luna> |
 | Baseline executor readiness | confirmed |
+| Execution tractability | confirmed |
 | Scope size | medium-large |
 | Implementation autonomy | high |
 | Documentation sync | deferred |
@@ -42,21 +43,39 @@ Do not prescribe concrete implementation mechanics here unless they are part of 
 
 This milestone is `ready` only when the project's baseline implementation model can execute it without making a new material decision about architecture, semantics, compatibility, scope, acceptance criteria, or validation policy.
 
-Planning must resolve those decisions before implementation. Remaining implementation freedom should consist of local code, test, refactoring, sequencing, and supporting-work choices that fit the contract.
+Planning must resolve those decisions before implementation. Remaining implementation freedom should consist of local code, test, refactoring, sequencing, execution-decomposition, and supporting-work choices that fit the contract.
 
 Do not compensate for incomplete planning by requiring a stronger implementation-model tier or by turning the milestone into a line-by-line implementation script.
 
 If material evidence must be gathered before the final implementation contract can be decided, plan a focused diagnostic milestone first and return the resulting evidence to planning.
 
-Large coherent work is allowed when the contract is settled and execution or validation can be bounded or resumed safely.
+Large coherent work is allowed when the contract is settled and execution is tractable for the baseline model.
+
+## Execution Tractability
+
+For large or long-running AI execution, the milestone obligations must be explicit enough that implementation can derive bounded coherent work packages and map them to evidence without reopening planning.
+
+The implementation agent creates and maintains:
+
+```text
+.execution/<milestone-id>.md
+```
+
+as operational progress state. Planning does not pre-author that ledger or the executor's detailed task list.
+
+The ready milestone should remain one coherent semantic milestone when appropriate. Split it only when separate target states or unresolved planning boundaries justify separate milestones, not merely because the implementation contains many edits.
 
 ## Required Authority
 
 - <Relevant spec, architecture, decision, or engineering document>
 
+Reference authority rather than duplicating its complete body in this milestone.
+
 ## Acceptance Criteria
 
 - <Observable or machine-verifiable completion condition.>
+
+Acceptance criteria must describe completed outcomes and be specific enough to map to implementation work and evidence.
 
 ## Validation
 
@@ -94,8 +113,23 @@ Implementation updates directly contradicted authority documents only.
 
 Broad documentation normalization is handled by a separate documentation-sync pass.
 
+## Completion Expectations
+
+The implementation agent owns milestone closure and will:
+
+```text
+execution decomposition
+-> persistent execution ledger
+-> implement/validate work packages
+-> freshly reread this milestone
+-> reconcile milestone <-> ledger <-> repository/evidence
+-> completion audit
+```
+
+Passing tests or completing listed focus areas does not by itself establish milestone completion.
+
 ## Escalation Boundary
 
-Implementation owns concrete code and test mechanics that fit this contract.
+Implementation owns concrete code/test mechanics, execution decomposition, and supporting edits that fit this contract.
 
 Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, or validation policy.

@@ -30,15 +30,17 @@ Do not treat old copied setup or engineering guides as authority.
 
 Do not read `.guide-profile.json`, `.guide-sync/`, or `.review/` unless the milestone requires them or they are necessary to satisfy or verify an explicit milestone obligation.
 
+If `.execution/<milestone-id>.md` already exists for the active milestone, read it after the primary milestone. Treat it as operational progress state only, never as authority.
+
 ## Implementation ownership
 
 Inspect the live repository and derive the concrete implementation yourself.
 
-You own local implementation mechanics including files, types, functions, refactorings, test structure, and implementation sequence where the ready milestone does not constrain them.
+You own local implementation mechanics including files, types, functions, refactorings, test structure, implementation sequence, execution work packages, and supporting edits where the ready milestone does not constrain them.
 
 Prefer the smallest coherent change that satisfies the milestone goal, target state, acceptance criteria, and completion obligations. Follow established repository patterns where they do not conflict with the milestone.
 
-Do not expect planning to provide exhaustive file lists or line-by-line edits.
+Do not expect planning to provide exhaustive file lists, line-by-line edits, or a pre-authored implementation task list.
 
 If the milestone contains focus areas, workstreams, or similar decomposition, treat them as execution guidance rather than an edit allowlist. Supporting edits outside those areas are allowed when they are necessary to satisfy the milestone contract.
 
@@ -59,6 +61,62 @@ If implementation reveals a material unresolved decision that could change archi
 
 Local implementation choices that stay within the milestone contract do not require escalation.
 
+## Stage 1 — Execution decomposition
+
+Before making production implementation edits, convert the ready milestone into bounded execution work packages.
+
+This is implementation decomposition, not a new planning phase. Do not reopen settled project decisions.
+
+Create or reconcile:
+
+```text
+.execution/<milestone-id>.md
+```
+
+Use `templates/milestones/execution-ledger-template.md` as the conceptual shape when available, but do not read the external guide repository to obtain it during ordinary implementation.
+
+The ledger must be sufficient to recover execution state after context compaction, interruption, or a resumed session.
+
+At minimum, record:
+
+- the primary milestone path;
+- every applicable acceptance criterion and completion obligation;
+- bounded coherent work packages that cover those obligations;
+- current status for each obligation/work package;
+- required validation gates;
+- concrete evidence as work completes;
+- the current resume point while work remains.
+
+A small milestone may use one work package. Do not skip the ledger because the work appears simple.
+
+Before implementation starts, perform a coverage check:
+
+- every acceptance criterion maps to at least one work package;
+- every required artifact, documentation, migration, cleanup, compatibility, or review obligation maps to a work package or explicit gate;
+- every required validation command or validation gate is represented;
+- no work package depends on making a new material project-level decision.
+
+If the ledger already exists, reconcile it against the current milestone and live repository rather than trusting stale status mechanically.
+
+The ledger is mutable operational state. It must not amend, reinterpret, or override the milestone or referenced authority.
+
+## Stage 2 — Implementation loop
+
+Implement one coherent work package at a time where practical.
+
+For each work package:
+
+1. inspect the live repository state needed for that package;
+2. implement the required change and supporting work;
+3. run the relevant focused validation;
+4. fix agent-resolvable failures;
+5. update the ledger with actual status and evidence;
+6. record the next resume point before moving on when meaningful.
+
+Do not mark a work package or obligation `done` merely because code was written or a test command was invoked. `done` means the live repository and recorded evidence establish the mapped obligation.
+
+If context is compacted or the session is resumed, reread the primary milestone and `.execution/<milestone-id>.md` before continuing. Re-establish current repository state where the ledger may be stale.
+
 ## Execution rules
 
 Perform all implementation and supporting work required to satisfy the milestone contract.
@@ -70,6 +128,8 @@ Do not perform broad documentation synchronization unless it is part of the mile
 Use canonical repository commands from `eng/` when present.
 
 Passing tests is evidence of validation success. It is not by itself evidence that the milestone is complete.
+
+The execution ledger is evidence-routing and progress state. A checked ledger row is not proof by itself.
 
 ## Human review
 
@@ -88,7 +148,7 @@ When the milestone requires human review:
 - after the human decision, run `./eng/review-check.sh --milestone <milestone-id>` or the repository's documented equivalent;
 - do not reopen or revalidate completed reviews from earlier milestones because repository state changed.
 
-If the reviewer records `changes-requested`, correct the implementation within milestone scope, regenerate evidence, and preserve the decision history. If the requested change would alter the ready milestone contract, escalate back to planning.
+If the reviewer records `changes-requested`, correct the implementation within milestone scope, regenerate evidence, update the execution ledger, and preserve the decision history. If the requested change would alter the ready milestone contract, escalate back to planning.
 
 If a required human decision is the only remaining unsatisfied completion gate and it cannot be obtained in the current execution context, terminate as `AWAITING HUMAN REVIEW` and report the exact pending review ID and evidence. Do not claim milestone completion.
 
@@ -107,6 +167,8 @@ When a validation suite exposes `--plan-json`:
 5. run the fast `--verify` command;
 6. treat the verifier as aggregate validation-success authority.
 
+Record shard/gate completion and evidence in the execution ledger.
+
 Do not claim aggregate validation success from partial child output.
 
 ## Validation
@@ -119,9 +181,34 @@ If the milestone specifies CI-only validation, report local validation separatel
 
 If the milestone includes blocking human review, automated validation success alone does not complete the milestone.
 
+## Mandatory final reconciliation
+
+After implementation work packages and required validation appear complete, do not immediately terminate.
+
+Freshly reread the primary milestone from disk. Do not rely on conversational memory or the ledger's summary of the milestone.
+
+Then reconcile:
+
+```text
+milestone obligations
+<-> execution ledger
+<-> live repository and concrete evidence
+```
+
+For every applicable acceptance criterion and completion obligation:
+
+- identify the ledger work package or gate that claims coverage;
+- inspect the actual implementation/evidence needed to establish it;
+- downgrade any stale, unsupported, or merely asserted `done` state;
+- add newly discovered agent-resolvable gaps to the ledger and continue implementation.
+
+Also confirm that every required validation gate has current evidence and that the ledger contains no unresolved agent-resolvable item.
+
+Only after this reconciliation succeeds may you perform the terminal completion audit.
+
 ## Mandatory completion audit
 
-After implementation and required validation, perform a completion audit before terminating.
+After final reconciliation and required validation, perform a completion audit before terminating.
 
 Check the milestone against all applicable obligations, including:
 
@@ -137,23 +224,30 @@ Check the milestone against all applicable obligations, including:
 - constraints and invariants;
 - any supporting work discovered during implementation that is necessary to satisfy the milestone.
 
-Do not treat passing tests, successful compilation, or completion of listed focus areas as sufficient by themselves.
+Do not treat passing tests, successful compilation, completion of listed focus areas, or a fully checked execution ledger as sufficient by themselves.
 
 For every unsatisfied item:
 
-- if it is resolvable in the current execution context without changing the ready milestone contract, continue working;
+- if it is resolvable in the current execution context without changing the ready milestone contract, update the ledger and continue working;
 - if the only remaining requirement is a human decision, terminate as `AWAITING HUMAN REVIEW`;
 - if it requires unavailable external capability or a material planning decision you are not authorized to make, terminate as `BLOCKED` and identify the exact dependency or decision.
 
-Repeat implementation, validation, and completion audit as needed until no agent-resolvable milestone obligation remains.
+Repeat implementation, validation, ledger reconciliation, and completion audit as needed until no agent-resolvable milestone obligation remains.
 
 ## Success semantics
 
 Keep these concepts distinct:
 
 - implementation success: the intended implementation exists;
+- work-package completion: a bounded implementation outcome and its mapped evidence are established;
 - validation success: the required automated checks pass;
 - milestone completion: every milestone obligation and completion gate is satisfied.
+
+Implementation success does not imply work-package completion.
+
+Work-package completion does not imply aggregate validation success.
+
+Validation success does not imply milestone completion.
 
 Only milestone completion permits the `COMPLETE` terminal outcome.
 
@@ -163,7 +257,14 @@ Terminate only with one of these explicit outcomes:
 
 ### COMPLETE
 
-Use only when the completion audit finds every applicable milestone obligation satisfied and no blocking review or external dependency remains.
+Use only when:
+
+- the primary milestone was freshly reread from disk;
+- milestone-to-ledger-to-repository/evidence reconciliation succeeded;
+- every applicable milestone obligation is satisfied;
+- required validation is current;
+- no agent-resolvable ledger gap remains;
+- no blocking review or external dependency remains.
 
 The milestone may transition to `done`.
 
@@ -182,7 +283,7 @@ Use only when completion requires something the implementation agent cannot reso
 - inaccessible required dependency or artifact;
 - a material architectural, semantic, compatibility, scope, acceptance, or validation decision that must return to planning.
 
-Do not use `BLOCKED` for ordinary implementation work, failing tests, missing documentation, incomplete artifacts, or other issues the agent can fix itself.
+Do not use `BLOCKED` for ordinary implementation work, failing tests, missing documentation, incomplete artifacts, incomplete ledger items, or other issues the agent can fix itself.
 
 ## Completion report
 
@@ -207,6 +308,7 @@ Milestone status: BLOCKED
 Then report:
 
 - implemented outcome;
+- execution-ledger path and reconciliation result;
 - completion-audit result;
 - files changed;
 - validation commands run and results;
@@ -219,6 +321,6 @@ Then report:
 - result of the milestone-scoped review check, if applicable;
 - blockers, deviations, or planning escalations.
 
-Do not report implementation success or validation success as milestone completion unless the completion audit also passes.
+Do not report implementation success, checked work packages, or validation success as milestone completion unless final reconciliation and the completion audit also pass.
 
 Do not report prior milestone reviews as stale or requiring reapproval.

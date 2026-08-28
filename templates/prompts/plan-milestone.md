@@ -28,7 +28,7 @@ Planning owns decisions that materially affect:
 - acceptance criteria;
 - validation and human-review policy.
 
-The implementation phase owns concrete files, types, functions, refactorings, test structure, implementation sequence, supporting edits required by the contract, validation, and completion audit where those choices do not change the resolved contract.
+The implementation phase owns concrete files, types, functions, refactorings, test structure, execution decomposition, implementation sequence, supporting edits required by the contract, validation, persistent execution progress, and completion audit where those choices do not change the resolved contract.
 
 Do not require the implementation agent to reconstruct planning context or read the external guide repository.
 
@@ -55,6 +55,8 @@ Treat `docs/research/` and copied guides as non-authoritative unless explicitly 
 Use `.guide-profile.json` as guide-selection and planning metadata only. Ordinary implementation agents must not be required to read it.
 
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
+
+Treat `.execution/` as implementation-owned operational state, not planning authority. Planning should not pre-author execution ledgers for future milestones.
 
 ## Execution profile
 
@@ -99,11 +101,11 @@ Instead, resolve the decisions that materially affect the project contract and m
 
 If planning cannot settle a material decision without additional evidence, create a focused diagnostic or investigation milestone whose target state is that evidence. Use the result to return to planning and produce or revise the final implementation milestone.
 
-Large execution volume is not by itself a reason to require a stronger model. Shape large work using coherent scope, bounded operations, resumable validation, and explicit evidence.
+Large execution volume is not by itself a reason to require a stronger model or split a coherent semantic milestone. Shape large work using coherent scope, observable obligations, bounded execution work packages that the implementation phase can derive, persistent execution state, resumable validation, and explicit evidence.
 
 ## Ready milestone boundary
 
-The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy.
+The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy and can maintain reliable execution coverage across the expected implementation volume.
 
 The ready milestone must contain, as applicable:
 
@@ -125,6 +127,8 @@ The ready milestone must contain, as applicable:
 
 Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, and human-review gates in addition to automated tests.
 
+For large or long-running milestones, acceptance and completion obligations must be structured clearly enough that the implementation agent can map them to bounded work packages and evidence in a persistent execution ledger. Planning does not need to predict those concrete work packages.
+
 Do not require exhaustive file lists, predicted class/function changes, or detailed implementation sequences unless those details are themselves architecturally or compatibly significant.
 
 If the source work item uses focus areas, workstreams, or similar decomposition, do not turn them into an exhaustive edit allowlist unless that restriction is genuinely part of the contract.
@@ -138,9 +142,12 @@ Before marking the milestone `ready`, explicitly verify that:
 - architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy are settled to the degree required by the work;
 - remaining choices are local implementation mechanics rather than new project policy;
 - acceptance criteria let the executor distinguish correct completion from partial implementation;
+- every material completion obligation is explicit enough to be mapped to implementation work and evidence;
 - subjective acceptance is routed to human review instead of being left as vague executor judgment;
 - required external dependencies and capabilities are known;
-- large or long-running work has an execution/validation shape the baseline model can complete safely;
+- large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
+- long implementation can resume from repository-local execution state rather than depending on conversational memory;
+- long validation has a safe bounded/resumable shape where required;
 - no stronger implementation model is being relied on to resolve uncertainty that belongs in planning.
 
 If any item fails, keep the milestone in `draft/planning` or create a diagnostic milestone. Do not mark it `ready` merely because implementation could probably make progress.
@@ -157,9 +164,13 @@ Create a planning/design package, not an implementation patch.
 
 The package may contain repository-relative project-truth Markdown, milestone metadata, `.review/` requests, or `.guide-sync/pending/` hints directly required to make the milestone ready.
 
-Do not include implementation source files, test files, generated code, workflow YAML, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
+Do not include implementation source files, test files, generated code, workflow YAML, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, or pre-authored `.execution/` ledgers.
 
-An overlay ZIP is a transport mechanism for these repository-relative changes. It is not separate planning authority.
+Do not create a bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent file that repeats canonical execution methodology, milestone acceptance criteria, or project authority.
+
+An overlay ZIP is a transport mechanism for repository-relative planning changes. It is not separate planning authority.
+
+When an overlay requires application instructions, keep them limited to transport/application steps and identification of the primary ready milestone. Do not turn application instructions into a second execution contract.
 
 ## Documentation impact
 
@@ -198,19 +209,30 @@ For resumable suites, specify the plan command, shard contract, receipt location
 
 Distinguish capability-provider validation from capability-consumer product validation. Mixed/dogfood scope must be bounded and explicit.
 
-## Implementation closure expectation
+## Implementation tractability and closure expectation
 
-The ready milestone must support an executor that owns milestone closure.
+The ready milestone must support an executor that owns both reliable execution progress and milestone closure.
 
 The implementation phase will:
 
 ```text
-implement -> validate -> completion audit -> continue or terminate
+read milestone and authority
+-> execution decomposition
+-> create/reconcile .execution/<milestone-id>.md
+-> implement a coherent work package
+-> validate and update ledger
+-> repeat
+-> freshly reread milestone
+-> reconcile milestone <-> ledger <-> repository/evidence
+-> completion audit
+-> continue or terminate
 ```
 
 Do not design the milestone so that passing tests is the only implied completion condition when other obligations exist.
 
-The executor must be able to determine from the milestone and referenced project authority whether the outcome is actually complete, awaiting required human review, or externally blocked.
+Do not require the implementation agent to keep the entire execution plan in conversational memory. The ready contract must be structured so obligation coverage can be externalized into the implementation-owned ledger.
+
+The executor must be able to determine from the milestone, referenced project authority, execution ledger, live repository, and concrete evidence whether the outcome is actually complete, awaiting required human review, or externally blocked.
 
 ## Deliverable
 
@@ -222,13 +244,13 @@ After creating the ZIP, respond with:
 2. included file list and purpose;
 3. confirmed or inferred profile, role, maturity, execution profile, and baseline implementation model;
 4. primary ready-milestone path;
-5. concise handoff note for the disconnected implementation agent when useful;
+5. concise transport/application handoff when needed;
 6. documentation-sync hints created;
 7. human-review items and evidence expectations;
 8. constrained-execution instructions if applicable;
 9. any unresolved issue that prevents the milestone from being marked ready.
 
-The canonical implementation methodology is `templates/prompts/execute-milestone.md`; the handoff does not need to recreate that prompt.
+The canonical implementation methodology is `templates/prompts/execute-milestone.md`. Do not recreate it in the planning package.
 
 ## Quality bar
 
@@ -237,12 +259,13 @@ The package is acceptable only if:
 - the goal and target state are unambiguous;
 - material architectural, semantic, compatibility, scope, acceptance, and validation decisions are resolved;
 - the milestone is executable by the configured baseline implementation model without relying on model escalation for unresolved project-level reasoning;
+- large/long execution is tractable through implementation-owned bounded work packages and persistent execution state;
 - constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
 - required project authority is explicit;
 - acceptance criteria are observable or verifiable and cover the actual milestone outcome;
 - validation is concrete but is not confused with milestone completion;
 - implementation can derive local mechanics from the live repository without the planning conversation;
-- implementation is not burdened with planning scratch work or speculative edit instructions;
+- implementation is not burdened with planning scratch work, speculative edit instructions, or duplicated per-milestone execution methodology;
 - the selected execution profile is explicit and appropriate to the work;
 - human-review requirements are milestone-owned and explicit when automation cannot decide acceptance;
 - long validation is resumable where required;
