@@ -1,5 +1,55 @@
 # Changelog
 
+## 0.7.4
+
+Migration required: recommended for repositories that produce distributable artifacts; otherwise version-metadata-only/no-op.
+
+Affected areas:
+
+- validation model;
+- distributable artifact acceptance;
+- milestone validation template;
+- guide-profile version metadata.
+
+### Added
+
+Distributable artifacts now require representative consumer-surface validation through their intended consumption mechanism.
+
+Testing only source projects, internal assemblies, command handlers, unpackaged executables, or successful packaging is not sufficient to prove the distributable boundary.
+
+The generic rule is:
+
+```text
+build/package current artifact
+-> consume/install/publish through intended mechanism
+-> exercise representative public behavior
+```
+
+Specific guidance now covers:
+
+- NuGet libraries consumed from the current packed package by an isolated consumer;
+- `dotnet tool` packages installed from the current local package through `dotnet tool` and invoked through the installed command/shim;
+- standalone executables invoked from the current published/package artifact.
+
+For `dotnet tool`, packaged-tool acceptance should normally prove installation, command resolution, representative successful behavior, applicable failure/exit semantics, and absence of repository-relative/global-install assumptions.
+
+Consumer-surface acceptance should remain small and representative. Detailed behavior continues to belong primarily in lower-level tests.
+
+### Clarified
+
+- consumer-surface validation uses the artifact produced by the current build;
+- validation must avoid accidental reliance on globally installed, stale, cached, or repository-internal substitutes;
+- milestones that materially affect a distributable surface must include the applicable artifact-level validation gate;
+- this is a validation capability, not a new project type, lifecycle phase, or engineering-command requirement.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.3-to-v0.7.4.md
+```
+
 ## 0.7.3
 
 Migration required: recommended for repositories using AI-executed coding milestones; otherwise no-op for workflows that do not use the canonical AI implementation prompt.

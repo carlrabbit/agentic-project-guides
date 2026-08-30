@@ -14,6 +14,7 @@
 | Documentation sync | deferred |
 | Local validation | Tier 1 focused validation |
 | Integration validation | Tier 3 PR workflows |
+| Consumer-surface validation | <not-applicable|required; intended mechanism> |
 | Human review | <none|recommended|required|blocking> |
 
 ## Goal
@@ -77,9 +78,21 @@ Reference authority rather than duplicating its complete body in this milestone.
 
 Acceptance criteria must describe completed outcomes and be specific enough to map to implementation work and evidence.
 
+When the milestone affects a distributable artifact, include acceptance criteria for the intended consumer boundary where relevant. Internal tests alone do not establish that a packed/installed/published artifact is consumable.
+
 ## Validation
 
 - <Concrete command or completion check.>
+
+If the repository produces a distributable artifact affected by this milestone, include at least one representative validation path that consumes the artifact through its intended mechanism.
+
+Examples:
+
+- NuGet library: consume the current packed package from an isolated test consumer;
+- `dotnet tool`: install the current packed tool through `dotnet tool` into an isolated tool path or local manifest and invoke the installed command/shim;
+- standalone executable: invoke the current published/package artifact rather than only the project/build output.
+
+The artifact-level path must exercise the artifact produced by the current build and avoid accidental reliance on globally installed or stale artifacts.
 
 ## Human Review
 
@@ -127,6 +140,8 @@ execution decomposition
 ```
 
 Passing tests or completing listed focus areas does not by itself establish milestone completion.
+
+When consumer-surface validation applies, passing internal tests does not establish completion until the current distributable artifact has been exercised through its intended consumer mechanism.
 
 ## Escalation Boundary
 

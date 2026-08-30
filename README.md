@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.7.3
+Version: 0.7.4
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -21,56 +21,42 @@ AI executors persist coverage and progress in a repository-local execution ledge
 Implementation derives concrete edits from the live repository and the ready milestone.
 The executor owns milestone closure, not only code production and test execution.
 Validation success is evidence, not milestone completion by itself.
+Distributable artifacts are validated through their intended consumer mechanism.
 Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
 
-## Version 0.7.3
+## Version 0.7.4
 
-Version 0.7.3 adds execution tractability and persistent execution state to the implementation contract.
+Version 0.7.4 strengthens validation at distributable product boundaries.
 
-A ready milestone remains the semantic implementation contract. The executor does not redo architectural planning, but before production edits it converts the milestone into bounded implementation work packages and creates:
+A repository that ships a package, tool, published executable, or similar distributable artifact must include representative acceptance coverage that consumes the artifact through the mechanism real consumers use. Testing only source projects, internal assemblies, command handlers, or unpackaged build outputs is insufficient to prove the distributable surface.
 
-```text
-.execution/<milestone-id>.md
-```
+For a `dotnet tool`, applicable validation must pack the current tool package, install that exact package through `dotnet tool` using an isolated tool path or local tool manifest, and invoke the installed command/shim. The acceptance path should remain small and representative; detailed behavior still belongs primarily in lower-level tests.
 
-The execution ledger is operational state, not project authority. It maps milestone obligations and acceptance criteria to work packages, tracks status, and records concrete evidence. Its purpose is to make long implementation runs resumable and to prevent completion from depending on conversational memory.
-
-The implementation loop is now:
+The generic examples are:
 
 ```text
-read milestone and authority
--> execution decomposition
--> create/reconcile execution ledger
--> implement a work package
--> validate it
--> update ledger
--> repeat
--> reread milestone from disk
--> reconcile milestone <-> ledger <-> repository/evidence
--> final validation and completion audit
--> terminal outcome
+NuGet library
+  -> pack -> isolated consumer -> representative public behavior
+
+dotnet tool
+  -> pack -> dotnet tool install -> installed command/shim -> representative command behavior
+
+standalone executable
+  -> publish/package -> invoke published artifact
 ```
 
-Before `COMPLETE`, the executor must freshly reread the milestone from disk and prove coverage of every applicable acceptance criterion and completion obligation. A checked ledger row without supporting repository state or evidence is not proof.
+Consumer-surface validation must use the artifact produced by the current build and avoid accidental reliance on globally installed, cached, stale, or repository-internal artifacts.
 
-Planning still owns project-level decisions. Large coherent milestones do not need to be split merely because they contain substantial implementation volume, but they must be tractable as bounded execution work packages for the baseline implementation model.
+This is a validation rule, not a new project type or engineering-command requirement.
 
-Planning handoff is also simplified. Do not generate bespoke per-milestone `EXECUTE-Mxxx.md` files that duplicate the canonical execution methodology or repeat milestone authority. Overlay application instructions and a short handoff identifying the ready milestone remain valid transport artifacts.
-
-No new engineering commands are introduced by v0.7.3.
-
-The terminal outcomes remain:
-
-- `COMPLETE` — every applicable milestone obligation and completion gate is satisfied;
-- `AWAITING HUMAN REVIEW` — all agent-resolvable work is complete and a required human decision remains;
-- `BLOCKED` — completion requires unavailable external capability or a material planning decision the executor cannot make.
+The v0.7.3 execution-ledger and milestone-closure model remains unchanged.
 
 ## Upgrade
 
-From v0.7.2, use:
+From v0.7.3, use:
 
 ```text
-migrations/guide-system-v0.7.2-to-v0.7.3.md
+migrations/guide-system-v0.7.3-to-v0.7.4.md
 ```
