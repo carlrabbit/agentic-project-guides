@@ -8,6 +8,7 @@
 | Mode | ai-executed-human-reviewed |
 | Baseline implementation model | <project baseline; default GPT-5.6 Luna> |
 | Baseline executor readiness | confirmed |
+| Decision preservation | confirmed |
 | Execution tractability | confirmed |
 | Scope size | medium-large |
 | Implementation autonomy | high |
@@ -35,8 +36,11 @@
 
 ## Decisions and Constraints
 
-- <Resolved architectural, semantic, compatibility, or scope decision.>
+- <Resolved architectural, semantic, compatibility, ownership, integration, or scope decision.>
+- <Negative requirement or forbidden alternative when needed to prevent a plausible incorrect implementation.>
 - <Invariant or implementation constraint.>
+
+Preserve resolved material decisions with enough precision that implementation does not have to rediscover or reinterpret them.
 
 Do not prescribe concrete implementation mechanics here unless they are part of the required project contract.
 
@@ -51,6 +55,22 @@ Do not compensate for incomplete planning by requiring a stronger implementation
 If material evidence must be gathered before the final implementation contract can be decided, plan a focused diagnostic milestone first and return the resulting evidence to planning.
 
 Large coherent work is allowed when the contract is settled and execution is tractable for the baseline model.
+
+## Decision Preservation
+
+`ready` requires both decision completeness and decision preservation.
+
+Planning may compress analysis, but it must not semantically weaken a resolved material decision.
+
+Project-wide decisions belong in the appropriate referenced project authority. Milestone-specific decisions belong here. Preserve decision-enabling rationale or negative requirements when their omission could cause the executor to misapply, reinterpret, or incorrectly generalize a settled decision.
+
+Before `ready`, verify:
+
+> If the planning conversation and planning model disappeared now, could the baseline executor recover every material decision already made during planning from this milestone and referenced project authority without repeating project-level reasoning?
+
+If not, this milestone is not ready.
+
+Do not preserve speculative implementation suggestions merely because they appeared during planning. Preserve them only when changing them would alter the resolved project contract.
 
 ## Execution Tractability
 
@@ -147,4 +167,4 @@ When consumer-surface validation applies, passing internal tests does not establ
 
 Implementation owns concrete code/test mechanics, execution decomposition, and supporting edits that fit this contract.
 
-Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, or validation policy.
+Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, or validation policy, or if a material planning decision cannot be recovered from durable project authority without repeating project-level reasoning.
