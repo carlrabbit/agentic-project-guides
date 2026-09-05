@@ -8,12 +8,10 @@ Planning may compress investigation and reasoning, but it must not compress a re
 
 ## Required Guide Updates
 
-Adopt the v0.7.5 versions of:
+Adopt:
 
-- `templates/prompts/plan-milestone.md`;
-- `templates/milestones/milestone-template.md`;
-- `meta/MILESTONE-EXECUTION-MODEL.md`;
-- `decisions/ADR-0020-preserve-planning-decisions.md`;
+- `decisions/ADR-0020-preserve-planning-decisions.md` as the decision-preservation authority;
+- the v0.7.5 milestone template, including its `Decision Preservation` readiness section;
 - guide-profile version metadata.
 
 The canonical execution-ledger and consumer-surface validation rules remain unchanged.
@@ -77,7 +75,7 @@ Update the guide-system and applied base profile versions to `0.7.5`.
 Migration is complete when:
 
 - the repository points to guide system v0.7.5;
-- planning distinguishes decision completeness from decision preservation;
+- milestone planning applies ADR-0020 and distinguishes decision completeness from decision preservation;
 - resolved material decisions are durable in the milestone or referenced project authority;
 - project-wide authority is referenced rather than duplicated into milestones;
 - planning transcripts and scratch work are not required implementation inputs;
