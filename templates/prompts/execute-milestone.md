@@ -48,11 +48,11 @@ Do not introduce unrelated product scope.
 
 ## Planning boundary
 
-Treat the ready milestone's decisions, constraints, non-goals, authority, acceptance criteria, and validation policy as resolved.
+Treat the ready milestone's decisions, constraints, non-goals, authority, acceptance criteria, validation policy/topology, project-local specializations, and human-review policy as resolved.
 
 Do not silently reopen or broaden them.
 
-If implementation reveals a material unresolved decision that could change architecture, semantics, compatibility, scope, acceptance criteria, or validation policy:
+If implementation reveals a material unresolved decision that could change architecture, semantics, compatibility, scope, acceptance criteria, validation policy/target/locus, or a required project specialization:
 
 1. stop the affected work;
 2. identify the exact decision required and evidence that exposed it;
@@ -83,7 +83,7 @@ At minimum, record:
 - every applicable acceptance criterion and completion obligation;
 - bounded coherent work packages that cover those obligations;
 - current status for each obligation/work package;
-- required validation gates;
+- required validation gates, including target/locus constraints when material;
 - concrete evidence as work completes;
 - the current resume point while work remains.
 
@@ -93,7 +93,7 @@ Before implementation starts, perform a coverage check:
 
 - every acceptance criterion maps to at least one work package;
 - every required artifact, documentation, migration, cleanup, compatibility, or review obligation maps to a work package or explicit gate;
-- every required validation command or validation gate is represented;
+- every required validation command or validation gate is represented with its required target/locus where applicable;
 - no work package depends on making a new material project-level decision.
 
 If the ledger already exists, reconcile it against the current milestone and live repository rather than trusting stale status mechanically.
@@ -108,7 +108,7 @@ For each work package:
 
 1. inspect the live repository state needed for that package;
 2. implement the required change and supporting work;
-3. run the relevant focused validation;
+3. run the relevant focused validation that is available in the current context;
 4. fix agent-resolvable failures;
 5. update the ledger with actual status and evidence;
 6. record the next resume point before moving on when meaningful.
@@ -145,7 +145,7 @@ When the milestone requires human review:
 - do not create an approval or waiver on behalf of a human;
 - do not write numeric aliases into milestones, requests, records, or automation;
 - treat a blocking review as incomplete until the human records an acceptable decision;
-- after the human decision, run `./eng/review-check.sh --milestone <milestone-id>` or the repository's documented equivalent;
+- after the human decision, run the repository's documented milestone-scoped `review-check` command;
 - do not reopen or revalidate completed reviews from earlier milestones because repository state changed.
 
 If the reviewer records `changes-requested`, correct the implementation within milestone scope, regenerate evidence, update the execution ledger, and preserve the decision history. If the requested change would alter the ready milestone contract, escalate back to planning.
@@ -173,11 +173,20 @@ Do not claim aggregate validation success from partial child output.
 
 ## Validation
 
-Run the validation tier and concrete commands specified in the milestone plus repository-standard validation that is directly applicable to the changed area.
+Run the validation depth/tier, target, execution locus/platform requirements, and concrete commands specified in the milestone plus repository-standard validation that is directly applicable to the changed area.
+
+Validation depth does not determine where validation runs. Do not move or substitute an authoritative integration target merely because CI, the current agent environment, or another locus is easier to access.
 
 If validation fails for a reason you can resolve in the current execution context, continue working and rerun the relevant validation. A resolvable validation failure is not a terminal blocker.
 
-If the milestone specifies CI-only validation, report local validation separately and do not claim CI success before it runs.
+If a required validation target/locus is unavailable in the current execution context:
+
+- run any explicitly allowed fallback/portable validation separately;
+- report the unavailable target/locus and the evidence still missing;
+- do not claim success for the unavailable validation obligation;
+- use `BLOCKED` only when that missing external capability prevents milestone completion in the current run.
+
+Examples include CI-only validation, local-Windows-only installed-runtime validation, remote-service validation requiring unavailable credentials, or native/hardware validation unavailable to the current agent.
 
 If the milestone includes blocking human review, automated validation success alone does not complete the milestone.
 
@@ -199,7 +208,8 @@ For every applicable acceptance criterion and completion obligation:
 
 - identify the ledger work package or gate that claims coverage;
 - inspect the actual implementation/evidence needed to establish it;
-- downgrade any stale, unsupported, or merely asserted `done` state;
+- verify that required validation evidence came from the declared target/locus;
+- downgrade any stale, unsupported, substitute-only, or merely asserted `done` state;
 - add newly discovered agent-resolvable gaps to the ledger and continue implementation.
 
 Also confirm that every required validation gate has current evidence and that the ledger contains no unresolved agent-resolvable item.
@@ -216,7 +226,7 @@ Check the milestone against all applicable obligations, including:
 - target state;
 - scope-required behavior;
 - every acceptance criterion;
-- all required validation commands and validation evidence;
+- all required validation targets/loci, commands, and evidence;
 - required artifacts or generated outputs;
 - direct documentation obligations;
 - required migrations, cleanup, or compatibility work;
@@ -240,7 +250,7 @@ Keep these concepts distinct:
 
 - implementation success: the intended implementation exists;
 - work-package completion: a bounded implementation outcome and its mapped evidence are established;
-- validation success: the required automated checks pass;
+- validation success: the required checks pass against the required targets/loci;
 - milestone completion: every milestone obligation and completion gate is satisfied.
 
 Implementation success does not imply work-package completion.
@@ -262,7 +272,7 @@ Use only when:
 - the primary milestone was freshly reread from disk;
 - milestone-to-ledger-to-repository/evidence reconciliation succeeded;
 - every applicable milestone obligation is satisfied;
-- required validation is current;
+- required validation is current from the required target/locus;
 - no agent-resolvable ledger gap remains;
 - no blocking review or external dependency remains.
 
@@ -279,9 +289,10 @@ The milestone remains active until the review is resolved.
 Use only when completion requires something the implementation agent cannot resolve in the current execution context, such as:
 
 - unavailable credentials or permissions;
-- unavailable required infrastructure or external service;
+- unavailable required infrastructure, runtime, integration target, or external service;
 - inaccessible required dependency or artifact;
-- a material architectural, semantic, compatibility, scope, acceptance, or validation decision that must return to planning.
+- required validation constrained to an unavailable platform/locus;
+- a material architectural, semantic, compatibility, scope, acceptance, validation, or specialization decision that must return to planning.
 
 Do not use `BLOCKED` for ordinary implementation work, failing tests, missing documentation, incomplete artifacts, incomplete ledger items, or other issues the agent can fix itself.
 
@@ -311,7 +322,8 @@ Then report:
 - execution-ledger path and reconciliation result;
 - completion-audit result;
 - files changed;
-- validation commands run and results;
+- validation commands run, target/locus, and results;
+- missing target/locus evidence when blocked;
 - resumable shard and verifier results, if applicable;
 - direct documentation changes;
 - required artifacts produced;
