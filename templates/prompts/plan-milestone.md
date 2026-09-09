@@ -26,9 +26,10 @@ Planning owns decisions that materially affect:
 - scope and non-goals;
 - cross-package or subsystem boundaries;
 - acceptance criteria;
-- validation and human-review policy.
+- validation and human-review policy;
+- required project-local specializations for concrete runtimes, services, environments, packaging boundaries, or domain architecture.
 
-The implementation phase owns concrete files, types, functions, refactorings, test structure, execution decomposition, implementation sequence, supporting edits required by the contract, validation, persistent execution progress, and completion audit where those choices do not change the resolved contract.
+The implementation phase owns concrete files, types, functions, refactorings, test structure, execution decomposition, implementation sequence, supporting edits required by the contract, validation execution, persistent execution progress, and completion audit where those choices do not change the resolved contract.
 
 Do not require the implementation agent to reconstruct planning context or read the external guide repository.
 
@@ -43,7 +44,7 @@ Read the minimum project truth needed to plan correctly. Usually consider:
 - `.guide-profile.json` if present;
 - `docs/TERMINOLOGY.md`;
 - `docs/SPECS.md` and relevant specs;
-- `docs/ENGINEERING.md` and relevant engineering docs;
+- `docs/ENGINEERING.md` and relevant engineering/specialization docs;
 - relevant architecture and decisions;
 - relevant current milestones;
 - source and tests needed to understand architectural boundaries and existing behavior.
@@ -57,6 +58,14 @@ Use `.guide-profile.json` as guide-selection and planning metadata only. Ordinar
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
 
 Treat `.execution/` as implementation-owned operational state, not planning authority. Planning should not pre-author execution ledgers for future milestones.
+
+## Profiles and project specialization
+
+Use profiles only for broad reusable engineering shapes. Do not model an operating system, local/CI execution, a test-strategy preference, one packaging mechanism, a named external vendor/runtime, or one concrete product architecture as a profile merely to make project composition more granular.
+
+When generic guide concepts need concrete answers, record them as project-local authority in the repository's normal engineering, specification, architecture, or decision documents.
+
+For external/runtime-bound integration, use `meta/VALIDATION-MODEL.md` to identify the generic decision surface and `meta/SPECIALIZATION-MODEL.md` to decide what must become project truth. The implementation agent must receive the concrete specialization through referenced repository authority, not by reading those guide files.
 
 ## Execution profile
 
@@ -105,7 +114,7 @@ Large execution volume is not by itself a reason to require a stronger model or 
 
 ## Ready milestone boundary
 
-The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, or validation policy and can maintain reliable execution coverage across the expected implementation volume.
+The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, validation policy/topology, or required project specialization and can maintain reliable execution coverage across the expected implementation volume.
 
 The ready milestone must contain, as applicable:
 
@@ -116,16 +125,16 @@ The ready milestone must contain, as applicable:
 5. scope;
 6. non-goals;
 7. resolved decisions and constraints;
-8. required project authority;
+8. required project authority, including specialization authority when applicable;
 9. acceptance criteria;
-10. validation tiers, concrete commands, and validation execution mode;
+10. validation depth/tiers, targets, execution loci, platform/capability requirements, concrete commands, execution mode, and expected evidence;
 11. direct documentation impact;
 12. deferred documentation synchronization hints;
 13. human-review requirements;
 14. constrained-runtime requirements;
 15. escalation boundary for unresolved material decisions.
 
-Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, and human-review gates in addition to automated tests.
+Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, external/runtime integration, and human-review gates in addition to automated tests.
 
 For large or long-running milestones, acceptance and completion obligations must be structured clearly enough that the implementation agent can map them to bounded work packages and evidence in a persistent execution ledger. Planning does not need to predict those concrete work packages.
 
@@ -135,16 +144,38 @@ If the source work item uses focus areas, workstreams, or similar decomposition,
 
 Do not retain planning scratch work, rejected alternatives, or discussion history merely because they were useful while reaching the decision. Preserve a rejected alternative only when knowing that rejection is necessary to prevent a likely incorrect implementation.
 
+## Validation planning
+
+Validation depth and execution location are separate concerns.
+
+For each material validation obligation determine, as applicable:
+
+- tier/depth;
+- real validation target;
+- execution locus: local, CI, remote, or mixed;
+- platform/capability requirements;
+- provisioning/connection and cleanup/isolation constraints when these are project policy;
+- concrete invocation;
+- expected evidence;
+- fallback behavior when the authoritative target is unavailable;
+- consumer/release relationship.
+
+Do not infer that Tier 3 integration validation belongs in PR/CI workflows. A local installed runtime, real database, browser, native subsystem, remote service, or other declared target may be authoritative.
+
+Do not weaken an integration target to a fake or shallow substitute merely because the real target is unavailable in CI. Instead, represent the actual locus/capability constraint and separate portable CI checks from authoritative integration evidence.
+
+If the project's testing policy is integration-first, do not introduce unit-test obligations merely to satisfy an assumed test pyramid. Require the evidence needed for the project's actual boundaries.
+
 ## Baseline-executability audit
 
 Before marking the milestone `ready`, explicitly verify that:
 
-- architecture, semantics, compatibility, scope, acceptance, validation, and human-review policy are settled to the degree required by the work;
+- architecture, semantics, compatibility, scope, acceptance, validation, specialization, and human-review policy are settled to the degree required by the work;
 - remaining choices are local implementation mechanics rather than new project policy;
 - acceptance criteria let the executor distinguish correct completion from partial implementation;
 - every material completion obligation is explicit enough to be mapped to implementation work and evidence;
 - subjective acceptance is routed to human review instead of being left as vague executor judgment;
-- required external dependencies and capabilities are known;
+- required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, and fallback semantics are known where material;
 - large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
 - long implementation can resume from repository-local execution state rather than depending on conversational memory;
 - long validation has a safe bounded/resumable shape where required;
@@ -154,9 +185,11 @@ If any item fails, keep the milestone in `draft/planning` or create a diagnostic
 
 ## Additional authority documents
 
-Create or update specs, architecture docs, decision records, engineering docs, scenarios, artifact contracts, or public docs only when a planning conclusion must become durable project truth before implementation.
+Create or update specs, architecture docs, decision records, engineering docs, project-local specialization docs, scenarios, artifact contracts, or public docs only when a planning conclusion must become durable project truth before implementation.
 
 Do not duplicate complete authority-document bodies inside the milestone. Reference them.
+
+Do not create central-style technology profile documents in the product repository merely to mirror guide taxonomy. Use the repository's normal project-authority structure.
 
 ## Deliverable boundary
 
@@ -203,9 +236,11 @@ Do not define perpetual re-review or future-commit staleness for completed revie
 
 ## Constrained execution and validation
 
-Determine whether validation may exceed a constrained agent runtime.
+Determine whether validation may exceed a constrained agent runtime or depend on a locus/capability unavailable in the current execution context.
 
 For resumable suites, specify the plan command, shard contract, receipt location, fingerprint scope, verifier command, and expected aggregate evidence. Never accept partial child output as aggregate success.
+
+For locus-constrained validation, distinguish a genuine external capability block from a product failure and from portable validation that can still run elsewhere.
 
 Distinguish capability-provider validation from capability-consumer product validation. Mixed/dogfood scope must be bounded and explicit.
 
@@ -247,7 +282,7 @@ After creating the ZIP, respond with:
 5. concise transport/application handoff when needed;
 6. documentation-sync hints created;
 7. human-review items and evidence expectations;
-8. constrained-execution instructions if applicable;
+8. validation target/locus and constrained-execution instructions if applicable;
 9. any unresolved issue that prevents the milestone from being marked ready.
 
 The canonical implementation methodology is `templates/prompts/execute-milestone.md`. Do not recreate it in the planning package.
@@ -257,13 +292,13 @@ The canonical implementation methodology is `templates/prompts/execute-milestone
 The package is acceptable only if:
 
 - the goal and target state are unambiguous;
-- material architectural, semantic, compatibility, scope, acceptance, and validation decisions are resolved;
+- material architectural, semantic, compatibility, scope, acceptance, validation, and specialization decisions are resolved;
 - the milestone is executable by the configured baseline implementation model without relying on model escalation for unresolved project-level reasoning;
 - large/long execution is tractable through implementation-owned bounded work packages and persistent execution state;
 - constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
 - required project authority is explicit;
 - acceptance criteria are observable or verifiable and cover the actual milestone outcome;
-- validation is concrete but is not confused with milestone completion;
+- validation is concrete about depth, target, locus, platform/capability, command, and evidence where material, but is not confused with milestone completion;
 - implementation can derive local mechanics from the live repository without the planning conversation;
 - implementation is not burdened with planning scratch work, speculative edit instructions, or duplicated per-milestone execution methodology;
 - the selected execution profile is explicit and appropriate to the work;
