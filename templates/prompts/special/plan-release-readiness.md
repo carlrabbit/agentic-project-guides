@@ -24,7 +24,7 @@ If the target repository contains `.review/`, inspect it only for active reviews
 
 There is no direct synchronization between the planning AI and implementation AI.
 
-Create a complete package that allows the later agent to start from the primary milestone, read only listed authority, perform release-readiness work, run the specified validation, produce evidence, and stop at any required human gate without reconstructing planning context.
+Create a complete package that allows the later agent to start from the primary milestone, read only listed authority, perform release-readiness work, run the specified validation against the declared targets/loci, produce evidence, and stop at any required human gate without reconstructing planning context.
 
 Generate a filled execution prompt in chat.
 
@@ -36,10 +36,11 @@ Inspect the minimum relevant repository state, usually:
 - `AGENTS.md`;
 - `.guide-profile.json`;
 - release and packaging engineering docs;
+- project-local runtime/integration specialization relevant to release evidence;
 - public API policy and baselines;
 - public documentation contract and sources;
 - samples and package-smoke configuration;
-- release workflows;
+- release/publication workflows when used;
 - relevant milestones and decisions;
 - `.guide-sync/pending/` items affecting the release surface;
 - `.review/` items owned by the current release milestone.
@@ -72,9 +73,9 @@ The primary milestone must include:
 2. repository maturity and profile assumptions;
 3. release scope and non-goals;
 4. package, API, documentation, sample, diagnostic, and website surfaces in scope;
-5. authority documents;
+5. authority documents, including relevant project-local specialization;
 6. focus areas;
-7. validation tiers and concrete commands;
+7. validation depth, targets, execution loci/platform requirements, concrete commands, and expected evidence;
 8. constrained-execution handling;
 9. release evidence requirements;
 10. human-review requirements;
@@ -82,6 +83,8 @@ The primary milestone must include:
 12. deferred documentation sync items;
 13. acceptance criteria;
 14. publish operations explicitly excluded unless requested.
+
+Do not infer that release readiness requires CI. If publication occurs through GitHub while authoritative integration validation runs locally, preserve that topology explicitly.
 
 ## Human review
 
@@ -104,11 +107,31 @@ After the milestone completes, the review is historical evidence. It is not a pe
 
 ## Validation
 
-Use Tier 4 release validation when applicable.
+Use Tier 4 release/consumer validation when applicable.
+
+Release validation may depend on lower-tier integration evidence from a different locus. State that dependency explicitly instead of silently substituting CI checks for an unavailable authoritative target.
 
 When long validation supports resumable execution, require `--plan-json`, bounded shards, receipts, and a fast verifier.
 
 Do not infer release readiness from partial output.
+
+## Publication
+
+Publication and validation are separate obligations.
+
+A repository may intentionally use a topology such as:
+
+```text
+local workstation
+  -> authoritative integration validation
+  -> pack and consumer validation
+
+GitHub
+  -> release/publication automation
+  -> NuGet or other destination
+```
+
+Do not require duplication of all local integration validation in the publication environment unless project policy requires it.
 
 ## Chat response
 
@@ -121,8 +144,8 @@ After creating the ZIP, provide:
 5. filled execution prompt;
 6. release evidence and human-review expectations;
 7. deferred documentation sync hints;
-8. commands expected for local, CI, release, and review validation.
+8. validation commands grouped by declared target/locus, plus publication commands/workflows where applicable.
 
 ## Quality bar
 
-The package is acceptable only if the release target is unambiguous, publish operations are not accidentally performed, validation is concrete, review is milestone-scoped, required public surfaces are covered, and the implementation agent does not need to read the external guide repository.
+The package is acceptable only if the release target is unambiguous, publish operations are not accidentally performed, validation depth/target/locus is concrete, review is milestone-scoped, required public surfaces are covered, and the implementation agent does not need to read the external guide repository.
