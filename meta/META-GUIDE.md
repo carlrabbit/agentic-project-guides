@@ -28,7 +28,7 @@ A product repository may contain `.guide-profile.json` for traceability and `.gu
 
 These files are coordination metadata, not ordinary implementation authority.
 
-Concrete specializations are ordinary project truth and belong in the repository's normal engineering, specification, architecture, or decision documents.
+Concrete specializations and semantic component/surface definitions are ordinary project truth and belong in the repository's normal engineering, specification, architecture, or decision documents.
 
 ## Guide composition principle
 
@@ -47,6 +47,32 @@ base + artifact-first-runtime + capability-provider role + implementation-ready 
 ```
 
 Profiles describe broad reusable engineering shapes. They are not feature tags for operating systems, test strategies, packaging choices, execution locations, named vendor products, or concrete project architectures.
+
+### Scoped composition
+
+Multiple broad engineering shapes may coexist in one repository.
+
+Profile applicability may be:
+
+```text
+repository-wide
+component-scoped
+surface-scoped
+```
+
+For example, a package suite containing ordinary .NET libraries and source-generator packages can use:
+
+```text
+base                [repository]
+dotnet-library       [repository]
+source-generator     [component: generator-packages]
+```
+
+Profiles compose additively. Profile order has no semantic meaning and no profile silently overrides another.
+
+If applicable profile obligations conflict materially, planning resolves the conflict into project-local authority before implementation proceeds.
+
+`.guide-profile.json` records profile applicability for planning/traceability. Component and surface IDs are semantic project-defined identifiers; their meaning comes from normal project authority, not path globs in metadata.
 
 Project-local authority then specializes the reusable model where concrete answers are required.
 
@@ -83,6 +109,8 @@ Planning owns decisions that materially affect:
 - scope and non-goals;
 - acceptance criteria;
 - validation and review policy;
+- applicable profiles and their semantic scopes;
+- conflicts between applicable profile obligations;
 - required project-local specializations.
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
@@ -93,7 +121,7 @@ Implementation agents execute a ready milestone. They inspect the live source an
 
 The implementation handoff must not depend on the planning conversation. Everything required to execute must exist in the ready milestone or its referenced project authority.
 
-If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, or specialization decision, the milestone returns to planning. Implementation must not silently create new project policy.
+If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, profile-applicability/conflict, or specialization decision, the milestone returns to planning. Implementation must not silently create new project policy.
 
 Planning agents may also create:
 
