@@ -10,7 +10,7 @@ Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
 Use the guide system only for planning, migration, documentation synchronization, and release readiness.
 
-Target repository documentation must contain project truth only.
+Target repository documentation must contain project truth and concrete project specialization only.
 
 If the target repository contains old copied setup or engineering guides, treat them as legacy/non-authoritative unless the repository explicitly marks them as active project documentation.
 
@@ -28,6 +28,9 @@ Read at minimum:
 - `CHANGELOG.md`;
 - `meta/VERSIONING.md`;
 - `meta/MIGRATION-MODEL.md`;
+- `meta/PROFILE-MODEL.md`;
+- `meta/SPECIALIZATION-MODEL.md` when present;
+- `meta/VALIDATION-MODEL.md`;
 - `decisions/`;
 - `migrations/`;
 - `templates/PROMPTS.md`.
@@ -45,7 +48,9 @@ Use this prompt when the target repository has one or more of:
 - TBPs, guardrails, workflows, or issue templates from an older default model;
 - no `.guide-profile.json`;
 - no `.guide-sync/`;
-- guide documents treated as repository-local authority.
+- guide documents treated as repository-local authority;
+- old central project-type references;
+- validation rules that equate integration depth with PR/CI execution.
 
 ## Repository inspection
 
@@ -59,11 +64,22 @@ Usually read:
 - old `docs/research/project-setup-guide-*.md` and `docs/research/engineering-guide-*.md` only to understand legacy state;
 - `docs/TERMINOLOGY.md`;
 - `docs/SPECS.md`;
-- `docs/ENGINEERING.md`;
+- `docs/ENGINEERING.md` and focused engineering/specialization docs;
 - `docs/MILESTONES.md`;
 - relevant existing milestones and decisions.
 
 Treat old copied guides as legacy/non-authoritative unless explicitly marked otherwise.
+
+## 0.8 specialization and validation review
+
+When the resolved target version uses the 0.8 model or later:
+
+- keep profiles broad and reusable rather than turning project details into feature-tag profiles;
+- migrate concrete project-type/vendor/runtime rules into normal project-local authority;
+- separate validation depth from validation target and execution locus;
+- preserve authoritative local/runtime integration validation when CI cannot exercise the real target;
+- record external/runtime-bound validation target, locus, platform/capability, invocation/evidence, and fallback constraints when material;
+- preserve an intentional integration-first test strategy without manufacturing unit-test obligations from a generic test-pyramid assumption.
 
 ## Required output
 
@@ -73,7 +89,7 @@ Create or update `.guide-profile.json` when useful.
 
 Create or update `.guide-sync/pending/` hints for deferred documentation cleanup.
 
-Update target-repository docs only when needed to remove guide leakage or make the migration implementation-ready.
+Update target-repository docs only when needed to remove guide leakage, localize concrete specialization, or make the migration implementation-ready.
 
 Do not copy external guide documents into the target repository.
 
@@ -91,7 +107,7 @@ Classify migration work as:
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context or reading the external guide repository.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
 
@@ -106,6 +122,6 @@ After creating the ZIP, respond with:
 1. download link;
 2. included file list;
 3. reason each file is included;
-4. confirmed or inferred profile, role, maturity, and execution mode;
+4. confirmed or inferred profiles, role, maturity, execution mode, and material specialization assumptions;
 5. a filled execution prompt for the later implementation agent;
 6. documentation-sync hints and the `.guide-sync/pending/` files created.
