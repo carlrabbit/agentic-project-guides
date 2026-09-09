@@ -11,7 +11,7 @@ The following artifacts are versioned independently when useful:
 - guide system;
 - base guides;
 - profiles;
-- project-type guides;
+- generic models;
 - migrations;
 - templates;
 - prompt families.
@@ -19,6 +19,10 @@ The following artifacts are versioned independently when useful:
 ## Semantic versioning
 
 Use semantic versioning.
+
+Until guide-system `1.0.0`, MINOR versions may intentionally include breaking model evolution when accompanied by explicit migration guidance. `0.x` repositories should not assume minor-version compatibility.
+
+After `1.0.0`:
 
 ```text
 MAJOR
