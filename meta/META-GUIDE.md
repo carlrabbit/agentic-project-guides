@@ -2,19 +2,19 @@
 
 ## Status
 
-Authoritative meta-level guide for creating, versioning, applying, executing, and migrating project-type guides.
+Authoritative meta-level guide for creating, versioning, applying, executing, and migrating the guide system.
 
 ## Purpose
 
 The meta guide defines how this guide system is structured and how guide artifacts are applied to concrete repositories.
 
-It does not define a single universal repository template. Instead, it defines how to compose project-specific guide profiles by project type, repository role, maturity stage, validation model, and execution model.
+It does not define a single universal repository template or maintain a catalog of concrete project types. Instead, it defines how to compose reusable profiles and generic models, then specialize them through project-local authority for a repository's actual technology, runtime, validation, and architectural constraints.
 
 ## Core doctrine
 
 ```text
-Guide repository owns methodology.
-Product repositories contain project truth.
+Guide repository owns methodology and reusable engineering shapes.
+Product repositories contain project truth and concrete specializations.
 Milestones separate planning from implementation.
 Implementation agents read product repository documentation and ready milestones only.
 Planning and documentation-sync agents may use this guide system.
@@ -28,14 +28,16 @@ A product repository may contain `.guide-profile.json` for traceability and `.gu
 
 These files are coordination metadata, not ordinary implementation authority.
 
+Concrete specializations are ordinary project truth and belong in the repository's normal engineering, specification, architecture, or decision documents.
+
 ## Guide composition principle
 
 Guides compose; repositories do not inherit everything.
 
-A repository should be generated from an explicit profile selection such as:
+A repository should be planned from an explicit small profile selection such as:
 
 ```text
-base + dotnet-library + source-generator + public-preview maturity
+base + dotnet-library + public-preview maturity
 ```
 
 or:
@@ -43,6 +45,29 @@ or:
 ```text
 base + artifact-first-runtime + capability-provider role + implementation-ready maturity
 ```
+
+Profiles describe broad reusable engineering shapes. They are not feature tags for operating systems, test strategies, packaging choices, execution locations, named vendor products, or concrete project architectures.
+
+Project-local authority then specializes the reusable model where concrete answers are required.
+
+Example:
+
+```text
+profile:
+  dotnet-library
+
+project policy:
+  integration-first
+
+validation target:
+  installed external desktop runtime
+
+project-local specialization:
+  concrete runtime, Windows requirements, invocation,
+  isolation/reset, evidence, and failure semantics
+```
+
+See `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, and `meta/VALIDATION-MODEL.md`.
 
 ## Planning/implementation separation
 
@@ -57,7 +82,8 @@ Planning owns decisions that materially affect:
 - compatibility;
 - scope and non-goals;
 - acceptance criteria;
-- validation and review policy.
+- validation and review policy;
+- required project-local specializations.
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
 
@@ -67,7 +93,7 @@ Implementation agents execute a ready milestone. They inspect the live source an
 
 The implementation handoff must not depend on the planning conversation. Everything required to execute must exist in the ready milestone or its referenced project authority.
 
-If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, or validation decision, the milestone returns to planning. Implementation must not silently create new project policy.
+If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, or specialization decision, the milestone returns to planning. Implementation must not silently create new project policy.
 
 Planning agents may also create:
 
