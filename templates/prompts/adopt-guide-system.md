@@ -50,7 +50,8 @@ Use this prompt when the target repository has one or more of:
 - no `.guide-sync/`;
 - guide documents treated as repository-local authority;
 - old central project-type references;
-- validation rules that equate integration depth with PR/CI execution.
+- validation rules that equate integration depth with PR/CI execution;
+- mixed repository shapes whose profile applicability is currently implicit.
 
 ## Repository inspection
 
@@ -65,16 +66,24 @@ Usually read:
 - `docs/TERMINOLOGY.md`;
 - `docs/SPECS.md`;
 - `docs/ENGINEERING.md` and focused engineering/specialization docs;
+- `docs/ARCHITECTURE.md` when component/surface boundaries matter;
 - `docs/MILESTONES.md`;
 - relevant existing milestones and decisions.
 
 Treat old copied guides as legacy/non-authoritative unless explicitly marked otherwise.
 
-## 0.8 specialization and validation review
+## 0.8 profile composition, specialization, and validation review
 
 When the resolved target version uses the 0.8 model or later:
 
 - keep profiles broad and reusable rather than turning project details into feature-tag profiles;
+- allow a small set of profiles to compose when several broad engineering shapes genuinely apply;
+- determine whether each applied profile is repository-wide, component-scoped, or surface-scoped;
+- use semantic component/surface identifiers defined by normal project authority rather than path globs as architecture metadata;
+- treat profile order as non-semantic and do not invent primary/secondary precedence;
+- resolve material conflicts between applicable profile obligations into project-local authority before implementation;
+- migrate `.guide-profile.json` to schema version 2 when profile applicability metadata is adopted;
+- treat legacy schema-version-1 profile entries as repository-wide unless repository evidence demonstrates narrower intended applicability;
 - migrate concrete project-type/vendor/runtime rules into normal project-local authority;
 - separate validation depth from validation target and execution locus;
 - preserve authoritative local/runtime integration validation when CI cannot exercise the real target;
@@ -89,7 +98,7 @@ Create or update `.guide-profile.json` when useful.
 
 Create or update `.guide-sync/pending/` hints for deferred documentation cleanup.
 
-Update target-repository docs only when needed to remove guide leakage, localize concrete specialization, or make the migration implementation-ready.
+Update target-repository docs only when needed to remove guide leakage, localize concrete specialization, define semantic profile scopes, resolve profile conflicts, or make the migration implementation-ready.
 
 Do not copy external guide documents into the target repository.
 
@@ -122,6 +131,6 @@ After creating the ZIP, respond with:
 1. download link;
 2. included file list;
 3. reason each file is included;
-4. confirmed or inferred profiles, role, maturity, execution mode, and material specialization assumptions;
+4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
 5. a filled execution prompt for the later implementation agent;
 6. documentation-sync hints and the `.guide-sync/pending/` files created.
