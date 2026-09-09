@@ -14,6 +14,7 @@ Product repositories contain localized project truth and concrete project specia
 Guides live here.
 Projects contain project truth and concrete specializations.
 Profiles describe broad reusable engineering shapes, not feature tags.
+Multiple profiles compose additively and may have explicit semantic applicability scopes.
 Validation depth is independent of target and execution locus.
 Milestones are planned before they are implemented.
 Planning resolves uncertainty and produces a ready milestone.
@@ -31,7 +32,7 @@ Human review gates milestone completion when automation cannot decide acceptance
 
 ## Version 0.8.0
 
-Version 0.8.0 makes project specialization and integration-first/local-first validation first-class without expanding the central guide into a catalog of concrete project types.
+Version 0.8.0 makes project specialization, scoped profile composition, and integration-first/local-first validation first-class without expanding the central guide into a catalog of concrete project types.
 
 ### Validation model
 
@@ -68,11 +69,33 @@ Named vendor/runtime/architecture details such as Power BI Desktop integration, 
 
 The former central `project-types/agentic-2d-game-engine/` layer is removed. Concrete project archetypes should not grow a parallel guide hierarchy.
 
-### Profiles
+### Profiles and mixed repositories
 
-Profiles remain broad reusable engineering shapes such as `dotnet-library` or `artifact-first-runtime`.
+Profiles remain broad reusable engineering shapes such as `dotnet-library`, `source-generator`, or `artifact-first-runtime`.
 
 Do not create profiles merely for an operating system, local/CI execution, integration-first testing, one packaging mechanism, one external product, or one concrete project architecture.
+
+A repository may combine a small number of profiles when several broad engineering shapes genuinely apply.
+
+Applicability can be:
+
+```text
+repository-wide
+component-scoped
+surface-scoped
+```
+
+For example:
+
+```text
+base                [repository]
+dotnet-library       [repository]
+source-generator     [component: generator-packages]
+```
+
+Profiles compose additively. Ordering has no semantic meaning, and no profile silently overrides another. Material conflicts must be resolved into project-local authority before implementation.
+
+`.guide-profile.json` schema version 2 records semantic profile scopes for planning/traceability. Component/surface IDs are defined by normal project authority rather than path globs in metadata.
 
 ### Integration-first libraries
 
@@ -85,6 +108,8 @@ Consumer-surface validation from v0.7.4 remains in force: a packed NuGet package
 The v0.7.5 decision-preservation model remains in force.
 
 When correctness depends on a concrete external runtime/service/environment, planning must ensure that the target, execution locus, capability constraints, invocation/evidence policy, and any required project-local specialization are durable before a milestone becomes `ready`.
+
+When multiple scoped profiles apply, planning must also determine the affected semantic scope, combine applicable obligations, and resolve any material conflicts into durable project authority.
 
 Implementation still owns concrete code/test mechanics that fit that contract.
 
