@@ -1,8 +1,10 @@
 # Documentation Layer Model
 
-Documentation layers should be activated by project type, maturity, and repository role.
+Documentation layers should be activated by selected profiles, maturity, repository role, and concrete project authority needs.
 
 They are not all mandatory.
+
+Project-local specialization normally uses these ordinary authority layers rather than introducing a separate central-style specialization hierarchy.
 
 Common layers:
 
