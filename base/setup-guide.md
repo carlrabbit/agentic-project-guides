@@ -1,6 +1,6 @@
 # Base Setup Guide
 
-This base guide defines the minimum repository documentation model shared by most project types.
+This base guide defines the minimum repository documentation model shared by most projects.
 
 It is not copied into product repositories.
 
@@ -12,6 +12,6 @@ AGENTS.md
 docs/ENGINEERING.md
 ```
 
-Add other docs only when the selected profile, maturity stage, and repository role require them.
+Add other docs only when selected profiles, maturity stage, repository role, or concrete project authority needs require them.
 
-Product repositories contain localized project truth. Do not copy guide documents into product repositories as active documentation.
+Product repositories contain localized project truth and concrete specializations. Do not copy guide documents into product repositories as active documentation.
