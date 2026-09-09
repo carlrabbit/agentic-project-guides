@@ -24,6 +24,26 @@ Profiles describe broad reusable engineering shapes. Do not invent a central-sty
 
 When those details materially affect implementation or validation, record them as project-local engineering/specification/architecture/decision authority.
 
+## Profile composition and applicability
+
+A project may combine a small number of profiles when multiple broad engineering shapes genuinely apply.
+
+For every selected profile, determine whether it applies:
+
+- repository-wide;
+- to one or more durable project-defined components;
+- to one or more durable project-defined surfaces.
+
+Profiles compose additively. Do not assign primary/secondary precedence and do not rely on profile ordering.
+
+If two applicable profiles impose materially incompatible expectations, resolve the conflict into project-local authority before producing an implementation-ready milestone.
+
+When `.guide-profile.json` is created for guide-system 0.8 or later, use schema version 2 and record semantic `repository`, `component`, or `surface` scopes for each applied profile.
+
+Component/surface IDs are project-defined semantic identifiers. Their meaning must be established by normal project authority; do not use path globs in `.guide-profile.json` as the architecture definition.
+
+If the repository is homogeneous, repository-wide scopes are sufficient. Do not invent component/surface IDs without a real planning need.
+
 If the target repository contains old copied setup or engineering guides, treat them as legacy/non-authoritative unless the repository explicitly marks them as active project documentation.
 
 If the target repository contains `.guide-profile.json`, use it as guide-selection metadata. Ordinary implementation agents must not be required to read `.guide-profile.json`.
@@ -50,7 +70,7 @@ docs/MILESTONES.md
 docs/milestones/M0001-initialization.md
 ```
 
-Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, project constraints, and maturity stage.
+Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
 
 Do not include copied guide documents.
 
@@ -91,6 +111,6 @@ After creating the ZIP, respond with:
 1. download link;
 2. included file list;
 3. reason each file is included;
-4. confirmed or inferred profiles, role, maturity, execution mode, and material specialization assumptions;
+4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
 5. a filled execution prompt for the later implementation agent;
 6. documentation-sync hints and the `.guide-sync/pending/` files created.
