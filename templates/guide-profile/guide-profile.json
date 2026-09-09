@@ -22,12 +22,8 @@
   "engineeringCommands": {
     "canonicalInterface": "eng",
     "implementation": "repository-specific",
-    "supportedLaunchers": [
-      "powershell"
-    ],
-    "testedPlatforms": [
-      "windows"
-    ]
+    "supportedLaunchers": [],
+    "testedPlatforms": []
   },
   "activeDocumentationLayers": [
     "engineering",
