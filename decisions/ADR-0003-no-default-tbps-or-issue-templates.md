@@ -6,7 +6,7 @@ Accepted.
 
 ## Decision
 
-TBPs and issue templates are not default repository layers. They may be activated only by a profile or project-type guide when needed.
+TBPs and issue templates are not default repository layers. They may be activated only when a selected profile or concrete project need justifies them.
 
 ## Consequences
 
