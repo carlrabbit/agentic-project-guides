@@ -1,5 +1,121 @@
 # Changelog
 
+## 0.8.0
+
+Migration required: recommended for repositories using integration validation, concrete project-type guidance, external/runtime-bound validation, or integration-first testing; otherwise metadata/template review may be sufficient.
+
+Affected areas:
+
+- validation model and tier terminology;
+- validation targets and execution loci;
+- integration-ready maturity semantics;
+- profile model;
+- project-local specialization;
+- .NET library test-strategy guidance;
+- milestone planning/template semantics;
+- platform-support guidance;
+- concrete `project-types/` layer;
+- guide-profile version metadata.
+
+### Changed — validation topology
+
+Validation depth is now independent of execution location.
+
+Tier 2 is `standard repository validation` rather than `standard local validation`.
+
+Tier 3 is `integration validation` rather than `PR integration validation`.
+
+Material validation obligations may separately declare:
+
+```text
+depth
++ target
++ execution locus
++ platform/capability requirements
++ evidence
+```
+
+Local, CI, remote-service, and mixed execution are valid according to project authority. CI is not part of the generic definition of integration depth or integration-ready maturity.
+
+### Added — validation targets and integration-bound projects
+
+The validation model now names the real boundary being exercised as a validation target.
+
+For external/runtime-bound validation, project authority should resolve applicable availability, locus/platform, provisioning, isolation/reset, identity, invocation, evidence, failure-semantics, fallback, release, and consumer-surface concerns.
+
+Concrete target rules remain project-local.
+
+### Added — integration-first policy
+
+Projects may explicitly adopt integration-first testing.
+
+The generic `.NET library` profile no longer assumes a test pyramid or requires unit tests as the default correctness mechanism. Unit tests remain appropriate when isolated validation is materially cheaper, more exhaustive, or more diagnostic.
+
+### Changed — profiles and specialization
+
+Profiles are broad reusable engineering shapes, not feature tags.
+
+Do not create profiles merely for operating system, local/CI execution, integration-first testing, one packaging mechanism, one named external product/service, or one concrete project architecture.
+
+`meta/SPECIALIZATION-MODEL.md` defines project-local specialization: the guide system defines reusable decision surfaces; product repositories contain the concrete answers needed by implementation.
+
+### Removed — concrete project-type catalog
+
+The central `project-types/agentic-2d-game-engine/` guide is removed.
+
+Concrete game-engine architecture/role/runtime rules belong in the engine repository. Reusable concepts remain covered by profiles and generic validation/engineering models.
+
+The guide repository should not grow a parallel catalog of concrete projects or vendor integrations.
+
+### Platform/local-first clarification
+
+Platform support is established by declared representative validation evidence, not by CI alone.
+
+A repository may intentionally use a Windows-local authoritative integration environment while GitHub provides portable checks, release automation, or publication.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.5-to-v0.8.0.md
+```
+
+## 0.7.5
+
+Migration required: recommended for repositories using disconnected planning/implementation handoff; otherwise no-op when durable implementation authority already preserves all resolved material planning decisions.
+
+Affected areas:
+
+- planning-to-implementation information boundary;
+- decision completeness and preservation;
+- ready-milestone audit;
+- baseline implementation model handoff;
+- guide-profile version metadata.
+
+### Strengthened
+
+Planning readiness now has two separate obligations:
+
+```text
+decision completeness
++ decision preservation
+```
+
+Planning may compress investigation history, rejected alternatives, and speculative implementation ideas, but must preserve every resolved material decision required by the baseline executor in durable milestone or referenced project authority.
+
+Before `ready`, planning applies a counterfactual audit: if the planning conversation disappeared, the baseline executor must still be able to recover every material decision without repeating project-level reasoning.
+
+The v0.7.3 execution-ledger/closure model and v0.7.4 consumer-surface validation model remain unchanged.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.4-to-v0.7.5.md
+```
+
 ## 0.7.4
 
 Migration required: recommended for repositories that produce distributable artifacts; otherwise version-metadata-only/no-op.
