@@ -27,6 +27,7 @@ Planning owns decisions that materially affect:
 - cross-package or subsystem boundaries;
 - acceptance criteria;
 - validation and human-review policy;
+- applicable guide profiles/scopes and material conflicts between their obligations;
 - required project-local specializations for concrete runtimes, services, environments, packaging boundaries, or domain architecture.
 
 The implementation phase owns concrete files, types, functions, refactorings, test structure, execution decomposition, implementation sequence, supporting edits required by the contract, validation execution, persistent execution progress, and completion audit where those choices do not change the resolved contract.
@@ -53,7 +54,9 @@ Read `.review/`, `.guide-sync/`, workflows, research, public docs, or legacy cop
 
 Treat `docs/research/` and copied guides as non-authoritative unless explicitly marked otherwise.
 
-Use `.guide-profile.json` as guide-selection and planning metadata only. Ordinary implementation agents must not be required to read it.
+Use `.guide-profile.json` as guide-selection, applicability, and planning metadata only. Ordinary implementation agents must not be required to read it.
+
+When `.guide-profile.json` uses schema version 2, resolve which repository/component/surface-scoped profiles apply to the milestone using the semantic component/surface definitions in normal project authority.
 
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
 
@@ -62,6 +65,22 @@ Treat `.execution/` as implementation-owned operational state, not planning auth
 ## Profiles and project specialization
 
 Use profiles only for broad reusable engineering shapes. Do not model an operating system, local/CI execution, a test-strategy preference, one packaging mechanism, a named external vendor/runtime, or one concrete product architecture as a profile merely to make project composition more granular.
+
+A repository may combine a small number of profiles when multiple broad engineering shapes genuinely apply.
+
+For the milestone's affected scope, determine every applicable profile:
+
+```text
+repository-wide profiles
++ matching component-scoped profiles
++ matching surface-scoped profiles
+```
+
+Applicable profiles compose additively. Profile order has no semantic meaning. Do not assign primary/secondary precedence and do not let a narrower profile silently override a broader one.
+
+If applicable profile obligations materially conflict, planning must resolve the conflict into durable project-local authority before the milestone is ready.
+
+Component/surface IDs in guide metadata are semantic project-defined identifiers, not path-based architecture authority. Resolve their meaning from normal project documents.
 
 When generic guide concepts need concrete answers, record them as project-local authority in the repository's normal engineering, specification, architecture, or decision documents.
 
@@ -114,7 +133,7 @@ Large execution volume is not by itself a reason to require a stronger model or 
 
 ## Ready milestone boundary
 
-The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, validation policy/topology, or required project specialization and can maintain reliable execution coverage across the expected implementation volume.
+The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, validation policy/topology, applicable profile obligations/conflicts, or required project specialization and can maintain reliable execution coverage across the expected implementation volume.
 
 The ready milestone must contain, as applicable:
 
@@ -124,8 +143,8 @@ The ready milestone must contain, as applicable:
 4. baseline implementation model or an explicit statement that the project default applies;
 5. scope;
 6. non-goals;
-7. resolved decisions and constraints;
-8. required project authority, including specialization authority when applicable;
+7. resolved decisions and constraints, including any material profile-conflict resolution;
+8. required project authority, including specialization/profile-scope authority when applicable;
 9. acceptance criteria;
 10. validation depth/tiers, targets, execution loci, platform/capability requirements, concrete commands, execution mode, and expected evidence;
 11. direct documentation impact;
@@ -170,7 +189,8 @@ If the project's testing policy is integration-first, do not introduce unit-test
 
 Before marking the milestone `ready`, explicitly verify that:
 
-- architecture, semantics, compatibility, scope, acceptance, validation, specialization, and human-review policy are settled to the degree required by the work;
+- architecture, semantics, compatibility, scope, acceptance, validation, applicable profile obligations/conflicts, specialization, and human-review policy are settled to the degree required by the work;
+- the milestone's affected components/surfaces and their applicable profiles are known where multiple scoped profiles exist;
 - remaining choices are local implementation mechanics rather than new project policy;
 - acceptance criteria let the executor distinguish correct completion from partial implementation;
 - every material completion obligation is explicit enough to be mapped to implementation work and evidence;
@@ -277,7 +297,7 @@ After creating the ZIP, respond with:
 
 1. download link;
 2. included file list and purpose;
-3. confirmed or inferred profile, role, maturity, execution profile, and baseline implementation model;
+3. confirmed or inferred applicable profiles/scopes, role, maturity, execution profile, and baseline implementation model;
 4. primary ready-milestone path;
 5. concise transport/application handoff when needed;
 6. documentation-sync hints created;
@@ -292,14 +312,14 @@ The canonical implementation methodology is `templates/prompts/execute-milestone
 The package is acceptable only if:
 
 - the goal and target state are unambiguous;
-- material architectural, semantic, compatibility, scope, acceptance, validation, and specialization decisions are resolved;
+- material architectural, semantic, compatibility, scope, acceptance, validation, applicable-profile/conflict, and specialization decisions are resolved;
 - the milestone is executable by the configured baseline implementation model without relying on model escalation for unresolved project-level reasoning;
 - large/long execution is tractable through implementation-owned bounded work packages and persistent execution state;
 - constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
 - required project authority is explicit;
 - acceptance criteria are observable or verifiable and cover the actual milestone outcome;
 - validation is concrete about depth, target, locus, platform/capability, command, and evidence where material, but is not confused with milestone completion;
-- implementation can derive local mechanics from the live repository without the planning conversation;
+- implementation can derive local mechanics from the live repository without the planning conversation or `.guide-profile.json`;
 - implementation is not burdened with planning scratch work, speculative edit instructions, or duplicated per-milestone execution methodology;
 - the selected execution profile is explicit and appropriate to the work;
 - human-review requirements are milestone-owned and explicit when automation cannot decide acceptance;
