@@ -2,7 +2,7 @@
 
 ## 0.8.0
 
-Migration required: recommended for repositories using integration validation, concrete project-type guidance, mixed/scoped profiles, external/runtime-bound validation, integration-first testing, or durable planning research; otherwise metadata/template review may be sufficient.
+Migration required: recommended for repositories using integration validation, concrete project-type guidance, mixed/scoped profiles, external/runtime-bound validation, integration-first testing, durable planning research, or historical planning knowledge worth adopting; otherwise metadata/template review may be sufficient.
 
 Affected areas:
 
@@ -14,6 +14,7 @@ Affected areas:
 - reusable source-generator profile;
 - project-local specialization;
 - planning research and durable evidence;
+- historical research adoption and optional transition capabilities;
 - planning/implementation context boundary;
 - .NET library test-strategy guidance;
 - milestone planning/template semantics;
@@ -105,13 +106,37 @@ A lightweight `templates/research/research-template.md` is provided for durable 
 
 Existing `docs/research/` content should be classified rather than blindly retained or deleted: useful evidence may be retained/revalidated/superseded, operative rules should be promoted, obsolete notes may be removed, and copied guide documents remain legacy guide leakage rather than project research.
 
+### Added — historical research adoption
+
+Projects whose planning history predates the 0.8 research model may optionally recover durable planning knowledge from surviving chats, uploaded documents, notes, experiments, repository history, or other evidence.
+
+Research adoption uses one of three planning modes:
+
+```text
+none
+selective
+reconstructive
+```
+
+The mode is chosen from evidence availability/quality, rediscovery cost, expected future planning value, maturity and expected change, unusual/fragile constraints, and revalidation cost. Maturity does not mechanically determine the mode.
+
+Historical conversations/files are source material, not research artifacts. They must be curated into bounded evidence/findings rather than copied wholesale into `docs/research/`.
+
+Guide-system compliance and historical research completeness are independent. Missing historical material does not block migration and must not be fabricated. A repository may fully adopt 0.8 with `research adoption: none`.
+
+Small selective adoption may occur as part of project creation, guide adoption, or the pre-0.8 -> 0.8 migration. Substantial reconstructive adoption should normally use `templates/prompts/special/adopt-research.md` and may occur later when historical material becomes available.
+
+The selected adoption mode is workflow history, not stable `.guide-profile.json` configuration.
+
 ### Changed — bootstrap and migration handling
 
-`new-project.md` uses research only when bootstrap investigation produces evidence worth retaining; it does not create research scaffolding by default.
+`new-project.md` uses research only when bootstrap investigation produces evidence worth retaining and can evaluate pre-project planning material when it is actually available; it does not create research scaffolding by default.
 
-`adopt-guide-system.md` distinguishes genuine project research from copied legacy guide material and promotes any de-facto project rules before implementation handoff.
+`adopt-guide-system.md` distinguishes genuine project research from copied legacy guide material, explicitly evaluates `none`/`selective`/`reconstructive` historical adoption when the target model supports research, and promotes any de-facto project rules before implementation handoff.
 
-`update-guide-system.md` derives research migration semantics from the applicable version-to-version migration chain rather than hard-coding 0.8 behavior into future guide updates.
+`update-guide-system.md` derives research and optional transition semantics from the applicable version-to-version migration chain rather than hard-coding 0.8 behavior into every future guide update.
+
+`meta/MIGRATION-MODEL.md` now distinguishes required guide migration from optional transition capabilities whose historical adoption may be useful but is not required for compliance.
 
 ### Removed — concrete project-type catalog
 
