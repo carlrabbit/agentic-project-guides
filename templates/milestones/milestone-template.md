@@ -13,9 +13,11 @@
 | Scope size | medium-large |
 | Implementation autonomy | high |
 | Documentation sync | deferred |
-| Local validation | Tier 1 focused validation |
-| Integration validation | Tier 3 PR workflows |
-| Consumer-surface validation | <not-applicable|required; intended mechanism> |
+| Focused validation | <Tier 1 command/check or not-applicable> |
+| Repository validation | <Tier 2 command/check or not-applicable> |
+| Integration validation | <Tier 3 target + command/check or not-applicable> |
+| Validation locus/platform | <local|CI|remote|mixed; platform/capability requirements> |
+| Consumer/release validation | <Tier 4 mechanism or not-applicable> |
 | Human review | <none|recommended|required|blocking> |
 
 ## Goal
@@ -88,9 +90,11 @@ The ready milestone should remain one coherent semantic milestone when appropria
 
 ## Required Authority
 
-- <Relevant spec, architecture, decision, or engineering document>
+- <Relevant spec, architecture, decision, engineering, or specialization document>
 
 Reference authority rather than duplicating its complete body in this milestone.
+
+When a concrete external runtime, service, platform, test environment, or domain-specific integration materially constrains implementation or validation, reference the project-local authority that defines that specialization.
 
 ## Acceptance Criteria
 
@@ -100,9 +104,15 @@ Acceptance criteria must describe completed outcomes and be specific enough to m
 
 When the milestone affects a distributable artifact, include acceptance criteria for the intended consumer boundary where relevant. Internal tests alone do not establish that a packed/installed/published artifact is consumable.
 
+When correctness depends on an external/runtime integration target, include acceptance criteria that establish representative behavior through that target rather than only through substitutes.
+
 ## Validation
 
-- <Concrete command or completion check.>
+For each material validation obligation, specify the applicable depth, target, execution locus, platform/capability requirements, concrete command/check, and expected evidence.
+
+Do not assume that Tier 3 integration validation runs in CI. Local Windows, local Linux, a remote service, CI, or a mixed topology are all valid when declared by project authority.
+
+If an integration target requires technology-specific provisioning, isolation/reset, identity, invocation, or evidence rules, reference the project-local specialization rather than restating the external guide system.
 
 If the repository produces a distributable artifact affected by this milestone, include at least one representative validation path that consumes the artifact through its intended mechanism.
 
@@ -163,8 +173,10 @@ Passing tests or completing listed focus areas does not by itself establish mile
 
 When consumer-surface validation applies, passing internal tests does not establish completion until the current distributable artifact has been exercised through its intended consumer mechanism.
 
+When required integration validation applies, a substitute validation path does not establish completion unless project authority explicitly defines it as equivalent.
+
 ## Escalation Boundary
 
 Implementation owns concrete code/test mechanics, execution decomposition, and supporting edits that fit this contract.
 
-Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, or validation policy, or if a material planning decision cannot be recovered from durable project authority without repeating project-level reasoning.
+Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, validation policy, or a required project specialization, or if a material planning decision cannot be recovered from durable project authority without repeating project-level reasoning.

@@ -1,5 +1,200 @@
 # Changelog
 
+## 0.8.0
+
+Migration required: recommended for repositories using integration validation, concrete project-type guidance, mixed/scoped profiles, external/runtime-bound validation, integration-first testing, durable planning research, or historical planning knowledge worth adopting; otherwise metadata/template review may be sufficient.
+
+Affected areas:
+
+- validation model and tier terminology;
+- validation targets and execution loci;
+- integration-ready maturity semantics;
+- profile model and scoped profile composition;
+- guide-profile schema version 2;
+- reusable source-generator profile;
+- project-local specialization;
+- planning research and durable evidence;
+- historical research adoption and optional transition capabilities;
+- planning/implementation context boundary;
+- .NET library test-strategy guidance;
+- milestone planning/template semantics;
+- bootstrap/adoption/version-migration prompts;
+- platform-support guidance;
+- concrete `project-types/` layer.
+
+### Changed — validation topology
+
+Validation depth is now independent of execution location.
+
+Tier 2 is `standard repository validation` rather than `standard local validation`.
+
+Tier 3 is `integration validation` rather than `PR integration validation`.
+
+Material validation obligations may separately declare:
+
+```text
+depth
++ target
++ execution locus
++ platform/capability requirements
++ evidence
+```
+
+Local, CI, remote-service, and mixed execution are valid according to project authority. CI is not part of the generic definition of integration depth or integration-ready maturity.
+
+### Added — validation targets and integration-bound projects
+
+The validation model now names the real boundary being exercised as a validation target.
+
+For external/runtime-bound validation, project authority should resolve applicable availability, locus/platform, provisioning, isolation/reset, identity, invocation, evidence, failure-semantics, fallback, release, and consumer-surface concerns.
+
+Concrete target rules remain project-local.
+
+### Added — integration-first policy
+
+Projects may explicitly adopt integration-first testing.
+
+The generic `.NET library` profile no longer assumes a test pyramid or requires unit tests as the default correctness mechanism. Unit tests remain appropriate when isolated validation is materially cheaper, more exhaustive, or more diagnostic.
+
+### Changed — profiles and specialization
+
+Profiles are broad reusable engineering shapes, not feature tags.
+
+Do not create profiles merely for operating system, local/CI execution, integration-first testing, one packaging mechanism, one named external product/service, or one concrete project architecture.
+
+`meta/SPECIALIZATION-MODEL.md` defines project-local specialization: the guide system defines reusable decision surfaces; product repositories contain the concrete answers needed by implementation.
+
+### Added — scoped profile composition
+
+Repositories may combine a small number of profiles when multiple broad engineering shapes genuinely apply.
+
+Profile applicability may be repository-wide, component-scoped, or surface-scoped. Applicable obligations compose additively; profile order has no semantic meaning and no profile silently overrides another.
+
+Material conflicts between applicable profiles must be resolved into project-local authority before implementation.
+
+`.guide-profile.json` schema version 2 records semantic profile scopes for planning/traceability. Component and surface IDs are project-defined semantic identifiers whose meaning comes from ordinary project authority rather than path globs in metadata.
+
+### Added — source-generator profile
+
+0.8 adds a reusable `source-generator` profile for Roslyn source-generator/analyzer-style compile-time surfaces.
+
+It may compose with `dotnet-library`, including in mixed package suites where only selected generator components/surfaces receive the additional source-generator obligations.
+
+Concrete compiler/MSBuild compatibility, generated-source, diagnostic, packaging, and version-alignment rules remain project-local where project-specific.
+
+### Added — planning research and durable evidence
+
+`meta/RESEARCH-MODEL.md` makes research a first-class non-authoritative planning-knowledge layer.
+
+The generic flow is:
+
+```text
+investigation/evidence
+  -> durable research when future planning value justifies retention
+  -> planning conclusion
+  -> project authority when implementation depends on the conclusion
+  -> implementation
+```
+
+Research may preserve external documentation findings, experiments, compatibility probes, historical reconstruction, comparisons, uncertainty, provenance, and revalidation triggers.
+
+Research must not become shadow project authority. Implementation-affecting conclusions must be promoted into ordinary project authority before a ready milestone depends on them.
+
+Planning should load research selectively. Ordinary implementation must remain executable from the ready milestone and referenced project authority without reconstructing decisions from the research corpus.
+
+A lightweight `templates/research/research-template.md` is provided for durable investigations. Projects should not create empty research folders, indexes, or placeholder artifacts merely because the guide supports research.
+
+Existing `docs/research/` content should be classified rather than blindly retained or deleted: useful evidence may be retained/revalidated/superseded, operative rules should be promoted, obsolete notes may be removed, and copied guide documents remain legacy guide leakage rather than project research.
+
+### Added — historical research adoption
+
+Projects whose planning history predates the 0.8 research model may optionally recover durable planning knowledge from surviving chats, uploaded documents, notes, experiments, repository history, or other evidence.
+
+Research adoption uses one of three planning modes:
+
+```text
+none
+selective
+reconstructive
+```
+
+The mode is chosen from evidence availability/quality, rediscovery cost, expected future planning value, maturity and expected change, unusual/fragile constraints, and revalidation cost. Maturity does not mechanically determine the mode.
+
+Historical conversations/files are source material, not research artifacts. They must be curated into bounded evidence/findings rather than copied wholesale into `docs/research/`.
+
+Guide-system compliance and historical research completeness are independent. Missing historical material does not block migration and must not be fabricated. A repository may fully adopt 0.8 with `research adoption: none`.
+
+Small selective adoption may occur as part of project creation, guide adoption, or the pre-0.8 -> 0.8 migration. Substantial reconstructive adoption should normally use `templates/prompts/special/adopt-research.md` and may occur later when historical material becomes available.
+
+The selected adoption mode is workflow history, not stable `.guide-profile.json` configuration.
+
+### Changed — bootstrap and migration handling
+
+`new-project.md` uses research only when bootstrap investigation produces evidence worth retaining and can evaluate pre-project planning material when it is actually available; it does not create research scaffolding by default.
+
+`adopt-guide-system.md` distinguishes genuine project research from copied legacy guide material, explicitly evaluates `none`/`selective`/`reconstructive` historical adoption when the target model supports research, and promotes any de-facto project rules before implementation handoff.
+
+`update-guide-system.md` derives research and optional transition semantics from the applicable version-to-version migration chain rather than hard-coding 0.8 behavior into every future guide update.
+
+`meta/MIGRATION-MODEL.md` now distinguishes required guide migration from optional transition capabilities whose historical adoption may be useful but is not required for compliance.
+
+### Removed — concrete project-type catalog
+
+The central `project-types/agentic-2d-game-engine/` guide is removed.
+
+Concrete game-engine architecture/role/runtime rules belong in the engine repository. Reusable concepts remain covered by profiles and generic validation/engineering models.
+
+The guide repository should not grow a parallel catalog of concrete projects or vendor integrations.
+
+### Platform/local-first clarification
+
+Platform support is established by declared representative validation evidence, not by CI alone.
+
+A repository may intentionally use a Windows-local authoritative integration environment while GitHub provides portable checks, release automation, or publication.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.5-to-v0.8.0.md
+```
+
+## 0.7.5
+
+Migration required: recommended for repositories using disconnected planning/implementation handoff; otherwise no-op when durable implementation authority already preserves all resolved material planning decisions.
+
+Affected areas:
+
+- planning-to-implementation information boundary;
+- decision completeness and preservation;
+- ready-milestone audit;
+- baseline implementation model handoff;
+- guide-profile version metadata.
+
+### Strengthened
+
+Planning readiness now has two separate obligations:
+
+```text
+decision completeness
++ decision preservation
+```
+
+Planning may compress investigation history, rejected alternatives, and speculative implementation ideas, but must preserve every resolved material decision required by the baseline executor in durable milestone or referenced project authority.
+
+Before `ready`, planning applies a counterfactual audit: if the planning conversation disappeared, the baseline executor must still be able to recover every material decision without repeating project-level reasoning.
+
+The v0.7.3 execution-ledger/closure model and v0.7.4 consumer-surface validation model remain unchanged.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.7.4-to-v0.7.5.md
+```
+
 ## 0.7.4
 
 Migration required: recommended for repositories that produce distributable artifacts; otherwise version-metadata-only/no-op.

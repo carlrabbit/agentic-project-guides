@@ -1,13 +1,18 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "0.7.5"
+    "version": "0.8.0"
   },
   "appliedProfiles": [
     {
       "id": "base",
-      "version": "0.7.5"
+      "version": "0.8.0",
+      "scopes": [
+        {
+          "kind": "repository"
+        }
+      ]
     }
   ],
   "repositoryRole": "capability-provider",
@@ -22,12 +27,8 @@
   "engineeringCommands": {
     "canonicalInterface": "eng",
     "implementation": "repository-specific",
-    "supportedLaunchers": [
-      "bash"
-    ],
-    "testedPlatforms": [
-      "linux"
-    ]
+    "supportedLaunchers": [],
+    "testedPlatforms": []
   },
   "activeDocumentationLayers": [
     "engineering",

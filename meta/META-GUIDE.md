@@ -2,21 +2,23 @@
 
 ## Status
 
-Authoritative meta-level guide for creating, versioning, applying, executing, and migrating project-type guides.
+Authoritative meta-level guide for creating, versioning, applying, executing, and migrating the guide system.
 
 ## Purpose
 
 The meta guide defines how this guide system is structured and how guide artifacts are applied to concrete repositories.
 
-It does not define a single universal repository template. Instead, it defines how to compose project-specific guide profiles by project type, repository role, maturity stage, validation model, and execution model.
+It does not define a single universal repository template or maintain a catalog of concrete project types. Instead, it defines how to compose reusable profiles and generic models, then specialize them through project-local authority for a repository's actual technology, runtime, validation, and architectural constraints.
 
 ## Core doctrine
 
 ```text
-Guide repository owns methodology.
-Product repositories contain project truth.
+Guide repository owns methodology and reusable engineering shapes.
+Product repositories contain project truth and concrete specializations.
+Product repositories may retain selective non-authoritative planning research.
 Milestones separate planning from implementation.
-Implementation agents read product repository documentation and ready milestones only.
+Planning may consume durable research and promote conclusions into project authority.
+Implementation agents read product repository authority and ready milestones, not planning context.
 Planning and documentation-sync agents may use this guide system.
 ```
 
@@ -28,14 +30,69 @@ A product repository may contain `.guide-profile.json` for traceability and `.gu
 
 These files are coordination metadata, not ordinary implementation authority.
 
+Concrete specializations and semantic component/surface definitions are ordinary project truth and belong in the repository's normal engineering, specification, architecture, or decision documents.
+
+A product repository may also contain `docs/research/` and an optional `docs/RESEARCH.md` index as non-authoritative planning knowledge. Research preserves useful evidence and investigation context; it does not define project behavior.
+
+## Planning knowledge and research
+
+Planning often needs more information than should become implementation context or durable project authority.
+
+Examples include:
+
+- external documentation and source observations;
+- experiments, compatibility probes, and benchmarks;
+- comparison evidence;
+- historical reconstruction;
+- uncertain findings and known unknowns;
+- vendor/runtime behavior whose provenance or version matters.
+
+Persist only the subset that would materially help future planning and would be expensive, unreliable, or wasteful to rediscover.
+
+The information flow is:
+
+```text
+external evidence / investigation
+        -> durable research when justified
+        -> planning interpretation
+        -> project authority for implementation-affecting conclusions
+        -> implementation
+```
+
+Research remains non-authoritative. If a conclusion constrains implementation, validation, compatibility, architecture, public behavior, supported environments, or another durable project contract, planning must promote it into the appropriate project-authority document.
+
+Planning should load relevant research selectively rather than reading the complete research corpus by default.
+
+Ordinary implementation agents should not require research to reconstruct planning decisions. An implementation or diagnostic milestone may explicitly inspect or produce research when investigation itself is part of the assigned work, but any material new decision still returns to planning.
+
+### Historical research adoption
+
+Projects may have valuable planning knowledge that predates the repository, predates the guide-system research model, or remained only in chats/files outside repository authority.
+
+Historical material can be adopted using one of three planning modes:
+
+```text
+none
+selective
+reconstructive
+```
+
+The mode is chosen from evidence availability/quality, rediscovery cost, expected future planning value, maturity and expected change, unusual/fragile constraints, and revalidation cost. It is not mechanically derived from maturity and is not persistent `.guide-profile.json` configuration.
+
+Historical chats/files are source material, not research artifacts. Curate durable evidence/findings, preserve provenance and uncertainty, revalidate where material, and promote operative conclusions into project authority.
+
+Guide-system compliance is independent from historical research completeness. Missing historical evidence does not block adoption or migration. Substantial reconstruction should use `templates/prompts/special/adopt-research.md` and may occur later when material becomes available.
+
+See `meta/RESEARCH-MODEL.md`.
+
 ## Guide composition principle
 
 Guides compose; repositories do not inherit everything.
 
-A repository should be generated from an explicit profile selection such as:
+A repository should be planned from an explicit small profile selection such as:
 
 ```text
-base + dotnet-library + source-generator + public-preview maturity
+base + dotnet-library + public-preview maturity
 ```
 
 or:
@@ -44,11 +101,60 @@ or:
 base + artifact-first-runtime + capability-provider role + implementation-ready maturity
 ```
 
+Profiles describe broad reusable engineering shapes. They are not feature tags for operating systems, test strategies, packaging choices, execution locations, named vendor products, or concrete project architectures.
+
+### Scoped composition
+
+Multiple broad engineering shapes may coexist in one repository.
+
+Profile applicability may be:
+
+```text
+repository-wide
+component-scoped
+surface-scoped
+```
+
+For example, a package suite containing ordinary .NET libraries and source-generator packages can use:
+
+```text
+base                [repository]
+dotnet-library       [repository]
+source-generator     [component: generator-packages]
+```
+
+Profiles compose additively. Profile order has no semantic meaning and no profile silently overrides another.
+
+If applicable profile obligations conflict materially, planning resolves the conflict into project-local authority before implementation proceeds.
+
+`.guide-profile.json` records profile applicability for planning/traceability. Component and surface IDs are semantic project-defined identifiers; their meaning comes from normal project authority, not path globs in metadata.
+
+Project-local authority then specializes the reusable model where concrete answers are required.
+
+Example:
+
+```text
+profile:
+  dotnet-library
+
+project policy:
+  integration-first
+
+validation target:
+  installed external desktop runtime
+
+project-local specialization:
+  concrete runtime, Windows requirements, invocation,
+  isolation/reset, evidence, and failure semantics
+```
+
+See `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, and `meta/VALIDATION-MODEL.md`.
+
 ## Planning/implementation separation
 
 Milestone work has two distinct phases independent of the human, model, interface, or tool used for either phase.
 
-Planning agents may read this guide repository. They inspect enough product-repository truth to resolve implementation-affecting uncertainty and produce a ready milestone.
+Planning agents may read this guide repository. They inspect enough product-repository truth and relevant planning research to resolve implementation-affecting uncertainty and produce a ready milestone.
 
 Planning owns decisions that materially affect:
 
@@ -57,7 +163,12 @@ Planning owns decisions that materially affect:
 - compatibility;
 - scope and non-goals;
 - acceptance criteria;
-- validation and review policy.
+- validation and review policy;
+- applicable profiles and their semantic scopes;
+- conflicts between applicable profile obligations;
+- required project-local specializations.
+
+Planning also decides whether investigation evidence should be persisted for future planning, revalidated, promoted into authority, superseded, deleted, or adopted from historical material according to `meta/RESEARCH-MODEL.md`.
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
 
@@ -65,9 +176,11 @@ Planning should not prescribe concrete implementation mechanics that a capable e
 
 Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not read this guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
 
+Ordinary implementation must not depend on `docs/research/` to recover operative project rules. Research may be read only when explicitly relevant to an investigation/evidence obligation or when the ready milestone deliberately references it for non-authoritative evidence.
+
 The implementation handoff must not depend on the planning conversation. Everything required to execute must exist in the ready milestone or its referenced project authority.
 
-If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, or validation decision, the milestone returns to planning. Implementation must not silently create new project policy.
+If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, profile-applicability/conflict, or specialization decision, the milestone returns to planning. Implementation must not silently create new project policy from research or other evidence.
 
 Planning agents may also create:
 

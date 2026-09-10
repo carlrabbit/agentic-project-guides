@@ -20,11 +20,11 @@ draft/planning -> ready -> implementing -> done
 
 `done` means the milestone acceptance and completion gates have been satisfied.
 
-If implementation discovers an unresolved decision that could materially alter architecture, semantics, compatibility, scope, acceptance, or validation, stop the affected work and return that decision to planning. Local implementation choices that do not alter those boundaries remain implementation-owned.
+If implementation discovers an unresolved decision that could materially alter architecture, semantics, compatibility, scope, acceptance, validation, or a required project specialization, stop the affected work and return that decision to planning. Local implementation choices that do not alter those boundaries remain implementation-owned.
 
 ## Planning phase
 
-Planning reduces uncertainty. It should inspect enough repository truth to make the milestone safe to execute, but it should not predict implementation mechanics that the executor can derive reliably from the live repository.
+Planning reduces uncertainty. It should inspect enough repository truth and relevant planning knowledge to make the milestone safe to execute, but it should not predict implementation mechanics that the executor can derive reliably from the live repository.
 
 A ready milestone defines, as applicable:
 
@@ -34,20 +34,41 @@ A ready milestone defines, as applicable:
 - implementation constraints and invariants;
 - required authority documents;
 - acceptance criteria;
-- validation commands and validation execution mode;
+- validation depth, targets, execution loci, platform/capability requirements, commands, and evidence;
 - direct documentation impact;
 - deferred documentation synchronization;
 - human-review gates;
 - known exceptional implementation constraints;
 - baseline-executor readiness.
 
-Planning may create or update project-truth documents when a decision must become durable authority before implementation.
+Planning may create or update project-truth documents when a decision must become durable authority before implementation. This includes project-local specialization for concrete external runtimes, services, platforms, test environments, packaging boundaries, or domain architecture when generic guide guidance is insufficient.
+
+Planning may also inspect, create, revalidate, supersede, or remove non-authoritative research according to `meta/RESEARCH-MODEL.md`.
+
+Research preserves reusable evidence and investigation context, not operative project rules. Every research-derived conclusion required by ordinary implementation must be promoted into the ready milestone or referenced project authority before the milestone becomes `ready`.
 
 Detailed file lists, class designs, edit sequences, and speculative implementation steps are not required unless they are themselves part of the architectural or compatibility contract.
 
 If a milestone uses focus areas, workstreams, or similar decomposition, those describe expected concentration of work. They are not an exhaustive edit allowlist unless the milestone explicitly makes them contractual.
 
 Planning must structure acceptance criteria and completion obligations clearly enough that implementation can map them to concrete execution work and evidence. Planning does not pre-author the executor's local task list.
+
+## Research and diagnostic work
+
+If a material planning decision cannot be resolved from current project authority and existing current evidence, planning may perform research directly or define a focused diagnostic/investigation milestone whose target state is the required evidence.
+
+Durable research is justified only when the evidence is useful to future planning and would be expensive, unreliable, or wasteful to rediscover.
+
+A diagnostic/investigation milestone should define the question, evidence to obtain, relevant environment/version constraints, and observable completion condition without pre-deciding the result.
+
+After the evidence exists, planning should:
+
+1. persist reusable research when justified;
+2. re-evaluate the material decision;
+3. promote any implementation-affecting conclusion into project authority;
+4. create or revise the actual implementation milestone.
+
+The guide does not define a generic persistent planning ledger. Research stores reusable evidence; ready milestones and project authority store resolved decisions; conversational scratch reasoning remains disposable.
 
 ## Baseline implementation model and `ready` boundary
 
@@ -70,11 +91,13 @@ A milestone is baseline-executable when the configured baseline implementation m
 - public or persisted compatibility;
 - scope or non-goals;
 - acceptance criteria;
-- validation policy;
+- validation policy, target, or required execution topology;
 - human-review policy;
 - project-level invariants.
 
 Planning owns the reasoning needed to reach that state.
+
+The implementation contract must remain complete without requiring the executor to reconstruct planning decisions from `docs/research/`, planning chat history, or guide metadata.
 
 Do not compensate for incomplete planning by selecting a `strong`, `frontier`, or similar stronger implementation tier. Such capability tiers are not part of the generic execution model.
 
@@ -125,18 +148,21 @@ The executor:
 - starts with the milestone and explicitly required project authority;
 - inspects the live source and tests needed for the change;
 - may inspect additional repository-local material needed to implement or prove a milestone obligation;
+- treats `docs/research/` as non-authoritative and reads it only when explicitly relevant to an investigation/evidence obligation or referenced evidence;
 - derives concrete execution work packages and implementation mechanics;
 - creates or reconciles persistent execution coverage/progress state for AI-executed milestones;
 - follows established repository patterns where the milestone leaves implementation freedom;
 - performs all implementation and supporting work required by the milestone contract;
 - avoids unrelated product expansion;
-- runs the specified validation and fixes agent-resolvable failures;
+- runs the specified validation in the declared target/locus topology and fixes agent-resolvable failures;
 - produces required evidence and artifacts;
 - freshly reconciles milestone obligations against execution state and repository evidence before completion;
 - performs a mandatory completion audit;
 - continues working while any unsatisfied milestone obligation is agent-resolvable.
 
-The executor does not need the planning conversation, external guide repository, rejected alternatives, or planning-agent scratch work.
+The executor does not need the planning conversation, external guide repository, rejected alternatives, planning-agent scratch work, or research corpus to recover the project contract.
+
+Ordinary implementation should not create research merely to record reasoning or discoveries. When a milestone explicitly assigns investigation/evidence preservation, the executor may create or update research, but research cannot amend project authority. Material decisions exposed by the evidence return to planning.
 
 The instruction to remain within milestone scope forbids unrelated expansion. It does not forbid supporting edits necessary to satisfy the milestone goal, target state, acceptance criteria, validation, documentation, artifact, migration, cleanup, or review obligations.
 
@@ -155,7 +181,7 @@ Stage 1 is execution decomposition. Before production edits, the executor:
 
 Stage 2 is iterative implementation of those work packages.
 
-Execution decomposition may choose files, types, tests, refactorings, local sequencing, and other implementation mechanics. It must not amend architecture, semantics, compatibility, scope, acceptance, validation policy, or human-review policy already settled by planning.
+Execution decomposition may choose files, types, tests, refactorings, local sequencing, and other implementation mechanics. It must not amend architecture, semantics, compatibility, scope, acceptance, validation policy, required validation target/locus, project specialization, or human-review policy already settled by planning.
 
 A small milestone may consist of one work package. AI-executed milestones do not skip persistent execution state merely because the work initially appears simple.
 
@@ -228,7 +254,7 @@ For every applicable acceptance criterion and completion obligation, the executo
 
 Unsupported, stale, or merely asserted `done` states must be reopened. Newly discovered agent-resolvable gaps become active execution work and the loop continues.
 
-Final reconciliation also confirms that every required validation gate has current evidence and that no agent-resolvable ledger item remains.
+Final reconciliation also confirms that every required validation gate has current evidence from the required target/locus and that no agent-resolvable ledger item remains.
 
 ## Completion audit
 
@@ -238,9 +264,10 @@ After final reconciliation and required validation, the executor audits all appl
 - target state;
 - scope-required behavior;
 - every acceptance criterion;
-- required validation and evidence;
+- required validation targets, loci, and evidence;
 - required artifacts or generated outputs;
 - direct documentation obligations;
+- explicitly required research/evidence artifacts when investigation is part of the milestone;
 - required migrations, cleanup, or compatibility work;
 - human-review gates;
 - constraints and invariants;
@@ -260,7 +287,7 @@ Implementation success, work-package completion, validation success, and milesto
 |---|---|
 | Implementation success | The intended implementation exists. |
 | Work-package completion | A bounded implementation outcome and its mapped evidence are established. |
-| Validation success | The required automated checks pass. |
+| Validation success | The required automated checks pass against the required targets/loci. |
 | Milestone completion | Every applicable milestone obligation and completion gate is satisfied. |
 
 Implementation success does not imply work-package completion.
@@ -294,9 +321,9 @@ Completion requires something the implementation agent cannot resolve in the cur
 Examples include:
 
 - unavailable credentials or permissions;
-- unavailable required infrastructure or external services;
+- unavailable required infrastructure, runtime, integration target, or external service;
 - inaccessible required dependencies or artifacts;
-- a material architectural, semantic, compatibility, scope, acceptance, or validation decision that must return to planning.
+- a material architectural, semantic, compatibility, scope, acceptance, validation, or specialization decision that must return to planning.
 
 Ordinary implementation work, failing tests, missing documentation, incomplete artifacts, incomplete ledger items, or other agent-resolvable obligations are not blockers.
 
@@ -326,22 +353,34 @@ Workflow type describes the kind of work being planned. It is separate from life
 Examples include:
 
 - ordinary product or library milestone work;
+- diagnostic/investigation work;
 - engineering migration;
 - documentation synchronization;
 - release readiness.
 
 Special workflow types may use dedicated planning prompts because they have different authority, scope, or completion semantics. When they result in coding or repository changes, they still converge on the same ready-milestone boundary and use the canonical implementation phase unless their workflow explicitly requires a different executor contract.
 
-## Validation execution mode
+## Validation topology and execution mode
 
-Validation execution mode describes how required validation runs, for example:
+Validation topology describes what is exercised and where. It is independent of validation depth.
+
+For each material obligation, planning may need to declare:
+
+- validation tier/depth;
+- target;
+- execution locus: local, CI, remote, or mixed;
+- required platform/capability;
+- expected evidence.
+
+Validation execution mode describes how a validation operation runs, for example:
 
 - direct;
 - resumable-sharded;
-- CI-only;
-- human-review-gated.
+- human-review-gated where the final acceptance step is human.
 
-Validation execution mode must not be confused with execution profile or workflow type.
+A locus constraint such as `CI-only` or `local Windows only` is not itself a validation depth or execution profile.
+
+Validation topology and execution mode must not be confused with implementation execution profile or workflow type.
 
 ## Milestone completion
 
@@ -350,12 +389,15 @@ A milestone defines its own completion gates.
 Possible gates include:
 
 - focused automated validation;
-- standard local validation;
-- PR integration validation;
-- release validation;
+- standard repository validation;
+- integration validation against declared targets;
+- release/consumer validation;
 - required artifact production;
 - direct documentation obligations;
+- explicitly assigned research/evidence production for investigation milestones;
 - human review of milestone evidence.
+
+These gates may run locally, in CI, against remote services, or through a mixed topology according to project authority.
 
 Human review is not inherited indefinitely by the project.
 
