@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Adopt the 0.8 validation/specialization/profile-composition model without importing concrete guide-system methodology into product repositories.
+Adopt the 0.8 validation/specialization/profile-composition/research model without importing concrete guide-system methodology into product repositories.
 
 ## Migration required
 
@@ -14,7 +14,9 @@ Recommended for repositories that:
 - use concrete project-type guide selection;
 - combine multiple engineering shapes in one repository;
 - depend on external runtimes/services/platform-specific integration targets;
-- use or intend to use integration-first testing.
+- use or intend to use integration-first testing;
+- retain planning research/evidence under `docs/research/`;
+- rely on research/notes as de-facto implementation authority.
 
 For repositories unaffected by those concepts, update guide metadata and review planning templates; no product behavior change is required.
 
@@ -153,6 +155,42 @@ In a mixed package suite, scope `source-generator` to the applicable generator c
 
 Concrete Roslyn/MSBuild compatibility, diagnostic, generated-source, package-layout, and version-alignment rules remain project-local where they differ by project.
 
+### Planning research and durable evidence
+
+0.8 makes research an explicit non-authoritative planning-knowledge layer.
+
+The generic relationship is:
+
+```text
+investigation/evidence
+  -> durable research when future planning value justifies retention
+  -> planning conclusion
+  -> project authority when implementation depends on the conclusion
+```
+
+`docs/research/` may contain durable evidence such as external documentation findings, experiments, compatibility probes, historical reconstruction, comparisons, uncertainty, and revalidation triggers.
+
+Research is not project authority. If an existing research/notes file contains an operative rule that constrains implementation, validation, compatibility, architecture, public behavior, supported environments, or another durable contract, promote that rule into the appropriate project authority before ordinary implementation depends on it.
+
+Do not preserve all old planning material mechanically. Classify existing research as applicable:
+
+```text
+retain        = evidence remains useful to future planning
+revalidate    = evidence is relevant but its freshness/assumptions are now doubtful
+promote       = implementation-affecting conclusion belongs in project authority
+supersede     = old evidence remains useful but is no longer current
+remove        = no durable planning value remains
+legacy-guide  = copied guide methodology, not project research
+```
+
+Copied setup/engineering guides under `docs/research/` remain legacy guide leakage and should not be reclassified as durable project research merely because the directory now has a defined research role.
+
+Do not create `docs/research/` simply to satisfy guide-system 0.8. Activate research only when durable planning evidence exists.
+
+When research volume makes discovery difficult, a repository may maintain a compact non-authoritative `docs/RESEARCH.md` index. Do not duplicate findings or project authority into the index.
+
+Ordinary implementation must remain executable from ready milestones and project authority without loading the research corpus.
+
 ## Product repository changes
 
 As applicable:
@@ -165,9 +203,12 @@ As applicable:
 6. add/refine project-local specialization authority for concrete external runtimes/services;
 7. define semantic component/surface IDs in normal project authority when scoped profiles require them;
 8. resolve material profile conflicts in project-local authority;
-9. update milestone templates/current draft milestones to carry validation target/locus requirements;
-10. remove project-type guide references;
-11. do not copy `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, or other guide files into the product repository.
+9. classify existing `docs/research/` content according to the 0.8 research model;
+10. promote any operative rules that currently exist only in research/notes into project authority;
+11. retain/revalidate/supersede/remove research according to continuing planning value rather than archival instinct;
+12. update milestone templates/current draft milestones to carry validation target/locus requirements;
+13. remove project-type guide references;
+14. do not copy `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, `meta/RESEARCH-MODEL.md`, or other guide files into the product repository.
 
 ## Mixed package-suite example
 
@@ -182,6 +223,26 @@ source-generator     [component: generator-packages]
 The project repository defines what `generator-packages` means in normal architecture/engineering authority.
 
 The generator components receive both applicable `.NET library` obligations and source-generator obligations. Neither profile overrides the other.
+
+## Research migration example
+
+A repository may currently contain:
+
+```text
+docs/research/runtime-investigation.md
+```
+
+If that file establishes both evidence and a project rule such as "integration validation must use runtime X", migrate to:
+
+```text
+docs/research/runtime-investigation.md
+  -> retain concise evidence/provenance if still useful
+
+docs/ENGINEERING.md or docs/engineering/<topic>.md
+  -> state the operative validation target/locus rule
+```
+
+A later implementation milestone references the engineering authority, not the research file, unless it separately needs the research as evidence.
 
 ## Windows-local / GitHub-publication example
 
@@ -212,8 +273,11 @@ Review:
 - any mixed repository where selected profiles currently appear to apply to every component by accident;
 - any profile ordering used as implicit precedence;
 - any external-runtime test suite whose authoritative target or fallback behavior is implicit;
-- any test policy that creates unit tests only because of a generic test-pyramid assumption.
+- any test policy that creates unit tests only because of a generic test-pyramid assumption;
+- any `docs/research/` file used as de-facto implementation authority;
+- any copied guide document under `docs/research/` that could be mistaken for project research;
+- any large research corpus that ordinary planning currently loads indiscriminately.
 
 ## Completion
 
-Migration is complete when project-local authority contains the concrete rules implementation needs, profile selection remains broad/reusable with explicit applicability where necessary, profile conflicts are resolved explicitly, and validation obligations no longer infer execution location from validation depth.
+Migration is complete when project-local authority contains the concrete rules implementation needs, profile selection remains broad/reusable with explicit applicability where necessary, profile conflicts are resolved explicitly, validation obligations no longer infer execution location from validation depth, retained research is clearly non-authoritative and useful to future planning, and ordinary implementation does not depend on planning research to recover project rules.
