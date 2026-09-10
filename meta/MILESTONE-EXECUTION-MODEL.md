@@ -24,7 +24,7 @@ If implementation discovers an unresolved decision that could materially alter a
 
 ## Planning phase
 
-Planning reduces uncertainty. It should inspect enough repository truth to make the milestone safe to execute, but it should not predict implementation mechanics that the executor can derive reliably from the live repository.
+Planning reduces uncertainty. It should inspect enough repository truth and relevant planning knowledge to make the milestone safe to execute, but it should not predict implementation mechanics that the executor can derive reliably from the live repository.
 
 A ready milestone defines, as applicable:
 
@@ -43,11 +43,32 @@ A ready milestone defines, as applicable:
 
 Planning may create or update project-truth documents when a decision must become durable authority before implementation. This includes project-local specialization for concrete external runtimes, services, platforms, test environments, packaging boundaries, or domain architecture when generic guide guidance is insufficient.
 
+Planning may also inspect, create, revalidate, supersede, or remove non-authoritative research according to `meta/RESEARCH-MODEL.md`.
+
+Research preserves reusable evidence and investigation context, not operative project rules. Every research-derived conclusion required by ordinary implementation must be promoted into the ready milestone or referenced project authority before the milestone becomes `ready`.
+
 Detailed file lists, class designs, edit sequences, and speculative implementation steps are not required unless they are themselves part of the architectural or compatibility contract.
 
 If a milestone uses focus areas, workstreams, or similar decomposition, those describe expected concentration of work. They are not an exhaustive edit allowlist unless the milestone explicitly makes them contractual.
 
 Planning must structure acceptance criteria and completion obligations clearly enough that implementation can map them to concrete execution work and evidence. Planning does not pre-author the executor's local task list.
+
+## Research and diagnostic work
+
+If a material planning decision cannot be resolved from current project authority and existing current evidence, planning may perform research directly or define a focused diagnostic/investigation milestone whose target state is the required evidence.
+
+Durable research is justified only when the evidence is useful to future planning and would be expensive, unreliable, or wasteful to rediscover.
+
+A diagnostic/investigation milestone should define the question, evidence to obtain, relevant environment/version constraints, and observable completion condition without pre-deciding the result.
+
+After the evidence exists, planning should:
+
+1. persist reusable research when justified;
+2. re-evaluate the material decision;
+3. promote any implementation-affecting conclusion into project authority;
+4. create or revise the actual implementation milestone.
+
+The guide does not define a generic persistent planning ledger. Research stores reusable evidence; ready milestones and project authority store resolved decisions; conversational scratch reasoning remains disposable.
 
 ## Baseline implementation model and `ready` boundary
 
@@ -75,6 +96,8 @@ A milestone is baseline-executable when the configured baseline implementation m
 - project-level invariants.
 
 Planning owns the reasoning needed to reach that state.
+
+The implementation contract must remain complete without requiring the executor to reconstruct planning decisions from `docs/research/`, planning chat history, or guide metadata.
 
 Do not compensate for incomplete planning by selecting a `strong`, `frontier`, or similar stronger implementation tier. Such capability tiers are not part of the generic execution model.
 
@@ -125,6 +148,7 @@ The executor:
 - starts with the milestone and explicitly required project authority;
 - inspects the live source and tests needed for the change;
 - may inspect additional repository-local material needed to implement or prove a milestone obligation;
+- treats `docs/research/` as non-authoritative and reads it only when explicitly relevant to an investigation/evidence obligation or referenced evidence;
 - derives concrete execution work packages and implementation mechanics;
 - creates or reconciles persistent execution coverage/progress state for AI-executed milestones;
 - follows established repository patterns where the milestone leaves implementation freedom;
@@ -136,7 +160,9 @@ The executor:
 - performs a mandatory completion audit;
 - continues working while any unsatisfied milestone obligation is agent-resolvable.
 
-The executor does not need the planning conversation, external guide repository, rejected alternatives, or planning-agent scratch work.
+The executor does not need the planning conversation, external guide repository, rejected alternatives, planning-agent scratch work, or research corpus to recover the project contract.
+
+Ordinary implementation should not create research merely to record reasoning or discoveries. When a milestone explicitly assigns investigation/evidence preservation, the executor may create or update research, but research cannot amend project authority. Material decisions exposed by the evidence return to planning.
 
 The instruction to remain within milestone scope forbids unrelated expansion. It does not forbid supporting edits necessary to satisfy the milestone goal, target state, acceptance criteria, validation, documentation, artifact, migration, cleanup, or review obligations.
 
@@ -241,6 +267,7 @@ After final reconciliation and required validation, the executor audits all appl
 - required validation targets, loci, and evidence;
 - required artifacts or generated outputs;
 - direct documentation obligations;
+- explicitly required research/evidence artifacts when investigation is part of the milestone;
 - required migrations, cleanup, or compatibility work;
 - human-review gates;
 - constraints and invariants;
@@ -326,6 +353,7 @@ Workflow type describes the kind of work being planned. It is separate from life
 Examples include:
 
 - ordinary product or library milestone work;
+- diagnostic/investigation work;
 - engineering migration;
 - documentation synchronization;
 - release readiness.
@@ -366,6 +394,7 @@ Possible gates include:
 - release/consumer validation;
 - required artifact production;
 - direct documentation obligations;
+- explicitly assigned research/evidence production for investigation milestones;
 - human review of milestone evidence.
 
 These gates may run locally, in CI, against remote services, or through a mixed topology according to project authority.
