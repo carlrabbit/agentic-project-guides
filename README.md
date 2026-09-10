@@ -56,7 +56,11 @@ investigation/evidence
 
 Research is not project authority. Ordinary implementation must remain executable from the ready milestone and referenced project authority without reconstructing planning decisions from research.
 
-See `meta/RESEARCH-MODEL.md` and `templates/research/research-template.md`.
+Projects that predate the research model may optionally adopt historical planning knowledge from surviving chats, files, experiments, or other evidence. The adoption mode is `none`, `selective`, or `reconstructive`; it is chosen from expected planning value and evidence quality rather than mechanically from maturity.
+
+Historical research completeness is independent of guide-system compliance. Missing historical material does not block migration to 0.8. Substantial reconstruction can be performed later through `templates/prompts/special/adopt-research.md`.
+
+See `meta/RESEARCH-MODEL.md`, `templates/research/research-template.md`, and `templates/prompts/special/adopt-research.md`.
 
 ### Validation model
 
