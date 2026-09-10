@@ -18,7 +18,7 @@ Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
 Use the guide system only for planning, migration, documentation synchronization, and release readiness.
 
-Target repository documentation must contain project truth only.
+Target repository documentation must contain project truth only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
 Profiles describe broad reusable engineering shapes. Do not invent a central-style project type or feature-tag profile for operating system, local/CI execution, integration-first testing, a packaging mechanism, a named external product/service, or one concrete product architecture.
 
@@ -74,6 +74,20 @@ Add specs, architecture docs, decisions, public docs, or focused engineering/spe
 
 Do not include copied guide documents.
 
+## Research initialization
+
+Do not create `docs/RESEARCH.md`, `docs/research/`, placeholder research files, or copied research templates merely because the guide system defines a research model.
+
+During project initialization, use `meta/RESEARCH-MODEL.md` when bootstrap planning itself requires non-trivial investigation.
+
+Persist research only when the evidence would materially help future planning and would be expensive, unreliable, or wasteful to rediscover. Typical bootstrap examples may include external runtime feasibility, compatibility probes, or evidence behind an architectural choice.
+
+If research produces a conclusion required by the initialization milestone or later implementation, promote that conclusion into normal project authority before handoff. The implementation agent must not need research to reconstruct the operative rule.
+
+Create a compact `docs/RESEARCH.md` index only when enough durable research exists to make discovery useful. Do not create an empty index as scaffolding.
+
+This prompt intentionally does not prescribe a larger research bootstrap policy beyond these invariants; project creation should remain minimal unless real planning knowledge exists.
+
 ## Validation and specialization
 
 If correctness depends on an external runtime, installed application, service, real database, browser, native subsystem, or other concrete integration target, initialize enough project authority to make its validation contract explicit before implementation depends on it.
@@ -96,7 +110,7 @@ If the project intentionally uses integration-first testing, record that policy 
 
 There is no direct synchronization between the planning AI and implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context or reading the external guide repository.
+Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context, reading the external guide repository, or depending on non-authoritative research for project rules.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
 
@@ -104,7 +118,7 @@ Also generate a concise execution prompt in chat for the later implementation ag
 
 Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, or research scaffolding without durable evidence.
 
 After creating the ZIP, respond with:
 
@@ -112,5 +126,6 @@ After creating the ZIP, respond with:
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
-5. a filled execution prompt for the later implementation agent;
-6. documentation-sync hints and the `.guide-sync/pending/` files created.
+5. durable research created during initialization, if any, and which conclusions were promoted into project authority;
+6. a filled execution prompt for the later implementation agent;
+7. documentation-sync hints and the `.guide-sync/pending/` files created.
