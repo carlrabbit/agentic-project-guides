@@ -6,20 +6,22 @@ This repository contains a versioned guide system for creating and maintaining A
 
 The guide system is intentionally separate from product repositories.
 
-Product repositories contain localized project truth and concrete project specializations. Planning, migration, documentation synchronization, and guide authoring may use this guide repository. Ordinary implementation agents work from localized repository authority documents and implementation-ready milestones.
+Product repositories contain localized project truth and concrete project specializations. They may also retain selective non-authoritative research for future planning. Planning, migration, documentation synchronization, and guide authoring may use this guide repository. Ordinary implementation agents work from localized repository authority documents and implementation-ready milestones.
 
 ## Core rule
 
 ```text
 Guides live here.
 Projects contain project truth and concrete specializations.
+Projects may retain selective non-authoritative planning research.
 Profiles describe broad reusable engineering shapes, not feature tags.
 Multiple profiles compose additively and may have explicit semantic applicability scopes.
 Validation depth is independent of target and execution locus.
 Milestones are planned before they are implemented.
 Planning resolves uncertainty and produces a ready milestone.
-Planning may compress analysis but must preserve resolved material decisions.
-A ready milestone must be executable by the project's baseline implementation model.
+Planning may preserve reusable evidence without preserving the planning conversation.
+Planning promotes implementation-affecting research conclusions into project authority.
+A ready milestone must be executable by the project's baseline implementation model without research reconstruction.
 Implementation begins by decomposing the ready milestone into bounded execution work packages.
 AI executors persist coverage and progress in a repository-local execution ledger.
 Implementation derives concrete edits from the live repository and the ready milestone.
@@ -32,7 +34,29 @@ Human review gates milestone completion when automation cannot decide acceptance
 
 ## Version 0.8.0
 
-Version 0.8.0 makes project specialization, scoped profile composition, and integration-first/local-first validation first-class without expanding the central guide into a catalog of concrete project types.
+Version 0.8.0 makes project specialization, scoped profile composition, planning research, and integration-first/local-first validation first-class without expanding the central guide into a catalog of concrete project types.
+
+### Planning research
+
+Planning often needs more evidence and investigation context than should become implementation context or durable project authority.
+
+0.8 defines `docs/research/` as an optional non-authoritative planning-knowledge layer.
+
+Use it to preserve evidence that would be materially useful to future planning and expensive, unreliable, or wasteful to rediscover, such as external documentation findings, experiments, compatibility probes, historical reconstruction, comparisons, uncertainty, and revalidation triggers.
+
+The generic flow is:
+
+```text
+investigation/evidence
+  -> durable research when justified
+  -> planning conclusion
+  -> project authority when implementation depends on the conclusion
+  -> implementation
+```
+
+Research is not project authority. Ordinary implementation must remain executable from the ready milestone and referenced project authority without reconstructing planning decisions from research.
+
+See `meta/RESEARCH-MODEL.md` and `templates/research/research-template.md`.
 
 ### Validation model
 
@@ -105,7 +129,9 @@ Consumer-surface validation from v0.7.4 remains in force: a packed NuGet package
 
 ### Planning-to-implementation boundary
 
-The v0.7.5 decision-preservation model remains in force.
+The v0.7.5 decision-preservation model remains in force and is extended by the research model.
+
+Planning may retain useful evidence, but a ready milestone must not depend on the implementation agent reconstructing the decision from that evidence.
 
 When correctness depends on a concrete external runtime/service/environment, planning must ensure that the target, execution locus, capability constraints, invocation/evidence policy, and any required project-local specialization are durable before a milestone becomes `ready`.
 
