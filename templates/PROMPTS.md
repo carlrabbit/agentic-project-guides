@@ -69,6 +69,9 @@ Special prompts exist only where the work has materially different authority, sc
 | Plan documentation synchronization | `templates/prompts/special/plan-documentation-sync.md` |
 | Plan release readiness | `templates/prompts/special/plan-release-readiness.md` |
 | Perform a documentation synchronization pass | `templates/prompts/special/documentation-sync-pass.md` |
+| Adopt historical planning research into curated project-local planning knowledge | `templates/prompts/special/adopt-research.md` |
+
+`adopt-research.md` is a planning/research workflow rather than ordinary implementation. It may be invoked independently or from a guide adoption/update when historical planning knowledge is worth recovering. Research adoption does not need to reconstruct complete history and does not make ordinary implementation depend on research.
 
 Ready milestones produced by special planning still use `templates/prompts/execute-milestone.md` unless the special prompt explicitly defines a non-implementation workflow.
 
