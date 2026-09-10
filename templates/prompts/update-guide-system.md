@@ -86,7 +86,29 @@ When a target migration introduces or changes a non-authoritative research/plann
 - promote any implementation-affecting conclusion into ordinary project authority when required by the target model;
 - ensure ordinary implementation does not need research to reconstruct the migrated project contract.
 
-This prompt intentionally delegates exact research migration behavior to the applicable version migration documents so future guide versions can evolve the model without being constrained by hard-coded 0.8 rules here.
+## Optional transition capabilities
+
+Some migration steps may introduce a reusable capability whose historical adoption is useful but not required for guide-system compliance.
+
+Follow the migration document that introduces the capability. Keep its adoption decision separate from required migration changes.
+
+For a transition that introduces historical research adoption, such as crossing from a pre-0.8 guide model into 0.8, evaluate the migration-defined mode:
+
+```text
+none
+selective
+reconstructive
+```
+
+Do not infer `reconstructive` merely because historical chats/files exist or because the project has a particular maturity stage.
+
+A bounded optional adoption may be included when it is cheap and useful. If substantial reconstruction would dominate or delay the guide update, route it to `templates/prompts/special/adopt-research.md` and allow the guide migration to complete independently unless the migration document explicitly makes a recovered conclusion necessary for correctness.
+
+Unavailable historical evidence must not be fabricated and does not by itself block guide migration.
+
+Do not persist a historical adoption mode in `.guide-profile.json` unless a future migration explicitly changes the coordination schema to require such state.
+
+This prompt intentionally delegates exact optional-transition behavior to the applicable version migration documents so future guide versions can evolve without being constrained by hard-coded 0.8 semantics.
 
 ## Required output
 
@@ -99,6 +121,7 @@ The milestone must include:
 - applicable profiles and applicability scopes when required by the target model;
 - execution mode;
 - required, conditional, deprecated, manual-review, and no-op changes;
+- optional transition-capability decisions required by the migration chain;
 - authority documents;
 - likely affected files;
 - validation depth/tiers, targets/loci when required, and concrete commands;
@@ -182,7 +205,8 @@ After creating the ZIP, respond with:
 6. documentation-sync hints and the `.guide-sync/pending/` files created;
 7. required human-review items and evidence expectations;
 8. constrained-execution or resumable-validation instructions, if applicable;
-9. research/planning-knowledge migration actions, if applicable.
+9. research/planning-knowledge migration actions, if applicable;
+10. optional transition-capability decisions and any deferred dedicated workflow, if applicable.
 
 ## Quality bar
 
@@ -193,6 +217,7 @@ The package is acceptable only if:
 - the later implementation agent does not need to read the external guide repository;
 - the later implementation agent does not need to reconstruct project rules from planning research;
 - each guide-version transition follows its applicable migration contract rather than an ahistorical latest-model assumption;
+- optional historical reconstruction is not confused with required guide compliance;
 - validation expectations are concrete for the target model;
 - direct documentation updates are separated from deferred synchronization;
 - provider and consumer responsibilities are not blurred;
@@ -201,5 +226,6 @@ The package is acceptable only if:
 - aggregate success is never inferred from partial output;
 - copied guide material is not mistaken for current project authority or durable project research;
 - genuine research/evidence is not deleted or promoted mechanically without applying the relevant migration semantics;
+- unavailable historical evidence is reported rather than fabricated;
 - no TBP or issue-template dependency is introduced;
 - the later implementation agent does not need to reconstruct planning context.
