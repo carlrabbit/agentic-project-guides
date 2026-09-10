@@ -53,7 +53,8 @@ Use this prompt when the target repository has one or more of:
 - old central project-type references;
 - validation rules that equate integration depth with PR/CI execution;
 - mixed repository shapes whose profile applicability is currently implicit;
-- research/notes that may contain useful planning evidence or de-facto implementation rules.
+- research/notes that may contain useful planning evidence or de-facto implementation rules;
+- surviving historical planning chats, documents, experiments, or other evidence that may be worth adopting as durable planning knowledge.
 
 ## Repository inspection
 
@@ -75,6 +76,36 @@ Usually read:
 If `docs/RESEARCH.md` exists, inspect it as a non-authoritative discovery surface and open only research subjects relevant to the migration decisions being made.
 
 Treat genuine project research as non-authoritative planning knowledge. Treat old copied guides as legacy/non-authoritative guide leakage; do not reclassify them as project research merely because they are stored under `docs/research/`.
+
+## Research-adoption decision
+
+When the target guide version defines a research model, explicitly evaluate whether historical planning knowledge should be adopted.
+
+Available source material may include repository-local notes/research and any previous chats, uploaded documents, experiments, prototypes, issue/PR history, or external references actually available to the planning task.
+
+Choose one research-adoption mode for the current adoption scope:
+
+```text
+none
+selective
+reconstructive
+```
+
+Use `meta/RESEARCH-MODEL.md` as the authority for the decision surface. Consider evidence availability/quality, rediscovery cost, future planning value, project maturity and expected change, importance of unusual/fragile constraints, revalidation cost, and how much current project authority already preserves.
+
+Do not map maturity mechanically to a mode.
+
+`none` is valid. Historical material may be unavailable or not worth curating. Do not fabricate missing evidence and do not block guide adoption merely because planning history cannot be reconstructed.
+
+`selective` recovers only bounded high-value findings/evidence.
+
+`reconstructive` deliberately establishes a broader useful planning-knowledge baseline from surviving evidence; it is still curated research rather than conversation archival.
+
+Historical chats/files are source material. Do not copy them wholesale into `docs/research/`. Extract durable evidence/findings, preserve provenance/uncertainty, revalidate where material, and promote operative project rules into normal project authority.
+
+A bounded selective adoption may be included in this workflow. If reconstructive adoption would materially expand or delay guide adoption, prefer `templates/prompts/special/adopt-research.md` as a separate planning/research workflow. Guide adoption may complete independently unless a recovered conclusion is actually required to establish the current project contract correctly.
+
+Do not persist the selected adoption mode in `.guide-profile.json`.
 
 ## 0.8 profile composition, specialization, research, and validation review
 
@@ -125,6 +156,8 @@ Classify migration work as:
 
 When research is present, classify its treatment separately enough to distinguish retained evidence from promoted project authority and legacy copied-guide cleanup.
 
+Record the historical research-adoption decision (`none`, `selective`, or `reconstructive`) in the adoption work when the target model defines that capability. Treat it separately from required guide-system compliance.
+
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
@@ -145,6 +178,7 @@ After creating the ZIP, respond with:
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
-5. research retained/revalidated/promoted/superseded/removed when material;
-6. a filled execution prompt for the later implementation agent;
-7. documentation-sync hints and the `.guide-sync/pending/` files created.
+5. research-adoption mode, source material actually available, and research retained/revalidated/promoted/superseded/removed when material;
+6. deferred reconstructive research-adoption work, if any;
+7. a filled execution prompt for the later implementation agent;
+8. documentation-sync hints and the `.guide-sync/pending/` files created.
