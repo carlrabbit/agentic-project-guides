@@ -12,6 +12,8 @@ AGENTS.md
 docs/ENGINEERING.md
 ```
 
-Add other docs only when selected profiles, maturity stage, repository role, or concrete project authority needs require them.
+Add other project-authority docs only when selected profiles, maturity stage, repository role, or concrete project authority needs require them.
 
-Product repositories contain localized project truth and concrete specializations. Do not copy guide documents into product repositories as active documentation.
+Add `docs/research/` and an optional `docs/RESEARCH.md` discovery surface only when durable planning evidence actually exists and is materially useful to future planning. Do not create research scaffolding by default.
+
+Product repositories contain localized project truth and concrete specializations, and may retain selective non-authoritative planning research. Do not copy guide documents into product repositories as active documentation or research.
