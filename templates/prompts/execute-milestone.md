@@ -28,6 +28,10 @@ Do not require the planning conversation or planning-agent scratch work.
 
 Do not treat old copied setup or engineering guides as authority.
 
+Treat `docs/research/` and `docs/RESEARCH.md` as non-authoritative planning knowledge. Do not read research merely to reconstruct an operative project rule that should have been provided by the ready milestone or project authority.
+
+Read a research artifact only when the milestone explicitly requires investigation/evidence work, references it as non-authoritative evidence, or the artifact is genuinely necessary to verify an explicit milestone obligation. Research findings never override the ready milestone or project authority.
+
 Do not read `.guide-profile.json`, `.guide-sync/`, or `.review/` unless the milestone requires them or they are necessary to satisfy or verify an explicit milestone obligation.
 
 If `.execution/<milestone-id>.md` already exists for the active milestone, read it after the primary milestone. Treat it as operational progress state only, never as authority.
@@ -51,6 +55,8 @@ Do not introduce unrelated product scope.
 Treat the ready milestone's decisions, constraints, non-goals, authority, acceptance criteria, validation policy/topology, project-local specializations, and human-review policy as resolved.
 
 Do not silently reopen or broaden them.
+
+Non-authoritative research, experiments, comments, or newly discovered evidence do not silently amend the project contract.
 
 If implementation reveals a material unresolved decision that could change architecture, semantics, compatibility, scope, acceptance criteria, validation policy/target/locus, or a required project specialization:
 
@@ -124,6 +130,8 @@ Perform all implementation and supporting work required to satisfy the milestone
 Do not perform unrelated product expansion or broad cleanup merely because nearby work is visible.
 
 Do not perform broad documentation synchronization unless it is part of the milestone. Update direct documentation when required by the milestone, when implementation would otherwise contradict project authority, or when documentation itself is an acceptance or completion obligation.
+
+Do not create or expand `docs/research/` during ordinary implementation merely to record reasoning or discoveries. Create/update research only when the ready milestone explicitly assigns investigation/evidence preservation. If new evidence requires a material project decision, return it to planning rather than encoding the decision as research.
 
 Use canonical repository commands from `eng/` when present.
 
@@ -229,6 +237,7 @@ Check the milestone against all applicable obligations, including:
 - all required validation targets/loci, commands, and evidence;
 - required artifacts or generated outputs;
 - direct documentation obligations;
+- explicitly required research/evidence artifacts when investigation is part of the milestone;
 - required migrations, cleanup, or compatibility work;
 - human-review gates;
 - constraints and invariants;
@@ -326,6 +335,7 @@ Then report:
 - missing target/locus evidence when blocked;
 - resumable shard and verifier results, if applicable;
 - direct documentation changes;
+- explicitly required research/evidence artifacts created or updated, if any;
 - required artifacts produced;
 - `.guide-sync/pending/` hints created or updated, if explicitly required;
 - human-review requests owned by this milestone;
