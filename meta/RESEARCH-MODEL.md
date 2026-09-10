@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for persistent planning knowledge, research lifecycle, promotion into project authority, and the planning/implementation research boundary.
+Authoritative for persistent planning knowledge, research lifecycle, historical research adoption, promotion into project authority, and the planning/implementation research boundary.
 
 ## Purpose
 
@@ -163,6 +163,88 @@ question
 A research artifact may be marked `current`, `needs-revalidation`, or `superseded` when an explicit status is useful. Do not require status machinery for trivial research.
 
 Delete research when its evidence is no longer useful to future planning and all durable project conclusions have been promoted. Mark it superseded rather than deleting only when the old evidence still has concrete planning/historical value.
+
+## Historical research adoption
+
+A project may have valuable planning knowledge that predates this research model or was never captured under it.
+
+Possible historical source material includes:
+
+- previous planning chats or exported conversations;
+- uploaded documents and personal/project notes;
+- prototypes, experiments, benchmarks, or retained evidence artifacts;
+- issues, pull requests, commit history, or historical repository state;
+- external references retained from earlier investigation;
+- existing research folders created without a defined methodology.
+
+Historical material is input evidence. It is not copied wholesale into `docs/research/` and does not become project authority merely because it influenced earlier planning.
+
+The adoption flow is:
+
+```text
+historical material
+  -> extract candidate durable evidence/findings
+  -> assess provenance and freshness
+  -> revalidate where materially necessary
+  -> persist bounded research when future value justifies it
+  -> promote missing operative conclusions into project authority
+```
+
+Research adoption may happen while introducing/upgrading the guide system or independently later when useful historical material becomes available.
+
+### Adoption modes
+
+Choose one mode for the current adoption scope:
+
+```text
+none
+selective
+reconstructive
+```
+
+`none` means historical planning knowledge is not reconstructed. Use it when evidence is unavailable or weak, rediscovery is cheap, future planning value is low, or the project is sufficiently settled that recovery would not justify the cost.
+
+`selective` means recover only bounded high-value evidence/findings. This is normally appropriate when a few historical subjects contain costly, unusual, fragile, or likely-to-recur planning knowledge.
+
+`reconstructive` means deliberately establish a broader useful planning-knowledge baseline from surviving historical evidence. It is not exhaustive transcript archival and must still discard conversational sequencing, generic brainstorming, and low-value material.
+
+The selected mode is a planning/workflow decision, not stable project configuration. Do not add it to `.guide-profile.json` merely to record that an adoption occurred.
+
+### Adoption decision surface
+
+Determine the mode from the evidence and expected planning value rather than from a mechanical maturity rule.
+
+Consider, as applicable:
+
+- availability of historical evidence;
+- evidence quality and provenance;
+- cost or unreliability of rediscovery;
+- expected future planning value;
+- project maturity;
+- expected rate of future change;
+- importance of unusual, fragile, external, or poorly documented constraints;
+- cost and feasibility of revalidation;
+- whether current project authority already preserves the operative conclusion adequately.
+
+Maturity is one input, not a mapping. A mature system with obscure external constraints may justify reconstruction; an early project with little reusable evidence may justify none.
+
+### Adoption completeness
+
+Historical completeness is not the goal.
+
+Missing historical chats, notes, or artifacts must not be fabricated and normally do not block guide adoption/version migration.
+
+Keep these concepts distinct:
+
+```text
+guide-system compliance
+research-adoption completeness
+historical evidence availability
+```
+
+A project may be fully migrated to a guide version that defines research while having no recovered historical research.
+
+A small/selective research adoption may be embedded in a project-creation, guide-adoption, or version-migration workflow. If reconstructive adoption is substantial, prefer the dedicated `templates/prompts/special/adopt-research.md` workflow so guide compliance does not depend on broad historical reconstruction.
 
 ## Retrieval and planning context
 
