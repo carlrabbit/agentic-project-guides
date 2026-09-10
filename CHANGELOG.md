@@ -2,20 +2,24 @@
 
 ## 0.8.0
 
-Migration required: recommended for repositories using integration validation, concrete project-type guidance, external/runtime-bound validation, or integration-first testing; otherwise metadata/template review may be sufficient.
+Migration required: recommended for repositories using integration validation, concrete project-type guidance, mixed/scoped profiles, external/runtime-bound validation, integration-first testing, or durable planning research; otherwise metadata/template review may be sufficient.
 
 Affected areas:
 
 - validation model and tier terminology;
 - validation targets and execution loci;
 - integration-ready maturity semantics;
-- profile model;
+- profile model and scoped profile composition;
+- guide-profile schema version 2;
+- reusable source-generator profile;
 - project-local specialization;
+- planning research and durable evidence;
+- planning/implementation context boundary;
 - .NET library test-strategy guidance;
 - milestone planning/template semantics;
+- bootstrap/adoption/version-migration prompts;
 - platform-support guidance;
-- concrete `project-types/` layer;
-- guide-profile version metadata.
+- concrete `project-types/` layer.
 
 ### Changed — validation topology
 
@@ -58,6 +62,56 @@ Profiles are broad reusable engineering shapes, not feature tags.
 Do not create profiles merely for operating system, local/CI execution, integration-first testing, one packaging mechanism, one named external product/service, or one concrete project architecture.
 
 `meta/SPECIALIZATION-MODEL.md` defines project-local specialization: the guide system defines reusable decision surfaces; product repositories contain the concrete answers needed by implementation.
+
+### Added — scoped profile composition
+
+Repositories may combine a small number of profiles when multiple broad engineering shapes genuinely apply.
+
+Profile applicability may be repository-wide, component-scoped, or surface-scoped. Applicable obligations compose additively; profile order has no semantic meaning and no profile silently overrides another.
+
+Material conflicts between applicable profiles must be resolved into project-local authority before implementation.
+
+`.guide-profile.json` schema version 2 records semantic profile scopes for planning/traceability. Component and surface IDs are project-defined semantic identifiers whose meaning comes from ordinary project authority rather than path globs in metadata.
+
+### Added — source-generator profile
+
+0.8 adds a reusable `source-generator` profile for Roslyn source-generator/analyzer-style compile-time surfaces.
+
+It may compose with `dotnet-library`, including in mixed package suites where only selected generator components/surfaces receive the additional source-generator obligations.
+
+Concrete compiler/MSBuild compatibility, generated-source, diagnostic, packaging, and version-alignment rules remain project-local where project-specific.
+
+### Added — planning research and durable evidence
+
+`meta/RESEARCH-MODEL.md` makes research a first-class non-authoritative planning-knowledge layer.
+
+The generic flow is:
+
+```text
+investigation/evidence
+  -> durable research when future planning value justifies retention
+  -> planning conclusion
+  -> project authority when implementation depends on the conclusion
+  -> implementation
+```
+
+Research may preserve external documentation findings, experiments, compatibility probes, historical reconstruction, comparisons, uncertainty, provenance, and revalidation triggers.
+
+Research must not become shadow project authority. Implementation-affecting conclusions must be promoted into ordinary project authority before a ready milestone depends on them.
+
+Planning should load research selectively. Ordinary implementation must remain executable from the ready milestone and referenced project authority without reconstructing decisions from the research corpus.
+
+A lightweight `templates/research/research-template.md` is provided for durable investigations. Projects should not create empty research folders, indexes, or placeholder artifacts merely because the guide supports research.
+
+Existing `docs/research/` content should be classified rather than blindly retained or deleted: useful evidence may be retained/revalidated/superseded, operative rules should be promoted, obsolete notes may be removed, and copied guide documents remain legacy guide leakage rather than project research.
+
+### Changed — bootstrap and migration handling
+
+`new-project.md` uses research only when bootstrap investigation produces evidence worth retaining; it does not create research scaffolding by default.
+
+`adopt-guide-system.md` distinguishes genuine project research from copied legacy guide material and promotes any de-facto project rules before implementation handoff.
+
+`update-guide-system.md` derives research migration semantics from the applicable version-to-version migration chain rather than hard-coding 0.8 behavior into future guide updates.
 
 ### Removed — concrete project-type catalog
 
