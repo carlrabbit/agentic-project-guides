@@ -65,6 +65,24 @@ Planning should load relevant research selectively rather than reading the compl
 
 Ordinary implementation agents should not require research to reconstruct planning decisions. An implementation or diagnostic milestone may explicitly inspect or produce research when investigation itself is part of the assigned work, but any material new decision still returns to planning.
 
+### Historical research adoption
+
+Projects may have valuable planning knowledge that predates the repository, predates the guide-system research model, or remained only in chats/files outside repository authority.
+
+Historical material can be adopted using one of three planning modes:
+
+```text
+none
+selective
+reconstructive
+```
+
+The mode is chosen from evidence availability/quality, rediscovery cost, expected future planning value, maturity and expected change, unusual/fragile constraints, and revalidation cost. It is not mechanically derived from maturity and is not persistent `.guide-profile.json` configuration.
+
+Historical chats/files are source material, not research artifacts. Curate durable evidence/findings, preserve provenance and uncertainty, revalidate where material, and promote operative conclusions into project authority.
+
+Guide-system compliance is independent from historical research completeness. Missing historical evidence does not block adoption or migration. Substantial reconstruction should use `templates/prompts/special/adopt-research.md` and may occur later when material becomes available.
+
 See `meta/RESEARCH-MODEL.md`.
 
 ## Guide composition principle
@@ -150,7 +168,7 @@ Planning owns decisions that materially affect:
 - conflicts between applicable profile obligations;
 - required project-local specializations.
 
-Planning also decides whether investigation evidence should be persisted for future planning, revalidated, promoted into authority, superseded, or deleted according to `meta/RESEARCH-MODEL.md`.
+Planning also decides whether investigation evidence should be persisted for future planning, revalidated, promoted into authority, superseded, deleted, or adopted from historical material according to `meta/RESEARCH-MODEL.md`.
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
 
