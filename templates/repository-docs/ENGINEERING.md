@@ -44,6 +44,16 @@ Resolve as applicable:
 
 Use a focused `docs/engineering/<topic>.md`, spec, architecture document, or decision record when this becomes too detailed for this file. Do not copy the external guide's specialization model into the repository.
 
+## Research boundary
+
+If the repository uses `docs/research/`, treat it as non-authoritative planning knowledge.
+
+Research may preserve evidence, experiments, provenance, uncertainty, comparisons, and revalidation triggers. Operative engineering rules must live here or in another appropriate project-authority document.
+
+Ordinary implementation must not need to infer an engineering rule from research. If a planning conclusion changes implementation, validation, compatibility, supported environments, or another durable engineering contract, promote that conclusion into project authority before implementation depends on it.
+
+Do not use research as an archive for planning transcripts or copied guide methodology.
+
 ## Human review commands
 
 When the human-review module is active, expose the repository's supported launcher(s). Example bash surface:
