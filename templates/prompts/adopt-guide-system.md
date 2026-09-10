@@ -10,7 +10,7 @@ Do not copy guide documents into the target repository.
 Do not make target repository documentation reference guide documents as operational authority.
 Use the guide system only for planning, migration, documentation synchronization, and release readiness.
 
-Target repository documentation must contain project truth and concrete project specialization only.
+Target repository documentation must contain project truth and concrete project specialization only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
 If the target repository contains old copied setup or engineering guides, treat them as legacy/non-authoritative unless the repository explicitly marks them as active project documentation.
 
@@ -30,6 +30,7 @@ Read at minimum:
 - `meta/MIGRATION-MODEL.md`;
 - `meta/PROFILE-MODEL.md`;
 - `meta/SPECIALIZATION-MODEL.md` when present;
+- `meta/RESEARCH-MODEL.md` when present;
 - `meta/VALIDATION-MODEL.md`;
 - `decisions/`;
 - `migrations/`;
@@ -51,7 +52,8 @@ Use this prompt when the target repository has one or more of:
 - guide documents treated as repository-local authority;
 - old central project-type references;
 - validation rules that equate integration depth with PR/CI execution;
-- mixed repository shapes whose profile applicability is currently implicit.
+- mixed repository shapes whose profile applicability is currently implicit;
+- research/notes that may contain useful planning evidence or de-facto implementation rules.
 
 ## Repository inspection
 
@@ -70,9 +72,11 @@ Usually read:
 - `docs/MILESTONES.md`;
 - relevant existing milestones and decisions.
 
-Treat old copied guides as legacy/non-authoritative unless explicitly marked otherwise.
+If `docs/RESEARCH.md` exists, inspect it as a non-authoritative discovery surface and open only research subjects relevant to the migration decisions being made.
 
-## 0.8 profile composition, specialization, and validation review
+Treat genuine project research as non-authoritative planning knowledge. Treat old copied guides as legacy/non-authoritative guide leakage; do not reclassify them as project research merely because they are stored under `docs/research/`.
+
+## 0.8 profile composition, specialization, research, and validation review
 
 When the resolved target version uses the 0.8 model or later:
 
@@ -88,7 +92,12 @@ When the resolved target version uses the 0.8 model or later:
 - separate validation depth from validation target and execution locus;
 - preserve authoritative local/runtime integration validation when CI cannot exercise the real target;
 - record external/runtime-bound validation target, locus, platform/capability, invocation/evidence, and fallback constraints when material;
-- preserve an intentional integration-first test strategy without manufacturing unit-test obligations from a generic test-pyramid assumption.
+- preserve an intentional integration-first test strategy without manufacturing unit-test obligations from a generic test-pyramid assumption;
+- classify existing planning notes/research as retain, revalidate, promote, supersede, remove, or legacy-guide where that classification is needed for migration;
+- promote implementation-affecting conclusions that exist only in research/notes into normal project authority;
+- retain research only when it continues to provide material future planning value;
+- do not create research scaffolding when no durable planning evidence exists;
+- keep ordinary implementation independent of `docs/research/` for operative project rules.
 
 ## Required output
 
@@ -98,9 +107,11 @@ Create or update `.guide-profile.json` when useful.
 
 Create or update `.guide-sync/pending/` hints for deferred documentation cleanup.
 
-Update target-repository docs only when needed to remove guide leakage, localize concrete specialization, define semantic profile scopes, resolve profile conflicts, or make the migration implementation-ready.
+Update target-repository docs only when needed to remove guide leakage, localize concrete specialization, define semantic profile scopes, resolve profile conflicts, promote research-derived project rules, preserve genuinely useful planning evidence, or make the migration implementation-ready.
 
 Do not copy external guide documents into the target repository.
+
+Do not create `docs/research/` or `docs/RESEARCH.md` merely because the target guide version supports them.
 
 ## Migration classification
 
@@ -112,11 +123,13 @@ Classify migration work as:
 - manual-review;
 - no-op.
 
+When research is present, classify its treatment separately enough to distinguish retained evidence from promoted project authority and legacy copied-guide cleanup.
+
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context or reading the external guide repository.
+Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context, reading the external guide repository, or depending on non-authoritative research for project rules.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
 
@@ -124,7 +137,7 @@ Also generate a concise execution prompt in chat for the later implementation ag
 
 Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or research scaffolding without durable evidence.
 
 After creating the ZIP, respond with:
 
@@ -132,5 +145,6 @@ After creating the ZIP, respond with:
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
-5. a filled execution prompt for the later implementation agent;
-6. documentation-sync hints and the `.guide-sync/pending/` files created.
+5. research retained/revalidated/promoted/superseded/removed when material;
+6. a filled execution prompt for the later implementation agent;
+7. documentation-sync hints and the `.guide-sync/pending/` files created.
