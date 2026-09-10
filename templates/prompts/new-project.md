@@ -86,7 +86,27 @@ If research produces a conclusion required by the initialization milestone or la
 
 Create a compact `docs/RESEARCH.md` index only when enough durable research exists to make discovery useful. Do not create an empty index as scaffolding.
 
-This prompt intentionally does not prescribe a larger research bootstrap policy beyond these invariants; project creation should remain minimal unless real planning knowledge exists.
+### Prior/pre-project research adoption
+
+A new repository may still have substantial planning history that predates repository creation, for example previous chats, uploaded documents, prototypes, experiments, or comparison work.
+
+When such material is actually available to planning, evaluate whether it contains durable evidence worth adopting into the new repository.
+
+Use the research-adoption modes from `meta/RESEARCH-MODEL.md`:
+
+```text
+none
+selective
+reconstructive
+```
+
+Do not assume that a new repository should start with reconstructive research. Choose the mode from expected future planning value, evidence quality/availability, rediscovery cost, project maturity/expected change, and revalidation cost.
+
+Historical/pre-project chats and files are source material. Do not copy them wholesale into `docs/research/`; extract bounded durable findings/evidence, preserve provenance/uncertainty, revalidate where materially necessary, and promote operative initial project decisions into normal authority.
+
+If substantial reconstructive adoption would dominate project initialization, prefer `templates/prompts/special/adopt-research.md` as a separate planning/research workflow. Repository initialization must not become blocked merely because historical research is incomplete or unavailable.
+
+Do not persist the adoption mode in `.guide-profile.json`.
 
 ## Validation and specialization
 
@@ -126,6 +146,6 @@ After creating the ZIP, respond with:
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
-5. durable research created during initialization, if any, and which conclusions were promoted into project authority;
+5. research-adoption mode when prior/pre-project material was available, durable research created during initialization, and which conclusions were promoted into project authority;
 6. a filled execution prompt for the later implementation agent;
 7. documentation-sync hints and the `.guide-sync/pending/` files created.
