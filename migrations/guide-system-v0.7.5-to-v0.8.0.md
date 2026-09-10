@@ -20,6 +20,8 @@ Recommended for repositories that:
 
 For repositories unaffected by those concepts, update guide metadata and review planning templates; no product behavior change is required.
 
+Historical research reconstruction is not required for guide-system compliance. When crossing into 0.8, evaluate it separately as described below.
+
 ## Guide-system changes
 
 ### Validation depth and execution locus
@@ -191,6 +193,54 @@ When research volume makes discovery difficult, a repository may maintain a comp
 
 Ordinary implementation must remain executable from ready milestones and project authority without loading the research corpus.
 
+### Historical research adoption when crossing into 0.8
+
+Repositories planned before 0.8 may have valuable planning knowledge outside the repository because earlier guide versions did not define a durable research methodology.
+
+Possible surviving material includes:
+
+- old planning chats or exported conversations;
+- uploaded documents or project notes;
+- experiments, prototypes, benchmarks, or retained evidence;
+- issues, pull requests, or historical repository observations;
+- external references retained from earlier research.
+
+When migrating from a pre-0.8 guide model into 0.8, explicitly evaluate a research-adoption mode:
+
+```text
+none
+selective
+reconstructive
+```
+
+Use the decision surface in `meta/RESEARCH-MODEL.md`, considering evidence availability/quality, rediscovery cost, expected future planning value, project maturity/rate of change, unusual or fragile constraints, revalidation cost, and how much current project authority already captures.
+
+Do not map maturity mechanically to a mode.
+
+`none` is a valid migration result. Missing historical chats/files do not block migration and must not be fabricated.
+
+`selective` recovers a bounded set of high-value historical findings/evidence.
+
+`reconstructive` deliberately establishes a broader useful planning-knowledge baseline from surviving material. It is still curated research, not transcript archival.
+
+Historical conversations/files are source material. Extract durable evidence/findings, assess freshness, and revalidate where material; do not copy them wholesale into `docs/research/`.
+
+Keep these outcomes independent:
+
+```text
+guide-system 0.8 migration complete
+research adoption complete/partial/not performed
+historical evidence available/unavailable
+```
+
+A small selective adoption may be included in the guide migration when it does not obscure or delay required migration work.
+
+If reconstructive adoption is substantial, prefer `templates/prompts/special/adopt-research.md` as a separate workflow. The 0.8 guide migration can complete independently unless a specific recovered conclusion is itself necessary to migrate the current project contract correctly.
+
+Research adoption may also be performed later if historical material becomes available after the repository has already moved to 0.8 or beyond.
+
+Do not persist the selected adoption mode in `.guide-profile.json`; it describes a historical planning operation, not a stable project characteristic.
+
 ## Product repository changes
 
 As applicable:
@@ -206,9 +256,11 @@ As applicable:
 9. classify existing `docs/research/` content according to the 0.8 research model;
 10. promote any operative rules that currently exist only in research/notes into project authority;
 11. retain/revalidate/supersede/remove research according to continuing planning value rather than archival instinct;
-12. update milestone templates/current draft milestones to carry validation target/locus requirements;
-13. remove project-type guide references;
-14. do not copy `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, `meta/RESEARCH-MODEL.md`, or other guide files into the product repository.
+12. record the pre-0.8 historical research-adoption decision (`none`, `selective`, or `reconstructive`) in the migration work when the decision is material;
+13. perform bounded selective recovery when chosen and appropriate, or route substantial reconstructive recovery to `templates/prompts/special/adopt-research.md`;
+14. update milestone templates/current draft milestones to carry validation target/locus requirements;
+15. remove project-type guide references;
+16. do not copy `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, `meta/RESEARCH-MODEL.md`, or other guide files into the product repository.
 
 ## Mixed package-suite example
 
@@ -244,6 +296,14 @@ docs/ENGINEERING.md or docs/engineering/<topic>.md
 
 A later implementation milestone references the engineering authority, not the research file, unless it separately needs the research as evidence.
 
+A different pre-0.8 repository may have no research directory but have valuable historical planning chats. Its migration may legitimately record:
+
+```text
+research adoption: selective
+```
+
+and extract only the few expensive-to-rediscover findings worth retaining. Another repository may record `none` and still be fully migrated to 0.8.
+
 ## Windows-local / GitHub-publication example
 
 A valid 0.8 project topology is:
@@ -276,8 +336,11 @@ Review:
 - any test policy that creates unit tests only because of a generic test-pyramid assumption;
 - any `docs/research/` file used as de-facto implementation authority;
 - any copied guide document under `docs/research/` that could be mistaken for project research;
-- any large research corpus that ordinary planning currently loads indiscriminately.
+- any large research corpus that ordinary planning currently loads indiscriminately;
+- whether surviving pre-0.8 planning material contains costly reusable evidence worth selectively or reconstructively adopting.
 
 ## Completion
 
 Migration is complete when project-local authority contains the concrete rules implementation needs, profile selection remains broad/reusable with explicit applicability where necessary, profile conflicts are resolved explicitly, validation obligations no longer infer execution location from validation depth, retained research is clearly non-authoritative and useful to future planning, and ordinary implementation does not depend on planning research to recover project rules.
+
+Historical research reconstruction is not part of the required completion condition unless the migration explicitly chose a bounded adoption as required work. A repository may complete the 0.8 migration with `research adoption: none`, or with substantial reconstructive adoption deferred to the dedicated workflow.
