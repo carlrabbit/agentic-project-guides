@@ -15,7 +15,9 @@ For ordinary milestone-driven development, use only these two prompts:
 
 Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. It also establishes that the resulting milestone is executable and execution-tractable by the project's baseline implementation model.
 
-Implementation reads the ready milestone and localized project authority, inspects the live repository, decomposes the work into bounded execution work packages, persists coverage/progress in `.execution/<milestone-id>.md`, implements, validates, reconciles the milestone against live evidence, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
+For AI-executed milestones, planning assigns stable IDs to every individually verifiable acceptance criterion and material completion obligation, then seeds `.execution/<milestone-id>.md` with a lossless pending obligation registry and the required validation gates. Planning does not seed work packages, implementation tasks, evidence, or completion state.
+
+Implementation reads the ready milestone, localized project authority, and planning-seeded ledger; verifies lossless obligation coverage; inspects the live repository; decomposes work into bounded execution work packages; maps those packages back to the seeded obligations; implements, validates, records criterion-specific evidence, reconciles the milestone against live evidence, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
 
 Execution profile is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
 
@@ -25,7 +27,7 @@ Passing tests or successful implementation does not by itself complete a milesto
 
 ## Stable implementation handoff
 
-The ready milestone plus referenced project authority is the durable semantic handoff.
+The ready milestone plus referenced project authority is the durable semantic handoff. For AI-executed milestones, the planning-seeded ledger accompanies that handoff as non-authoritative operational coverage state.
 
 Use `templates/prompts/execute-milestone.md` as the canonical execution methodology.
 
@@ -93,7 +95,9 @@ Planning owns decisions that materially affect architecture, semantics, compatib
 
 Planning also owns the judgment that the milestone can be executed by the configured baseline implementation model without unresolved project-level reasoning and that its implementation volume is execution-tractable.
 
-Implementation owns concrete files, types, functions, refactorings, test structure, execution work packages, implementation sequence, supporting edits required by the contract, persistent execution progress, validation, and completion audit where those choices remain inside the ready milestone contract.
+Planning owns the lossless obligation identities and initial ledger coverage structure for AI-executed milestones.
+
+Implementation owns concrete files, types, functions, refactorings, test structure, execution work packages, implementation sequence, supporting edits required by the contract, ledger work-package/evidence/status/resume fields, persistent execution progress, validation, and completion audit where those choices remain inside the ready milestone contract.
 
 A material unresolved decision prevents `ready` status. If such a decision is discovered during implementation, the affected work returns to planning.
 
@@ -101,15 +105,17 @@ Execution decomposition does not introduce another durable lifecycle phase.
 
 ## Execution-state rule
 
-For AI-executed coding milestones, implementation creates or reconciles:
+For AI-executed coding milestones, planning initializes:
 
 ```text
 .execution/<milestone-id>.md
 ```
 
-before production edits.
+before `ready` with every individually verifiable obligation as a separate pending row and with required validation gates.
 
-The ledger maps milestone obligations to bounded work packages and evidence. It is operational state only and cannot amend the milestone or referenced authority.
+Implementation reconciles that seeded registry before production edits, then extends it with work packages, evidence, status, and resume state.
+
+The ledger is operational state only and cannot amend the milestone or referenced authority. It may compress work but must not compress obligations.
 
 A small milestone may use one work package. Do not skip persistent execution state merely because the milestone appears simple.
 
@@ -120,10 +126,11 @@ Update the ledger after coherent work packages and their relevant validation. On
 Implementation follows:
 
 ```text
-read milestone and authority
+read milestone, authority, and planning-seeded ledger
+-> verify lossless obligation-set equality
 -> execution decomposition
--> create/reconcile execution ledger
--> implement/validate/update ledger by work package
+-> map obligations to work packages
+-> implement/validate/update evidence and status by work package
 -> freshly reread milestone
 -> reconcile milestone <-> ledger <-> repository/evidence
 -> completion audit

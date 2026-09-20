@@ -18,6 +18,22 @@ If the target repository contains `.guide-profile.json`, use it as guide-selecti
 
 If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
 
+## Planning-seeded execution ledger
+
+When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
+
+Seed only contract-derived coverage:
+
+- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
+- one separate pending ledger row per obligation;
+- required validation-gate IDs, target/locus, and the obligation IDs each gate is intended to prove.
+
+Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry.
+
+Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
+
+The execution ledger may compress work. It must not compress obligations.
+
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.

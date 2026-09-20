@@ -51,7 +51,13 @@ Detailed file lists, class designs, edit sequences, and speculative implementati
 
 If a milestone uses focus areas, workstreams, or similar decomposition, those describe expected concentration of work. They are not an exhaustive edit allowlist unless the milestone explicitly makes them contractual.
 
-Planning must structure acceptance criteria and completion obligations clearly enough that implementation can map them to concrete execution work and evidence. Planning does not pre-author the executor's local task list.
+Planning must structure acceptance criteria and completion obligations clearly enough that implementation can map them to concrete execution work and evidence.
+
+For AI-executed milestones, planning also assigns stable identities to every individually verifiable acceptance criterion and material completion obligation, then initializes the execution ledger with those obligations as separate pending rows and with the required validation gates.
+
+Planning seeds coverage structure, not implementation decomposition. It does not pre-author the executor's local task list, work packages, concrete implementation mapping, evidence, or completion state.
+
+The execution ledger may compress work. It must not compress obligations.
 
 ## Research and diagnostic work
 
@@ -127,11 +133,12 @@ Decision completeness is necessary but not sufficient for reliable AI execution.
 
 Planning must also establish that the milestone's implementation volume is tractable for the baseline executor. A milestone is execution-tractable when:
 
-- its obligations are explicit and observable;
-- implementation can group those obligations into bounded coherent work packages without making new project-level decisions;
+- its obligations are explicit, observable, and individually identifiable where they can be verified independently;
+- planning has seeded a lossless obligation registry for AI-executed milestones;
+- implementation can group those obligations into bounded coherent work packages without making new project-level decisions or replacing several obligations with a broad summary;
 - work-package progress can be externalized into repository-local operational state;
-- validation/evidence can be associated with the relevant obligations;
-- an interrupted or compacted implementation session can reconstruct current execution state from the milestone, ledger, repository, and evidence.
+- implementation and validation evidence can be associated with each specific applicable obligation;
+- an interrupted or compacted implementation session can reconstruct current execution state from the milestone, planning-seeded ledger, repository, and evidence.
 
 Execution tractability does not require planning to predict the concrete work-package decomposition. That decomposition belongs to implementation because it depends on the live repository and local mechanics.
 
@@ -150,7 +157,7 @@ The executor:
 - may inspect additional repository-local material needed to implement or prove a milestone obligation;
 - treats `docs/research/` as non-authoritative and reads it only when explicitly relevant to an investigation/evidence obligation or referenced evidence;
 - derives concrete execution work packages and implementation mechanics;
-- creates or reconciles persistent execution coverage/progress state for AI-executed milestones;
+- reads and reconciles the planning-seeded obligation registry, then extends the ledger with work-package mappings, evidence, status, and resume state for AI-executed milestones;
 - follows established repository patterns where the milestone leaves implementation freedom;
 - performs all implementation and supporting work required by the milestone contract;
 - avoids unrelated product expansion;
@@ -172,12 +179,15 @@ For AI-executed coding milestones, implementation has two internal stages withou
 
 Stage 1 is execution decomposition. Before production edits, the executor:
 
-1. rereads the ready milestone and required authority;
-2. inspects enough live repository state to locate implementation surfaces;
-3. maps every applicable acceptance criterion and completion obligation to at least one bounded work package or explicit gate;
-4. maps required validation to the relevant work packages/gates;
-5. creates or reconciles `.execution/<milestone-id>.md`;
-6. verifies that no work package requires reopening a settled material decision.
+1. rereads the ready milestone, required authority, and planning-seeded `.execution/<milestone-id>.md`;
+2. enumerates the milestone's applicable obligation IDs and verifies exact set equality with the seeded obligation registry;
+3. verifies that no planner-seeded obligation row was merged, deleted, renumbered, paraphrased, or replaced by a broader summary;
+4. inspects enough live repository state to locate implementation surfaces;
+5. maps every applicable obligation row to at least one bounded work package or explicit gate while preserving the individual row;
+6. maps required validation to the specific obligation IDs it actually exercises;
+7. verifies that no work package requires reopening a settled material decision.
+
+If a legacy or externally prepared milestone has no seeded ledger, the executor may initialize one from the milestone before implementation, but it must preserve every applicable obligation individually. A material ambiguity in the milestone contract returns to planning.
 
 Stage 2 is iterative implementation of those work packages.
 
@@ -193,36 +203,67 @@ The canonical repository-local ledger path is:
 .execution/<milestone-id>.md
 ```
 
-The ledger is mutable operational state, not project authority.
+The ledger is mutable operational state, not project authority. The milestone remains authoritative if the two disagree.
 
-It records at least:
+For AI-executed milestones, planning creates the initial ledger before the milestone becomes `ready`.
+
+Planning owns the seeded coverage structure:
 
 - primary milestone path;
-- acceptance/completion obligation coverage;
-- bounded work packages;
-- work-package/obligation status;
-- required validation gates;
-- concrete evidence for completed obligations;
-- a concise resume point while work remains.
+- stable obligation IDs;
+- one separate row for every individually verifiable acceptance criterion and material completion obligation;
+- the obligation type and wording mirrored from the milestone;
+- required validation-gate IDs, target/locus, and the obligation IDs each gate is intended to prove.
 
-A ledger row marked `done` is a claim about progress, not acceptance authority. Repository state and concrete evidence must independently establish the mapped obligation.
+Implementation owns the evolving execution state:
 
-The executor updates the ledger after each coherent work package and relevant validation.
+- bounded work packages and their mapping to obligation IDs;
+- implementation evidence;
+- validation evidence actually obtained;
+- obligation/work-package status;
+- a concise resume point while work remains;
+- agent-resolvable supporting work discovered during implementation.
+
+Planner-seeded obligation rows are protected methodologically. Implementation must not delete, merge, renumber, paraphrase, or replace them merely to simplify execution tracking. Several obligations may map to one work package, but the obligations remain separate ledger rows.
+
+The core invariant is:
+
+```text
+execution ledger may compress work
+execution ledger must not compress obligations
+```
+
+A ledger row marked `done` is a claim about one specific obligation, not acceptance authority. Repository state and concrete evidence must independently establish that obligation.
+
+An aggregate validation result proves only the obligation IDs whose required behavior the executed scenario actually exercises. Passing a broad suite must not be used to fill evidence for criterion-specific behaviors that were not exercised.
+
+The executor updates implementation-owned ledger fields after each coherent work package and relevant validation.
 
 After context compaction, interruption, or session resume, the executor rereads the primary milestone and execution ledger before continuing and reconciles them with the live repository where necessary.
 
+Before `COMPLETE`, the executor verifies:
+
+```text
+set(applicable milestone obligation IDs)
+==
+set(ledger obligation IDs)
+```
+
+and then verifies evidence for every individual applicable obligation. Set equality is necessary but not sufficient; duplicate, stale, indirect-without-justification, substitute-only, or merely asserted evidence does not establish completion.
+
 The ledger is required while an AI-executed milestone is active. Retention after milestone completion is repository policy. Removing a completed ledger does not invalidate independently established milestone evidence.
 
-No generic engineering command is required to create, update, check, or complete the ledger.
+No generic engineering command is required to initialize, update, check, or complete the ledger. Planning already owns the milestone obligation set and may seed the ledger directly without an intermediate parser or generator.
 
 ## Execution loop
 
 Implementation follows this loop:
 
 ```text
-read milestone and authority
+read milestone, authority, and planning-seeded ledger
+  -> verify lossless obligation registry
   -> execution decomposition
-  -> create/reconcile execution ledger
+  -> map obligations to work packages
   -> implement coherent work package
   -> focused validation
   -> update ledger and evidence
@@ -250,9 +291,17 @@ milestone obligations
 <-> live repository and concrete evidence
 ```
 
-For every applicable acceptance criterion and completion obligation, the executor must identify the claimed execution coverage and verify it against actual repository state or evidence.
+First, the executor enumerates the applicable obligation IDs from the freshly reread milestone and verifies exact set equality with the planning-seeded ledger registry. Missing, merged, duplicated, renumbered, or extra contract rows must be reconciled before completion; a material ambiguity returns to planning.
 
-Unsupported, stale, or merely asserted `done` states must be reopened. Newly discovered agent-resolvable gaps become active execution work and the loop continues.
+For every applicable obligation ID, the executor must then:
+
+- identify the work package or gate that claims coverage;
+- inspect the concrete implementation evidence;
+- identify the validation evidence required for that specific obligation;
+- verify that the executed validation actually exercises the behavior claimed by the obligation;
+- reject evidence inferred only from a neighboring criterion or an aggregate pass that did not exercise the required behavior.
+
+Unsupported, stale, indirect-without-justification, substitute-only, or merely asserted `done` states must be reopened. Newly discovered agent-resolvable gaps become active execution work and the loop continues.
 
 Final reconciliation also confirms that every required validation gate has current evidence from the required target/locus and that no agent-resolvable ledger item remains.
 

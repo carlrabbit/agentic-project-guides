@@ -1,5 +1,85 @@
 # Changelog
 
+## 0.9.0
+
+Migration required: recommended for repositories using AI-executed milestones and persistent execution ledgers; otherwise metadata-only/no-op may be sufficient.
+
+Affected areas:
+
+- milestone obligation identity;
+- planning/implementation ledger ownership;
+- execution-ledger template;
+- planning prompt deliverables;
+- work-package decomposition;
+- validation-to-criterion traceability;
+- final reconciliation and completion evidence;
+- guide-profile version metadata.
+
+### Changed — execution ledger ownership
+
+Planning now initializes the execution ledger for AI-executed milestones before `ready`.
+
+Planning seeds only the lossless contract-derived coverage structure:
+
+```text
+stable milestone obligation IDs
++ one pending ledger row per independently verifiable obligation
++ required validation gates and intended obligation coverage
+```
+
+Implementation continues to own work packages, concrete implementation mapping, evidence, status, and resume state.
+
+This does not return implementation decomposition to planning.
+
+### Added — lossless obligation invariant
+
+The execution model now states:
+
+```text
+the execution ledger may compress work
+the execution ledger must not compress obligations
+```
+
+Several milestone obligations may map to one coherent work package, but the planner-seeded obligation rows remain individually traceable.
+
+Implementation must not delete, merge, renumber, paraphrase, or replace seeded obligation rows merely to simplify tracking.
+
+### Added — criterion-specific validation traceability
+
+Required validation gates identify the milestone obligation IDs they are intended to prove.
+
+Aggregate validation success establishes only the obligations whose required behavior the executed scenario actually exercises.
+
+A passing broad suite or integration scenario does not implicitly prove separately specified behaviors that were not exercised.
+
+### Strengthened — final reconciliation
+
+Before `COMPLETE`, implementation verifies exact set equality:
+
+```text
+set(applicable milestone obligation IDs)
+==
+set(ledger obligation IDs)
+```
+
+It then verifies concrete implementation and validation evidence for every individual obligation.
+
+Missing, grouped, duplicated, stale, indirect-without-justification, substitute-only, or merely asserted evidence cannot establish completion.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.8.0-to-v0.9.0.md
+```
+
+Draft/planning milestones should adopt stable obligation IDs and a seeded ledger before becoming ready.
+
+Ready or active AI-executed milestones should be reconciled to the lossless obligation model. Existing work packages and valid evidence can be preserved.
+
+Completed historical milestones do not require retroactive ledger rewriting unless reopened.
+
 ## 0.8.0
 
 Migration required: recommended for repositories using integration validation, concrete project-type guidance, mixed/scoped profiles, external/runtime-bound validation, integration-first testing, durable planning research, or historical planning knowledge worth adopting; otherwise metadata/template review may be sufficient.

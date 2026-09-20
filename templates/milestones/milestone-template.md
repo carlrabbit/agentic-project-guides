@@ -10,6 +10,7 @@
 | Baseline executor readiness | confirmed |
 | Decision preservation | confirmed |
 | Execution tractability | confirmed |
+| Execution ledger | <.execution/<milestone-id>.md planning-seeded | not-applicable> |
 | Scope size | medium-large |
 | Implementation autonomy | high |
 | Documentation sync | deferred |
@@ -50,7 +51,7 @@ Do not prescribe concrete implementation mechanics here unless they are part of 
 
 This milestone is `ready` only when the project's baseline implementation model can execute it without making a new material decision about architecture, semantics, compatibility, scope, acceptance criteria, or validation policy.
 
-Planning must resolve those decisions before implementation. Remaining implementation freedom should consist of local code, test, refactoring, sequencing, execution-decomposition, and supporting-work choices that fit the contract.
+Planning must resolve those decisions before implementation. Remaining implementation freedom should consist of local code, test, refactoring, sequencing, work-package, and supporting-work choices that fit the contract.
 
 Do not compensate for incomplete planning by requiring a stronger implementation-model tier or by turning the milestone into a line-by-line implementation script.
 
@@ -76,15 +77,23 @@ Do not preserve speculative implementation suggestions merely because they appea
 
 ## Execution Tractability
 
-For large or long-running AI execution, the milestone obligations must be explicit enough that implementation can derive bounded coherent work packages and map them to evidence without reopening planning.
+For AI-executed work, planning must make the milestone ledger-ready without pre-planning implementation mechanics.
 
-The implementation agent creates and maintains:
+Assign a stable ID to every individually verifiable acceptance criterion and every other material completion obligation. Examples include `AC-01`, `DOC-01`, `ART-01`, `MIG-01`, and `REV-01`; the exact prefix taxonomy is project-local.
+
+For AI-executed milestones, planning initializes:
 
 ```text
 .execution/<milestone-id>.md
 ```
 
-as operational progress state. Planning does not pre-author that ledger or the executor's detailed task list.
+before the milestone becomes `ready`.
+
+The seeded ledger must contain every milestone obligation as a separate pending row and every required validation gate with its target/locus. Planning owns the obligation identity and wording; it leaves work-package mapping, concrete implementation evidence, validation results, status progression, and resume state to implementation.
+
+The execution ledger may compress work. It must not compress obligations.
+
+Planning does not pre-author the executor's detailed task list or work-package decomposition.
 
 The ready milestone should remain one coherent semantic milestone when appropriate. Split it only when separate target states or unresolved planning boundaries justify separate milestones, not merely because the implementation contains many edits.
 
@@ -98,9 +107,12 @@ When a concrete external runtime, service, platform, test environment, or domain
 
 ## Acceptance Criteria
 
-- <Observable or machine-verifiable completion condition.>
+- **AC-01** — <Observable or machine-verifiable completion condition.>
+- **AC-02** — <Another independently verifiable completion condition.>
 
-Acceptance criteria must describe completed outcomes and be specific enough to map to implementation work and evidence.
+Every independently verifiable criterion gets a stable ID. Do not combine several separately provable behaviors into one broad criterion merely to shorten the milestone or ledger.
+
+Acceptance criteria must describe completed outcomes and be specific enough to map individually to implementation and evidence.
 
 When the milestone affects a distributable artifact, include acceptance criteria for the intended consumer boundary where relevant. Internal tests alone do not establish that a packed/installed/published artifact is consumable.
 
@@ -108,7 +120,13 @@ When correctness depends on an external/runtime integration target, include acce
 
 ## Validation
 
-For each material validation obligation, specify the applicable depth, target, execution locus, platform/capability requirements, concrete command/check, and expected evidence.
+For each material validation obligation, assign a stable validation-gate ID and specify the applicable depth, target, execution locus, platform/capability requirements, concrete command/check, expected evidence, and the milestone obligation IDs it is intended to prove.
+
+| ID | Depth | Target | Locus/platform | Command/check | Proves | Expected evidence |
+|---|---|---|---|---|---|---|
+| VAL-01 | <Tier> | <real boundary> | <local/CI/remote/mixed + capability> | <command> | <AC-01, ...> | <evidence> |
+
+A gate may prove several criteria, but planning must not claim a criterion is covered by a gate whose scenario does not actually exercise it.
 
 Do not assume that Tier 3 integration validation runs in CI. Local Windows, local Linux, a remote service, CI, or a mixed topology are all valid when declared by project authority.
 
@@ -148,6 +166,8 @@ Milestone completion command:
 ./eng/review-check.sh --milestone <milestone-id>
 ```
 
+When human review is a material completion obligation, assign it a stable obligation ID (for example `REV-01`) and seed that row into the execution ledger.
+
 Human review belongs only to this milestone. After milestone completion, the record is historical evidence and is not revalidated by later changes.
 
 ## Documentation Policy
@@ -156,16 +176,21 @@ Implementation updates directly contradicted authority documents only.
 
 Broad documentation normalization is handled by a separate documentation-sync pass.
 
+When this milestone requires a distinct documentation outcome for completion, assign that outcome a stable obligation ID (for example `DOC-01`) rather than leaving it implicit.
+
 ## Completion Expectations
 
 The implementation agent owns milestone closure and will:
 
 ```text
-execution decomposition
--> persistent execution ledger
+read milestone + planning-seeded ledger
+-> execution decomposition
+-> map seeded obligations to work packages
 -> implement/validate work packages
+-> attach criterion-specific evidence
 -> freshly reread this milestone
--> reconcile milestone <-> ledger <-> repository/evidence
+-> verify milestone obligation IDs == ledger obligation IDs
+-> reconcile each obligation <-> ledger <-> repository/evidence
 -> completion audit
 ```
 

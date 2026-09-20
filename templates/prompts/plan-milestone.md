@@ -32,7 +32,9 @@ Planning owns decisions that materially affect:
 
 Planning also owns the research boundary: determine which unknowns require investigation, which evidence is worth persisting for future planning, which existing research must be revalidated, and which conclusions must be promoted into project authority before implementation.
 
-The implementation phase owns concrete files, types, functions, refactorings, test structure, execution decomposition, implementation sequence, supporting edits required by the contract, validation execution, persistent execution progress, and completion audit where those choices do not change the resolved contract.
+The implementation phase owns concrete files, types, functions, refactorings, test structure, work-package decomposition, implementation sequence, supporting edits required by the contract, validation execution, evidence/status updates, persistent execution progress, and completion audit where those choices do not change the resolved contract.
+
+For AI-executed milestones, planning owns the initial execution-ledger coverage structure: stable obligation IDs, one lossless pending row per individually verifiable milestone obligation, and the required validation gates. Planning does not assign implementation work packages or pre-fill implementation evidence/status.
 
 Do not require the implementation agent to reconstruct planning context or read the external guide repository.
 
@@ -66,7 +68,18 @@ When `.guide-profile.json` uses schema version 2, resolve which repository/compo
 
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
 
-Treat `.execution/` as implementation-owned operational state, not planning authority. Planning should not pre-author execution ledgers for future milestones.
+Treat `.execution/` as operational state, not planning authority.
+
+For AI-executed milestones, planning must create `.execution/<milestone-id>.md` before `ready` and seed only the contract-derived coverage structure:
+
+- primary milestone path;
+- stable obligation IDs;
+- one separate pending row for every individually verifiable acceptance criterion and material completion obligation;
+- required validation-gate IDs, target/locus, and the obligation IDs each gate is intended to prove.
+
+Do not seed work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those remain implementation-owned.
+
+The execution ledger may compress work. It must not compress obligations.
 
 ## Research and planning knowledge
 
@@ -223,19 +236,25 @@ The ready milestone must contain, as applicable:
 6. non-goals;
 7. resolved decisions and constraints, including any material profile-conflict resolution;
 8. required project authority, including specialization/profile-scope authority when applicable;
-9. acceptance criteria;
-10. validation depth/tiers, targets, execution loci, platform/capability requirements, concrete commands, execution mode, and expected evidence;
-11. direct documentation impact;
-12. deferred documentation synchronization hints;
-13. human-review requirements;
-14. constrained-runtime requirements;
-15. escalation boundary for unresolved material decisions.
+9. acceptance criteria with stable IDs for every independently verifiable criterion;
+10. other material completion obligations with stable IDs where they are not already acceptance criteria;
+11. validation depth/tiers, stable validation-gate IDs, targets, execution loci, platform/capability requirements, concrete commands, execution mode, expected evidence, and the obligation IDs each gate is intended to prove;
+12. the planning-seeded execution-ledger path when the execution profile requires one;
+13. direct documentation impact;
+14. deferred documentation synchronization hints;
+15. human-review requirements;
+16. constrained-runtime requirements;
+17. escalation boundary for unresolved material decisions.
 
 Research artifacts may be referenced separately as non-authoritative evidence when useful, but they are not substitutes for item 8. Every operative conclusion required by implementation must be recoverable from the ready milestone or project authority.
 
 Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, external/runtime integration, and human-review gates in addition to automated tests.
 
-For large or long-running milestones, acceptance and completion obligations must be structured clearly enough that the implementation agent can map them to bounded work packages and evidence in a persistent execution ledger. Planning does not need to predict those concrete work packages.
+For AI-executed milestones, assign a stable ID to every individually verifiable acceptance criterion and every other material completion obligation. Several criteria may later map to one work package, but do not collapse separately provable behaviors into one broad obligation merely to shorten the milestone or ledger.
+
+Seed the execution ledger directly from the finalized milestone. Before `ready`, verify exact set equality between the milestone's applicable obligation IDs and the ledger's obligation rows. The ledger is a non-authoritative projection of the contract, not a second place to reinterpret it.
+
+For large or long-running milestones, the seeded obligations must be structured clearly enough that the implementation agent can group them into bounded work packages and attach criterion-specific evidence. Planning does not need to predict those concrete work packages.
 
 Do not require exhaustive file lists, predicted class/function changes, or detailed implementation sequences unless those details are themselves architecturally or compatibly significant.
 
@@ -276,7 +295,10 @@ Before marking the milestone `ready`, explicitly verify that:
 - no stale or contradicted research is being relied on without appropriate revalidation;
 - remaining choices are local implementation mechanics rather than new project policy;
 - acceptance criteria let the executor distinguish correct completion from partial implementation;
-- every material completion obligation is explicit enough to be mapped to implementation work and evidence;
+- every independently verifiable acceptance criterion and material completion obligation has a stable ID when the milestone is AI-executed;
+- the planning-seeded ledger contains exactly the applicable milestone obligation IDs with no grouping, omission, duplication, or reinterpretation;
+- every required validation gate identifies the specific obligation IDs it is intended to prove;
+- every material completion obligation is explicit enough to be mapped to implementation work and criterion-specific evidence;
 - subjective acceptance is routed to human review instead of being left as vague executor judgment;
 - required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, and fallback semantics are known where material;
 - large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
@@ -300,9 +322,9 @@ Do not create central-style technology profile documents in the product reposito
 
 Create a planning/design package, not an implementation patch.
 
-The package may contain repository-relative project-truth Markdown, justified durable research artifacts, milestone metadata, `.review/` requests, or `.guide-sync/pending/` hints directly required to make the milestone ready.
+The package may contain repository-relative project-truth Markdown, justified durable research artifacts, milestone metadata, the planning-seeded `.execution/<milestone-id>.md` required for an AI-executed ready milestone, `.review/` requests, or `.guide-sync/pending/` hints directly required to make the milestone ready.
 
-Do not include implementation source files, test files, generated code, workflow YAML, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or pre-authored `.execution/` ledgers.
+Do not include implementation source files, test files, generated code, workflow YAML, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or planner-authored work-package/task/evidence/status content inside `.execution/`.
 
 Do not create a bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent file that repeats canonical execution methodology, milestone acceptance criteria, or project authority.
 
@@ -358,11 +380,12 @@ The ready milestone must support an executor that owns both reliable execution p
 The implementation phase will:
 
 ```text
-read milestone and authority
+read milestone, authority, and planning-seeded ledger
+-> verify milestone obligation IDs == ledger obligation IDs
 -> execution decomposition
--> create/reconcile .execution/<milestone-id>.md
+-> map seeded obligations to work packages
 -> implement a coherent work package
--> validate and update ledger
+-> validate and update evidence/status
 -> repeat
 -> freshly reread milestone
 -> reconcile milestone <-> ledger <-> repository/evidence
@@ -372,7 +395,7 @@ read milestone and authority
 
 Do not design the milestone so that passing tests is the only implied completion condition when other obligations exist.
 
-Do not require the implementation agent to keep the entire execution plan in conversational memory. The ready contract must be structured so obligation coverage can be externalized into the implementation-owned ledger.
+Do not require the implementation agent to keep the entire execution plan in conversational memory. Planning seeds the lossless obligation registry; implementation extends that operational ledger with work decomposition, evidence, status, and resume state.
 
 The executor must be able to determine from the milestone, referenced project authority, execution ledger, live repository, and concrete evidence whether the outcome is actually complete, awaiting required human review, or externally blocked.
 
@@ -404,7 +427,7 @@ The package is acceptable only if:
 - research used for material decisions is sufficiently grounded, current for the decision, and promoted where implementation depends on its conclusions;
 - the implementation handoff remains complete without requiring ordinary implementation to load planning research;
 - the milestone is executable by the configured baseline implementation model without relying on model escalation for unresolved project-level reasoning;
-- large/long execution is tractable through implementation-owned bounded work packages and persistent execution state;
+- large/long execution is tractable through planning-seeded lossless obligation coverage plus implementation-owned bounded work packages and persistent execution state;
 - constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
 - required project authority is explicit;
 - acceptance criteria are observable or verifiable and cover the actual milestone outcome;

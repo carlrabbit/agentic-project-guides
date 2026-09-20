@@ -17,8 +17,9 @@ Start with:
 Start by reading:
 
 1. the primary milestone document;
-2. the authority documents explicitly listed in that milestone;
-3. source and test files needed to implement and validate the change.
+2. for an AI-executed milestone, the planning-seeded `.execution/<milestone-id>.md`;
+3. the authority documents explicitly listed in that milestone;
+4. source and test files needed to implement and validate the change.
 
 You may inspect additional repository-local material when necessary to implement a milestone requirement or prove that a completion condition is satisfied.
 
@@ -34,7 +35,7 @@ Read a research artifact only when the milestone explicitly requires investigati
 
 Do not read `.guide-profile.json`, `.guide-sync/`, or `.review/` unless the milestone requires them or they are necessary to satisfy or verify an explicit milestone obligation.
 
-If `.execution/<milestone-id>.md` already exists for the active milestone, read it after the primary milestone. Treat it as operational progress state only, never as authority.
+Treat `.execution/<milestone-id>.md` as operational coverage/progress state only, never as authority. For 0.9-planned AI-executed milestones it should already exist with the lossless obligation registry seeded by planning. If a legacy milestone lacks it, follow the Stage 1 fallback and initialize it from the milestone without compressing obligations.
 
 ## Implementation ownership
 
@@ -44,7 +45,7 @@ You own local implementation mechanics including files, types, functions, refact
 
 Prefer the smallest coherent change that satisfies the milestone goal, target state, acceptance criteria, and completion obligations. Follow established repository patterns where they do not conflict with the milestone.
 
-Do not expect planning to provide exhaustive file lists, line-by-line edits, or a pre-authored implementation task list.
+Do not expect planning to provide exhaustive file lists, line-by-line edits, or a pre-authored implementation task list. Planning may provide a seeded execution ledger containing the milestone's lossless obligation registry and validation gates; that is contract projection, not implementation decomposition.
 
 If the milestone contains focus areas, workstreams, or similar decomposition, treat them as execution guidance rather than an edit allowlist. Supporting edits outside those areas are allowed when they are necessary to satisfy the milestone contract.
 
@@ -69,42 +70,42 @@ Local implementation choices that stay within the milestone contract do not requ
 
 ## Stage 1 — Execution decomposition
 
-Before making production implementation edits, convert the ready milestone into bounded execution work packages.
+Before making production implementation edits, read:
+
+1. the ready milestone;
+2. the required authority;
+3. the planning-seeded `.execution/<milestone-id>.md` when the milestone uses an AI-executed profile.
+
+The ledger is operational state, not authority. The milestone wins if they disagree.
+
+Before deriving work packages, perform a lossless coverage check:
+
+1. enumerate every applicable stable obligation ID from the freshly read milestone;
+2. enumerate every planner-seeded obligation ID in the ledger;
+3. verify exact set equality;
+4. verify no seeded obligation was merged, deleted, renumbered, paraphrased, or replaced by a broader summary;
+5. verify every required validation gate is represented with its declared target/locus and the obligation IDs it is intended to prove.
+
+If a legacy or externally prepared AI-executed milestone has no seeded ledger, initialize one from the milestone before production edits. Preserve every applicable obligation individually. Do not use the absence of a seeded ledger as permission to summarize the contract.
+
+If the mismatch reflects a material ambiguity or missing project-level decision, return to planning. If it is a mechanical ledger omission and the milestone is unambiguous, repair the ledger from the milestone without changing the contract.
+
+Then convert the work into bounded execution work packages.
 
 This is implementation decomposition, not a new planning phase. Do not reopen settled project decisions.
 
-Create or reconcile:
+For each work package:
 
-```text
-.execution/<milestone-id>.md
-```
+- map the specific seeded obligation IDs it covers;
+- map required validation only to obligation IDs the planned scenario actually exercises;
+- leave unrelated seeded obligations separate even when the same code change may affect them;
+- verify that no work package requires reopening a settled material decision.
 
-Use `templates/milestones/execution-ledger-template.md` as the conceptual shape when available, but do not read the external guide repository to obtain it during ordinary implementation.
+The execution ledger may compress work. It must not compress obligations.
 
-The ledger must be sufficient to recover execution state after context compaction, interruption, or a resumed session.
-
-At minimum, record:
-
-- the primary milestone path;
-- every applicable acceptance criterion and completion obligation;
-- bounded coherent work packages that cover those obligations;
-- current status for each obligation/work package;
-- required validation gates, including target/locus constraints when material;
-- concrete evidence as work completes;
-- the current resume point while work remains.
+Implementation owns work-package decomposition, concrete implementation mapping, evidence, status, and resume state. Planning owns the seeded obligation identity and wording.
 
 A small milestone may use one work package. Do not skip the ledger because the work appears simple.
-
-Before implementation starts, perform a coverage check:
-
-- every acceptance criterion maps to at least one work package;
-- every required artifact, documentation, migration, cleanup, compatibility, or review obligation maps to a work package or explicit gate;
-- every required validation command or validation gate is represented with its required target/locus where applicable;
-- no work package depends on making a new material project-level decision.
-
-If the ledger already exists, reconcile it against the current milestone and live repository rather than trusting stale status mechanically.
-
-The ledger is mutable operational state. It must not amend, reinterpret, or override the milestone or referenced authority.
 
 ## Stage 2 — Implementation loop
 
@@ -119,7 +120,9 @@ For each work package:
 5. update the ledger with actual status and evidence;
 6. record the next resume point before moving on when meaningful.
 
-Do not mark a work package or obligation `done` merely because code was written or a test command was invoked. `done` means the live repository and recorded evidence establish the mapped obligation.
+Do not mark a work package or obligation `done` merely because code was written or a test command was invoked. `done` means the live repository and recorded evidence establish that specific mapped obligation.
+
+A broad suite pass establishes only the obligation IDs whose required behavior the executed tests/scenarios actually exercise. Do not use neighboring coverage, assumed transitivity, or an aggregate green result as criterion-specific evidence.
 
 If context is compacted or the session is resumed, reread the primary milestone and `.execution/<milestone-id>.md` before continuing. Re-establish current repository state where the ledger may be stale.
 
@@ -204,21 +207,35 @@ After implementation work packages and required validation appear complete, do n
 
 Freshly reread the primary milestone from disk. Do not rely on conversational memory or the ledger's summary of the milestone.
 
+First reconcile the contract shape:
+
+```text
+set(applicable milestone obligation IDs)
+==
+set(ledger obligation IDs)
+```
+
+Verify exact set equality, not merely equal counts. Confirm that no applicable obligation was omitted, merged, duplicated, renumbered, paraphrased into a broader claim, or replaced by a work-package summary.
+
 Then reconcile:
 
 ```text
-milestone obligations
-<-> execution ledger
-<-> live repository and concrete evidence
+each milestone obligation ID
+<-> ledger mapping
+<-> live repository
+<-> criterion-specific evidence
 ```
 
-For every applicable acceptance criterion and completion obligation:
+For every applicable obligation ID:
 
 - identify the ledger work package or gate that claims coverage;
-- inspect the actual implementation/evidence needed to establish it;
-- verify that required validation evidence came from the declared target/locus;
-- downgrade any stale, unsupported, substitute-only, or merely asserted `done` state;
-- add newly discovered agent-resolvable gaps to the ledger and continue implementation.
+- inspect the actual implementation evidence;
+- identify the validation evidence required for that obligation;
+- verify the executed validation actually exercises the behavior stated by that obligation;
+- verify required evidence came from the declared target/locus;
+- reject evidence inferred only from a neighboring criterion, a different scenario, or an aggregate pass that did not exercise the required behavior;
+- downgrade any stale, unsupported, indirect-without-justification, substitute-only, or merely asserted `done` state;
+- add newly discovered agent-resolvable gaps to the implementation-owned ledger fields and continue implementation.
 
 Also confirm that every required validation gate has current evidence and that the ledger contains no unresolved agent-resolvable item.
 
@@ -279,7 +296,8 @@ Terminate only with one of these explicit outcomes:
 Use only when:
 
 - the primary milestone was freshly reread from disk;
-- milestone-to-ledger-to-repository/evidence reconciliation succeeded;
+- exact milestone-obligation-to-ledger set reconciliation succeeded;
+- criterion-specific milestone-to-ledger-to-repository/evidence reconciliation succeeded;
 - every applicable milestone obligation is satisfied;
 - required validation is current from the required target/locus;
 - no agent-resolvable ledger gap remains;
@@ -328,7 +346,7 @@ Milestone status: BLOCKED
 Then report:
 
 - implemented outcome;
-- execution-ledger path and reconciliation result;
+- execution-ledger path, obligation-set equality result, and criterion-specific reconciliation result;
 - completion-audit result;
 - files changed;
 - validation commands run, target/locus, and results;

@@ -172,6 +172,10 @@ Planning also decides whether investigation evidence should be persisted for fut
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
 
+For AI-executed milestones, planning also projects the finalized milestone contract into a non-authoritative execution-ledger skeleton before `ready`: stable obligation IDs, one separate pending row per independently verifiable obligation, and required validation gates. This is coverage initialization, not implementation decomposition. Work-package design, implementation mapping, evidence, status, and resume state remain implementation-owned.
+
+The execution ledger may compress work, but it must not compress milestone obligations.
+
 Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
 
 Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not read this guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
