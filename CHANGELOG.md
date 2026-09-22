@@ -52,6 +52,33 @@ Aggregate validation success establishes only the obligations whose required beh
 
 A passing broad suite or integration scenario does not implicitly prove separately specified behaviors that were not exercised.
 
+### Added — acceptance evidence topology
+
+An obligation may define stable `EC-*` evidence cases when it spans materially different implementation paths, state mechanisms, compatibility surfaces, target surfaces, or failure behaviors.
+
+Examples include scalar/enum dispatch, Root/Batch scope, inherited/direct behavior, provider-specific implementations, or source-project/packaged-consumer surfaces.
+
+Evidence cases describe what must be proven, not how tests are implemented.
+
+Planning must not generate a Cartesian product of every dimension. Evidence cases are used only where one path would not provide reliable evidence for another.
+
+Validation gates map to exact obligation/evidence-case IDs.
+
+### Added — durable completion evidence
+
+Before an AI-executed milestone transitions to `done`, implementation preserves a compact durable completion trace:
+
+```text
+obligation/evidence case
+-> concrete evidence
+-> validation gate/target
+-> result
+```
+
+The trace lives in the milestone or another immutable completion record explicitly referenced by it.
+
+Mutable `.execution/` state may still be removed after completion according to repository policy. The durable trace preserves reviewability without retaining work-package tasks, resume state, or execution scratch detail.
+
 ### Strengthened — final reconciliation
 
 Before `COMPLETE`, implementation verifies exact set equality:
