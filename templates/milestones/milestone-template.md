@@ -118,15 +118,44 @@ When the milestone affects a distributable artifact, include acceptance criteria
 
 When correctness depends on an external/runtime integration target, include acceptance criteria that establish representative behavior through that target rather than only through substitutes.
 
+## Acceptance Evidence Topology
+
+Use evidence cases only when an acceptance/completion obligation spans materially distinct behaviors that require independent proof.
+
+Examples of materially distinct paths may include:
+
+- scalar versus enum dispatch;
+- Root versus Batch state scope;
+- source-project versus packed/installed consumer surface;
+- sync versus async path;
+- provider-specific behavior;
+- inherited versus directly declared behavior;
+- success versus contractually distinct failure/diagnostic behavior.
+
+Do not mechanically generate a Cartesian product of every dimension. Create a separate evidence case only when the distinction could plausibly hide a different implementation path, state mechanism, compatibility surface, failure mode, or contract behavior.
+
+| ID | Parent obligation | Required evidence case | Why separate evidence is required |
+|---|---|---|---|
+| EC-01a | AC-01 | <material behavior/path> | <distinct path/state/surface/failure reason> |
+| EC-01b | AC-01 | <material behavior/path> | <distinct path/state/surface/failure reason> |
+
+Evidence-case IDs are planning-owned. They describe what must be proven, not how to implement or test it.
+
+If an obligation has no materially distinct evidence cases, the obligation itself remains the evidence unit and no `EC-*` entries are required.
+
+For AI-executed milestones, seed every required evidence case into the execution ledger before `ready`.
+
 ## Validation
 
-For each material validation obligation, assign a stable validation-gate ID and specify the applicable depth, target, execution locus, platform/capability requirements, concrete command/check, expected evidence, and the milestone obligation IDs it is intended to prove.
+For each material validation obligation, assign a stable validation-gate ID and specify the applicable depth, target, execution locus, platform/capability requirements, concrete command/check, expected evidence, and the exact evidence units it is intended to prove.
+
+When an obligation has explicit evidence cases, validation maps to those `EC-*` IDs. Otherwise validation may map directly to the obligation ID.
 
 | ID | Depth | Target | Locus/platform | Command/check | Proves | Expected evidence |
 |---|---|---|---|---|---|---|
-| VAL-01 | <Tier> | <real boundary> | <local/CI/remote/mixed + capability> | <command> | <AC-01, ...> | <evidence> |
+| VAL-01 | <Tier> | <real boundary> | <local/CI/remote/mixed + capability> | <command> | <EC-01a, EC-01b or AC-01> | <evidence> |
 
-A gate may prove several criteria, but planning must not claim a criterion is covered by a gate whose scenario does not actually exercise it.
+A gate may prove several evidence units, but planning must not claim coverage for a case whose behavior the validation scenario does not actually exercise.
 
 Do not assume that Tier 3 integration validation runs in CI. Local Windows, local Linux, a remote service, CI, or a mixed topology are all valid when declared by project authority.
 
@@ -187,11 +216,13 @@ read milestone + planning-seeded ledger
 -> execution decomposition
 -> map seeded obligations to work packages
 -> implement/validate work packages
--> attach criterion-specific evidence
+-> attach obligation/evidence-case-specific evidence
 -> freshly reread this milestone
 -> verify milestone obligation IDs == ledger obligation IDs
--> reconcile each obligation <-> ledger <-> repository/evidence
+-> verify required evidence-case IDs == ledger evidence-case IDs
+-> reconcile each obligation/evidence case <-> ledger <-> repository/evidence
 -> completion audit
+-> write compact durable completion evidence into this milestone
 ```
 
 Passing tests or completing listed focus areas does not by itself establish milestone completion.
@@ -199,6 +230,20 @@ Passing tests or completing listed focus areas does not by itself establish mile
 When consumer-surface validation applies, passing internal tests does not establish completion until the current distributable artifact has been exercised through its intended consumer mechanism.
 
 When required integration validation applies, a substitute validation path does not establish completion unless project authority explicitly defines it as equivalent.
+
+## Completion Evidence
+
+This section is populated by implementation only after final reconciliation and the completion audit succeed. It is durable historical evidence, not an amendment to the ready contract.
+
+Preserve a compact trace from each obligation/evidence case to concrete evidence before the mutable execution ledger is removed under repository policy.
+
+| Obligation / evidence case | Evidence | Validation gate / target | Result |
+|---|---|---|---|
+| AC-01 or EC-01a | <test, receipt, artifact, review, repository state> | <VAL-01 / target> | satisfied |
+
+Include every applicable obligation. Where an obligation has explicit evidence cases, list the cases rather than replacing them with one aggregate row.
+
+Do not copy work-package tasks, resume state, conversational reasoning, or the full execution ledger into this section.
 
 ## Escalation Boundary
 
