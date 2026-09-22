@@ -176,6 +176,10 @@ For AI-executed milestones, planning also projects the finalized milestone contr
 
 The execution ledger may compress work, but it must not compress milestone obligations.
 
+When one obligation spans materially distinct proof paths, planning may also seed stable evidence-case IDs. These cases define what must be independently proven without prescribing the executor's concrete test mechanics. They should be selective rather than a Cartesian product.
+
+After successful completion, the implementation phase preserves a compact durable obligation/evidence-case-to-proof reconciliation before mutable execution state is discarded under repository policy.
+
 Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
 
 Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not read this guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
