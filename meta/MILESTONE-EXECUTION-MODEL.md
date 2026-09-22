@@ -81,6 +81,8 @@ Examples may include:
 
 Evidence cases describe what must be proven, not how to write the implementation or tests.
 
+Evidence cases do not replace proper obligation decomposition. If two outcomes are independently meaningful completion conditions, keep them as separate `AC-*` or other obligation IDs. Use `EC-*` only when the parent remains one coherent contract outcome but its proof must cross materially different paths.
+
 Do not generate the full Cartesian product of every possible dimension. Add a separate evidence case only when the distinction is materially capable of hiding a different implementation defect or contract failure.
 
 If an obligation has no materially distinct proof paths, the obligation itself remains the evidence unit.
