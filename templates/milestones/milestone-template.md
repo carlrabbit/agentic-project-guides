@@ -141,6 +141,8 @@ Do not mechanically generate a Cartesian product of every dimension. Create a se
 
 Evidence-case IDs are planning-owned. They describe what must be proven, not how to implement or test it.
 
+Do not use evidence cases to hide independently meaningful outcomes inside an overly broad acceptance criterion. Split those outcomes into separate obligation IDs first. Use evidence cases only when one coherent outcome requires independent proof across materially different paths.
+
 If an obligation has no materially distinct evidence cases, the obligation itself remains the evidence unit and no `EC-*` entries are required.
 
 For AI-executed milestones, seed every required evidence case into the execution ledger before `ready`.
