@@ -257,6 +257,8 @@ For each obligation, ask whether evidence for one supported path could leave ano
 
 When yes, define stable evidence-case IDs (`EC-*`) for those paths. Evidence cases describe what must be proven, not the concrete test/file/mechanism.
 
+First split independently meaningful completion outcomes into separate obligation IDs. Use evidence cases only when one coherent obligation still requires multiple independent proof paths.
+
 Do not generate a Cartesian product of every dimension. Create separate evidence cases only for distinctions that could plausibly hide different defects or contract failures.
 
 Seed the execution ledger directly from the finalized milestone. Before `ready`, verify exact set equality between the milestone's applicable obligation IDs and the ledger's obligation rows and, where evidence cases exist, exact set equality between milestone and ledger evidence-case IDs. The ledger is a non-authoritative projection of the contract, not a second place to reinterpret it.
