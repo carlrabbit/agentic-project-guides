@@ -59,6 +59,34 @@ Planning seeds coverage structure, not implementation decomposition. It does not
 
 The execution ledger may compress work. It must not compress obligations.
 
+## Acceptance evidence topology
+
+Lossless obligation tracking prevents an executor from dropping requirements, but a single obligation can still hide materially distinct behavioral paths.
+
+Planning must therefore ask, for each acceptance/completion obligation:
+
+> Does this obligation cover more than one materially distinct implementation path, state mechanism, compatibility surface, dispatch path, target surface, or failure behavior such that evidence for one path would not establish the others?
+
+When the answer is yes, planning defines explicit evidence cases with stable IDs such as `EC-01a`, `EC-01b`, and seeds them into the execution ledger.
+
+Examples may include:
+
+- scalar versus enum generation when they use different dispatch paths;
+- Root versus Batch state scopes;
+- inherited versus directly declared behavior;
+- source-project versus packed/installed consumer surfaces;
+- provider-specific implementations;
+- sync versus async paths;
+- success behavior versus contractually distinct failure/diagnostic behavior.
+
+Evidence cases describe what must be proven, not how to write the implementation or tests.
+
+Do not generate the full Cartesian product of every possible dimension. Add a separate evidence case only when the distinction is materially capable of hiding a different implementation defect or contract failure.
+
+If an obligation has no materially distinct proof paths, the obligation itself remains the evidence unit.
+
+For AI-executed milestones, planning seeds the evidence-case registry before `ready`. Implementation may choose the concrete test structure and validation mechanics, but it cannot replace several required evidence cases with one aggregate claim.
+
 ## Research and diagnostic work
 
 If a material planning decision cannot be resolved from current project authority and existing current evidence, planning may perform research directly or define a focused diagnostic/investigation milestone whose target state is the required evidence.
@@ -135,9 +163,10 @@ Planning must also establish that the milestone's implementation volume is tract
 
 - its obligations are explicit, observable, and individually identifiable where they can be verified independently;
 - planning has seeded a lossless obligation registry for AI-executed milestones;
-- implementation can group those obligations into bounded coherent work packages without making new project-level decisions or replacing several obligations with a broad summary;
+- planning has identified and seeded materially distinct evidence cases where one obligation needs independent proof across heterogeneous paths;
+- implementation can group obligations into bounded coherent work packages without making new project-level decisions or replacing several obligations/evidence cases with a broad summary;
 - work-package progress can be externalized into repository-local operational state;
-- implementation and validation evidence can be associated with each specific applicable obligation;
+- implementation and validation evidence can be associated with each specific applicable obligation and evidence case;
 - an interrupted or compacted implementation session can reconstruct current execution state from the milestone, planning-seeded ledger, repository, and evidence.
 
 Execution tractability does not require planning to predict the concrete work-package decomposition. That decomposition belongs to implementation because it depends on the live repository and local mechanics.
@@ -213,7 +242,8 @@ Planning owns the seeded coverage structure:
 - stable obligation IDs;
 - one separate row for every individually verifiable acceptance criterion and material completion obligation;
 - the obligation type and wording mirrored from the milestone;
-- required validation-gate IDs, target/locus, and the obligation IDs each gate is intended to prove.
+- required evidence-case IDs for materially distinct proof paths;
+- required validation-gate IDs, target/locus, and the obligation/evidence-case IDs each gate is intended to prove.
 
 Implementation owns the evolving execution state:
 
@@ -235,7 +265,7 @@ execution ledger must not compress obligations
 
 A ledger row marked `done` is a claim about one specific obligation, not acceptance authority. Repository state and concrete evidence must independently establish that obligation.
 
-An aggregate validation result proves only the obligation IDs whose required behavior the executed scenario actually exercises. Passing a broad suite must not be used to fill evidence for criterion-specific behaviors that were not exercised.
+An aggregate validation result proves only the evidence units whose required behavior the executed scenario actually exercises. When explicit evidence cases exist, those cases—not only the parent obligation—must be established. Passing a broad suite must not be used to fill evidence for behaviors that were not exercised.
 
 The executor updates implementation-owned ledger fields after each coherent work package and relevant validation.
 
@@ -249,7 +279,11 @@ set(applicable milestone obligation IDs)
 set(ledger obligation IDs)
 ```
 
-and then verifies evidence for every individual applicable obligation. Set equality is necessary but not sufficient; duplicate, stale, indirect-without-justification, substitute-only, or merely asserted evidence does not establish completion.
+and then verifies evidence for every individual applicable obligation.
+
+When the milestone defines evidence cases, the executor also verifies exact set equality between required milestone evidence-case IDs and ledger evidence-case IDs, then verifies concrete evidence for every case.
+
+Set equality is necessary but not sufficient; duplicate, stale, indirect-without-justification, substitute-only, neighboring-case, or merely asserted evidence does not establish completion.
 
 The ledger is required while an AI-executed milestone is active. Retention after milestone completion is repository policy. Removing a completed ledger does not invalidate independently established milestone evidence.
 
@@ -269,9 +303,10 @@ read milestone, authority, and planning-seeded ledger
   -> update ledger and evidence
   -> repeat as needed
   -> freshly reread milestone from disk
-  -> reconcile milestone <-> ledger <-> repository/evidence
+  -> reconcile milestone/evidence cases <-> ledger <-> repository/evidence
   -> final validation
   -> completion audit
+  -> persist compact durable completion evidence
   -> terminal execution outcome
 ```
 
@@ -298,12 +333,34 @@ For every applicable obligation ID, the executor must then:
 - identify the work package or gate that claims coverage;
 - inspect the concrete implementation evidence;
 - identify the validation evidence required for that specific obligation;
-- verify that the executed validation actually exercises the behavior claimed by the obligation;
-- reject evidence inferred only from a neighboring criterion or an aggregate pass that did not exercise the required behavior.
+- when explicit evidence cases exist, enumerate and verify every required child evidence-case ID;
+- verify that the executed validation actually exercises the behavior claimed by the obligation/evidence case;
+- reject evidence inferred only from a neighboring criterion, sibling evidence case, different implementation path, or aggregate pass that did not exercise the required behavior.
 
 Unsupported, stale, indirect-without-justification, substitute-only, or merely asserted `done` states must be reopened. Newly discovered agent-resolvable gaps become active execution work and the loop continues.
 
 Final reconciliation also confirms that every required validation gate has current evidence from the required target/locus and that no agent-resolvable ledger item remains.
+
+## Durable completion evidence
+
+The mutable execution ledger exists to support implementation and recovery. Repository policy may remove it after milestone completion.
+
+Before a `COMPLETE` milestone transitions to `done`, implementation must preserve a compact completion-evidence reconciliation in the milestone itself (or in another project-defined immutable completion record explicitly referenced by the milestone).
+
+The durable record should map:
+
+```text
+obligation/evidence case
+-> concrete evidence
+-> validation gate/target
+-> result
+```
+
+Where explicit evidence cases exist, preserve those cases individually rather than collapsing them back into the parent obligation.
+
+The durable completion record is historical evidence. It does not amend the ready contract and must not contain work-package task lists, resume state, scratch reasoning, or the full mutable execution ledger.
+
+This allows reviewers and later release/readiness work to inspect what proved milestone completion even when `.execution/<milestone-id>.md` is no longer retained.
 
 ## Completion audit
 
