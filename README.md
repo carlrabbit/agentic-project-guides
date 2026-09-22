@@ -104,7 +104,7 @@ migrations/guide-system-v0.8.0-to-v0.9.0.md
 
 Existing completed milestones do not require retroactive ledger migration. Draft, ready, or active AI-executed milestones should be reconciled according to the migration guidance.
 
-See `decisions/ADR-0026-planning-seeds-lossless-execution-ledger.md`, `meta/MILESTONE-EXECUTION-MODEL.md`, and `templates/milestones/execution-ledger-template.md`.
+See `decisions/ADR-0026-planning-seeds-lossless-execution-ledger.md`, `decisions/ADR-0027-preserve-acceptance-evidence-topology.md`, `meta/MILESTONE-EXECUTION-MODEL.md`, and `templates/milestones/execution-ledger-template.md`.
 
 ## Version 0.8.0
 
