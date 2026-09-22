@@ -82,9 +82,12 @@ Before deriving work packages, perform a lossless coverage check:
 
 1. enumerate every applicable stable obligation ID from the freshly read milestone;
 2. enumerate every planner-seeded obligation ID in the ledger;
-3. verify exact set equality;
+3. verify exact obligation-ID set equality;
 4. verify no seeded obligation was merged, deleted, renumbered, paraphrased, or replaced by a broader summary;
-5. verify every required validation gate is represented with its declared target/locus and the obligation IDs it is intended to prove.
+5. enumerate every required `EC-*` evidence-case ID from the milestone and ledger;
+6. verify exact evidence-case-ID set equality when evidence cases exist;
+7. verify no evidence case was omitted, merged, paraphrased, or replaced by an aggregate claim;
+8. verify every required validation gate is represented with its declared target/locus and the exact obligation/evidence-case IDs it is intended to prove.
 
 If a legacy or externally prepared AI-executed milestone has no seeded ledger, initialize one from the milestone before production edits. Preserve every applicable obligation individually. Do not use the absence of a seeded ledger as permission to summarize the contract.
 
@@ -97,8 +100,9 @@ This is implementation decomposition, not a new planning phase. Do not reopen se
 For each work package:
 
 - map the specific seeded obligation IDs it covers;
-- map required validation only to obligation IDs the planned scenario actually exercises;
-- leave unrelated seeded obligations separate even when the same code change may affect them;
+- map any required evidence-case IDs without collapsing sibling cases;
+- map validation only to the obligation/evidence-case IDs the planned scenario actually exercises;
+- leave unrelated seeded obligations/evidence cases separate even when the same code change may affect them;
 - verify that no work package requires reopening a settled material decision.
 
 The execution ledger may compress work. It must not compress obligations.
@@ -122,7 +126,9 @@ For each work package:
 
 Do not mark a work package or obligation `done` merely because code was written or a test command was invoked. `done` means the live repository and recorded evidence establish that specific mapped obligation.
 
-A broad suite pass establishes only the obligation IDs whose required behavior the executed tests/scenarios actually exercise. Do not use neighboring coverage, assumed transitivity, or an aggregate green result as criterion-specific evidence.
+When an obligation has explicit evidence cases, do not mark it `done` until every applicable child evidence case is established.
+
+A broad suite pass establishes only the obligation/evidence-case IDs whose required behavior the executed tests/scenarios actually exercise. Do not use neighboring coverage, sibling-case coverage, assumed transitivity, or an aggregate green result as criterion-specific evidence.
 
 If context is compacted or the session is resumed, reread the primary milestone and `.execution/<milestone-id>.md` before continuing. Re-establish current repository state where the ledger may be stale.
 
@@ -213,27 +219,32 @@ First reconcile the contract shape:
 set(applicable milestone obligation IDs)
 ==
 set(ledger obligation IDs)
+
+set(required milestone evidence-case IDs)
+==
+set(ledger evidence-case IDs)
 ```
 
-Verify exact set equality, not merely equal counts. Confirm that no applicable obligation was omitted, merged, duplicated, renumbered, paraphrased into a broader claim, or replaced by a work-package summary.
+Verify exact set equality, not merely equal counts. Confirm that no applicable obligation or evidence case was omitted, merged, duplicated, renumbered, paraphrased into a broader claim, or replaced by a work-package/aggregate summary.
 
 Then reconcile:
 
 ```text
-each milestone obligation ID
+each milestone obligation/evidence-case ID
 <-> ledger mapping
 <-> live repository
-<-> criterion-specific evidence
+<-> specific evidence
 ```
 
 For every applicable obligation ID:
 
 - identify the ledger work package or gate that claims coverage;
 - inspect the actual implementation evidence;
-- identify the validation evidence required for that obligation;
-- verify the executed validation actually exercises the behavior stated by that obligation;
+- enumerate every required child evidence case, when defined;
+- identify the validation evidence required for that obligation/evidence case;
+- verify the executed validation actually exercises the behavior stated by that obligation/evidence case;
 - verify required evidence came from the declared target/locus;
-- reject evidence inferred only from a neighboring criterion, a different scenario, or an aggregate pass that did not exercise the required behavior;
+- reject evidence inferred only from a neighboring criterion, sibling evidence case, different implementation path, different scenario, or aggregate pass that did not exercise the required behavior;
 - downgrade any stale, unsupported, indirect-without-justification, substitute-only, or merely asserted `done` state;
 - add newly discovered agent-resolvable gaps to the implementation-owned ledger fields and continue implementation.
 
@@ -270,6 +281,18 @@ For every unsatisfied item:
 
 Repeat implementation, validation, ledger reconciliation, and completion audit as needed until no agent-resolvable milestone obligation remains.
 
+## Persist durable completion evidence
+
+After final reconciliation and the mandatory completion audit establish that the milestone is complete, but before reporting `COMPLETE`:
+
+1. update the milestone's `Completion Evidence` section (or the project-defined immutable completion record explicitly referenced by the milestone);
+2. record a compact mapping from every applicable obligation/evidence case to concrete evidence and validation gate/target;
+3. preserve explicit evidence cases individually rather than collapsing them back into one parent summary;
+4. omit work-package task lists, resume state, scratch reasoning, and other mutable execution detail;
+5. ensure the durable evidence summary can be understood after `.execution/<milestone-id>.md` is removed under repository policy.
+
+This completion-evidence update is historical evidence only. It must not rewrite or reinterpret the ready contract.
+
 ## Success semantics
 
 Keep these concepts distinct:
@@ -297,7 +320,9 @@ Use only when:
 
 - the primary milestone was freshly reread from disk;
 - exact milestone-obligation-to-ledger set reconciliation succeeded;
-- criterion-specific milestone-to-ledger-to-repository/evidence reconciliation succeeded;
+- exact required-evidence-case-to-ledger set reconciliation succeeded where evidence cases apply;
+- criterion/evidence-case-specific milestone-to-ledger-to-repository/evidence reconciliation succeeded;
+- compact durable completion evidence was written to the milestone or referenced immutable completion record;
 - every applicable milestone obligation is satisfied;
 - required validation is current from the required target/locus;
 - no agent-resolvable ledger gap remains;
@@ -346,7 +371,8 @@ Milestone status: BLOCKED
 Then report:
 
 - implemented outcome;
-- execution-ledger path, obligation-set equality result, and criterion-specific reconciliation result;
+- execution-ledger path, obligation/evidence-case set equality results, and criterion-specific reconciliation result;
+- durable completion-evidence location;
 - completion-audit result;
 - files changed;
 - validation commands run, target/locus, and results;
