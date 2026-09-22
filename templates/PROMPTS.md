@@ -99,7 +99,7 @@ Planning owns decisions that materially affect architecture, semantics, compatib
 
 Planning also owns the judgment that the milestone can be executed by the configured baseline implementation model without unresolved project-level reasoning and that its implementation volume is execution-tractable.
 
-Planning owns the lossless obligation identities and initial ledger coverage structure for AI-executed milestones.
+Planning owns the lossless obligation identities, selective evidence-case identities where material, and initial ledger coverage structure for AI-executed milestones.
 
 Implementation owns concrete files, types, functions, refactorings, test structure, execution work packages, implementation sequence, supporting edits required by the contract, ledger work-package/evidence/status/resume fields, persistent execution progress, validation, and completion audit where those choices remain inside the ready milestone contract.
 
@@ -133,13 +133,14 @@ Implementation follows:
 
 ```text
 read milestone, authority, and planning-seeded ledger
--> verify lossless obligation-set equality
+-> verify lossless obligation/evidence-case set equality
 -> execution decomposition
 -> map obligations to work packages
 -> implement/validate/update evidence and status by work package
 -> freshly reread milestone
--> reconcile milestone <-> ledger <-> repository/evidence
+-> reconcile obligation/evidence cases <-> ledger <-> repository/evidence
 -> completion audit
+-> persist compact durable completion evidence
 -> continue or terminate
 ```
 
