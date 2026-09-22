@@ -238,13 +238,14 @@ The ready milestone must contain, as applicable:
 8. required project authority, including specialization/profile-scope authority when applicable;
 9. acceptance criteria with stable IDs for every independently verifiable criterion;
 10. other material completion obligations with stable IDs where they are not already acceptance criteria;
-11. validation depth/tiers, stable validation-gate IDs, targets, execution loci, platform/capability requirements, concrete commands, execution mode, expected evidence, and the obligation IDs each gate is intended to prove;
-12. the planning-seeded execution-ledger path when the execution profile requires one;
-13. direct documentation impact;
-14. deferred documentation synchronization hints;
-15. human-review requirements;
-16. constrained-runtime requirements;
-17. escalation boundary for unresolved material decisions.
+11. explicit evidence cases with stable `EC-*` IDs when an obligation spans materially distinct proof paths;
+12. validation depth/tiers, stable validation-gate IDs, targets, execution loci, platform/capability requirements, concrete commands, execution mode, expected evidence, and the obligation/evidence-case IDs each gate is intended to prove;
+13. the planning-seeded execution-ledger path when the execution profile requires one;
+14. direct documentation impact;
+15. deferred documentation synchronization hints;
+16. human-review requirements;
+17. constrained-runtime requirements;
+18. escalation boundary for unresolved material decisions.
 
 Research artifacts may be referenced separately as non-authoritative evidence when useful, but they are not substitutes for item 8. Every operative conclusion required by implementation must be recoverable from the ready milestone or project authority.
 
@@ -252,7 +253,13 @@ Acceptance criteria and completion obligations must describe the milestone outco
 
 For AI-executed milestones, assign a stable ID to every individually verifiable acceptance criterion and every other material completion obligation. Several criteria may later map to one work package, but do not collapse separately provable behaviors into one broad obligation merely to shorten the milestone or ledger.
 
-Seed the execution ledger directly from the finalized milestone. Before `ready`, verify exact set equality between the milestone's applicable obligation IDs and the ledger's obligation rows. The ledger is a non-authoritative projection of the contract, not a second place to reinterpret it.
+For each obligation, ask whether evidence for one supported path could leave another materially different path unproven because it uses a different dispatch path, state scope, compatibility surface, provider/runtime path, inheritance path, or contractually distinct failure behavior.
+
+When yes, define stable evidence-case IDs (`EC-*`) for those paths. Evidence cases describe what must be proven, not the concrete test/file/mechanism.
+
+Do not generate a Cartesian product of every dimension. Create separate evidence cases only for distinctions that could plausibly hide different defects or contract failures.
+
+Seed the execution ledger directly from the finalized milestone. Before `ready`, verify exact set equality between the milestone's applicable obligation IDs and the ledger's obligation rows and, where evidence cases exist, exact set equality between milestone and ledger evidence-case IDs. The ledger is a non-authoritative projection of the contract, not a second place to reinterpret it.
 
 For large or long-running milestones, the seeded obligations must be structured clearly enough that the implementation agent can group them into bounded work packages and attach criterion-specific evidence. Planning does not need to predict those concrete work packages.
 
@@ -274,9 +281,12 @@ For each material validation obligation determine, as applicable:
 - platform/capability requirements;
 - provisioning/connection and cleanup/isolation constraints when these are project policy;
 - concrete invocation;
+- exact obligation/evidence-case IDs the validation is intended to prove;
 - expected evidence;
 - fallback behavior when the authoritative target is unavailable;
 - consumer/release relationship.
+
+When one capability applies across an existing union of materially different surfaces (for example scalar/enum, sync/async, provider A/provider B, source/packaged consumer), inspect whether those surfaces use different implementation paths. If they do, require separate evidence rather than treating one member as representative of the union.
 
 Do not infer that Tier 3 integration validation belongs in PR/CI workflows. A local installed runtime, real database, browser, native subsystem, remote service, or other declared target may be authoritative.
 
@@ -297,8 +307,10 @@ Before marking the milestone `ready`, explicitly verify that:
 - acceptance criteria let the executor distinguish correct completion from partial implementation;
 - every independently verifiable acceptance criterion and material completion obligation has a stable ID when the milestone is AI-executed;
 - the planning-seeded ledger contains exactly the applicable milestone obligation IDs with no grouping, omission, duplication, or reinterpretation;
-- every required validation gate identifies the specific obligation IDs it is intended to prove;
-- every material completion obligation is explicit enough to be mapped to implementation work and criterion-specific evidence;
+- every material evidence case has a stable ID and is seeded losslessly when one obligation spans heterogeneous proof paths;
+- evidence cases are selective rather than a mechanical Cartesian product;
+- every required validation gate identifies the specific obligation/evidence-case IDs it is intended to prove;
+- every material completion obligation is explicit enough to be mapped to implementation work and criterion/evidence-case-specific evidence;
 - subjective acceptance is routed to human review instead of being left as vague executor judgment;
 - required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, and fallback semantics are known where material;
 - large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
