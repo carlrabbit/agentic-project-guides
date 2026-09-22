@@ -15,9 +15,13 @@ For ordinary milestone-driven development, use only these two prompts:
 
 Planning resolves material architectural, semantic, compatibility, scope, acceptance, and validation uncertainty. It also establishes that the resulting milestone is executable and execution-tractable by the project's baseline implementation model.
 
-For AI-executed milestones, planning assigns stable IDs to every individually verifiable acceptance criterion and material completion obligation, then seeds `.execution/<milestone-id>.md` with a lossless pending obligation registry and the required validation gates. Planning does not seed work packages, implementation tasks, evidence, or completion state.
+For AI-executed milestones, planning assigns stable IDs to every individually verifiable acceptance criterion and material completion obligation, then seeds `.execution/<milestone-id>.md` with a lossless pending obligation registry and the required validation gates.
 
-Implementation reads the ready milestone, localized project authority, and planning-seeded ledger; verifies lossless obligation coverage; inspects the live repository; decomposes work into bounded execution work packages; maps those packages back to the seeded obligations; implements, validates, records criterion-specific evidence, reconciles the milestone against live evidence, performs a completion audit, and drives the milestone to a valid terminal execution outcome.
+When one obligation spans materially different proof paths, planning also seeds selective `EC-*` evidence cases. Do not mechanically generate Cartesian-product cases; use them only where one supported path would not prove another.
+
+Planning does not seed work packages, implementation tasks, concrete evidence, or completion state.
+
+Implementation reads the ready milestone, localized project authority, and planning-seeded ledger; verifies lossless obligation/evidence-case coverage; inspects the live repository; decomposes work into bounded execution work packages; maps those packages back to the seeded obligations; implements, validates, records criterion/evidence-case-specific evidence, reconciles the milestone against live evidence, performs a completion audit, persists a compact durable completion-evidence trace, and drives the milestone to a valid terminal execution outcome.
 
 Execution profile is selected during planning. Do not choose a different planning prompt merely because implementation will be human-led, AI-assisted, or AI-executed.
 
@@ -115,7 +119,9 @@ before `ready` with every individually verifiable obligation as a separate pendi
 
 Implementation reconciles that seeded registry before production edits, then extends it with work packages, evidence, status, and resume state.
 
-The ledger is operational state only and cannot amend the milestone or referenced authority. It may compress work but must not compress obligations.
+The ledger is operational state only and cannot amend the milestone or referenced authority. It may compress work but must not compress obligations or required evidence cases.
+
+Before mutable ledger cleanup after completion, preserve a compact obligation/evidence-case-to-proof summary in the milestone or its explicitly referenced immutable completion record.
 
 A small milestone may use one work package. Do not skip persistent execution state merely because the milestone appears simple.
 
