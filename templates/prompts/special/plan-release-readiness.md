@@ -128,15 +128,21 @@ After the milestone completes, the review is historical evidence. It is not a pe
 
 Use Tier 4 release/consumer validation when applicable.
 
-Release validation may depend on lower-tier integration evidence from a different locus. State that dependency explicitly instead of silently substituting CI checks for an unavailable authoritative target.
+Release validation may depend on lower-tier milestone completion evidence or integration evidence from a different locus. State that dependency explicitly instead of silently substituting CI checks for an unavailable authoritative target.
+
+Prior milestone completion evidence is an input to release planning, not release-candidate proof by itself. Reuse it only where the underlying artifact/behavior remains applicable and the release authority permits reuse.
+
+Run release-specific gates against the actual final release candidate commit/artifact and the intended stable version when the repository contract is version-sensitive. A prerelease surrogate, feature-branch head, or earlier package build does not establish the final candidate unless project authority explicitly defines equivalence.
 
 When long validation supports resumable execution, require `--plan-json`, bounded shards, receipts, and a fast verifier.
 
-Do not infer release readiness from partial output.
+Do not infer release readiness from partial output or from green CI whose tests do not cover the release obligation/evidence cases.
 
 ## Publication
 
 Publication and validation are separate obligations.
+
+Release readiness and feature-milestone completion are also separate obligations. A completed feature milestone may provide evidence, but the release milestone must still establish release-specific package, compatibility, documentation, publication-channel, and final-candidate gates required by project authority.
 
 A repository may intentionally use a topology such as:
 
@@ -167,4 +173,4 @@ After creating the ZIP, provide:
 
 ## Quality bar
 
-The package is acceptable only if the release target is unambiguous, publish operations are not accidentally performed, validation depth/target/locus is concrete, review is milestone-scoped, required public surfaces are covered, and the implementation agent does not need to read the external guide repository.
+The package is acceptable only if the release target and final candidate are unambiguous, publish operations are not accidentally performed, validation depth/target/locus is concrete, required obligation/evidence cases are explicit where release surfaces differ materially, prior milestone evidence is not mistaken for final-candidate proof, review is milestone-scoped, required public surfaces are covered, and the implementation agent does not need to read the external guide repository.
