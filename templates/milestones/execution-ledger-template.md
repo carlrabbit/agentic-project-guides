@@ -111,4 +111,5 @@ Before `COMPLETE`:
 - [ ] downgrade any stale, indirect-without-justification, substitute-only, or merely asserted `done` state;
 - [ ] confirm every required validation gate has current evidence from the declared target/locus;
 - [ ] confirm no agent-resolvable gap remains;
-- [ ] run the milestone's final validation and completion audit.
+- [ ] run the milestone's final validation and completion audit;
+- [ ] write the compact durable obligation/evidence-case-to-proof reconciliation to the milestone's Completion Evidence section or referenced immutable completion record before this ledger is eligible for cleanup.
