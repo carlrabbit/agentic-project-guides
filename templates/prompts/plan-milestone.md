@@ -245,7 +245,8 @@ The ready milestone must contain, as applicable:
 15. deferred documentation synchronization hints;
 16. human-review requirements;
 17. constrained-runtime requirements;
-18. escalation boundary for unresolved material decisions.
+18. durable completion-evidence destination (normally the milestone's `Completion Evidence` section);
+19. escalation boundary for unresolved material decisions.
 
 Research artifacts may be referenced separately as non-authoritative evidence when useful, but they are not substitutes for item 8. Every operative conclusion required by implementation must be recoverable from the ready milestone or project authority.
 
@@ -313,6 +314,7 @@ Before marking the milestone `ready`, explicitly verify that:
 - evidence cases are selective rather than a mechanical Cartesian product;
 - every required validation gate identifies the specific obligation/evidence-case IDs it is intended to prove;
 - every material completion obligation is explicit enough to be mapped to implementation work and criterion/evidence-case-specific evidence;
+- the milestone identifies where compact durable completion evidence will be preserved after successful reconciliation;
 - subjective acceptance is routed to human review instead of being left as vague executor judgment;
 - required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, and fallback semantics are known where material;
 - large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
