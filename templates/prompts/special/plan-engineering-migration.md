@@ -95,6 +95,7 @@ docs/artifacts/xxx.md
 docs/review/xxx.md
 .review/pending/xxx.md
 .guide-sync/pending/xxx.md
+.execution/M00XX-<milestone>.md
 ```
 
 Only include files directly needed to make the milestone implementation-ready.
