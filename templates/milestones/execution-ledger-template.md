@@ -29,6 +29,23 @@ An obligation is `done` only when the live repository and recorded evidence esta
 
 Before implementation starts, verify that the set of applicable obligation IDs in the milestone equals the set represented in this registry. If the planner-seeded registry is incomplete or inconsistent with the milestone, reconcile it from the milestone without compressing obligations; if the mismatch reflects a material contract ambiguity, return to planning.
 
+## Evidence Case Registry
+
+Planning seeds this section only for obligations that require materially distinct proof paths.
+
+Planner-owned columns are `ID`, `Parent obligation`, and `Required evidence case`. Implementation must not delete, merge, renumber, paraphrase, or replace planner-seeded evidence cases.
+
+| ID | Parent obligation | Required evidence case | Validation gate(s) | Evidence | Status |
+|---|---|---|---|---|---|
+| EC-01a | AC-01 | <distinct behavior/path that must be proven> | VAL-01 | | todo |
+| EC-01b | AC-01 | <another distinct behavior/path> | VAL-02 | | todo |
+
+Do not create evidence cases mechanically for every possible combination. They exist only when planning identified a materially different path, state mechanism, compatibility surface, or failure behavior that needs independent proof.
+
+An obligation with evidence cases is not `done` until all applicable child evidence cases are established in addition to any required implementation evidence.
+
+Obligations without evidence cases are proven directly through their obligation row and validation gates.
+
 ## Work Packages
 
 Implementation owns this section.
@@ -57,11 +74,13 @@ Work packages may group many obligations. They do not replace the individual obl
 
 Planning seeds required validation gates before `ready`. Implementation records execution evidence and status.
 
-| ID | Required validation | Target/locus | Proves obligations | Status | Evidence |
+| ID | Required validation | Target/locus | Proves evidence units | Status | Evidence |
 |---|---|---|---|---|---|
-| VAL-01 | <command/check> | <target + local/CI/remote/mixed> | <AC-01, ...> | todo | |
+| VAL-01 | <command/check> | <target + local/CI/remote/mixed> | <EC-01a, EC-01b or AC-01> | todo | |
 
-A validation gate may prove several obligations, but `Proves obligations` must name the specific obligation IDs actually exercised. Do not infer criterion coverage merely because an aggregate suite passed.
+When explicit evidence cases exist, map the gate to those `EC-*` IDs. Otherwise map it directly to obligation IDs.
+
+A validation gate may prove several evidence units, but it must name only the behaviors actually exercised. Do not infer coverage merely because an aggregate suite passed.
 
 ## Resume Point
 
@@ -85,8 +104,10 @@ Before `COMPLETE`:
 - [ ] enumerate the milestone's applicable obligation IDs;
 - [ ] verify exact set equality with the planner-seeded obligation registry;
 - [ ] verify no obligation was merged, deleted, renumbered, or replaced by a broader summary;
+- [ ] enumerate all planner-seeded evidence-case IDs and verify none were omitted, merged, or replaced by an aggregate claim;
 - [ ] reconcile every obligation ID against its concrete implementation evidence;
-- [ ] verify each required validation claim actually exercises the obligation IDs it claims to prove;
+- [ ] reconcile every required evidence-case ID against concrete validation evidence;
+- [ ] verify each validation claim actually exercises the obligation/evidence-case IDs it claims to prove;
 - [ ] downgrade any stale, indirect-without-justification, substitute-only, or merely asserted `done` state;
 - [ ] confirm every required validation gate has current evidence from the declared target/locus;
 - [ ] confirm no agent-resolvable gap remains;
