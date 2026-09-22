@@ -24,8 +24,10 @@ Planning promotes implementation-affecting research conclusions into project aut
 A ready milestone must be executable by the project's baseline implementation model without research reconstruction.
 For AI-executed milestones, planning seeds a lossless execution-ledger obligation registry before ready.
 The ledger may compress work but must not compress milestone obligations.
-Implementation derives bounded work packages from the live repository and maps them to the seeded obligation IDs.
-AI executors persist work-package progress and criterion-specific evidence in the repository-local execution ledger.
+When one obligation spans materially distinct proof paths, planning seeds selective evidence-case IDs.
+Implementation derives bounded work packages from the live repository and maps them to the seeded obligation/evidence-case IDs.
+AI executors persist work-package progress and criterion/evidence-case-specific evidence in the repository-local execution ledger.
+Before mutable ledger cleanup, completion preserves a compact durable evidence trace.
 Implementation derives concrete edits from the live repository and the ready milestone.
 The executor owns milestone closure, not only code production and test execution.
 Validation success is evidence, not milestone completion by itself.
@@ -78,7 +80,19 @@ A broad work-package completion or aggregate green test run no longer establishe
 
 Before `COMPLETE`, implementation verifies exact set equality between applicable milestone obligation IDs and ledger obligation IDs, then verifies implementation and validation evidence for every individual obligation.
 
-A validation gate may prove several obligations, but only when the executed scenario actually exercises those behaviors.
+When one obligation spans materially different paths—such as scalar/enum dispatch, Root/Batch state, inherited/direct behavior, or source/packaged consumer surfaces—planning may define stable `EC-*` evidence cases. These cases identify what needs independent proof without prescribing concrete tests.
+
+Evidence cases are selective. Do not generate the Cartesian product of every dimension.
+
+A validation gate may prove several obligations/evidence cases, but only when the executed scenario actually exercises those behaviors.
+
+### Durable completion evidence
+
+The execution ledger remains mutable operational state and may be removed after completion according to repository policy.
+
+Before that happens, implementation preserves a compact historical mapping from each obligation/evidence case to the concrete evidence and validation gate/target that established it. This trace lives in the milestone or another immutable completion record explicitly referenced by it.
+
+This keeps milestone completion auditable without retaining work-package tasks, resume state, or the full execution ledger.
 
 ### Migration
 
