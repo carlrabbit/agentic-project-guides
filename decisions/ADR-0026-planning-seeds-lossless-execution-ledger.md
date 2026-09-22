@@ -38,6 +38,12 @@ The ledger remains non-authoritative operational state. The milestone and refere
 
 No generic ledger-initialization command is required. Planning already owns the obligation set and can project it directly into the ledger without a parser or generator.
 
+## 0.9 evidence-topology refinement
+
+`ADR-0027-preserve-acceptance-evidence-topology.md` extends this decision where one obligation contains materially distinct proof paths.
+
+ADR-0026 remains authoritative for lossless obligation identity and planning-seeded ledger ownership. ADR-0027 adds selective `EC-*` evidence cases and durable post-completion evidence traceability.
+
 ## Consequences
 
 Planning packages for AI-executed milestones contain both the ready milestone and its seeded execution ledger.
