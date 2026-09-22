@@ -180,9 +180,12 @@ Seed only contract-derived coverage:
 
 - stable IDs for every individually verifiable acceptance criterion and material completion obligation;
 - one separate pending ledger row per obligation;
-- required validation-gate IDs, target/locus, and the obligation IDs each gate is intended to prove.
+- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
+- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
 
-Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry.
+Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
+
+Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
 
 Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
 
