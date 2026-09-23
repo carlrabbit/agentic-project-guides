@@ -22,6 +22,25 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 If the target repository contains `.review/`, treat it as repository-local human-review state. Read it only when the milestone requires human review, engineering migration, documentation synchronization, or release readiness.
 
+## Planning-seeded execution ledger
+
+When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
+
+Seed only contract-derived coverage:
+
+- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
+- one separate pending ledger row per obligation;
+- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
+- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
+
+Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
+
+Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
+
+Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
+
+The execution ledger may compress work. It must not compress obligations.
+
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
@@ -76,6 +95,7 @@ docs/artifacts/xxx.md
 docs/review/xxx.md
 .review/pending/xxx.md
 .guide-sync/pending/xxx.md
+.execution/M00XX-<milestone>.md
 ```
 
 Only include files directly needed to make the milestone implementation-ready.

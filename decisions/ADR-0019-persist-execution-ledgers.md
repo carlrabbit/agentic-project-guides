@@ -4,6 +4,8 @@
 
 Accepted in guide system v0.7.3.
 
+Amended by `ADR-0026-planning-seeds-lossless-execution-ledger.md` in guide system v0.9.0. ADR-0026 changes ledger initialization ownership and lossless obligation requirements while retaining this ADR's persistent operational-state purpose.
+
 ## Context
 
 A ready milestone can be semantically complete yet still require a long implementation trajectory. During long agent runs, repository inspection, edits, test output, validation receipts, retries, and context compaction can make the executor's conversational working state unreliable.
@@ -49,6 +51,17 @@ milestone obligations
 A checked ledger row is not proof by itself. If the repository state or evidence does not establish the mapped obligation, the item is still incomplete.
 
 The ledger is required while the milestone is active. After milestone completion, retention is repository policy; removing an operational ledger after completion does not invalidate independently established milestone evidence.
+
+## 0.9 amendment
+
+The original v0.7.3 decision assigned ledger creation to implementation. Guide-system 0.9 keeps execution decomposition and mutable progress/evidence state implementation-owned, but moves initialization of the lossless milestone-obligation registry to planning.
+
+For current behavior, ADR-0026 governs where it differs from the original decision below:
+
+- planning seeds one pending row per independently verifiable milestone obligation and the required validation gates before `ready`;
+- implementation preserves those rows and maps them to work packages/evidence;
+- work may be grouped, but obligations may not be compressed;
+- final reconciliation verifies exact obligation-ID set equality and criterion-specific evidence.
 
 ## Consequences
 
