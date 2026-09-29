@@ -68,6 +68,7 @@ docs/SPECS.md
 docs/ENGINEERING.md
 docs/MILESTONES.md
 docs/milestones/M0001-initialization.md
+.execution/M0001-initialization.md   # when the initialization milestone is AI-executed
 ```
 
 Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
@@ -125,6 +126,25 @@ Resolve as applicable:
 - consumer/release relationship.
 
 If the project intentionally uses integration-first testing, record that policy in project engineering authority. Do not create unit-test requirements merely because of an assumed generic test pyramid.
+
+## Planning-seeded execution ledger
+
+When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
+
+Seed only contract-derived coverage:
+
+- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
+- one separate pending ledger row per obligation;
+- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
+- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
+
+Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
+
+Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
+
+Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
+
+The execution ledger may compress work. It must not compress obligations.
 
 ## Planning/implementation separation
 

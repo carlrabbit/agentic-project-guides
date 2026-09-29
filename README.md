@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.8.0
+Version: 0.9.0
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -22,8 +22,12 @@ Planning resolves uncertainty and produces a ready milestone.
 Planning may preserve reusable evidence without preserving the planning conversation.
 Planning promotes implementation-affecting research conclusions into project authority.
 A ready milestone must be executable by the project's baseline implementation model without research reconstruction.
-Implementation begins by decomposing the ready milestone into bounded execution work packages.
-AI executors persist coverage and progress in a repository-local execution ledger.
+For AI-executed milestones, planning seeds a lossless execution-ledger obligation registry before ready.
+The ledger may compress work but must not compress milestone obligations.
+When one obligation spans materially distinct proof paths, planning seeds selective evidence-case IDs.
+Implementation derives bounded work packages from the live repository and maps them to the seeded obligation/evidence-case IDs.
+AI executors persist work-package progress and criterion/evidence-case-specific evidence in the repository-local execution ledger.
+Before mutable ledger cleanup, completion preserves a compact durable evidence trace.
 Implementation derives concrete edits from the live repository and the ready milestone.
 The executor owns milestone closure, not only code production and test execution.
 Validation success is evidence, not milestone completion by itself.
@@ -31,6 +35,76 @@ Distributable artifacts are validated through their intended consumer mechanism.
 Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
+
+## Version 0.9.0
+
+Version 0.9.0 strengthens execution traceability for AI-executed milestones by moving lossless obligation-registry initialization into planning while preserving implementation ownership of work decomposition.
+
+### Planning-seeded execution ledger
+
+For AI-executed milestones, planning now assigns stable IDs to every independently verifiable acceptance criterion and material completion obligation and creates:
+
+```text
+.execution/<milestone-id>.md
+```
+
+before the milestone becomes `ready`.
+
+Planning seeds only:
+
+- the primary milestone reference;
+- one separate pending row per milestone obligation;
+- stable obligation identities and wording;
+- required validation gates, targets/loci, and the obligation IDs each gate is intended to prove.
+
+Implementation still owns:
+
+- work-package decomposition;
+- concrete implementation mapping;
+- implementation and validation evidence;
+- status progression;
+- resume state.
+
+The governing rule is:
+
+```text
+the execution ledger may compress work
+the execution ledger must not compress obligations
+```
+
+Several criteria may map to one work package, but they remain separate ledger rows.
+
+### Criterion-specific completion evidence
+
+A broad work-package completion or aggregate green test run no longer establishes unrelated acceptance criteria implicitly.
+
+Before `COMPLETE`, implementation verifies exact set equality between applicable milestone obligation IDs and ledger obligation IDs, then verifies implementation and validation evidence for every individual obligation.
+
+When one obligation spans materially different paths—such as scalar/enum dispatch, Root/Batch state, inherited/direct behavior, or source/packaged consumer surfaces—planning may define stable `EC-*` evidence cases. These cases identify what needs independent proof without prescribing concrete tests.
+
+Evidence cases are selective. Do not generate the Cartesian product of every dimension.
+
+A validation gate may prove several obligations/evidence cases, but only when the executed scenario actually exercises those behaviors.
+
+### Durable completion evidence
+
+The execution ledger remains mutable operational state and may be removed after completion according to repository policy.
+
+Before that happens, implementation preserves a compact historical mapping from each obligation/evidence case to the concrete evidence and validation gate/target that established it. This trace lives in the milestone or another immutable completion record explicitly referenced by it.
+
+This keeps milestone completion auditable without retaining work-package tasks, resume state, or the full execution ledger.
+
+### Migration
+
+From v0.8.0, use:
+
+```text
+migrations/guide-system-v0.8.0-to-v0.9.0.md
+```
+
+Existing completed milestones do not require retroactive ledger migration. Draft, ready, or active AI-executed milestones should be reconciled according to the migration guidance.
+
+See `decisions/ADR-0026-planning-seeds-lossless-execution-ledger.md`, `decisions/ADR-0027-preserve-acceptance-evidence-topology.md`, `meta/MILESTONE-EXECUTION-MODEL.md`, and `templates/milestones/execution-ledger-template.md`.
 
 ## Version 0.8.0
 
@@ -145,8 +219,10 @@ Implementation still owns concrete code/test mechanics that fit that contract.
 
 ## Upgrade
 
-From v0.7.5, use:
+From v0.8.0, use:
 
 ```text
-migrations/guide-system-v0.7.5-to-v0.8.0.md
+migrations/guide-system-v0.8.0-to-v0.9.0.md
 ```
+
+Repositories older than 0.8.0 apply the complete migration chain in order.
