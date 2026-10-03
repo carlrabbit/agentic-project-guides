@@ -101,6 +101,15 @@ or:
 base + artifact-first-runtime + capability-provider role + implementation-ready maturity
 ```
 
+or, for a first-class command-line product:
+
+```text
+base + cli-tool
++ project-local distribution specialization
+```
+
+For example, a .NET global/local tool uses `cli-tool` for reusable command/process expectations while `dotnet-tool` packaging remains project-local specialization. Do not add `dotnet-library` solely because the tool is transported as a NuGet package.
+
 Profiles describe broad reusable engineering shapes. They are not feature tags for operating systems, test strategies, packaging choices, execution locations, named vendor products, or concrete project architectures.
 
 ### Scoped composition
