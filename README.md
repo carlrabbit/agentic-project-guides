@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.9.0
+Version: 0.9.1
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -35,6 +35,45 @@ Distributable artifacts are validated through their intended consumer mechanism.
 Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
+
+## Version 0.9.1
+
+Version 0.9.1 adds a reusable `cli-tool` profile for first-class command-line products.
+
+### CLI tool profile
+
+Use `cli-tool` when the command-line executable is itself a supported user or automation surface rather than merely an internal repository script.
+
+The profile makes recurring CLI planning decisions explicit, including:
+
+- command/subcommand and argument/option contracts;
+- interactive versus non-interactive behavior;
+- stdout/stderr ownership;
+- exit semantics;
+- structured output;
+- input/configuration precedence;
+- relative-path and filesystem behavior;
+- process/environment/cancellation behavior;
+- diagnostics and secret handling;
+- help/version surfaces;
+- compatibility-sensitive CLI behavior;
+- representative process-boundary and distributed-artifact validation.
+
+The profile is technology-neutral. Concrete implementation and distribution choices remain project-local specialization.
+
+For example, a .NET global/local tool normally uses:
+
+```text
+base
++ cli-tool
++ project-local specialization:
+    implementation = .NET
+    distribution = dotnet-tool
+```
+
+Do not add `dotnet-library` solely because `dotnet tool` uses NuGet as its transport. Add it only when the repository also exposes a supported reusable library/API surface.
+
+See `profiles/cli-tool/`, `meta/PROFILE-MODEL.md`, and `migrations/guide-system-v0.9.0-to-v0.9.1.md`.
 
 ## Version 0.9.0
 
@@ -173,7 +212,7 @@ The former central `project-types/agentic-2d-game-engine/` layer is removed. Con
 
 ### Profiles and mixed repositories
 
-Profiles remain broad reusable engineering shapes such as `dotnet-library`, `source-generator`, or `artifact-first-runtime`.
+Profiles remain broad reusable engineering shapes such as `dotnet-library`, `source-generator`, `cli-tool`, or `artifact-first-runtime`.
 
 Do not create profiles merely for an operating system, local/CI execution, integration-first testing, one packaging mechanism, one external product, or one concrete project architecture.
 
@@ -219,10 +258,10 @@ Implementation still owns concrete code/test mechanics that fit that contract.
 
 ## Upgrade
 
-From v0.8.0, use:
+From v0.9.0, use:
 
 ```text
-migrations/guide-system-v0.8.0-to-v0.9.0.md
+migrations/guide-system-v0.9.0-to-v0.9.1.md
 ```
 
-Repositories older than 0.8.0 apply the complete migration chain in order.
+Repositories older than 0.9.0 apply the complete migration chain in order.

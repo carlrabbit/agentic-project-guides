@@ -1,5 +1,63 @@
 # Changelog
 
+## 0.9.1
+
+Migration required: no by default; conditional when a repository chooses to adopt the new `cli-tool` profile.
+
+Affected areas:
+
+- reusable profile catalog;
+- new-project profile selection;
+- CLI/process contract guidance;
+- consumer/distribution validation;
+- project-local specialization boundary;
+- guide-profile version metadata.
+
+### Added — CLI tool profile
+
+0.9.1 adds the technology-neutral `cli-tool` profile for repositories or repository scopes that expose a supported command-line executable as a first-class product surface.
+
+The profile activates recurring planning/engineering concerns including:
+
+- command and invocation semantics;
+- non-interactive automation;
+- stdout/stderr ownership;
+- structured output;
+- stable exit semantics;
+- configuration/input precedence;
+- path/filesystem behavior;
+- environment/process/cancellation behavior;
+- diagnostics;
+- help/version behavior;
+- compatibility-sensitive CLI surfaces;
+- representative process-boundary validation;
+- distributed-artifact consumer validation.
+
+### Clarified — profile versus distribution specialization
+
+A concrete distribution mechanism such as `dotnet tool` is not a profile.
+
+A .NET tool normally composes:
+
+```text
+base + cli-tool
++ project-local .NET/dotnet-tool specialization
+```
+
+Do not add `dotnet-library` merely because the CLI is transported through a NuGet package. Apply `dotnet-library` only when a genuine reusable library/API surface also exists.
+
+Likewise, apply `artifact-first-runtime` only when artifact production/provenance is materially part of the product shape rather than merely because the CLI writes files.
+
+### Migration
+
+Use:
+
+```text
+migrations/guide-system-v0.9.0-to-v0.9.1.md
+```
+
+Existing repositories do not need to adopt `cli-tool` unless the profile genuinely matches a supported CLI product surface.
+
 ## 0.9.0
 
 Migration required: recommended for repositories using AI-executed milestones and persistent execution ledgers; otherwise metadata-only/no-op may be sufficient.

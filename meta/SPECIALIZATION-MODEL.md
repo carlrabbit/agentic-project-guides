@@ -97,6 +97,20 @@ concrete project authority:
 
 Do not promote `Windows`, `local-development`, `integration-first`, `NuGet`, `GitHub`, or a named external product into profiles merely to make the composition machine-like.
 
+A reusable product shape can still justify a profile even when one concrete realization uses a technology-specific packaging mechanism. For example:
+
+```text
+profile:
+  cli-tool
+
+project specialization:
+  implementation = .NET
+  distribution = dotnet-tool
+  command name / package metadata / installation policy = repository-specific
+```
+
+The profile owns reusable CLI/process concerns. The specialization owns the concrete .NET tool packaging/runtime choices.
+
 ## Promotion to reusable guidance
 
 Start technology- or architecture-specific rules as project-local specialization.

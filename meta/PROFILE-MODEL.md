@@ -16,6 +16,7 @@ Example profiles:
 base
 dotnet-library
 source-generator
+cli-tool
 blazor-component
 artifact-first-runtime
 ```
@@ -83,19 +84,30 @@ Repository-wide example:
 ```json
 {
   "id": "dotnet-library",
-  "version": "0.8.0",
+  "version": "0.9.1",
   "scopes": [
     { "kind": "repository" }
   ]
 }
 ```
 
+A first-class command-line product is a reusable product shape rather than merely a packaging mechanism. Use `cli-tool` when the command/process surface itself is supported product behavior.
+
+For example, a .NET global/local tool normally uses:
+
+```text
+base + cli-tool
++ project-local distribution specialization: dotnet-tool
+```
+
+Do not add `dotnet-library` solely because `dotnet tool` uses a NuGet package as transport. Add it only when a supported reusable library/API surface also exists.
+
 Scoped example:
 
 ```json
 {
   "id": "source-generator",
-  "version": "0.8.0",
+  "version": "0.9.1",
   "scopes": [
     {
       "kind": "component",
@@ -149,6 +161,8 @@ source-generator     [component: generator-packages]
 The `.NET library` obligations continue to apply to the package suite. Source-generator obligations additionally apply to the generator components. Generator-specific packaging or compiler-host behavior is then resolved in project-local engineering authority.
 
 Concrete target integrations such as EF Core, Power BI, SQL Server, browsers, or named vendor runtimes remain project-local specializations unless a vendor-independent reusable engineering shape justifies a future profile.
+
+A concrete distribution choice such as `dotnet tool`, npm, an OS package, or a standalone archive remains project-local specialization even when the reusable `cli-tool` profile applies.
 
 ## Promotion boundary
 
