@@ -18,6 +18,7 @@
 | Repository validation | <Tier 2 command/check or not-applicable> |
 | Integration validation | <Tier 3 target + command/check or not-applicable> |
 | Validation locus/platform | <local|CI|remote|mixed; platform/capability requirements> |
+| Environment authority | <project authority reference or scoped execution/provisioning/infrastructure permissions when material> |
 | Consumer/release validation | <Tier 4 mechanism or not-applicable> |
 | Human review | <none|recommended|required|blocking> |
 
@@ -159,6 +160,14 @@ When an obligation has explicit evidence cases, validation maps to those `EC-*` 
 
 A gate may prove several evidence units, but planning must not claim coverage for a case whose behavior the validation scenario does not actually exercise.
 
+When a prerequisite may be missing, preserve three separate permissions in the execution profile, decisions/constraints, or referenced project engineering authority:
+
+- **Execution:** which existing commands, tools, and environments can be used;
+- **Provisioning:** whether an executor may install SDKs/compiler/native tools, and whether the scope is isolated, disposable, user-scoped, or persistent/host-wide;
+- **Infrastructure modification:** whether creating or materially changing CI/CD workflows, runners, triggers, permissions, or remote services is within this milestone.
+
+For each gate, identify any allowed alternative locus (for example local Windows versus existing hosted Windows CI) and whether its evidence is equivalent. A broad "supported host" alone is insufficient when it changes the execution location or requires new infrastructure. If prerequisites are unavailable and no authorized path exists, specify that the executor must preserve the missing evidence and report `BLOCKED` or escalate the unresolved material choice. This does not require the prerequisite to have been installed before planning declares the milestone ready.
+
 Do not assume that Tier 3 integration validation runs in CI. Local Windows, local Linux, a remote service, CI, or a mixed topology are all valid when declared by project authority.
 
 If an integration target requires technology-specific provisioning, isolation/reset, identity, invocation, or evidence rules, reference the project-local specialization rather than restating the external guide system.
@@ -251,4 +260,4 @@ Do not copy work-package tasks, resume state, conversational reasoning, or the f
 
 Implementation owns concrete code/test mechanics, execution decomposition, and supporting edits that fit this contract.
 
-Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, validation policy, or a required project specialization, or if a material planning decision cannot be recovered from durable project authority without repeating project-level reasoning.
+Return the milestone to planning if implementation requires a new decision that materially changes architecture, semantics, compatibility, scope, acceptance criteria, validation policy, accepted validation locus, environment provisioning/infrastructure authority, or a required project specialization, or if a material planning decision cannot be recovered from durable project authority without repeating project-level reasoning.

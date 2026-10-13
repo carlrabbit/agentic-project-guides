@@ -113,19 +113,23 @@ Do not persist the adoption mode in `.guide-profile.json`.
 
 ## Validation and specialization
 
-If correctness depends on an external runtime, installed application, service, real database, browser, native subsystem, or other concrete integration target, initialize enough project authority to make its validation contract explicit before implementation depends on it.
+If correctness depends on an SDK/compiler toolchain, external runtime, installed application, service, real database, browser, native subsystem, or other concrete integration target, initialize enough project authority to make its validation contract explicit before implementation depends on it.
 
 Resolve as applicable:
 
 - target;
 - execution locus;
 - platform/capability requirements;
-- provisioning/connection;
+- provisioning/connection, including whether prerequisites are expected to be preinstalled;
+- executor permission to install tools or change persistent machine configuration;
+- permission to create/modify CI/CD workflows or other shared infrastructure;
 - isolation/reset;
 - invocation;
 - evidence;
-- fallback/failure semantics;
+- fallback/failure semantics, including accepted alternative loci and evidence equivalence;
 - consumer/release relationship.
+
+During bootstrap, explicitly check which toolchain/runtime capabilities the first milestone needs and whether a missing prerequisite can be provisioned in an authorized disposable/user-scoped environment, must be supplied by the environment owner, or should result in `BLOCKED`. Do not silently substitute GitHub Actions or another execution location for local validation. An absent prerequisite is compatible with a ready milestone when authority, evidence location, and the blocked path are settled; it is not a license for infrastructure creation.
 
 If the project intentionally uses integration-first testing, record that policy in project engineering authority. Do not create unit-test requirements merely because of an assumed generic test pyramid.
 

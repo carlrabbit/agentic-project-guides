@@ -283,6 +283,8 @@ For each material validation obligation determine, as applicable:
 - execution locus: local, CI, remote, or mixed;
 - platform/capability requirements;
 - provisioning/connection and cleanup/isolation constraints when these are project policy;
+- permissions for toolchain installation, persistent host changes, and creation/modification of CI/CD or external infrastructure when material;
+- permitted alternative host types/loci and their evidence equivalence, if any;
 - concrete invocation;
 - exact obligation/evidence-case IDs the validation is intended to prove;
 - expected evidence;
@@ -294,6 +296,10 @@ When one capability applies across an existing union of materially different sur
 Do not infer that Tier 3 integration validation belongs in PR/CI workflows. A local installed runtime, real database, browser, native subsystem, remote service, or other declared target may be authoritative.
 
 Do not weaken an integration target to a fake or shallow substitute merely because the real target is unavailable in CI. Instead, represent the actual locus/capability constraint and separate portable CI checks from authoritative integration evidence.
+
+Distinguish authority to run a gate from authority to provision its prerequisites or change infrastructure. If a required SDK, compiler, runtime, or other capability may be absent, resolve whether the executor may provision it (and at what persistence/permission scope), must use an existing authorized host, or must report `BLOCKED`. Do not use an ambiguous fallback such as "another supported host" without identifying whether local machines, existing CI, new CI workflows, or remote hosts are acceptable. Being allowed to validate in CI does not automatically authorize adding a CI workflow.
+
+An absent installed prerequisite does not alone prevent `ready` when the permitted remediation/blocked path and accepted evidence loci are defined. Do not pre-install the environment as a prerequisite to writing a sound milestone contract.
 
 If the project's testing policy is integration-first, do not introduce unit-test obligations merely to satisfy an assumed test pyramid. Require the evidence needed for the project's actual boundaries.
 
@@ -316,7 +322,7 @@ Before marking the milestone `ready`, explicitly verify that:
 - every material completion obligation is explicit enough to be mapped to implementation work and criterion/evidence-case-specific evidence;
 - the milestone identifies where compact durable completion evidence will be preserved after successful reconciliation;
 - subjective acceptance is routed to human review instead of being left as vague executor judgment;
-- required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, and fallback semantics are known where material;
+- required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, permitted provisioning, infrastructure-change authority, and accepted alternative-locus/fallback semantics are known where material;
 - large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
 - long implementation can resume from repository-local execution state rather than depending on conversational memory;
 - long validation has a safe bounded/resumable shape where required;

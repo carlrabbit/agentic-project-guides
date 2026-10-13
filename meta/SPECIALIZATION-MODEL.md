@@ -58,6 +58,8 @@ For an external or runtime-bound integration target, project authority should re
 - execution locus;
 - platform/capability requirements;
 - provisioning/connection;
+- permitted host provisioning versus shared infrastructure changes;
+- accepted alternative execution loci and evidence equivalence;
 - isolation;
 - reset/cleanup;
 - identity/secrets;

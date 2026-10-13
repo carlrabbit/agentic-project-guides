@@ -35,6 +35,7 @@ A ready milestone defines, as applicable:
 - required authority documents;
 - acceptance criteria;
 - validation depth, targets, execution loci, platform/capability requirements, commands, and evidence;
+- permitted execution-environment provisioning, infrastructure modifications, and alternative validation loci where material;
 - direct documentation impact;
 - deferred documentation synchronization;
 - human-review gates;
@@ -203,6 +204,10 @@ The executor does not need the planning conversation, external guide repository,
 Ordinary implementation should not create research merely to record reasoning or discoveries. When a milestone explicitly assigns investigation/evidence preservation, the executor may create or update research, but research cannot amend project authority. Material decisions exposed by the evidence return to planning.
 
 The instruction to remain within milestone scope forbids unrelated expansion. It does not forbid supporting edits necessary to satisfy the milestone goal, target state, acceptance criteria, validation, documentation, artifact, migration, cleanup, or review obligations.
+
+Supporting work does not grant new environment authority. The executor may run declared commands and perform authorized, isolated setup, but must not treat a missing SDK, compiler, runtime, or service as permission to change persistent host configuration, create CI workflows, or relocate authoritative validation. It may use an alternative host only when the accepted locus and evidence equivalence are already defined. If access or authorization is missing, run permitted checks, retain incomplete evidence, and report the precise dependency or decision as a blocker. See `meta/VALIDATION-MODEL.md`; the concrete permission must be supplied through the ready milestone or referenced project authority, not recovered by the executor from this guide.
+
+An absent prerequisite does not automatically make a milestone unready: planning may define an authorized provisioning path or a precise blocked outcome. What must not remain undecided at `ready` is who may change the environment or which evidence locations are acceptable.
 
 ## Execution decomposition
 
