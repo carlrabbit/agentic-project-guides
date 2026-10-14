@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Clarified — execution environment authority
+
+- Separate permission to execute validation from permission to install/modify host software and to create/change CI/CD or remote infrastructure.
+- Planning and new-project bootstrap now resolve material toolchain prerequisites, provisioning scope, accepted alternative loci, and blocked behavior before milestone handoff.
+- Implementation may use authorized isolated setup and declared dependencies, but may not substitute newly created CI workflows for unavailable local validation; blocked evidence remains explicit.
+- No compulsory retrofit of existing completed milestones. The clarification applies when planning new or revising active work.
+
 ## 0.9.1
 
 Migration required: no by default; conditional when a repository chooses to adopt the new `cli-tool` profile.

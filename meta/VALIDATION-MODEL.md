@@ -77,6 +77,20 @@ Local developer machines are valid authoritative validation environments when th
 
 CI may provide portable validation, redundant validation, publication automation, or release checks without becoming the authoritative location for all integration validation.
 
+## Execution environment authority
+
+A validation target and locus specify where evidence is valid; they do not, by themselves, authorize installing software, changing a machine, or creating infrastructure. Keep three permissions distinct:
+
+- **Execution:** run documented build/test commands, restore declared project dependencies, and use existing authorized tools or environments.
+- **Provisioning:** install/update SDKs, native toolchains, desktop runtimes, or other host software, or change persistent machine configuration. Specify the allowed scope (for example disposable sandbox, isolated user directory, or managed host) and owner when material.
+- **Infrastructure modification:** create or materially change CI/CD workflows, runners, triggers, permissions, secrets, cloud resources, or other shared execution infrastructure.
+
+Restoring declared project dependencies is ordinary execution, not permission for arbitrary host provisioning. Isolated tool installation may be executor-owned when existing project/environment policy authorizes it; machine-wide or persistent changes require appropriate authority. Technical access is not authorization. Neither high implementation autonomy nor a missing toolchain grants permission to introduce CI/CD infrastructure.
+
+When a required capability is unavailable, diagnose the missing prerequisite, attempt only authorized remedies, and run explicitly permitted portable checks separately. A different host is a valid substitute only if the accepted alternative locus and evidence equivalence are specified by the milestone or referenced project authority. An instruction such as "use a supported host" must define whether local, CI, remote, or mixed hosts are allowed; it does not implicitly authorize creating a workflow. If the needed remedy or alternative is not authorized, preserve the unproven gate and report the dependency or return the material decision to planning.
+
+These rules do not prohibit planned CI validation, authorized disposable environment setup, or in-scope maintenance of existing workflows. They prevent an executor from changing execution policy in order to satisfy it.
+
 ## Integration-bound validation
 
 When correctness materially depends on an external runtime, service, installed product, real persistence engine, browser, native subsystem, or similar boundary, project authority should resolve the following as applicable:
@@ -86,6 +100,9 @@ When correctness materially depends on an external runtime, service, installed p
 - execution locus: where the validation can run;
 - platform/capabilities: OS, native dependencies, hardware, application/runtime versions, network requirements;
 - provisioning: how validation acquires or connects to the target;
+- provisioning authority: what may be installed or configured, on which hosts, and by whom;
+- infrastructure-change authority: whether creating/changing CI/CD or remote execution resources is in scope;
+- accepted alternative loci: explicitly allowed host types and the evidence they can establish;
 - isolation: how concurrent or consecutive validation avoids interference;
 - reset/cleanup: how state is cleaned, recreated, or made disposable;
 - identity/secrets: accounts, credentials, tokens, or permissions;

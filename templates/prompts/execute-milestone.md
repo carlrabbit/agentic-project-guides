@@ -148,6 +148,17 @@ Passing tests is evidence of validation success. It is not by itself evidence th
 
 The execution ledger is evidence-routing and progress state. A checked ledger row is not proof by itself.
 
+## Execution environment authority
+
+Implementation autonomy authorizes code/test mechanics and the execution of declared repository commands; it is not blanket permission to alter the environment used to execute them.
+
+- Restore declared project dependencies and use existing authorized tooling. Install isolated tools only where the milestone, referenced project authority, or established environment policy permits the installation scope.
+- Do not install/update host-wide or persistent SDKs, compilers, runtimes, services, or machine settings merely because validation needs them unless that provisioning is authorized.
+- Do not create or materially change CI/CD workflows, runners, triggers, permissions, secrets, or remote infrastructure as a workaround for missing local capabilities unless that infrastructure work is explicitly in scope or already authorized by project policy.
+- Do not infer that a valid alternate validation locus authorizes provisioning that locus. Existing, approved CI execution and introducing a new workflow are different permissions.
+
+On an unavailable prerequisite, record the attempted gate, the concrete failure, and the missing capability; use only authorized remediation and explicitly allowed fallback checks. If the required authorization or acceptable locus remains undecided, stop that affected work and return the decision to planning. If completion needs an unavailable external capability, leave the relevant evidence pending and terminate `BLOCKED` rather than manufacture an alternate green gate. Continue unrelated agent-resolvable work when it does not require the unresolved decision.
+
 ## Human review
 
 Human review is a completion gate owned by the current milestone. It is not a perpetual project-wide quality gate.
@@ -194,12 +205,13 @@ Run the validation depth/tier, target, execution locus/platform requirements, an
 
 Validation depth does not determine where validation runs. Do not move or substitute an authoritative integration target merely because CI, the current agent environment, or another locus is easier to access.
 
-If validation fails for a reason you can resolve in the current execution context, continue working and rerun the relevant validation. A resolvable validation failure is not a terminal blocker.
+If validation fails for a reason you can resolve within the authorized execution environment, continue working and rerun the relevant validation. A resolvable validation failure is not a terminal blocker.
 
 If a required validation target/locus is unavailable in the current execution context:
 
 - run any explicitly allowed fallback/portable validation separately;
-- report the unavailable target/locus and the evidence still missing;
+- report the unavailable target/locus, attempted command and concrete missing capability, and the evidence still missing;
+- do not create infrastructure or silently relocate the gate to obtain a green result;
 - do not claim success for the unavailable validation obligation;
 - use `BLOCKED` only when that missing external capability prevents milestone completion in the current run.
 

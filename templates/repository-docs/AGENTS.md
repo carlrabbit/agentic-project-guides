@@ -11,6 +11,10 @@ Read:
 
 Use canonical `eng/` commands only.
 
+## Execution environment authority
+
+Run declared commands and restore project dependencies. Isolated tooling setup is allowed only within established project/environment permissions. Do not treat missing SDKs, compilers, or runtimes as permission to modify persistent host configuration or introduce CI/CD workflows/runners. A permitted alternative validation locus does not authorize new infrastructure. Record unavailable prerequisites, run only explicitly allowed fallback checks, and retain `BLOCKED` gates or escalate material authority decisions instead of substituting a green result.
+
 ## Coordination metadata
 
 During ordinary implementation, ignore unless explicitly in scope:
