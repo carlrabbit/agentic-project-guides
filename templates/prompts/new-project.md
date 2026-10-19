@@ -20,7 +20,7 @@ Use the guide system only for planning, migration, documentation synchronization
 
 Target repository documentation must contain project truth only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
-Shared profiles describe broad reusable engineering shapes. Projects may also register `local:<id>` profiles under `.guide/profiles/<id>/PROFILE.md` for distinct project-owned engineering shapes with multiple coordinated obligations. A local profile may be authored during initialization without first adding it to the central guide. Profiles Do not invent a central-style project type or feature-tag profile for operating system, local/CI execution, integration-first testing, a packaging mechanism, a named external product/service, or one concrete product architecture.
+Shared profiles describe broad reusable engineering shapes. Projects may also register `local:<id>` profiles under `.guide/profiles/<id>/PROFILE.md` for distinct project-owned engineering shapes with multiple coordinated obligations. A local profile may be authored during initialization without first adding it to the central guide. Do not invent a central-style project type or feature-tag profile for operating system, local/CI execution, integration-first testing, a packaging mechanism, a named external product/service, or one concrete product architecture.
 
 When the product exposes a supported command-line executable as a first-class user or automation interface, consider the `cli-tool` profile. A concrete `.NET tool` distribution is not itself a separate profile: use `cli-tool` plus project-local .NET/dotnet-tool specialization. Add `dotnet-library` only when a meaningful reusable library/API surface also exists.
 
