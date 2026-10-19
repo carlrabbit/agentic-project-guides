@@ -4,6 +4,8 @@
 
 ## Agentic-development objectives
 
+<!-- Optionally include cost-conscious validation and investigative-execution priorities here when project-specific. Implementation-facing commands and evidence rules remain in engineering authority. -->
+
 - <Project-specific objective and why it matters to planning decisions>
 
 ## Local interpretation of guide methodology

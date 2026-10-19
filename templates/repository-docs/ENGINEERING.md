@@ -15,6 +15,14 @@ scenario/artifact-first
 
 Do not inherit a generic test pyramid implicitly.
 
+## Validation intent, cost and investigation
+
+When material to this project, distinguish focused development feedback, investigative simulations/probes, and mandatory acceptance gates. Investigations are excluded from normal test discovery, canonical validation and CI unless expressly required. Define concrete experiment entry points separately.
+
+For expensive suites, document independent stage commands, relevant source/test/fixture/toolchain/configuration/environment/upstream-artifact dependencies, safe receipt reuse/invalidation and fast verification where justified. Measure stage and setup duration; avoid unnecessary repeated restore, process and fixture startup without breaking test isolation. Cheap suites may use a single direct command.
+
+Investigative findings may be discarded, retained as non-authoritative research when valuable, or deliberately promoted into bounded deterministic regression checks.
+
 ## Validation topology
 
 For material validation obligations, record the applicable:

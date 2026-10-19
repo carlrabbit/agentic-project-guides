@@ -33,6 +33,8 @@ Keep these layers distinct:
 
 Research is therefore project-local knowledge, but it is not ordinary project authority.
 
+Investigative execution (simulation, exploration, profiling, temporary diagnostic tests) is not itself a requirement to persist research or add regression tests. Preserve controlled inputs/seeds, methods and results when findings are expensive to rediscover or explicitly required by a milestone; otherwise discard temporary probes. A discovered invariant becomes an operative requirement or bounded regression test only through deliberate promotion. Do not add exploratory workloads to canonical validation by accident.
+
 ## When to persist research
 
 Persist research when future planning would materially benefit from retaining the evidence rather than rediscovering it.

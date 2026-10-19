@@ -135,6 +135,8 @@ During bootstrap, explicitly check which toolchain/runtime capabilities the firs
 
 If the project intentionally uses integration-first testing, record that policy in project engineering authority. Do not create unit-test requirements merely because of an assumed generic test pyramid.
 
+Where expensive validation or investigation is expected, initialize only justified project authority: cheap feedback commands, required acceptance gates, separate optional experiment entry points, and safe stage freshness/reuse rules. Optional project guidance may prioritize economical iteration; implementation-facing commands and criteria belong in engineering authority or the milestone. Do not create simulation/efficient-testing profiles, a mandatory caching framework, or canonical regression entries for exploratory workloads by default.
+
 ## Planning-seeded execution ledger
 
 When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.

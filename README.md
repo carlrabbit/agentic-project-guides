@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.9.2 (draft)
+Version: 0.9.3 (draft)
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -18,6 +18,7 @@ Shared profiles describe broad reusable engineering shapes, not feature tags.
 Registered project-local profiles may add a scoped engineering shape when ordinary specialization alone is insufficient.
 Multiple profiles compose additively and may have explicit semantic applicability scopes.
 Validation depth is independent of target and execution locus.
+Validation execution intent separates feedback, investigation and acceptance.
 Milestones are planned before they are implemented.
 Planning resolves uncertainty and produces a ready milestone.
 Planning may preserve reusable evidence without preserving the planning conversation.
@@ -36,6 +37,18 @@ Distributable artifacts are validated through their intended consumer mechanism.
 Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
+
+## Version 0.9.3 (draft)
+
+0.9.3 makes validation cost and investigative execution explicit without changing the five validation tiers or 0.9.2's project-local planning extension model.
+
+- Distinguish focused development feedback, exploratory simulations/probes, and authoritative acceptance validation as different execution intents.
+- Reuse current evidence from expensive independent stages when complete dependency fingerprints establish freshness; conservatively rerun when uncertain.
+- Final milestone verification establishes all required evidence without requiring unconditional full-suite re-execution.
+- Keep diagnostic simulations out of canonical regression/CI unless a milestone explicitly assigns their evidence.
+- Planning may consider project-local cost objectives; operative commands, stage boundaries and invalidation rules belong in engineering authority.
+
+See `meta/VALIDATION-MODEL.md`, `meta/CONSTRAINED-EXECUTION-MODEL.md` and `migrations/guide-system-v0.9.2-to-v0.9.3.md`.
 
 ## Version 0.9.2 (draft)
 

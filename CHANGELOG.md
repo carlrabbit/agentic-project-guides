@@ -1,6 +1,23 @@
 # Changelog
 
-## Unreleased
+## 0.9.3 (draft)
+
+Migration required: conditional for repositories with materially expensive validation suites or simulations that currently leak into routine tests; otherwise metadata-only/no-op.
+
+Affected areas: validation model, constrained execution, planning/implementation prompts, milestone and engineering templates, guide version metadata.
+
+### Added — validation intent and cost discipline
+
+- Separate development feedback, investigative execution, and authoritative acceptance validation without adding a test tier or profile.
+- During iteration prefer cheapest reliable affected checks; at closure verify current complete gate evidence rather than unconditionally rerun every expensive stage.
+- Treat independent stages, dependency fingerprints, safe receipt reuse, and measurement of costly setup/execution as proportional optimizations, including suites without timeouts.
+- Exclude exploratory simulations, profiling and probes from default regression/CI unless explicitly required; promote durable findings to research/authority or bounded regression deliberately.
+- Preserve all target/locus, release/consumer, evidence-case and completion-audit obligations.
+
+### Migration
+
+See `migrations/guide-system-v0.9.2-to-v0.9.3.md`. No mandatory regeneration of existing milestones or evidence.
+
 
 ### Clarified — execution environment authority
 

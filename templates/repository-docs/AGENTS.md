@@ -11,6 +11,8 @@ Read:
 
 Use canonical `eng/` commands only.
 
+Use affected reliable checks during development instead of reflexively rerunning all expensive validation. Reuse existing stage receipts only when documented dependencies prove they remain current; rerun missing/stale checks and verify all mandatory gates before completion. Exploratory simulations and diagnostic probes are not canonical/CI regression checks and do not automatically prove milestone acceptance.
+
 ## Execution environment authority
 
 Run declared commands and restore project dependencies. Isolated tooling setup is allowed only within established project/environment permissions. Do not treat missing SDKs, compilers, or runtimes as permission to modify persistent host configuration or introduce CI/CD workflows/runners. A permitted alternative validation locus does not authorize new infrastructure. Record unavailable prerequisites, run only explicitly allowed fallback checks, and retain `BLOCKED` gates or escalate material authority decisions instead of substituting a green result.
