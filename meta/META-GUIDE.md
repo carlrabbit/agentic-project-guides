@@ -22,6 +22,14 @@ Implementation agents read product repository authority and ready milestones, no
 Planning and documentation-sync agents may use this guide system.
 ```
 
+## Guide repository entrypoints
+
+The root `README.md` is a compact assigned-task router. It is **not** an authoritative summary of guide rules or a chronological release narrative. Route directly to the selected canonical prompt or appropriate meta model; avoid requiring an agent to read unrelated workflow or historical context.
+
+`templates/PROMPTS.md` catalogs prompt selection. The actual workflow contract belongs in its canonical prompt and applicable authoritative models. Avoid duplicating operational rules in either navigation entrypoint; duplicated descriptions cannot override the current contract.
+
+Keep historical changes in `CHANGELOG.md`, version-to-version instructions in `migrations/`, and rationale in `decisions/`. Ordinary product Implementers use the product milestone handoff and repository authority, not these guide entrypoints.
+
 ## Product repository boundary
 
 Product repositories must not copy guide documents as active authority.

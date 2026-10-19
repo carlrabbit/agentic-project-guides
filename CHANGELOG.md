@@ -20,6 +20,12 @@ Affected areas: validation model, constrained execution, planning/implementation
 - Bootstrap generates the entrypoint; adoption and version migration check existing routing and edit it only when necessary, preserving project-specific instructions.
 - Avoid duplicating validation policy in `AGENTS.md` and do not let its reading order or command restrictions conflict with the canonical milestone execution prompt.
 
+### Changed — guide repository README routing
+
+- Replace the version-by-version README narrative with an assigned-task router, including direct routes for planning, bootstrap, adoption/update, specialized planning, documentation sync, and guide maintenance.
+- Mark README and the prompt catalog as navigation rather than competing normative contracts. The selected prompt and authoritative models define current behavior.
+- Keep version history in the changelog/migrations and design rationale in ADRs. Ordinary product Implementers continue to use the milestone handoff without reading this repository.
+
 ### Migration
 
 See `migrations/guide-system-v0.9.2-to-v0.9.3.md`. No mandatory regeneration of existing milestones or evidence.
