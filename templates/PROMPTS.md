@@ -141,6 +141,7 @@ read milestone, authority, and planning-seeded ledger
 -> implement/validate/update evidence and status by work package
 -> freshly reread milestone
 -> reconcile obligation/evidence cases <-> ledger <-> repository/evidence
+-> verify all required current evidence; rerun missing/stale checks
 -> completion audit
 -> persist compact durable completion evidence
 -> continue or terminate
