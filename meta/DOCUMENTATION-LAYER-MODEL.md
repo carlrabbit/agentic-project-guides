@@ -26,6 +26,8 @@ Common project-authority layers:
 
 These documents contain project truth according to their defined authority roles.
 
+`AGENTS.md` is a thin repository entrypoint for agent navigation. For milestone implementation it points first to the ready milestone, its applicable execution ledger, referenced operative authority, and relevant code/tests. For non-milestone work it routes to the assigned workflow. Do not turn it into a second execution guide, repeat validation algorithms there, or use it to amend a milestone's contract. It may contain small enduring repository-specific boundaries, but substantive engineering policy belongs in ordinary engineering/specification authority. Bootstrap normally creates this entrypoint; migrations reconcile it when the routing/authority contract changes and preserve valid project-specific instructions.
+
 ## Optional project planning authority
 
 ```text

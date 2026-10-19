@@ -75,6 +75,8 @@ docs/milestones/M0001-initialization.md
 
 Add optional `docs/PROJECT-GUIDANCE.md` only when actual project meta objectives or planning-methodology clarifications warrant it; do not add it as a mandatory placeholder. Add local profile definitions only for genuinely selected `local:<id>` entries, and capture operative consequences in normal project authority.
 
+Create root `AGENTS.md` as a **small repository entrypoint**, not as a copy of the generic Implementer prompt. Its milestone route begins with the primary ready milestone, then the applicable planning-seeded execution ledger and explicitly referenced project authority, followed by needed code/tests. Route non-milestone work to its assigned workflow. Keep implementation specifics and validation policy in `docs/ENGINEERING.md`, other operative documents, or the ready milestone; do not require reading project planning metadata or the external guide for ordinary implementation. Check that entrypoint instructions do not conflict with the generated milestone package. Do not mechanically insert detailed guide methodology into `AGENTS.md`.
+
 Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
 
 Do not include copied guide documents.

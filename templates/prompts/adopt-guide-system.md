@@ -140,6 +140,14 @@ If the project owns a distinct reusable engineering shape not covered by shared 
 
 Reconcile applicable central/local profile obligations and project guidance into operative authority or implementation-ready milestones. Do not require implementation to read planning-only guidance.
 
+## AGENTS.md entrypoint reconciliation
+
+Inspect existing root `AGENTS.md` as a routing document, not as a second guide or a place to paste the latest implementation methodology. If absent and the project needs an agent entrypoint, create a concise project-specific one. Otherwise preserve valid existing instructions while removing outdated required-reading lists, copied generic execution rules, or routing that conflicts with the adopted milestone handoff.
+
+For an assigned implementation milestone, `AGENTS.md` should route first to the ready milestone, then its applicable seeded ledger, explicitly referenced operative authority, and relevant source/tests. It must not force the Implementer to reconstruct planning from guide documents, planning-only metadata, or research. Non-milestone agents should use their assigned workflows. Keep detailed validation cadence, evidence-freshness policy, simulations, and concrete commands in the execution contract or project engineering authority; do not blindly replace a customized `AGENTS.md` with the template.
+
+Classify an `AGENTS.md` edit as required only when existing routing is incorrect or incompatible; otherwise record no-op. Include necessary entrypoint changes as direct, in-scope migration documentation rather than deferring a broken routing contract to broad documentation sync.
+
 ## Required output
 
 Create one migration milestone under `docs/milestones/`.
@@ -148,7 +156,7 @@ Create or update `.guide-profile.json` when useful.
 
 Create or update `.guide-sync/pending/` hints for deferred documentation cleanup.
 
-Update target-repository docs only when needed to remove guide leakage, localize concrete specialization, define semantic profile scopes, resolve profile conflicts, promote research-derived project rules, preserve genuinely useful planning evidence, or make the migration implementation-ready.
+Update target-repository docs only when needed to repair `AGENTS.md` entrypoint routing, remove guide leakage, localize concrete specialization, define semantic profile scopes, resolve profile conflicts, promote research-derived project rules, preserve genuinely useful planning evidence, or make the migration implementation-ready.
 
 Do not copy external guide documents into the target repository.
 

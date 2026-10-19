@@ -47,6 +47,7 @@ Human review gates milestone completion when automation cannot decide acceptance
 - Final milestone verification establishes all required evidence without requiring unconditional full-suite re-execution.
 - Keep diagnostic simulations out of canonical regression/CI unless a milestone explicitly assigns their evidence.
 - Planning may consider project-local cost objectives; operative commands, stage boundaries and invalidation rules belong in engineering authority.
+- `AGENTS.md` remains a thin repository navigation entrypoint; bootstrap and guide migrations reconcile it only when its routing contract needs changing.
 
 See `meta/VALIDATION-MODEL.md`, `meta/CONSTRAINED-EXECUTION-MODEL.md` and `migrations/guide-system-v0.9.2-to-v0.9.3.md`.
 

@@ -23,6 +23,12 @@ For repositories with expensive repeated validation or simulations mixed into re
 
 Optional `docs/PROJECT-GUIDANCE.md` may state project-specific priorities for feedback latency or research/simulation work. Registered local profiles remain reserved for real engineering shapes, not isolated test strategies. The Planner resolves required evidence and any cost/freshness constraints into the milestone or project engineering authority. Implementers own affected-check selection, bounded diagnostic runs and incremental execution mechanics within that contract.
 
+## AGENTS.md entrypoint reconciliation
+
+The 0.9.3 `AGENTS.md` template is a minimal navigation entrypoint, not a second Implementer guide. It routes milestone execution first to the ready milestone, its applicable planning-seeded ledger, referenced project authority, and then relevant code/tests. Non-milestone tasks follow their assigned workflow.
+
+During this migration inspect existing `AGENTS.md` for contradictory reading order, duplicated test/receipt/simulation policy, requirements to consult external guide or planning-only sources, or overly rigid command restrictions. Preserve useful project-specific instructions and move detailed validation rules to operative engineering authority or the milestone. Edit `AGENTS.md` only when necessary; an already-sound entrypoint is a no-op. Treat a correction as direct migration work when the current routing would misdirect the executor, not as optional later documentation sync.
+
 ## Completion
 
-Confirm the project's normal test/CI entry points do not accidentally include exploratory workloads; acceptance evidence remains complete and fresh; no new workflows, infrastructure, mandatory receipts or profile changes were introduced merely to conform. No runtime tests are required for a guide-metadata-only update.
+Confirm the project's normal test/CI entry points do not accidentally include exploratory workloads; acceptance evidence remains complete and fresh; existing `AGENTS.md` routing was evaluated and reconciled only when needed; no new workflows, infrastructure, mandatory receipts or profile changes were introduced merely to conform. No runtime tests are required for a guide-metadata-only update.

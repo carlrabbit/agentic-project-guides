@@ -8,6 +8,13 @@ Affected areas: validation model, constrained execution, planning/implementation
 
 ### Added — validation intent and cost discipline
 
+### Clarified — agent entrypoint and migration reconciliation
+
+- Keep `AGENTS.md` as a minimal repository-routing entrypoint, with the milestone package and referenced operative authority supplying the implementation contract.
+- Bootstrap generates the entrypoint; adoption and version migration check existing routing and edit it only when necessary, preserving project-specific instructions.
+- Avoid duplicating validation policy in `AGENTS.md` and do not let its reading order or command restrictions conflict with the canonical milestone execution prompt.
+
+
 - Separate development feedback, investigative execution, and authoritative acceptance validation without adding a test tier or profile.
 - During iteration prefer cheapest reliable affected checks; at closure verify current complete gate evidence rather than unconditionally rerun every expensive stage.
 - Treat independent stages, dependency fingerprints, safe receipt reuse, and measurement of costly setup/execution as proportional optimizations, including suites without timeouts.
