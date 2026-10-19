@@ -9,6 +9,33 @@
 - Implementation may use authorized isolated setup and declared dependencies, but may not substitute newly created CI workflows for unavailable local validation; blocked evidence remains explicit.
 - No compulsory retrofit of existing completed milestones. The clarification applies when planning new or revising active work.
 
+## 0.9.2 (draft)
+
+Migration required: no by default; conditional for projects that elect to introduce local planning guidance or project-local profiles.
+
+Affected areas:
+
+- project-local planning objectives and discovery;
+- local profile registration, scope, and composition;
+- guide profile schema-version-2 compatibility;
+- planning-to-implementation authority boundary;
+- optional project documentation layers and templates;
+- planning/new-project/adoption/update prompts.
+
+### Added — project-local planning guidance
+
+Optional `docs/PROJECT-GUIDANCE.md` captures project-specific meta objectives, methodology clarifications, and additional planning/review expectations. Planning must consider it when present. Implementation-affecting rules still belong in ordinary engineering/specification/architecture/decision authority or a ready milestone. Do not make implementation load broad planning rationale.
+
+### Added — project-owned profiles
+
+Projects may register `local:<id>` in `.guide-profile.json` and define its contract in `.guide/profiles/<id>/PROFILE.md`. Existing shared profile IDs remain unchanged. Schema version 2, repository/component/surface scopes, additive composition, and explicit conflict resolution remain in force. Local profile versions are owned by the project, not coupled to the guide version.
+
+A local profile must activate a meaningful engineering shape with cross-cutting obligations; one technology choice, test preference, runtime, or packaging setting alone remains ordinary project specialization. Promotion into a shared profile is optional and requires separate assessment.
+
+### Migration
+
+Use `migrations/guide-system-v0.9.1-to-v0.9.2.md`. No empty project-guidance or local-profile scaffolding is required.
+
 ## 0.9.1
 
 Migration required: no by default; conditional when a repository chooses to adopt the new `cli-tool` profile.

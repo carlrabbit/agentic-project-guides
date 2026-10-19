@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.9.1
+Version: 0.9.2 (draft)
 
 This repository contains a versioned guide system for creating and maintaining AI-friendly project documentation and engineering workflows.
 
@@ -14,7 +14,8 @@ Product repositories contain localized project truth and concrete project specia
 Guides live here.
 Projects contain project truth and concrete specializations.
 Projects may retain selective non-authoritative planning research.
-Profiles describe broad reusable engineering shapes, not feature tags.
+Shared profiles describe broad reusable engineering shapes, not feature tags.
+Registered project-local profiles may add a scoped engineering shape when ordinary specialization alone is insufficient.
 Multiple profiles compose additively and may have explicit semantic applicability scopes.
 Validation depth is independent of target and execution locus.
 Milestones are planned before they are implemented.
@@ -35,6 +36,18 @@ Distributable artifacts are validated through their intended consumer mechanism.
 Documentation sync consumes deferred sync hints.
 Human review gates milestone completion when automation cannot decide acceptance.
 ```
+
+## Version 0.9.2 (draft)
+
+0.9.2 proposes a project-local planning extension contract and project-owned profiles without changing the centralized profile catalog.
+
+- Optional `docs/PROJECT-GUIDANCE.md` records project-specific agentic-development objectives, interpretations of generic methodology, and additional planning/review expectations. It is planning authority, not a replacement for operative engineering/specification authority.
+- Optional `.guide/profiles/<id>/PROFILE.md` contains a locally owned profile for a distinct project engineering shape. Reference it explicitly through `.guide-profile.json` as `local:<id>`, retaining schema version 2.
+- Shared and local profiles compose additively with repository/component/surface applicability. Profile order never overrides an obligation; conflicting requirements return to planning for explicit resolution.
+- Planning must discover both project guidance and registered local profiles, and promote every implementation-affecting conclusion into the ready milestone or normal project authority. Ordinary implementation does not need to load the external guide or planning-only profile documents.
+- Create neither layer as empty scaffolding. Do not use local profiles as substitutes for ordinary, concrete engineering specializations.
+
+See `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, `meta/DOCUMENTATION-LAYER-MODEL.md`, and `migrations/guide-system-v0.9.1-to-v0.9.2.md`.
 
 ## Version 0.9.1
 
@@ -258,10 +271,10 @@ Implementation still owns concrete code/test mechanics that fit that contract.
 
 ## Upgrade
 
-From v0.9.0, use:
+From v0.9.1, use:
 
 ```text
-migrations/guide-system-v0.9.0-to-v0.9.1.md
+migrations/guide-system-v0.9.1-to-v0.9.2.md
 ```
 
 Repositories older than 0.9.0 apply the complete migration chain in order.

@@ -26,6 +26,21 @@ Common project-authority layers:
 
 These documents contain project truth according to their defined authority roles.
 
+## Optional project planning authority
+
+```text
+docs/PROJECT-GUIDANCE.md             project-specific agentic objectives and methodology clarifications
+.guide/profiles/<id>/PROFILE.md      registered project-local engineering-shape profile
+```
+
+Both are **optional project-authored planning authority**, unlike non-authoritative research. Create them only when they improve planning decisions or define meaningful new obligations.
+
+`docs/PROJECT-GUIDANCE.md` may capture project objectives, local interpretations of generic guidance, additional planning/review requirements, and references to operative policy. It must not become a second copy of the shared guide or a replacement for normal engineering/specification authority.
+
+A local profile is loaded only when referenced through `.guide-profile.json` as `local:<id>`. Its applicability may be repository/component/surface scoped. The profile defines an engineering shape and obligations; concrete specialization remains in normal project authority.
+
+Planning evaluates these sources and projects implementation-affecting requirements into the ready milestone or normal project authority. Routine implementation agents do not have to read project-planning guidance or local profile definitions to reconstruct a contract.
+
 ## Planning-knowledge layer
 
 Research is an optional non-authoritative planning-knowledge layer:

@@ -47,6 +47,8 @@ Read the minimum project truth needed to plan correctly. Usually consider:
 - `README.md`;
 - `AGENTS.md`;
 - `.guide-profile.json` if present;
+- `docs/PROJECT-GUIDANCE.md` if present;
+- locally registered `.guide/profiles/<id>/PROFILE.md` definitions if present;
 - `docs/TERMINOLOGY.md`;
 - `docs/SPECS.md` and relevant specs;
 - `docs/ENGINEERING.md` and relevant engineering/specialization docs;
@@ -64,7 +66,9 @@ Treat copied guide documents under `docs/research/` as legacy/non-authoritative 
 
 Use `.guide-profile.json` as guide-selection, applicability, and planning metadata only. Ordinary implementation agents must not be required to read it.
 
-When `.guide-profile.json` uses schema version 2, resolve which repository/component/surface-scoped profiles apply to the milestone using the semantic component/surface definitions in normal project authority.
+When `.guide-profile.json` uses schema version 2, resolve which repository/component/surface-scoped profiles apply to the milestone using the semantic component/surface definitions in normal project authority. Unprefixed profile IDs select central profiles; `local:<id>` selects `.guide/profiles/<id>/PROFILE.md` in the project. Do not silently ignore missing local profile definitions or auto-activate unregistered ones.
+
+Treat `docs/PROJECT-GUIDANCE.md` as optional project-authored planning authority: evaluate its objectives, methodology clarifications, and additional planning/review obligations for the current work. It is not non-authoritative research, nor a blanket override for the guide. Promote any implementation-affecting conclusions into normal project authority or the ready milestone before handoff.
 
 Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
 
@@ -80,6 +84,14 @@ For AI-executed milestones, planning must create `.execution/<milestone-id>.md` 
 Do not seed work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those remain implementation-owned.
 
 The execution ledger may compress work. It must not compress obligations.
+
+## Effective planning contract
+
+Before setting a milestone to `ready`, reconcile the central base/shared profile obligations, any registered local profiles relevant to the affected semantic scope, local planning guidance, and concrete engineering/specification/architecture/decision authority.
+
+Distinguish mandatory and triggered conditional obligations from project-owned decisions. Objectives influence trade-offs but do not cancel requirements. Resolve conflicts explicitly, recording operative resolutions in normal project authority. Planning may create `docs/PROJECT-GUIDANCE.md` or a registered local profile when there is a real gap, but must not create empty scaffolding or technology-tag profiles. Preserve the resulting implementation-facing obligations, affected authority references, and validation/evidence requirements in the ready milestone and seeded execution-ledger coverage.
+
+Implementation must not need the external guide, `.guide-profile.json`, `.guide/profiles/`, or broad `docs/PROJECT-GUIDANCE.md` merely to reconstruct those decisions.
 
 ## Research and planning knowledge
 
@@ -155,7 +167,7 @@ Git history is sufficient archival storage. Do not retain obsolete research mere
 
 ## Profiles and project specialization
 
-Use profiles only for broad reusable engineering shapes. Do not model an operating system, local/CI execution, a test-strategy preference, one packaging mechanism, a named external vendor/runtime, or one concrete product architecture as a profile merely to make project composition more granular.
+Use shared profiles for broad reusable engineering shapes. Registered local profiles may describe a distinct project-owned engineering shape with multiple coordinated obligations, but must not become feature tags. Do not model an operating system, local/CI execution, a test-strategy preference, one packaging mechanism, a named external vendor/runtime, or one concrete product architecture as a profile merely to make project composition more granular.
 
 A repository may combine a small number of profiles when multiple broad engineering shapes genuinely apply.
 

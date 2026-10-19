@@ -65,6 +65,8 @@ Usually read:
 - `README.md`;
 - `AGENTS.md`;
 - `.guide-profile.json` if present;
+- `docs/PROJECT-GUIDANCE.md` if present;
+- any registered `.guide/profiles/<id>/PROFILE.md` documents;
 - old `docs/research/project-setup-guide-*.md` and `docs/research/engineering-guide-*.md` only to understand legacy state;
 - `docs/TERMINOLOGY.md`;
 - `docs/SPECS.md`;
@@ -129,6 +131,14 @@ When the resolved target version uses the 0.8 model or later:
 - retain research only when it continues to provide material future planning value;
 - do not create research scaffolding when no durable planning evidence exists;
 - keep ordinary implementation independent of `docs/research/` for operative project rules.
+
+## 0.9.2 local planning-extension review
+
+When adopting 0.9.2 or later, preserve existing project planning objectives in normal authority and optionally consolidate durable agentic-development meta objectives or planning-methodology clarifications into `docs/PROJECT-GUIDANCE.md`. Create neither project guidance nor local profile scaffolding without an actual need.
+
+If the project owns a distinct reusable engineering shape not covered by shared profiles, it may register `local:<id>` in schema-version-2 `.guide-profile.json` and define `.guide/profiles/<id>/PROFILE.md`. Verify each reference, scope, and project-owned version. Do not convert one-off technology choices into profiles.
+
+Reconcile applicable central/local profile obligations and project guidance into operative authority or implementation-ready milestones. Do not require implementation to read planning-only guidance.
 
 ## Required output
 
