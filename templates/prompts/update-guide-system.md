@@ -50,6 +50,7 @@ Inspect the target repository before writing files.
 Usually read:
 
 - `.guide-profile.json`;
+- `docs/PROJECT-GUIDANCE.md` and registered `.guide/profiles/<id>/PROFILE.md`, if present;
 - `.guide-sync/pending/` if present;
 - `.review/` if present and relevant;
 - `README.md`;
@@ -109,6 +110,12 @@ Unavailable historical evidence must not be fabricated and does not by itself bl
 Do not persist a historical adoption mode in `.guide-profile.json` unless a future migration explicitly changes the coordination schema to require such state.
 
 This prompt intentionally delegates exact optional-transition behavior to the applicable version migration documents so future guide versions can evolve without being constrained by hard-coded 0.8 semantics.
+
+## Local planning guidance and profiles
+
+When the migration chain includes 0.9.2 or later, evaluate existing project-local planning objectives and registered local profiles as part of the effective planning contract. `docs/PROJECT-GUIDANCE.md` is optional, and `.guide/profiles/<id>/PROFILE.md` only applies when explicitly registered as `local:<id>` in schema-version-2 `.guide-profile.json`.
+
+Do not mechanically create either layer or reclassify technology-specific engineering settings as local profiles. Preserve project-owned versions, resolve missing definitions and scope conflicts during planning, and promote implementation-affecting obligations into normal authority or the ready migration milestone.
 
 ## Required output
 

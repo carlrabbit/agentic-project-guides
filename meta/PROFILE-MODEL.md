@@ -23,6 +23,46 @@ artifact-first-runtime
 
 A profile defines a broad reusable engineering shape. It may define applicability, documentation layers, engineering blocks, validation expectations, maturity behavior, repository-role behavior, and migration concerns.
 
+## Shared and project-local profile sources
+
+Shared profiles are maintained in this guide repository under `profiles/<id>/`.
+
+A consuming project may define additional **local profiles** under:
+
+```text
+.guide/profiles/<id>/PROFILE.md
+```
+
+Register only intentionally applied local profiles in `.guide-profile.json` using the reserved ID namespace `local:<id>`. An unprefixed ID refers to a shared profile. The suffix `<id>` is a lower-case kebab-case stable name and maps directly to the corresponding local directory. Local profiles use the same repository/component/surface scope model and additive composition semantics as shared profiles.
+
+Example schema-version-2 entry:
+
+```json
+{
+  "id": "local:android-ime",
+  "version": "0.1.0",
+  "scopes": [
+    { "kind": "component", "ids": ["keyboard-app"] }
+  ]
+}
+```
+
+The local `version` is independently maintained by the project. The guide-system version and shared profile versions follow guide releases. No new metadata property or schema-version bump is needed. `local:<id>` registrations must resolve to a readable matching `PROFILE.md`; missing or ambiguous definitions are planning errors, not silently skipped obligations. Merely finding a local profile on disk does not activate it.
+
+Local profile docs are project-authored planning authority, not copied central guide methodology. They may specify applicability, mandatory and conditional obligations, project-owned decisions, validation/release considerations, and additional capabilities. Their operative conclusions must be represented in project authority or the ready milestone for disconnected implementation.
+
+A project can define a local profile for a concrete platform engineering shape, such as an Android input-method component, when it changes multiple engineering/validation/lifecycle expectations. Being project-owned does not excuse profiles that are merely lists of one-off technology choices.
+
+## Capability and decision vocabulary
+
+Profiles may distinguish:
+
+- **mandatory obligations** — apply whenever the profile applies;
+- **conditional obligations** — apply only when the named product capability or consumer surface exists;
+- **project-owned decisions / extension points** — require local resolution when material; they are not permission to waive mandatory obligations.
+
+Existing shared profiles are valid without adopting prescribed new headings. Avoid duplicating the same rule across a capability listing and an obligation listing. Project guidance may add planning/review obligations, but cannot silently negate an applicable profile requirement.
+
 ## Profiles are not feature tags
 
 Do not create a profile merely for:
@@ -44,8 +84,9 @@ Profiles compose additively:
 
 ```text
 base obligations
-+ every applicable profile obligation
-+ project-local specialization/resolution
++ applicable shared and registered local profile obligations
++ applicable project planning guidance
++ project-local specialization / explicit conflict resolution
 = effective project contract
 ```
 
@@ -128,6 +169,14 @@ Supported scope kinds are:
 A profile may declare multiple scopes when necessary. Do not duplicate profile entries merely to enumerate IDs of the same applicability kind.
 
 Legacy schema-version-1 profile entries without scope metadata are interpreted as repository-wide during migration unless project evidence shows that a narrower scope was intended.
+
+## Planning discovery and implementation boundary
+
+For the affected milestone scope, planning loads the external base/shared profiles, resolves registered `local:<id>` files, reads optional `docs/PROJECT-GUIDANCE.md`, and inspects the relevant project engineering/specification/architecture/decision authority. All applicable mandatory and triggered conditional obligations must be accounted for. Objectives guide planning choices; they do not automatically override explicit requirements.
+
+A new project or planning task may author a local profile if an uncovered engineering shape merits a reusable contract; register it explicitly and resolve project authority before a milestone becomes ready. Do not require a central guide release to introduce a local profile.
+
+Ordinary implementation reads ready milestones and referenced normal project authority; it is not required to recompose guide, profile metadata, local profiles, or project meta-objectives. Planning must preserve the resulting relevant obligations and validation evidence in the handoff.
 
 ## Conflict handling
 

@@ -33,6 +33,18 @@ Examples that normally remain project-local include:
 - organization-specific authentication/test identities;
 - project-specific artifact generation or deployment conventions.
 
+## Planning objectives and local profiles are distinct
+
+Three project-owned mechanisms are available:
+
+- `docs/PROJECT-GUIDANCE.md` (optional): the project's agentic-development objectives, clarifications of guide methodology, and additional planning/review expectations; consumed by planning.
+- `.guide/profiles/<id>/PROFILE.md` (optional): a registered local profile for an engineering shape that activates multiple coordinated obligations across a repository, component, or surface.
+- Normal engineering/specification/architecture/decision documents: the concrete implementation, validation, technology, runtime, and policy answers consumed by implementation.
+
+For example, an Android keyboard might justify a local `android-ime` profile with lifecycle, privacy, interaction, and device-validation obligations. Which Android APIs, Kotlin libraries, build tools, and test devices it actually uses are ordinary engineering authority. A Kotlin library surface only receives a `kotlin-library` profile if a supported reusable library/API contract genuinely exists.
+
+Local profiles should be used when they capture a coherent engineering shape, not because a project has selected a technology. Do not create a local profile for every feature or named runtime. Local profiles can remain local permanently; promotion into central reusable guidance is optional.
+
 ## Where specializations live
 
 A specialization is ordinary project truth. It should normally live in the repository's existing authority structure, for example:

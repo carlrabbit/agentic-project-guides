@@ -32,7 +32,19 @@ These files are coordination metadata, not ordinary implementation authority.
 
 Concrete specializations and semantic component/surface definitions are ordinary project truth and belong in the repository's normal engineering, specification, architecture, or decision documents.
 
+A project may optionally define `docs/PROJECT-GUIDANCE.md` for agentic-development meta objectives and local interpretations of methodology, and register locally owned engineering-shape profiles under `.guide/profiles/<id>/PROFILE.md` using `local:<id>` in `.guide-profile.json`. These are project-authored planning authority, not central guide copies or ordinary implementation required reading. The planning phase must account for applicable obligations and make the implementation handoff self-contained.
+
 A product repository may also contain `docs/research/` and an optional `docs/RESEARCH.md` index as non-authoritative planning knowledge. Research preserves useful evidence and investigation context; it does not define project behavior.
+
+## Project-local planning extensions
+
+Planning must reconcile the base guide, applicable shared profiles, registered project-local profiles, optional project guidance, and concrete project authority for the affected scope.
+
+Project guidance expresses objectives and local methodology or review obligations. Profiles express reusable engineering shapes and their mandatory/conditional obligations and project-owned decisions. Concrete engineering/specification/architecture authority supplies implementation-facing contracts. Material conflicts require explicit planning resolution; profile order never determines authority.
+
+A project may create a local profile during planning without updating the shared guide. Do not invent a local profile for a single runtime choice or formatting preference. Before `ready`, all implementation-affecting consequences and evidence requirements must be explicit in the milestone or normal project authority; ordinary implementation remains independent from this planning layer.
+
+See `meta/PROFILE-MODEL.md` and `meta/DOCUMENTATION-LAYER-MODEL.md`.
 
 ## Planning knowledge and research
 

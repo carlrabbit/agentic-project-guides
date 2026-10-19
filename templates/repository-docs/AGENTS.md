@@ -20,6 +20,8 @@ Run declared commands and restore project dependencies. Isolated tooling setup i
 During ordinary implementation, ignore unless explicitly in scope:
 
 - `.guide-profile.json`;
+- `.guide/profiles/`;
+- `docs/PROJECT-GUIDANCE.md` (unless a milestone explicitly requires it);
 - `.guide-sync/`;
 - `.review/`.
 

@@ -20,7 +20,7 @@ Use the guide system only for planning, migration, documentation synchronization
 
 Target repository documentation must contain project truth only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
-Profiles describe broad reusable engineering shapes. Do not invent a central-style project type or feature-tag profile for operating system, local/CI execution, integration-first testing, a packaging mechanism, a named external product/service, or one concrete product architecture.
+Shared profiles describe broad reusable engineering shapes. Projects may also register `local:<id>` profiles under `.guide/profiles/<id>/PROFILE.md` for distinct project-owned engineering shapes with multiple coordinated obligations. A local profile may be authored during initialization without first adding it to the central guide. Profiles Do not invent a central-style project type or feature-tag profile for operating system, local/CI execution, integration-first testing, a packaging mechanism, a named external product/service, or one concrete product architecture.
 
 When the product exposes a supported command-line executable as a first-class user or automation interface, consider the `cli-tool` profile. A concrete `.NET tool` distribution is not itself a separate profile: use `cli-tool` plus project-local .NET/dotnet-tool specialization. Add `dotnet-library` only when a meaningful reusable library/API surface also exists.
 
@@ -40,7 +40,7 @@ Profiles compose additively. Do not assign primary/secondary precedence and do n
 
 If two applicable profiles impose materially incompatible expectations, resolve the conflict into project-local authority before producing an implementation-ready milestone.
 
-When `.guide-profile.json` is created for guide-system 0.8 or later, use schema version 2 and record semantic `repository`, `component`, or `surface` scopes for each applied profile.
+When `.guide-profile.json` is created for guide-system 0.8 or later, use schema version 2 and record semantic `repository`, `component`, or `surface` scopes for each applied profile. Keep unprefixed IDs for central profiles. A registered local profile uses `local:<id>` and resolves to `.guide/profiles/<id>/PROFILE.md`; its version is project-owned.
 
 Component/surface IDs are project-defined semantic identifiers. Their meaning must be established by normal project authority; do not use path globs in `.guide-profile.json` as the architecture definition.
 
@@ -72,6 +72,8 @@ docs/MILESTONES.md
 docs/milestones/M0001-initialization.md
 .execution/M0001-initialization.md   # when the initialization milestone is AI-executed
 ```
+
+Add optional `docs/PROJECT-GUIDANCE.md` only when actual project meta objectives or planning-methodology clarifications warrant it; do not add it as a mandatory placeholder. Add local profile definitions only for genuinely selected `local:<id>` entries, and capture operative consequences in normal project authority.
 
 Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
 
