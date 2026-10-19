@@ -160,6 +160,10 @@ When an obligation has explicit evidence cases, validation maps to those `EC-*` 
 
 A gate may prove several evidence units, but planning must not claim coverage for a case whose behavior the validation scenario does not actually exercise.
 
+For materially expensive validation, record any established project engineering authority for stage dependency/freshness and measured cost; prefer independent stages that avoid repeating successful work. During implementation run affected feedback. At closure verify every required gate against current inputs, rerunning stale/missing evidence; complete verification need not be an unconditional full-suite rerun. Cheap suites need no special staging.
+
+Investigative simulations or temporary probes are not standard validation/CI. Include their reproducible evidence as milestone obligations only when the investigation itself is required; otherwise they remain implementation-owned diagnostics and do not prove acceptance.
+
 When a prerequisite may be missing, preserve three separate permissions in the execution profile, decisions/constraints, or referenced project engineering authority:
 
 - **Execution:** which existing commands, tools, and environments can be used;

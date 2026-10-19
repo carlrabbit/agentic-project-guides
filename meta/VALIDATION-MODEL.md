@@ -20,6 +20,26 @@ depth
 
 Do not infer that integration validation belongs in CI, that local validation must be shallow, or that CI is required for repository maturity.
 
+## Execution intent
+
+Execution intent is independent of validation tier, target, and locus:
+
+- **Development feedback** answers whether a change caused a relevant problem. Use focused, economical checks; their results are provisional.
+- **Investigative execution** explores hypotheses through simulations, parameter sweeps, profiling, fault injection, or temporary diagnostic tests. It is not automatically regression or acceptance validation.
+- **Acceptance validation** establishes milestone or release obligations with current evidence from required targets and loci.
+
+Exploration may use real systems and acceptance may use a small focused test; technical depth does not determine intent. Implementers may run bounded diagnostic experiments without planning approval, but return material project decisions to planning. Keep investigative code outside default test discovery, CI, and canonical validation unless explicitly required by the milestone. Discard disposable probes, retain reusable findings as non-authoritative research when justified, and deliberately promote established invariants into bounded regression tests when useful.
+
+## Validation efficiency
+
+Use the cheapest reliable check that detects the current class of defect during iteration. Do not run complete build/test/package/consumer validation after every edit by default.
+
+At completion, verify **all required gates against the current implementation**. This means all gates have valid, current evidence, not that all expensive checks must be re-executed. Execute missing/stale stages, reuse proven current evidence when safe, and preserve criterion/evidence-case coverage. Fresh final-candidate or consumer-surface validation remains necessary when the release/milestone contract requires it.
+
+For materially expensive suites, prefer independent validation stages that avoid repeating successful work after a late failure, even without timeouts. Measure relevant stage and setup times; investigate repeated restore, process startup, workspace/fixture creation, and teardown. Do not compromise isolation to share setup. Cheap suites need no staging or caching machinery.
+
+Concrete commands, stage dependencies, fingerprints, costs, fallback and investigative entry points belong in project-local engineering authority. Neither validation efficiency nor simulation alone justifies a new guide profile.
+
 ## Validation tiers
 
 Tiers describe validation depth and purpose. They do not prescribe where validation runs.
@@ -190,7 +210,7 @@ Later milestones declare their own Tier 5 requirements when appropriate.
 
 ## Resumable validation
 
-Long automated validation may use independently executable shards, atomic fingerprinted receipts, and a fast aggregate verifier.
+Materially expensive automated validation should consider independently executable stages, atomic fingerprinted receipts, and a fast aggregate verifier even without runtime-limit pressure. Prefer simpler direct validation when staging would cost more than it saves.
 
 Validation receipts and human review records serve different purposes:
 
@@ -203,5 +223,7 @@ human review record
 ```
 
 Automated receipts may become stale when their validation inputs change.
+
+Stage-specific dependency fingerprints can preserve passing evidence across unrelated edits, but must cover material source, tests, fixtures, tooling, configuration, environment and upstream artifacts. Use conservative whole-repository invalidation when full dependencies are unknown; the existence of a receipt is never sufficient.
 
 Completed human review records do not become stale under the generic model.

@@ -6,6 +6,8 @@ This index is the entry point for guide-system prompt selection.
 
 Prompt templates are guide-system methodology. They live in the guide repository, not in product repositories.
 
+This file selects prompts; its workflow summaries do not supersede the selected canonical prompt or authoritative models. Ordinary Implementers receive their milestone and execution prompt through the project handoff, not by loading this guide repository or this catalog.
+
 ## Normal development workflow
 
 For ordinary milestone-driven development, use only these two prompts:
@@ -139,6 +141,7 @@ read milestone, authority, and planning-seeded ledger
 -> implement/validate/update evidence and status by work package
 -> freshly reread milestone
 -> reconcile obligation/evidence cases <-> ledger <-> repository/evidence
+-> verify all required current evidence; rerun missing/stale checks
 -> completion audit
 -> persist compact durable completion evidence
 -> continue or terminate

@@ -75,6 +75,8 @@ docs/milestones/M0001-initialization.md
 
 Add optional `docs/PROJECT-GUIDANCE.md` only when actual project meta objectives or planning-methodology clarifications warrant it; do not add it as a mandatory placeholder. Add local profile definitions only for genuinely selected `local:<id>` entries, and capture operative consequences in normal project authority.
 
+Create root `AGENTS.md` as a **small repository entrypoint**, not as a copy of the generic Implementer prompt. Its milestone route begins with the primary ready milestone, then the applicable planning-seeded execution ledger and explicitly referenced project authority, followed by needed code/tests. Route non-milestone work to its assigned workflow. Keep implementation specifics and validation policy in `docs/ENGINEERING.md`, other operative documents, or the ready milestone; do not require reading project planning metadata or the external guide for ordinary implementation. Check that entrypoint instructions do not conflict with the generated milestone package. Do not mechanically insert detailed guide methodology into `AGENTS.md`.
+
 Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
 
 Do not include copied guide documents.
@@ -134,6 +136,8 @@ Resolve as applicable:
 During bootstrap, explicitly check which toolchain/runtime capabilities the first milestone needs and whether a missing prerequisite can be provisioned in an authorized disposable/user-scoped environment, must be supplied by the environment owner, or should result in `BLOCKED`. Do not silently substitute GitHub Actions or another execution location for local validation. An absent prerequisite is compatible with a ready milestone when authority, evidence location, and the blocked path are settled; it is not a license for infrastructure creation.
 
 If the project intentionally uses integration-first testing, record that policy in project engineering authority. Do not create unit-test requirements merely because of an assumed generic test pyramid.
+
+Where expensive validation or investigation is expected, initialize only justified project authority: cheap feedback commands, required acceptance gates, separate optional experiment entry points, and safe stage freshness/reuse rules. Optional project guidance may prioritize economical iteration; implementation-facing commands and criteria belong in engineering authority or the milestone. Do not create simulation/efficient-testing profiles, a mandatory caching framework, or canonical regression entries for exploratory workloads by default.
 
 ## Planning-seeded execution ledger
 

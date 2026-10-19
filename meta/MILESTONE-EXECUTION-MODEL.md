@@ -306,12 +306,12 @@ read milestone, authority, and planning-seeded ledger
   -> execution decomposition
   -> map obligations to work packages
   -> implement coherent work package
-  -> focused validation
+  -> focused affected feedback or bounded diagnostic investigation
   -> update ledger and evidence
   -> repeat as needed
   -> freshly reread milestone from disk
   -> reconcile milestone/evidence cases <-> ledger <-> repository/evidence
-  -> final validation
+  -> verify all required evidence; rerun missing/stale checks
   -> completion audit
   -> persist compact durable completion evidence
   -> terminal execution outcome
@@ -320,6 +320,8 @@ read milestone, authority, and planning-seeded ledger
 Tests and automated checks are evidence used by the execution ledger and completion audit. They are not substitutes for milestone reconciliation.
 
 A successful build, test suite, or validation shard must not become an implicit stopping condition when other milestone obligations remain unsatisfied.
+
+Validation is cost-aware without weakening completeness. Run focused affected feedback during implementation. For expensive stages, safely reuse current evidence and rerun stale/missing checks; if dependency coverage is uncertain, rerun conservatively. At closure all mandatory evidence must be valid, but not necessarily re-executed. Exploratory simulations and temporary diagnostic tests are allowed to inform implementation; they do not enter the canonical gate set without explicit milestone authority. Material decisions exposed by investigation return to planning.
 
 ## Final reconciliation
 

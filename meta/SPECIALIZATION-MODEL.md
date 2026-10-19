@@ -61,6 +61,8 @@ Do not require ordinary implementation agents to consult the external guide repo
 
 Do not create a generic `.specializations/` coordination layer merely to mirror guide concepts. Use normal project authority unless a concrete repository has a separate reason to organize its documentation differently.
 
+Project-specific validation-cost priorities may be recorded in `docs/PROJECT-GUIDANCE.md` for planning. Implementable stage commands, dependency/freshness rules, fixture reuse, and exploratory execution isolation belong in normal engineering authority and required gates in the milestone. Do not create `local:efficient-testing` or `local:simulation` profiles for a single testing preference.
+
 ## Specializing validation targets
 
 For an external or runtime-bound integration target, project authority should resolve the applicable parts of the generic validation contract:

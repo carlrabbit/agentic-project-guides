@@ -117,6 +117,14 @@ When the migration chain includes 0.9.2 or later, evaluate existing project-loca
 
 Do not mechanically create either layer or reclassify technology-specific engineering settings as local profiles. Preserve project-owned versions, resolve missing definitions and scope conflicts during planning, and promote implementation-affecting obligations into normal authority or the ready migration milestone.
 
+## AGENTS.md entrypoint reconciliation
+
+When a migration changes implementation handoff, required reading, validation routing, or authority boundaries, compare existing root `AGENTS.md` with the target model. It is an agent navigation entrypoint, not a second generic execution prompt. Preserve valid project-specific instructions; remove stale or conflicting requirements and unnecessary copies of methodology. If absent, create an entrypoint only when useful for the project's agent workflow.
+
+For a ready milestone, route first to the milestone, applicable planning-seeded execution ledger, explicitly referenced operative authority, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
+
+Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a required direct documentation change when current instructions contradict the target handoff; conditional when navigation actually needs improvement; no-op when sound. Record the decision in the migration milestone. Keep validation cadence, stage receipts/fingerprints, simulation isolation, and concrete commands in milestone/project engineering authority rather than accumulating them in `AGENTS.md`.
+
 ## Required output
 
 Create exactly one migration milestone under `docs/milestones/`.
@@ -135,6 +143,7 @@ The milestone must include:
 - human-review requirements;
 - constrained-execution implications;
 - direct documentation impact;
+- `AGENTS.md` entrypoint reconciliation (required / conditional / no-op, preserving local instructions);
 - deferred `.guide-sync/pending/` hints;
 - research/planning-knowledge migration treatment when materially affected by the migration chain;
 - acceptance criteria;
@@ -246,6 +255,7 @@ The package is acceptable only if:
 - optional historical reconstruction is not confused with required guide compliance;
 - validation expectations are concrete for the target model;
 - direct documentation updates are separated from deferred synchronization;
+- `AGENTS.md` is reconciled when its routing contract changes, without duplicating implementation methodology;
 - provider and consumer responsibilities are not blurred;
 - human-review requirements are explicit and milestone-scoped when the applicable guide version requires them;
 - long validation is made resumable when the execution environment may terminate long-running commands;

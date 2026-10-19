@@ -82,6 +82,8 @@ When explicit evidence cases exist, map the gate to those `EC-*` IDs. Otherwise 
 
 A validation gate may prove several evidence units, but it must name only the behaviors actually exercised. Do not infer coverage merely because an aggregate suite passed.
 
+For expensive gates, implementation may link to stage receipts and current dependency fingerprints in the evidence column. A passing receipt establishes the gate only when its provenance, input dependencies, target/locus, and behavior coverage remain valid; otherwise mark stale and rerun. Keep exploratory runs out of required gate status unless explicitly planned as evidence obligations.
+
 ## Resume Point
 
 Implementation owns this section.
@@ -111,5 +113,5 @@ Before `COMPLETE`:
 - [ ] downgrade any stale, indirect-without-justification, substitute-only, or merely asserted `done` state;
 - [ ] confirm every required validation gate has current evidence from the declared target/locus;
 - [ ] confirm no agent-resolvable gap remains;
-- [ ] run the milestone's final validation and completion audit;
+- [ ] verify current evidence for every required gate, executing stale/missing stages, and run the completion audit;
 - [ ] write the compact durable obligation/evidence-case-to-proof reconciliation to the milestone's Completion Evidence section or referenced immutable completion record before this ledger is eligible for cleanup.

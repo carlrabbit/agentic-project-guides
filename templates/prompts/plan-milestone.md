@@ -288,6 +288,10 @@ Do not retain planning scratch work, rejected alternatives, or discussion histor
 
 Validation depth and execution location are separate concerns.
 
+Distinguish development feedback, investigative execution and acceptance gates. Plan the required evidence, not every test invocation. If a simulation or investigation is a milestone obligation, define the question, reproducible inputs, expected evidence and its separate status; otherwise do not put exploratory work in routine regression/CI.
+
+Assess material test/stage costs and setup overhead where relevant to planning. For expensive suites, consider independent stage evidence, dependency/fingerprint-based reuse, and conservative invalidation when a dependency cannot be bounded. Do not require a generic DAG, cache, or cost threshold for small suites. Milestone completion requires fresh valid evidence for all required gates, not unconditional re-execution of every gate.
+
 For each material validation obligation determine, as applicable:
 
 - tier/depth;
@@ -300,6 +304,7 @@ For each material validation obligation determine, as applicable:
 - concrete invocation;
 - exact obligation/evidence-case IDs the validation is intended to prove;
 - expected evidence;
+- material validation-cost, safe evidence-reuse/freshness constraints, and any explicitly required investigative evidence;
 - fallback behavior when the authoritative target is unavailable;
 - consumer/release relationship.
 
@@ -338,6 +343,8 @@ Before marking the milestone `ready`, explicitly verify that:
 - large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
 - long implementation can resume from repository-local execution state rather than depending on conversational memory;
 - long validation has a safe bounded/resumable shape where required;
+- materially expensive validation has a proportionate stage/cadence policy, without weakening gate coverage;
+- exploratory simulations do not silently become standard validation or CI gates;
 - no stronger implementation model is being relied on to resolve uncertainty that belongs in planning.
 
 If any item fails, keep the milestone in `draft/planning` or create a diagnostic milestone. Do not mark it `ready` merely because implementation could probably make progress.

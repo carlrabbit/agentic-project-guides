@@ -1,46 +1,28 @@
 # Agent Instructions
 
-## Default implementation path
+## Repository entrypoint
 
-Read:
+This file routes agents to repository authority; it is not a milestone contract or a copy of the external guide.
 
-- `docs/ENGINEERING.md`;
-- the relevant milestone or task;
-- authority documents listed by that milestone;
-- relevant source and test files.
+For a ready implementation milestone, start with:
 
-Use canonical `eng/` commands only.
+1. the primary milestone document;
+2. its planning-seeded `.execution/<milestone-id>.md` ledger, when applicable;
+3. the project authority explicitly referenced by the milestone;
+4. relevant source, tests, and other repository context needed for the work.
 
-## Execution environment authority
+For other tasks, follow the assigned task and relevant repository authority. Do not assume every invocation is milestone implementation.
 
-Run declared commands and restore project dependencies. Isolated tooling setup is allowed only within established project/environment permissions. Do not treat missing SDKs, compilers, or runtimes as permission to modify persistent host configuration or introduce CI/CD workflows/runners. A permitted alternative validation locus does not authorize new infrastructure. Record unavailable prerequisites, run only explicitly allowed fallback checks, and retain `BLOCKED` gates or escalate material authority decisions instead of substituting a green result.
+Use documented repository engineering commands (`eng/` when applicable). The milestone and project engineering authority define validation requirements; do not invent command contracts.
 
-## Coordination metadata
+## Authority boundaries
 
-During ordinary implementation, ignore unless explicitly in scope:
+- The ready milestone and referenced project authority define implementation scope and obligations. The execution ledger records progress and evidence; it does not override the milestone.
+- Planning metadata (`.guide-profile.json`, `.guide/profiles/`, `docs/PROJECT-GUIDANCE.md`, `.guide-sync/`) is not routine implementation authority. Consult it only when the assigned work requires it.
+- `docs/research/` is non-authoritative evidence, not a substitute for project decisions. Read it when an assigned investigation/evidence obligation calls for it.
+- `.review/` is relevant when the active work requires milestone-scoped review, migration, or synchronization.
+- Do not depend on the external guide repository or planning conversation to reconstruct the implementation contract.
 
-- `.guide-profile.json`;
-- `.guide/profiles/`;
-- `docs/PROJECT-GUIDANCE.md` (unless a milestone explicitly requires it);
-- `.guide-sync/`;
-- `.review/`.
+## Execution boundaries
 
-Read `.review/` only when the milestone activates Tier 5 review, requests review evidence, or requires review validation.
-
-## Constrained execution
-
-When a validation command exposes `--plan-json`, do not run its long aggregate mode in a constrained agent environment.
-
-Run each planned shard in a separate invocation and finish with `--verify`.
-
-Do not claim aggregate success from partial logs.
-
-Do not attempt to bypass execution limits with `nohup`, backgrounding, `disown`, `setsid`, or shell timeout changes.
-
-## Do not
-
-- invent commands;
-- broaden scope;
-- perform broad documentation synchronization unless requested;
-- treat external guide documents as repository authority;
-- put complex project semantics into shell launchers.
+Preserve existing project work and remain within the assigned scope. Do not install persistent host software or change shared CI/CD infrastructure merely to make validation pass; follow the authorization in the milestone and project authority. Escalate material unresolved decisions to planning rather than silently changing project policy. Keep detailed test cadence, evidence-reuse mechanics, and simulation execution rules in the milestone or project engineering authority, not this entrypoint.

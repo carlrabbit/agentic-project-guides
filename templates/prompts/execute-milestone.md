@@ -119,7 +119,7 @@ For each work package:
 
 1. inspect the live repository state needed for that package;
 2. implement the required change and supporting work;
-3. run the relevant focused validation that is available in the current context;
+3. run the cheapest reliable affected feedback checks available in the current context;
 4. fix agent-resolvable failures;
 5. update the ledger with actual status and evidence;
 6. record the next resume point before moving on when meaningful.
@@ -145,6 +145,8 @@ Do not create or expand `docs/research/` during ordinary implementation merely t
 Use canonical repository commands from `eng/` when present.
 
 Passing tests is evidence of validation success. It is not by itself evidence that the milestone is complete.
+
+Distinguish (1) focused development feedback, (2) investigative probes/simulations and (3) authoritative acceptance validation. Use focused checks while iterating, not an unconditional full build/test/package/consumer chain after every work package. When stages are expensive, measure stage/setup cost and investigate repeated restore, process and fixture creation. Diagnostic experiments may be implementation-owned and disposable; exclude them from canonical tests/CI unless required as milestone evidence. Investigative findings requiring new material project decisions return to planning.
 
 The execution ledger is evidence-routing and progress state. A checked ledger row is not proof by itself.
 
@@ -188,12 +190,14 @@ Do not attempt to escape the harness with `nohup`, backgrounding, `disown`, `set
 
 When a validation suite exposes `--plan-json`:
 
-1. run the plan command;
-2. execute each required shard in a separate invocation;
-3. stop and report an actual shard failure;
+1. inspect the required stages and current validated receipts;
+2. execute missing/stale shards separately in constrained environments;
+3. stop and report real failures, preserving valid unaffected evidence;
 4. permit retries only where the suite contract allows them;
-5. run the fast `--verify` command;
+5. run the fast `--verify` when all required stages have valid evidence;
 6. treat the verifier as aggregate validation-success authority.
+
+Reuse stage evidence only when project authority defines dependency/fingerprint coverage for actual source, tests, fixture, toolchain, configuration, environment and upstream artifacts. If coverage is uncertain, rerun. A whole-repository fingerprint is safe but potentially over-invalidating. Exploratory runs do not count as stage receipts.
 
 Record shard/gate completion and evidence in the execution ledger.
 
@@ -202,6 +206,8 @@ Do not claim aggregate validation success from partial child output.
 ## Validation
 
 Run the validation depth/tier, target, execution locus/platform requirements, and concrete commands specified in the milestone plus repository-standard validation that is directly applicable to the changed area.
+
+During iteration prefer focused affected checks. Before completion, verify valid current evidence for **all** required gates, executing stale/missing stages rather than automatically rerunning every successful stage. Re-execute where freshness cannot be established. Direct full validation is appropriate for cheap suites; required fresh final-artifact/consumer checks remain mandatory. Stage receipt validity and per-obligation coverage are separate checks.
 
 Validation depth does not determine where validation runs. Do not move or substitute an authoritative integration target merely because CI, the current agent environment, or another locus is easier to access.
 
