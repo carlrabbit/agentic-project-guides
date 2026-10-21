@@ -207,7 +207,9 @@ Do not claim aggregate validation success from partial child output.
 
 Run the validation depth/tier, target, execution locus/platform requirements, and concrete commands specified in the milestone plus repository-standard validation that is directly applicable to the changed area.
 
-During iteration prefer focused affected checks. Before completion, verify valid current evidence for **all** required gates, executing stale/missing stages rather than automatically rerunning every successful stage. Re-execute where freshness cannot be established. Direct full validation is appropriate for cheap suites; required fresh final-artifact/consumer checks remain mandatory. Stage receipt validity and per-obligation coverage are separate checks.
+Honor the acceptance-gate execution triggers declared by the milestone or project authority. Before a materially expensive gate is ready to validate its relevant implementation surface, use focused feedback and justified diagnostic runs rather than treating the complete aggregate as the default implementation loop. An independent stage can run as soon as its own prerequisites and relevant implementation obligations are stable; do not delay it solely because unrelated milestone work remains. A diagnostic early run does not by itself establish acceptance for unimplemented behavior.
+
+Before completion, verify valid current evidence for **all** required gates, executing stale/missing stages rather than automatically rerunning every successful stage. Re-execute where freshness cannot be established. Direct full validation is appropriate for cheap suites; required fresh final-artifact/consumer checks remain mandatory. Stage receipt validity and per-obligation coverage are separate checks.
 
 Validation depth does not determine where validation runs. Do not move or substitute an authoritative integration target merely because CI, the current agent environment, or another locus is easier to access.
 
