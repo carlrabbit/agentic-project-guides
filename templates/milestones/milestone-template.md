@@ -162,6 +162,8 @@ A gate may prove several evidence units, but planning must not claim coverage fo
 
 For materially expensive validation, record any established project engineering authority for stage dependency/freshness and measured cost; prefer independent stages that avoid repeating successful work. During implementation run affected feedback. At closure verify every required gate against current inputs, rerunning stale/missing evidence; complete verification need not be an unconditional full-suite rerun. Cheap suites need no special staging.
 
+When declaring a materially expensive aggregate, consumer, or integration acceptance gate, make its **execution trigger** explicit in the milestone or referenced project authority: normally after the relevant implementation obligations are complete, with earlier runs only when justified by a concrete diagnostic need or an explicitly required intermediate gate. State which focused feedback to prefer while implementing and how current stage receipts are verified/reused at closure. Distinguish aggregate suite pass/freshness from criterion-specific behavioral coverage; passing against an incomplete intermediate snapshot must not be reported as completion evidence for unimplemented behavior. Do not prescribe a rigid full rerun if valid current evidence already exists.
+
 Investigative simulations or temporary probes are not standard validation/CI. Include their reproducible evidence as milestone obligations only when the investigation itself is required; otherwise they remain implementation-owned diagnostics and do not prove acceptance.
 
 When a prerequisite may be missing, preserve three separate permissions in the execution profile, decisions/constraints, or referenced project engineering authority:
