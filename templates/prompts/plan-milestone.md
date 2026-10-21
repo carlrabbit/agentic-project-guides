@@ -344,6 +344,7 @@ Before marking the milestone `ready`, explicitly verify that:
 - long implementation can resume from repository-local execution state rather than depending on conversational memory;
 - long validation has a safe bounded/resumable shape where required;
 - materially expensive validation has a proportionate stage/cadence policy, without weakening gate coverage;
+- expensive aggregate/consumer/integration acceptance gates state their execution trigger (normally the completed candidate), any justified early diagnostic exceptions, and safe evidence reuse/freshness behavior rather than leaving timing implicit;
 - exploratory simulations do not silently become standard validation or CI gates;
 - no stronger implementation model is being relied on to resolve uncertainty that belongs in planning.
 
