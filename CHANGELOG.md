@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.0 (draft)
+## 0.9.4 (draft)
 
 Migration required: no product repository migration by default; conditional correction when local planning automation assumes ZIP-only delivery or `AGENTS.md` refers to an archive as the implementation contract.
 
@@ -16,7 +16,7 @@ Affected areas: planning package transport, Git-native handoff baseline, active 
 
 ### Migration
 
-See `migrations/guide-system-v0.9.3-to-v0.10.0.md`. Existing ready/completed milestones remain valid; delivery choice alone does not trigger a retrofit.
+See `migrations/guide-system-v0.9.3-to-v0.9.4.md`. Existing ready/completed milestones remain valid; delivery choice alone does not trigger a retrofit.
 
 ## 0.9.3 (draft)
 
