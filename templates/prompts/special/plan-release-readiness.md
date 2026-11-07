@@ -68,7 +68,7 @@ Inspect the minimum relevant repository state, usually:
 
 Create a planning package, not an implementation patch.
 
-The ZIP may contain:
+The planning package may contain:
 
 ```text
 docs/milestones/M00XX-release-readiness.md
@@ -161,9 +161,11 @@ Do not require duplication of all local integration validation in the publicatio
 
 ## Chat response
 
-After creating the ZIP, provide:
+Deliver the planning package as a dedicated Git planning branch when authorized or as a repository-relative ZIP overlay otherwise, following `meta/HANDOFF-TRANSPORT-MODEL.md`.
 
-1. download link;
+After delivery, provide:
+
+1. Git repository, branch, exact planning commit SHA and PR URL if created; **or** ZIP download link and overlay application instructions;
 2. file list;
 3. reason for each file;
 4. resolved profile, role, maturity, and execution mode;
