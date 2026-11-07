@@ -18,8 +18,6 @@ Affected areas: planning package transport, Git-native handoff baseline, active 
 
 See `migrations/guide-system-v0.9.3-to-v0.10.0.md`. Existing ready/completed milestones remain valid; delivery choice alone does not trigger a retrofit.
 
----
- 
 ## 0.9.3 (draft)
 
 Migration required: conditional for repositories with materially expensive validation suites or simulations that currently leak into routine tests; otherwise metadata-only/no-op.
