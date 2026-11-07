@@ -370,9 +370,9 @@ Do not include implementation source files, test files, generated code, workflow
 
 Do not create a bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent file that repeats canonical execution methodology, milestone acceptance criteria, or project authority.
 
-An overlay ZIP is a transport mechanism for repository-relative planning changes. It is not separate planning authority.
+Follow `meta/HANDOFF-TRANSPORT-MODEL.md`. Prefer committing planning-only changes directly to a dedicated target-repository Git branch when authorized; otherwise deliver a repository-relative ZIP overlay. Neither transport is separate planning authority.
 
-When an overlay requires application instructions, keep them limited to transport/application steps and identification of the primary ready milestone. Do not turn application instructions into a second execution contract.
+For Git handoffs, identify the exact planning-baseline commit and whether implementation continues on that branch or branches from that commit. For ZIP handoffs, provide any necessary application instructions. Do not turn either handoff into a second execution contract.
 
 ## Documentation impact
 
@@ -443,12 +443,12 @@ The executor must be able to determine from the milestone, referenced project au
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement repository-relative files needed to make the milestone ready. If moves or deletions cannot be represented directly, include concise application instructions rather than preserving obsolete files.
+Deliver the repository-relative planning artifacts using the mode defined in `meta/HANDOFF-TRANSPORT-MODEL.md`. Use a dedicated Git branch and committed planning baseline when write access is authorized; otherwise create a downloadable ZIP overlay. ZIP application instructions must account for moves and deletions without retaining obsolete files.
 
-After creating the ZIP, respond with:
+After delivery, respond with:
 
-1. download link;
-2. included file list and purpose, distinguishing project authority from non-authoritative research;
+1. Git repository, branch, exact planning commit SHA, and PR URL if created; **or** ZIP download link and concise overlay application instructions;
+2. changed/included file list and purpose, distinguishing project authority from non-authoritative research;
 3. confirmed or inferred applicable profiles/scopes, role, maturity, execution profile, and baseline implementation model;
 4. primary ready-milestone path;
 5. concise transport/application handoff when needed;
