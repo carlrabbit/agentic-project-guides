@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted for guide-system v0.10.0 (draft).
+Accepted for guide-system v0.9.4 (draft).
 
 ## Context
 
