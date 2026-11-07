@@ -57,12 +57,13 @@ Do not treat old copied guides under `docs/research/` as authoritative unless th
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new, replacement, or deleted-file marker notes as appropriate for the documentation sync patch. Preserve repository-relative paths.
+Deliver the repository-relative documentation synchronization changes on a dedicated Git branch when authorized and available, or as a ZIP overlay otherwise, following `meta/HANDOFF-TRANSPORT-MODEL.md`. Preserve the intended file paths and deletions; for ZIP, provide deletion/move application instructions instead of treating marker notes as project authority.
 
 In chat, report:
 
-1. included file list;
-2. deleted or resolved `.guide-sync/pending/` hints;
-3. pending hints that remain and why;
-4. documentation areas synchronized;
-5. validation recommendations.
+1. Git repository, branch, exact sync commit SHA and PR URL if created; **or** ZIP download link and application instructions;
+2. included/changed file list;
+3. deleted or resolved `.guide-sync/pending/` hints;
+4. pending hints that remain and why;
+5. documentation areas synchronized;
+6. validation recommendations.
