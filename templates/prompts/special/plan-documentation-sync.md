@@ -41,7 +41,7 @@ The execution ledger may compress work. It must not compress obligations.
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation tiers, and finish without reconstructing planning context or reading the external guide repository.
+Create an implementation-ready package. The later implementation agent must be able to start from the exact Git planning commit or from a correctly applied ZIP overlay, open the primary milestone document, read only its explicitly listed authority, execute the milestone, run the specified validation, and finish without reconstructing planning context or reading the external guide repository.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
 
@@ -105,13 +105,13 @@ Execution mode: `documentation-sync`. This milestone may read `.guide-sync/pendi
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver planning-only, repository-relative files using `meta/HANDOFF-TRANSPORT-MODEL.md`: prefer an authorized dedicated Git planning branch with an exact commit baseline; otherwise create a ZIP overlay preserving target-repository paths.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
 
-After creating the ZIP, respond with:
+After delivery, respond with:
 
-1. download link;
+1. Git repository, branch, exact planning commit SHA and PR URL if created; **or** ZIP download link and overlay application instructions;
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profile, role, maturity, and execution mode;

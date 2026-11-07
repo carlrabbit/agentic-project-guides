@@ -39,7 +39,7 @@ Use `templates/prompts/execute-milestone.md` as the canonical execution methodol
 
 Do not generate bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent files that duplicate the canonical prompt, milestone acceptance criteria, or project authority.
 
-Overlay/archive application instructions and a short note identifying the primary ready-milestone path are valid transport context. They are not a second execution contract.
+Apply `meta/HANDOFF-TRANSPORT-MODEL.md`: an authorized Git planning branch (preferred) or repository-relative ZIP overlay carries the same ready milestone and seeded ledger. Identify the exact planning-baseline commit for Git, or the overlay application/base instructions for ZIP, plus the primary ready-milestone path. Transport context is not a second execution contract.
 
 ## Baseline-model readiness rule
 

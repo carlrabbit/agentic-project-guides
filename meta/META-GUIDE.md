@@ -223,7 +223,7 @@ Planning agents may also create:
 
 - documentation packages;
 - migration packages;
-- optional overlays when planning itself requires repository-relative file additions, replacements, moves, or deletions;
+- authorized planning-only commits on dedicated Git branches or repository-relative ZIP overlays, following `meta/HANDOFF-TRANSPORT-MODEL.md`;
 - concise execution prompts when a disconnected execution interface benefits from one.
 
-An overlay is a transport mechanism, not a second source of planning authority.
+Git commits and ZIP overlays are interchangeable transport mechanisms, not sources of planning authority. Git handoffs identify the immutable planning commit; either a shared implementation branch or a separate branch from that commit is valid.

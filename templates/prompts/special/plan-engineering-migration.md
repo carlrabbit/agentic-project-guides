@@ -47,7 +47,7 @@ There is no direct synchronization between the planning AI and the implementatio
 
 Create an implementation-ready package. The later implementation agent must be able to:
 
-1. unpack the ZIP into the target repository;
+1. start from the exact Git planning commit or apply the ZIP overlay to the intended target-repository revision;
 2. open the primary milestone document;
 3. read only the authority documents explicitly listed in that milestone;
 4. implement the focus areas;
@@ -82,7 +82,7 @@ Treat `docs/research/` and copied guides as non-authoritative legacy material un
 
 Create a planning/design package, not an implementation patch.
 
-The ZIP may contain repository-relative Markdown or metadata files such as:
+The planning package may contain repository-relative Markdown or metadata files such as:
 
 ```text
 docs/milestones/M00XX-xxx.md
@@ -217,13 +217,13 @@ Do not mix unrelated product feature implementation into the migration.
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver planning-only, repository-relative files using `meta/HANDOFF-TRANSPORT-MODEL.md`: prefer an authorized dedicated Git planning branch with an exact commit baseline; otherwise create a ZIP overlay preserving target-repository paths.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
 
-After creating the ZIP, respond with:
+After delivery, respond with:
 
-1. download link;
+1. Git repository, branch, exact planning commit SHA and PR URL if created; **or** ZIP download link and overlay application instructions;
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profile, role, maturity, and execution mode;
