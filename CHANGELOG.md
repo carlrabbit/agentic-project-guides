@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.10.0 (draft)
+
+Migration required: no product repository migration by default; conditional correction when local planning automation assumes ZIP-only delivery or `AGENTS.md` refers to an archive as the implementation contract.
+
+Affected areas: planning package transport, Git-native handoff baseline, active planning/initialization/migration/documentation-sync prompts, guide version metadata.
+
+### Added — transport-independent planning handoff
+
+- Prefer a dedicated Git planning branch and committed, exact planning-baseline SHA when authorized repository write access exists; retain repository-relative ZIP overlays for disconnected work.
+- Permit implementation to continue on the planning branch or to branch separately from the exact planning commit. A branch name alone is not a frozen handoff.
+- Preserve identical planning scope, milestone/project authority, seeded execution-ledger coverage, implementation separation, and acceptance gates across transports.
+- Specify delivery-specific reporting: commit/branch/optional PR versus ZIP link and application instructions; moves/deletions are native Git changes or explicit ZIP application instructions.
+- Do not require a PR or merge merely because Git is used, and do not start implementation as part of planning.
+
+### Migration
+
+See `migrations/guide-system-v0.9.3-to-v0.10.0.md`. Existing ready/completed milestones remain valid; delivery choice alone does not trigger a retrofit.
+
+---
+ 
 ## 0.9.3 (draft)
 
 Migration required: conditional for repositories with materially expensive validation suites or simulations that currently leak into routine tests; otherwise metadata-only/no-op.
