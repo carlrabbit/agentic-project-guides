@@ -33,13 +33,13 @@ The execution profile for that milestone is selected independently from the migr
 5. Resolve migration decisions and classify changes.
 6. Evaluate optional transition capabilities required/recommended by the migration chain.
 7. Create the ready migration milestone/package.
-8. Apply any planning-time overlay required to establish project truth.
+8. Persist planning-time project truth on the authorized Git planning branch or apply the ZIP overlay, as appropriate.
 9. Execute the ready milestone with the canonical execution prompt.
 10. Run validation and milestone-owned review gates.
 11. Run deferred documentation synchronization when applicable.
 ```
 
-A bespoke execution prompt is not required. `templates/prompts/execute-milestone.md` is the canonical executor entry point for ready milestones. A planning interface may provide a short handoff note that identifies the primary milestone path or overlay application instructions.
+A bespoke execution prompt is not required. `templates/prompts/execute-milestone.md` is the canonical executor entry point for ready milestones. Delivery follows `meta/HANDOFF-TRANSPORT-MODEL.md`; a planning interface identifies the exact Git planning commit or the ZIP overlay application instructions and primary milestone path.
 
 ## Change classification
 
