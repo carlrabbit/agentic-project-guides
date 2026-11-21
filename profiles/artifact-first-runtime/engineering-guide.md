@@ -7,11 +7,11 @@
 | Headless product CLI | Product operations are exposed through deterministic commands. |
 | Structured project data | Source data is schema-validated, stable-ID-based, diffable, and reviewable. |
 | Scenario-based validation | Deterministic scenarios produce structured results and artifacts. |
-| Artifact evidence and reports | Validation emits inspectable artifacts. |
+| Artifact evidence and reports | Produce inspectable artifacts where behavior or review depends on them; not a mandatory proof for every criterion. |
 | Generated/derived artifact pipeline | Derived outputs have provenance and rebuild rules. |
 | Human review gates | A milestone may require human acceptance of evidence automation cannot judge. |
 | Dual-mode runtime validation | Debug and release representations preserve semantics. |
-| Resumable validation suites | Long validation can run as bounded shards with fast aggregate verification. |
+| Resumable validation suites | Optional for suites whose measured cost warrants stages, receipts, or aggregate verification. |
 
 ## Human review
 
@@ -26,7 +26,7 @@ For artifact-first projects, human review commonly applies to:
 
 A review is owned by the milestone that produced the evidence.
 
-The review gates that milestone's completion. Once the milestone completes, the record remains historical and is not revalidated against later repository changes.
+Only explicitly required or blocking human review gates that milestone's completion; optional engineering review need not produce a formal record. Once the milestone completes, the record remains historical and is not revalidated against later repository changes.
 
 A provider repository validates review-system mechanics.
 

@@ -26,7 +26,7 @@ Useful validation targets include:
 
 - a compiler/Roslyn driver using representative source input;
 - an MSBuild project consuming the generator through the supported reference mechanism;
-- the current packed NuGet artifact consumed by an isolated project when the generator is distributed through NuGet;
+- at release readiness, the current packed NuGet artifact consumed by an isolated project when distributed through NuGet;
 - generated output compiled together with representative consumer code;
 - diagnostic behavior observed through the supported compilation surface.
 
@@ -36,9 +36,9 @@ When the source generator is also a NuGet library/package surface, compose this 
 
 ## Packaging
 
-Validate the actual package mechanism used by consumers. Source-generator/analyzer packages often have packaging semantics different from ordinary runtime libraries; those concrete layout rules belong in project-local engineering authority.
+At release qualification, validate the actual package mechanism used by consumers. Ordinary milestones may exercise representative compile-time behavior directly through Roslyn/MSBuild without packing the final artifact unless packaging is in scope or materially risky to defer. Source-generator/analyzer packages often have packaging semantics different from ordinary runtime libraries; those concrete layout rules belong in project-local engineering authority.
 
-Consumer-surface validation must use the current build artifact and avoid accidental success through project references, stale package caches, globally installed tools, or repository-internal substitutes.
+When consumer-surface qualification is performed, use the actual candidate artifact and avoid accidental success through project references, stale package caches, globally installed tools, or repository-internal substitutes.
 
 ## Public surface
 

@@ -1,412 +1,57 @@
 # Prompt — Execute Milestone
 
-You are the implementation agent for this repository.
+You are the implementation agent for a **ready** milestone. Implement the capability and close the milestone without redoing planning.
 
-A planning phase has already converted the work into a ready milestone. Do not redo planning.
+Start here: `{primary-milestone-path}`
 
-Your objective is not merely to implement code or make tests pass. You own milestone closure: continue working until the milestone reaches a valid terminal execution outcome.
+## Read
 
-Start with:
+1. Read the primary milestone and **only** the project authority it references.
+2. Inspect the live source, tests, relevant `AGENTS.md`, and documented engineering commands.
+3. Read an optional `.execution/<milestone-id>.md` only when provided or useful for resuming long work.
 
-```text
-{primary-milestone-path}
-```
+The ready milestone and actual project authority govern. Planning chat, external guide repository, guide selection metadata, or research archives are not required implementation input. Research is non-authoritative except as explicitly relevant evidence.
 
-## Required reading
+## Implement at agent scale
 
-Start by reading:
+Own the concrete implementation: architecture *within resolved constraints*, types, files, algorithms, sequence, tests, and supporting edits. Prefer a coherent capability to artificial mini-slices. Large edits and broad but related refactorings are acceptable.
 
-1. the primary milestone document;
-2. for an AI-executed milestone, the planning-seeded `.execution/<milestone-id>.md`;
-3. the authority documents explicitly listed in that milestone;
-4. source and test files needed to implement and validate the change.
+You may build disposable prototypes, compare approaches, reverse a failed implementation, and try another **within the milestone's goal, invariants, and environment authorization**. When planning deliberately delegates reversible architectural alternatives, evaluate them against the agreed criteria and preserve the chosen result without changing settled public contracts. Avoid unrelated expansion. You do not need planning approval for local implementation choices or implementation-derived decomposition.
 
-You may inspect additional repository-local material when necessary to implement a milestone requirement or prove that a completion condition is satisfied.
+Escalate only a **material unresolved project decision** affecting required architecture, semantics, public/persisted compatibility, scope, acceptance, safety, validation authority, or specialization. Explain the decision and discovered evidence. Do not treat implementation difficulty alone as a reason to stop.
 
-Do not read the external guide repository.
+Preserve existing work. Do not assume technical access permits persistent software installation, CI workflow changes, secret changes, or infrastructure provisioning; use documented project authority.
 
-Do not require the planning conversation or planning-agent scratch work.
+## Validation during implementation
 
-Do not treat old copied setup or engineering guides as authority.
+Run the cheapest feedback that catches the current plausible defects. Build affected code, use targeted tests, and use small investigations when productive. Do not rerun complete validation after every edit.
 
-Treat `docs/research/` and `docs/RESEARCH.md` as non-authoritative planning knowledge. Do not read research merely to reconstruct an operative project rule that should have been provided by the ready milestone or project authority.
+Near completion, run focused automated tests and a few representative integration scenarios that exercise the milestone's meaningful behavior and failure modes. Where a real database/runtime/browser/process boundary defines correctness, exercise that boundary with appropriately sized fixtures.
 
-Read a research artifact only when the milestone explicitly requires investigation/evidence work, references it as non-authoritative evidence, or the artifact is genuinely necessary to verify an explicit milestone obligation. Research findings never override the ready milestone or project authority.
+**Do not perform release qualification by default.** Installed/package consumer smoke tests, full compatibility suites, real repository dogfood, or final distribution verification belong to release readiness unless explicitly in scope for this milestone for a justified reason. Existing current evidence may be reused when still applicable.
 
-Do not read `.guide-profile.json`, `.guide-sync/`, or `.review/` unless the milestone requires them or they are necessary to satisfy or verify an explicit milestone obligation.
+Avoid introducing validation infrastructure merely to orchestrate checks. A direct test command or small `eng/` script is normally sufficient. Expensive sharding, dependency fingerprints, receipt caches, evidence-case registries, and aggregate verifiers are optional.
 
-Treat `.execution/<milestone-id>.md` as operational coverage/progress state only, never as authority. For 0.9-planned AI-executed milestones it should already exist with the lossless obligation registry seeded by planning. If a legacy milestone lacks it, follow the Stage 1 fallback and initialize it from the milestone without compressing obligations.
+Exploratory/nondeterministic tests do not automatically enter the default suite.
 
-## Implementation ownership
+## Completion, review, and correction
 
-Inspect the live repository and derive the concrete implementation yourself.
+Review the resulting repository against the milestone's **entire acceptance contract** and invariants; tests alone cannot certify unexercised behavior. Check explicitly required artifacts, migrations, documentation, and material residual risks.
 
-You own local implementation mechanics including files, types, functions, refactorings, test structure, implementation sequence, execution work packages, and supporting edits where the ready milestone does not constrain them.
+Write a **brief durable completion note** in the milestone (or its project-defined completion record) covering delivered behavior, tests actually run/results, important limitations, and release checks deferred. Also summarize this in the final report. Do not turn the note into a criterion-by-criterion proof ledger. No mandatory acceptance-to-evidence table, ledger set equality, immutable completion proof, or independent reviewer sign-off is implied.
 
-Prefer the smallest coherent change that satisfies the milestone goal, target state, acceptance criteria, and completion obligations. Follow established repository patterns where they do not conflict with the milestone.
+When correcting a defect, implement the repair and perform the smallest credible focused verification. Add a small permanent regression test when a reproducible defect is likely to recur and the test is economical; do not persist every one-off diagnostic. Do not expand acceptance or construct additional gates without a demonstrated material risk. If the prior validation strategy is excessive, reduce it rather than preserving sunk process costs.
 
-Do not expect planning to provide exhaustive file lists, line-by-line edits, or a pre-authored implementation task list. Planning may provide a seeded execution ledger containing the milestone's lossless obligation registry and validation gates; that is contract projection, not implementation decomposition.
+If the milestone explicitly requires a human decision, stop at that gate; never fabricate approval.
 
-If the milestone contains focus areas, workstreams, or similar decomposition, treat them as execution guidance rather than an edit allowlist. Supporting edits outside those areas are allowed when they are necessary to satisfy the milestone contract.
+## Outcome
 
-Do not introduce unrelated product scope.
+Begin the completion report with one of:
 
-## Planning boundary
+- `Milestone status: COMPLETE` — acceptance met and milestone-level validation credible.
+- `Milestone status: AWAITING HUMAN REVIEW` — only an explicit human decision remains.
+- `Milestone status: BLOCKED` — an actual external dependency or unresolved material decision prevents completion.
 
-Treat the ready milestone's decisions, constraints, non-goals, authority, acceptance criteria, validation policy/topology, project-local specializations, and human-review policy as resolved.
+Then state: implemented outcome; significant files/architectural changes; focused validation commands, target/locus where relevant, and results; known limitations and **deferred release qualification**; direct documentation changes; and any real blockers or review requests.
 
-Do not silently reopen or broaden them.
-
-Non-authoritative research, experiments, comments, or newly discovered evidence do not silently amend the project contract.
-
-If implementation reveals a material unresolved decision that could change architecture, semantics, compatibility, scope, acceptance criteria, validation policy/target/locus, or a required project specialization:
-
-1. stop the affected work;
-2. identify the exact decision required and evidence that exposed it;
-3. report the smallest useful set of options or constraints;
-4. return the milestone to planning rather than inventing project policy.
-
-Local implementation choices that stay within the milestone contract do not require escalation.
-
-## Stage 1 — Execution decomposition
-
-Before making production implementation edits, read:
-
-1. the ready milestone;
-2. the required authority;
-3. the planning-seeded `.execution/<milestone-id>.md` when the milestone uses an AI-executed profile.
-
-The ledger is operational state, not authority. The milestone wins if they disagree.
-
-Before deriving work packages, perform a lossless coverage check:
-
-1. enumerate every applicable stable obligation ID from the freshly read milestone;
-2. enumerate every planner-seeded obligation ID in the ledger;
-3. verify exact obligation-ID set equality;
-4. verify no seeded obligation was merged, deleted, renumbered, paraphrased, or replaced by a broader summary;
-5. enumerate every required `EC-*` evidence-case ID from the milestone and ledger;
-6. verify exact evidence-case-ID set equality when evidence cases exist;
-7. verify no evidence case was omitted, merged, paraphrased, or replaced by an aggregate claim;
-8. verify every required validation gate is represented with its declared target/locus and the exact obligation/evidence-case IDs it is intended to prove.
-
-If a legacy or externally prepared AI-executed milestone has no seeded ledger, initialize one from the milestone before production edits. Preserve every applicable obligation individually. Do not use the absence of a seeded ledger as permission to summarize the contract.
-
-If the mismatch reflects a material ambiguity or missing project-level decision, return to planning. If it is a mechanical ledger omission and the milestone is unambiguous, repair the ledger from the milestone without changing the contract.
-
-Then convert the work into bounded execution work packages.
-
-This is implementation decomposition, not a new planning phase. Do not reopen settled project decisions.
-
-For each work package:
-
-- map the specific seeded obligation IDs it covers;
-- map any required evidence-case IDs without collapsing sibling cases;
-- map validation only to the obligation/evidence-case IDs the planned scenario actually exercises;
-- leave unrelated seeded obligations/evidence cases separate even when the same code change may affect them;
-- verify that no work package requires reopening a settled material decision.
-
-The execution ledger may compress work. It must not compress obligations.
-
-Implementation owns work-package decomposition, concrete implementation mapping, evidence, status, and resume state. Planning owns the seeded obligation identity and wording.
-
-A small milestone may use one work package. Do not skip the ledger because the work appears simple.
-
-## Stage 2 — Implementation loop
-
-Implement one coherent work package at a time where practical.
-
-For each work package:
-
-1. inspect the live repository state needed for that package;
-2. implement the required change and supporting work;
-3. run the cheapest reliable affected feedback checks available in the current context;
-4. fix agent-resolvable failures;
-5. update the ledger with actual status and evidence;
-6. record the next resume point before moving on when meaningful.
-
-Do not mark a work package or obligation `done` merely because code was written or a test command was invoked. `done` means the live repository and recorded evidence establish that specific mapped obligation.
-
-When an obligation has explicit evidence cases, do not mark it `done` until every applicable child evidence case is established.
-
-A broad suite pass establishes only the obligation/evidence-case IDs whose required behavior the executed tests/scenarios actually exercise. Do not use neighboring coverage, sibling-case coverage, assumed transitivity, or an aggregate green result as criterion-specific evidence.
-
-If context is compacted or the session is resumed, reread the primary milestone and `.execution/<milestone-id>.md` before continuing. Re-establish current repository state where the ledger may be stale.
-
-## Execution rules
-
-Perform all implementation and supporting work required to satisfy the milestone contract.
-
-Do not perform unrelated product expansion or broad cleanup merely because nearby work is visible.
-
-Do not perform broad documentation synchronization unless it is part of the milestone. Update direct documentation when required by the milestone, when implementation would otherwise contradict project authority, or when documentation itself is an acceptance or completion obligation.
-
-Do not create or expand `docs/research/` during ordinary implementation merely to record reasoning or discoveries. Create/update research only when the ready milestone explicitly assigns investigation/evidence preservation. If new evidence requires a material project decision, return it to planning rather than encoding the decision as research.
-
-Use canonical repository commands from `eng/` when present.
-
-Passing tests is evidence of validation success. It is not by itself evidence that the milestone is complete.
-
-Distinguish (1) focused development feedback, (2) investigative probes/simulations and (3) authoritative acceptance validation. Use focused checks while iterating, not an unconditional full build/test/package/consumer chain after every work package. When stages are expensive, measure stage/setup cost and investigate repeated restore, process and fixture creation. Diagnostic experiments may be implementation-owned and disposable; exclude them from canonical tests/CI unless required as milestone evidence. Investigative findings requiring new material project decisions return to planning.
-
-The execution ledger is evidence-routing and progress state. A checked ledger row is not proof by itself.
-
-## Execution environment authority
-
-Implementation autonomy authorizes code/test mechanics and the execution of declared repository commands; it is not blanket permission to alter the environment used to execute them.
-
-- Restore declared project dependencies and use existing authorized tooling. Install isolated tools only where the milestone, referenced project authority, or established environment policy permits the installation scope.
-- Do not install/update host-wide or persistent SDKs, compilers, runtimes, services, or machine settings merely because validation needs them unless that provisioning is authorized.
-- Do not create or materially change CI/CD workflows, runners, triggers, permissions, secrets, or remote infrastructure as a workaround for missing local capabilities unless that infrastructure work is explicitly in scope or already authorized by project policy.
-- Do not infer that a valid alternate validation locus authorizes provisioning that locus. Existing, approved CI execution and introducing a new workflow are different permissions.
-
-On an unavailable prerequisite, record the attempted gate, the concrete failure, and the missing capability; use only authorized remediation and explicitly allowed fallback checks. If the required authorization or acceptable locus remains undecided, stop that affected work and return the decision to planning. If completion needs an unavailable external capability, leave the relevant evidence pending and terminate `BLOCKED` rather than manufacture an alternate green gate. Continue unrelated agent-resolvable work when it does not require the unresolved decision.
-
-## Human review
-
-Human review is a completion gate owned by the current milestone. It is not a perpetual project-wide quality gate.
-
-When the milestone requires human review:
-
-- create or update the review request under the specified `.review/` path;
-- ensure the request identifies the current milestone;
-- produce the required evidence;
-- report the canonical review ID and evidence paths;
-- do not fabricate approval;
-- do not create an approval or waiver on behalf of a human;
-- do not write numeric aliases into milestones, requests, records, or automation;
-- treat a blocking review as incomplete until the human records an acceptable decision;
-- after the human decision, run the repository's documented milestone-scoped `review-check` command;
-- do not reopen or revalidate completed reviews from earlier milestones because repository state changed.
-
-If the reviewer records `changes-requested`, correct the implementation within milestone scope, regenerate evidence, update the execution ledger, and preserve the decision history. If the requested change would alter the ready milestone contract, escalate back to planning.
-
-If a required human decision is the only remaining unsatisfied completion gate and it cannot be obtained in the current execution context, terminate as `AWAITING HUMAN REVIEW` and report the exact pending review ID and evidence. Do not claim milestone completion.
-
-## Constrained execution
-
-Assume the command-execution harness may terminate long-running process groups.
-
-Do not attempt to escape the harness with `nohup`, backgrounding, `disown`, `setsid`, shell redirection, or longer shell-level timeouts.
-
-When a validation suite exposes `--plan-json`:
-
-1. inspect the required stages and current validated receipts;
-2. execute missing/stale shards separately in constrained environments;
-3. stop and report real failures, preserving valid unaffected evidence;
-4. permit retries only where the suite contract allows them;
-5. run the fast `--verify` when all required stages have valid evidence;
-6. treat the verifier as aggregate validation-success authority.
-
-Reuse stage evidence only when project authority defines dependency/fingerprint coverage for actual source, tests, fixture, toolchain, configuration, environment and upstream artifacts. If coverage is uncertain, rerun. A whole-repository fingerprint is safe but potentially over-invalidating. Exploratory runs do not count as stage receipts.
-
-Record shard/gate completion and evidence in the execution ledger.
-
-Do not claim aggregate validation success from partial child output.
-
-## Validation
-
-Run the validation depth/tier, target, execution locus/platform requirements, and concrete commands specified in the milestone plus repository-standard validation that is directly applicable to the changed area.
-
-Honor the acceptance-gate execution triggers declared by the milestone or project authority. Before a materially expensive gate is ready to validate its relevant implementation surface, use focused feedback and justified diagnostic runs rather than treating the complete aggregate as the default implementation loop. An independent stage can run as soon as its own prerequisites and relevant implementation obligations are stable; do not delay it solely because unrelated milestone work remains. A diagnostic early run does not by itself establish acceptance for unimplemented behavior.
-
-Before completion, verify valid current evidence for **all** required gates, executing stale/missing stages rather than automatically rerunning every successful stage. Re-execute where freshness cannot be established. Direct full validation is appropriate for cheap suites; required fresh final-artifact/consumer checks remain mandatory. Stage receipt validity and per-obligation coverage are separate checks.
-
-Validation depth does not determine where validation runs. Do not move or substitute an authoritative integration target merely because CI, the current agent environment, or another locus is easier to access.
-
-If validation fails for a reason you can resolve within the authorized execution environment, continue working and rerun the relevant validation. A resolvable validation failure is not a terminal blocker.
-
-If a required validation target/locus is unavailable in the current execution context:
-
-- run any explicitly allowed fallback/portable validation separately;
-- report the unavailable target/locus, attempted command and concrete missing capability, and the evidence still missing;
-- do not create infrastructure or silently relocate the gate to obtain a green result;
-- do not claim success for the unavailable validation obligation;
-- use `BLOCKED` only when that missing external capability prevents milestone completion in the current run.
-
-Examples include CI-only validation, local-Windows-only installed-runtime validation, remote-service validation requiring unavailable credentials, or native/hardware validation unavailable to the current agent.
-
-If the milestone includes blocking human review, automated validation success alone does not complete the milestone.
-
-## Mandatory final reconciliation
-
-After implementation work packages and required validation appear complete, do not immediately terminate.
-
-Freshly reread the primary milestone from disk. Do not rely on conversational memory or the ledger's summary of the milestone.
-
-First reconcile the contract shape:
-
-```text
-set(applicable milestone obligation IDs)
-==
-set(ledger obligation IDs)
-
-set(required milestone evidence-case IDs)
-==
-set(ledger evidence-case IDs)
-```
-
-Verify exact set equality, not merely equal counts. Confirm that no applicable obligation or evidence case was omitted, merged, duplicated, renumbered, paraphrased into a broader claim, or replaced by a work-package/aggregate summary.
-
-Then reconcile:
-
-```text
-each milestone obligation/evidence-case ID
-<-> ledger mapping
-<-> live repository
-<-> specific evidence
-```
-
-For every applicable obligation ID:
-
-- identify the ledger work package or gate that claims coverage;
-- inspect the actual implementation evidence;
-- enumerate every required child evidence case, when defined;
-- identify the validation evidence required for that obligation/evidence case;
-- verify the executed validation actually exercises the behavior stated by that obligation/evidence case;
-- verify required evidence came from the declared target/locus;
-- reject evidence inferred only from a neighboring criterion, sibling evidence case, different implementation path, different scenario, or aggregate pass that did not exercise the required behavior;
-- downgrade any stale, unsupported, indirect-without-justification, substitute-only, or merely asserted `done` state;
-- add newly discovered agent-resolvable gaps to the implementation-owned ledger fields and continue implementation.
-
-Also confirm that every required validation gate has current evidence and that the ledger contains no unresolved agent-resolvable item.
-
-Only after this reconciliation succeeds may you perform the terminal completion audit.
-
-## Mandatory completion audit
-
-After final reconciliation and required validation, perform a completion audit before terminating.
-
-Check the milestone against all applicable obligations, including:
-
-- goal;
-- target state;
-- scope-required behavior;
-- every acceptance criterion;
-- all required validation targets/loci, commands, and evidence;
-- required artifacts or generated outputs;
-- direct documentation obligations;
-- explicitly required research/evidence artifacts when investigation is part of the milestone;
-- required migrations, cleanup, or compatibility work;
-- human-review gates;
-- constraints and invariants;
-- any supporting work discovered during implementation that is necessary to satisfy the milestone.
-
-Do not treat passing tests, successful compilation, completion of listed focus areas, or a fully checked execution ledger as sufficient by themselves.
-
-For every unsatisfied item:
-
-- if it is resolvable in the current execution context without changing the ready milestone contract, update the ledger and continue working;
-- if the only remaining requirement is a human decision, terminate as `AWAITING HUMAN REVIEW`;
-- if it requires unavailable external capability or a material planning decision you are not authorized to make, terminate as `BLOCKED` and identify the exact dependency or decision.
-
-Repeat implementation, validation, ledger reconciliation, and completion audit as needed until no agent-resolvable milestone obligation remains.
-
-## Persist durable completion evidence
-
-After final reconciliation and the mandatory completion audit establish that the milestone is complete, but before reporting `COMPLETE`:
-
-1. update the milestone's `Completion Evidence` section (or the project-defined immutable completion record explicitly referenced by the milestone);
-2. record a compact mapping from every applicable obligation/evidence case to concrete evidence and validation gate/target;
-3. preserve explicit evidence cases individually rather than collapsing them back into one parent summary;
-4. omit work-package task lists, resume state, scratch reasoning, and other mutable execution detail;
-5. ensure the durable evidence summary can be understood after `.execution/<milestone-id>.md` is removed under repository policy.
-
-This completion-evidence update is historical evidence only. It must not rewrite or reinterpret the ready contract.
-
-## Success semantics
-
-Keep these concepts distinct:
-
-- implementation success: the intended implementation exists;
-- work-package completion: a bounded implementation outcome and its mapped evidence are established;
-- validation success: the required checks pass against the required targets/loci;
-- milestone completion: every milestone obligation and completion gate is satisfied.
-
-Implementation success does not imply work-package completion.
-
-Work-package completion does not imply aggregate validation success.
-
-Validation success does not imply milestone completion.
-
-Only milestone completion permits the `COMPLETE` terminal outcome.
-
-## Terminal execution outcomes
-
-Terminate only with one of these explicit outcomes:
-
-### COMPLETE
-
-Use only when:
-
-- the primary milestone was freshly reread from disk;
-- exact milestone-obligation-to-ledger set reconciliation succeeded;
-- exact required-evidence-case-to-ledger set reconciliation succeeded where evidence cases apply;
-- criterion/evidence-case-specific milestone-to-ledger-to-repository/evidence reconciliation succeeded;
-- compact durable completion evidence was written to the milestone or referenced immutable completion record;
-- every applicable milestone obligation is satisfied;
-- required validation is current from the required target/locus;
-- no agent-resolvable ledger gap remains;
-- no blocking review or external dependency remains.
-
-The milestone may transition to `done`.
-
-### AWAITING HUMAN REVIEW
-
-Use only when implementation and all agent-resolvable completion work are complete and a required human review decision is the remaining gate.
-
-The milestone remains active until the review is resolved.
-
-### BLOCKED
-
-Use only when completion requires something the implementation agent cannot resolve in the current execution context, such as:
-
-- unavailable credentials or permissions;
-- unavailable required infrastructure, runtime, integration target, or external service;
-- inaccessible required dependency or artifact;
-- required validation constrained to an unavailable platform/locus;
-- a material architectural, semantic, compatibility, scope, acceptance, validation, or specialization decision that must return to planning.
-
-Do not use `BLOCKED` for ordinary implementation work, failing tests, missing documentation, incomplete artifacts, incomplete ledger items, or other issues the agent can fix itself.
-
-## Completion report
-
-The final report must begin with exactly one milestone status:
-
-```text
-Milestone status: COMPLETE
-```
-
-or:
-
-```text
-Milestone status: AWAITING HUMAN REVIEW
-```
-
-or:
-
-```text
-Milestone status: BLOCKED
-```
-
-Then report:
-
-- implemented outcome;
-- execution-ledger path, obligation/evidence-case set equality results, and criterion-specific reconciliation result;
-- durable completion-evidence location;
-- completion-audit result;
-- files changed;
-- validation commands run, target/locus, and results;
-- missing target/locus evidence when blocked;
-- resumable shard and verifier results, if applicable;
-- direct documentation changes;
-- explicitly required research/evidence artifacts created or updated, if any;
-- required artifacts produced;
-- `.guide-sync/pending/` hints created or updated, if explicitly required;
-- human-review requests owned by this milestone;
-- evidence paths and human decisions currently recorded;
-- result of the milestone-scoped review check, if applicable;
-- blockers, deviations, or planning escalations.
-
-Do not report implementation success, checked work packages, or validation success as milestone completion unless final reconciliation and the completion audit also pass.
-
-Do not report prior milestone reviews as stale or requiring reapproval.
+Ordinary failing tests, fixable defects, or incomplete source edits are work to resolve, not reasons to claim `BLOCKED`. Do not report `COMPLETE` on compilation alone when required behavior has not been established.

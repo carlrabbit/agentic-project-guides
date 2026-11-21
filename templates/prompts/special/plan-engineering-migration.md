@@ -22,24 +22,9 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 If the target repository contains `.review/`, treat it as repository-local human-review state. Read it only when the milestone requires human review, engineering migration, documentation synchronization, or release readiness.
 
-## Planning-seeded execution ledger
+## Optional execution progress
 
-When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
-
-Seed only contract-derived coverage:
-
-- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
-- one separate pending ledger row per obligation;
-- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
-- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
-
-Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
-
-Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
-
-Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
-
-The execution ledger may compress work. It must not compress obligations.
+Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
 
 ## Planning/implementation separation
 
@@ -47,7 +32,7 @@ There is no direct synchronization between the planning AI and the implementatio
 
 Create an implementation-ready package. The later implementation agent must be able to:
 
-1. unpack the ZIP into the target repository;
+1. apply the package into the target repository;
 2. open the primary milestone document;
 3. read only the authority documents explicitly listed in that milestone;
 4. implement the focus areas;
@@ -82,7 +67,7 @@ Treat `docs/research/` and copied guides as non-authoritative legacy material un
 
 Create a planning/design package, not an implementation patch.
 
-The ZIP may contain repository-relative Markdown or metadata files such as:
+The package may contain repository-relative Markdown or metadata files such as:
 
 ```text
 docs/milestones/M00XX-xxx.md
@@ -95,7 +80,7 @@ docs/artifacts/xxx.md
 docs/review/xxx.md
 .review/pending/xxx.md
 .guide-sync/pending/xxx.md
-.execution/M00XX-<milestone>.md
+.execution/M00XX-<milestone>.md   # optional resume state, only if justified
 ```
 
 Only include files directly needed to make the milestone implementation-ready.
@@ -106,25 +91,7 @@ Do not include implementation source files, test files, generated code, workflow
 
 Create exactly one primary milestone document under `docs/milestones/`.
 
-The milestone must include:
-
-1. goal;
-2. repository role and maturity assumptions;
-3. execution mode;
-4. scope;
-5. non-goals;
-6. focus areas;
-7. implementation constraints;
-8. required authority documents;
-9. files or areas likely affected;
-10. validation tiers and concrete commands;
-11. validation execution mode: direct, resumable-sharded, CI-only, or human-review;
-12. acceptance criteria;
-13. direct documentation impact;
-14. deferred documentation synchronization hints;
-15. human-review requirements;
-16. constrained-runtime handling;
-17. out-of-scope guide migration work if applicable.
+The milestone must define a coherent target, important architecture/invariants, scope/exclusions, verifiable acceptance outcomes, and focused milestone validation with release-only checks clearly deferred. Record applicable project authority, constraints, documentation-sync hints, authorization, and human judgment only where material. Do not create a file-edit forecast, evidence registry, or elaborate gate plan just to complete a template.
 
 ## Additional authority documents
 
@@ -144,46 +111,15 @@ Do not require the implementation agent to read `.guide-sync/`.
 
 ## Human review
 
-Determine whether automated validation can decide acceptance for this milestone's outputs.
+Apply a human-acceptance gate only when judgment is actually necessary or project authority explicitly requires approval. Specify the review subject, relevant evidence, required reviewer/authority, and acceptable decision. A PR approval or concise milestone-local decision is sufficient by default. Do not prescribe `.review/` registries, canonical review IDs, six review commands, a new engineering host, or fingerprints simply for one approval.
 
-Human review is owned by this milestone and acts only as a milestone completion gate. It must not be designed as a persistent project-wide approval.
-
-When human review applies, specify:
-
-- applicability: none, recommended, required, or blocking;
-- review class;
-- canonical review ID or allocation rule;
-- owning milestone ID and milestone path;
-- review subject;
-- required evidence;
-- acceptance criteria;
-- reviewer role when relevant;
-- acceptable decisions for completion;
-- waiver policy, if any;
-- review request and record locations under `.review/`;
-- the exact milestone-scoped review-check command.
-
-Do not define generic future-commit staleness or perpetual re-review triggers.
-
-Repository revision and evidence fingerprints may be recorded for provenance, but completed approval becomes historical evidence after this milestone completes.
-
-If future work may need review, state that the future milestone must declare its own review rather than reopening this milestone's completed record.
+Only when the repository **already uses** or deliberately needs the advanced structured review subsystem should the milestone reference its project-specific request/record locations, IDs, command contract, and scoped completion check. A future milestone owns any new review; completed decisions do not become stale after unrelated commits.
 
 ## Constrained execution and validation
 
 Determine whether any validation command may exceed a constrained agent runtime.
 
-For resumable suites, specify:
-
-- suite command;
-- `--plan-json` command;
-- shard execution contract;
-- receipt location;
-- fingerprint scope;
-- `--verify` command;
-- expected aggregate evidence.
-
-Do not accept partial child output as aggregate success.
+For materially expensive suites, use direct stage commands first; introduce receipt/fingerprint/verifier machinery only when its cost is justified. Do not impose a new validation pipeline on a normal migration milestone.
 
 ## Provider versus consumer distinction
 
@@ -195,7 +131,7 @@ Mixed/dogfood repositories may do both, but dogfood scope must be bounded and ex
 
 ## Mode requirements
 
-Execution mode: `engineering-migration`.
+Workflow type: `engineering-migration` (independent of the project's `defaultImplementationMode`).
 
 Use this mode for:
 
@@ -217,13 +153,13 @@ Do not mix unrelated product feature implementation into the migration.
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
 
-After creating the ZIP, respond with:
+After preparing the package, respond with:
 
-1. download link;
+1. branch\/PR link or download link, as applicable;
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profile, role, maturity, and execution mode;
@@ -245,7 +181,7 @@ The package is acceptable only if:
 - direct documentation updates are separated from deferred synchronization;
 - provider and consumer responsibilities are not blurred;
 - human-review requirements are explicit, milestone-owned, and limited to the current milestone when automation cannot decide acceptance;
-- long validation is made resumable when the execution environment may terminate long-running commands;
+- long validation is made resumable only when its cost or execution limits justify additional machinery;
 - aggregate success is never inferred from partial output;
 - old copied guides are not treated as active authority;
 - no TBP or issue-template dependency is introduced;

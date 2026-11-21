@@ -121,7 +121,7 @@ Do not mechanically create either layer or reclassify technology-specific engine
 
 When a migration changes implementation handoff, required reading, validation routing, or authority boundaries, compare existing root `AGENTS.md` with the target model. It is an agent navigation entrypoint, not a second generic execution prompt. Preserve valid project-specific instructions; remove stale or conflicting requirements and unnecessary copies of methodology. If absent, create an entrypoint only when useful for the project's agent workflow.
 
-For a ready milestone, route first to the milestone, applicable planning-seeded execution ledger, explicitly referenced operative authority, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
+For a ready milestone, route first to the milestone, explicitly referenced operative authority and optional execution progress notes when present, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
 
 Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a required direct documentation change when current instructions contradict the target handoff; conditional when navigation actually needs improvement; no-op when sound. Record the decision in the migration milestone. Keep validation cadence, stage receipts/fingerprints, simulation isolation, and concrete commands in milestone/project engineering authority rather than accumulating them in `AGENTS.md`.
 
@@ -159,53 +159,21 @@ Do not perform broad implementation work.
 
 ## Human review
 
-Inspect whether the target repository uses human review and which guide version shaped that implementation.
+Apply relevant historical migration rules only to the versions traversed. Under 1.0.0-rc.1, formal human acceptance is optional unless explicitly required by the milestone or project. A normal PR review or concise milestone-local decision may satisfy required acceptance; do not create new review registries, aliases, command hosts or review-check launchers for one approval.
 
-Apply the human-review migration semantics from the relevant migration documents rather than assuming the latest structure was always present.
+Existing repositories with a deliberately adopted structured review subsystem may retain their project-owned contract. Preserve completed decisions as historical rather than demanding reapproval after unrelated commits. Classify an ambiguous active legacy review for manual resolution.
 
-For migration through versions that use the milestone-scoped human-review model:
-
-- require pending reviews to identify one owning milestone;
-- treat human review as a milestone completion gate;
-- preserve completed records as historical evidence;
-- remove generic repository-wide approval staleness;
-- do not require humans to reapprove completed milestones because later commits occurred;
-- keep canonical IDs and ephemeral interactive aliases;
-- require milestone-scoped `review-check` behavior;
-- classify ambiguous legacy pending requests as manual-review migration items.
-
-When the migration milestone itself requires human judgment, create a review request owned by the migration milestone. Do not create an ongoing project-wide review gate.
+When the migration milestone itself requires human judgment, specify the subject and evidence and record the decision in an already supported location. Do not create an ongoing repository-wide review gate.
 
 ## Constrained execution
 
 Inspect engineering commands for long aggregate wrappers or agent-harness sensitivity.
 
-When migration validation may exceed runtime limits, require resumable validation with:
+When migration validation is demonstrably expensive or constrained, consider independently runnable stages. Add resumability, receipts, or a verifier only where these mechanisms reduce total cost and project authority specifies reliable stage success criteria. Do not infer success from partial output.
 
-- `--plan-json`;
-- bounded `--shard <id>` commands;
-- atomic fingerprinted receipts;
-- fast `--verify`;
-- no inference from partial output.
+## Optional execution progress
 
-## Planning-seeded execution ledger
-
-When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
-
-Seed only contract-derived coverage:
-
-- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
-- one separate pending ledger row per obligation;
-- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
-- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
-
-Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
-
-Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
-
-Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
-
-The execution ledger may compress work. It must not compress obligations.
+Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
 
 ## Planning/implementation separation
 
@@ -213,7 +181,7 @@ There is no direct synchronization between the planning AI and the implementatio
 
 Create an implementation-ready package. The later implementation agent must be able to:
 
-1. unpack the ZIP into the target repository;
+1. apply the package into the target repository;
 2. open the primary milestone document;
 3. read only the authority documents explicitly listed in that milestone;
 4. implement the focus areas;
@@ -226,13 +194,13 @@ Also generate a concise execution prompt in chat for the later implementation ag
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or research scaffolding that the migration chain does not justify.
 
-After creating the ZIP, respond with:
+After preparing the package, respond with:
 
-1. download link;
+1. branch\/PR link or download link, as applicable;
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profiles/scopes, role, maturity, and execution mode as defined by the target guide version;
@@ -258,7 +226,7 @@ The package is acceptable only if:
 - `AGENTS.md` is reconciled when its routing contract changes, without duplicating implementation methodology;
 - provider and consumer responsibilities are not blurred;
 - human-review requirements are explicit and milestone-scoped when the applicable guide version requires them;
-- long validation is made resumable when the execution environment may terminate long-running commands;
+- long validation is made resumable only when its cost or execution limits justify additional machinery;
 - aggregate success is never inferred from partial output;
 - copied guide material is not mistaken for current project authority or durable project research;
 - genuine research/evidence is not deleted or promoted mechanically without applying the relevant migration semantics;

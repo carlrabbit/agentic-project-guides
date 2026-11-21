@@ -1,177 +1,53 @@
 # Prompt — Plan a Release Readiness Milestone
 
-Our planning task is to create an implementation-ready release-readiness milestone package for:
+Create a release-readiness milestone package for:
 
 `{milestone}`
 
-The active guide authority is external:
+Use the current guide methodology for planning; implementers must not need the external guide or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
 
-- Guide repository: `carlrabbit/agentic-project-guides`
+## Distinct release boundary
 
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, review, and release readiness.
+Release qualification is a deliberate **release-candidate** activity, not a validation gate inherited by every feature milestone. A release milestone establishes confidence in the integrated candidate **as actually consumed and supported**.
 
-Target repository documentation must contain project truth only.
+Identify the target version, candidate commit/artifacts, **each actively supported distribution mechanism**, intended consumers, supported platform/runtime matrix, relevant public contracts, and release/publish decisions. Qualification must exercise representative behavior through the actual candidate artifact for each supported mechanism; record an explicit project-policy justification for any excluded surface. Distinguish qualification from publication.
 
-If the target repository contains `.guide-profile.json`, use it as guide-selection metadata. Ordinary implementation agents must not be required to read it.
+Read the minimum relevant product authority: README, AGENTS, release/packaging engineering policy, API/compatibility baselines, public documentation/examples, candidate build config, directly relevant completed milestone evidence, and existing CI/installation scripts. Resolve important profile/scope and real-runtime details without making implementers read selection metadata.
 
-If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata.
+## Ready release contract
 
-If the target repository contains `.review/`, inspect it only for active reviews owned by this release-readiness milestone or unresolved migration state that directly blocks it.
+Use the ordinary milestone template, with release-specific content:
+- **Goal:** exact candidate/version and supported distribution surfaces.
+- **Invariants:** required API, persisted data, public CLI/configuration, platform/security and compatibility commitments.
+- **Scope:** packages/executables, documentation, examples, installers, relevant integrations; exclude publication unless specifically requested and authorized.
+- **Acceptance:** small number of meaningful final-candidate outcomes, not one case for every internal requirement.
+- **Qualification:** actual package or installed artifact for each actively supported distribution mechanism, representative real consumer behavior, critical runtime/integration behavior, platform/compatibility and failure scenarios proportional to risk. Avoid exhaustive matrices unless product policy or consequences justify them.
+- **Authority:** execution loci, platform and credential permissions, clean isolation, and required human approval when actually needed.
 
-## Planning-seeded execution ledger
+A release may legitimately need a richer validation plan than an ordinary milestone. Justify expensive gates by consumer consequence or release risk—not merely by artifact count or a historical test matrix.
 
-When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
+## Consumer and compatibility evidence
 
-Seed only contract-derived coverage:
+Qualify the **current candidate artifact**, avoiding accidental resolution of developer build products, global installations, stale caches, or unpublished substitutions. Examples:
+- NuGet library: packed package consumed by isolated client.
+- .NET tool: local package installed through `dotnet tool` and invoked by generated command/shim.
+- Standalone executable: published executable invoked outside the source-project run path.
+- Generator: relevant compiled consumer and actual shipped package layout.
 
-- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
-- one separate pending ledger row per obligation;
-- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
-- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
+Cover important public command behavior, API/diagnostics, examples, and supported environments. Do not repeat all internal unit/integration tests through every consumer. Reuse applicable current milestone integration evidence if candidate inputs and behavior remain equivalent; rerun checks whose results can no longer establish the final candidate.
 
-Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
+Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. Missing required targets are blockers, not license to create new CI infrastructure without authorization.
 
-Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
+## Cost and completion
 
-Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
+Prefer direct scripts and focused consumer smoke scenarios. Resumable shards, receipts and aggregate verifiers are **opt-in** for demonstrably expensive execution, not mandatory simply because this is release readiness. Formal human review is explicitly scoped to this release milestone when required.
 
-The execution ledger may compress work. It must not compress obligations.
+The release milestone closes when its declared candidate qualification is credibly met, required artifacts/docs are prepared, and approvals are resolved. Publication remains a separately authorized action. Record passed checks, known limitations, and any unqualified supported surface clearly.
 
-## Planning/implementation separation
+Do not seed a mandatory `.execution/` ledger, acceptance/evidence-case registry, or one-to-one proof table. A lightweight progress note is optional for long release qualification.
 
-There is no direct synchronization between the planning AI and implementation AI.
+## Deliverable
 
-Create a complete package that allows the later agent to start from the primary milestone, read only listed authority, perform release-readiness work, run the specified validation against the declared targets/loci, produce evidence, and stop at any required human gate without reconstructing planning context.
+Prepare the primary ready milestone and only essential new/updated project authority, release documents, migration items, or review requests. Do not include product implementation, generated packages, copied guide docs, broad unrelated cleanup, or speculative CI pipelines.
 
-Generate a filled execution prompt in chat.
-
-## Repository inspection
-
-Inspect the minimum relevant repository state, usually:
-
-- `README.md`;
-- `AGENTS.md`;
-- `.guide-profile.json`;
-- release and packaging engineering docs;
-- project-local runtime/integration specialization relevant to release evidence;
-- public API policy and baselines;
-- public documentation contract and sources;
-- samples and package-smoke configuration;
-- release/publication workflows when used;
-- relevant milestones and decisions;
-- `.guide-sync/pending/` items affecting the release surface;
-- `.review/` items owned by the current release milestone.
-
-## Deliverable boundary
-
-Create a planning package, not an implementation patch.
-
-The ZIP may contain:
-
-```text
-docs/milestones/M00XX-release-readiness.md
-docs/specs/...
-docs/decisions/...
-docs/engineering/...
-.review/pending/...
-.guide-sync/pending/...
-public-docs/...
-.execution/M00XX-<milestone>.md
-```
-
-Include only files required to make release-readiness implementation unambiguous.
-
-Do not include source code, generated packages, workflow implementations, TBPs, issue templates, or copied guide documents.
-
-## Milestone requirements
-
-The primary milestone must include:
-
-1. release target and intended version;
-2. repository maturity and profile assumptions;
-3. release scope and non-goals;
-4. package, API, documentation, sample, diagnostic, and website surfaces in scope;
-5. authority documents, including relevant project-local specialization;
-6. focus areas;
-7. validation depth, targets, execution loci/platform requirements, concrete commands, and expected evidence;
-8. constrained-execution handling;
-9. release evidence requirements;
-10. human-review requirements;
-11. direct documentation impact;
-12. deferred documentation sync items;
-13. acceptance criteria;
-14. publish operations explicitly excluded unless requested.
-
-Do not infer that release readiness requires CI. If publication occurs through GitHub while authoritative integration validation runs locally, preserve that topology explicitly.
-
-## Human review
-
-A release review belongs to this release-readiness milestone.
-
-It may review:
-
-- release candidate artifacts;
-- package contents;
-- user-facing documentation;
-- compatibility decisions;
-- visual or UX release evidence;
-- release notes.
-
-Specify the canonical review ID, class, evidence, acceptance criteria, reviewer role, blocking behavior, and milestone-scoped review-check command.
-
-If the release candidate changes before this milestone completes, updated evidence may require another decision in the same active review.
-
-After the milestone completes, the review is historical evidence. It is not a perpetual approval of future repository state or future releases.
-
-## Validation
-
-Use Tier 4 release/consumer validation when applicable.
-
-Release validation may depend on lower-tier milestone completion evidence or integration evidence from a different locus. State that dependency explicitly instead of silently substituting CI checks for an unavailable authoritative target.
-
-Prior milestone completion evidence is an input to release planning, not release-candidate proof by itself. Reuse it only where the underlying artifact/behavior remains applicable and the release authority permits reuse.
-
-Run release-specific gates against the actual final release candidate commit/artifact and the intended stable version when the repository contract is version-sensitive. A prerelease surrogate, feature-branch head, or earlier package build does not establish the final candidate unless project authority explicitly defines equivalence.
-
-When long validation supports resumable execution, require `--plan-json`, bounded shards, receipts, and a fast verifier.
-
-Do not infer release readiness from partial output or from green CI whose tests do not cover the release obligation/evidence cases.
-
-## Publication
-
-Publication and validation are separate obligations.
-
-Release readiness and feature-milestone completion are also separate obligations. A completed feature milestone may provide evidence, but the release milestone must still establish release-specific package, compatibility, documentation, publication-channel, and final-candidate gates required by project authority.
-
-A repository may intentionally use a topology such as:
-
-```text
-local workstation
-  -> authoritative integration validation
-  -> pack and consumer validation
-
-GitHub
-  -> release/publication automation
-  -> NuGet or other destination
-```
-
-Do not require duplication of all local integration validation in the publication environment unless project policy requires it.
-
-## Chat response
-
-After creating the ZIP, provide:
-
-1. download link;
-2. file list;
-3. reason for each file;
-4. resolved profile, role, maturity, and execution mode;
-5. filled execution prompt;
-6. release evidence and human-review expectations;
-7. deferred documentation sync hints;
-8. validation commands grouped by declared target/locus, plus publication commands/workflows where applicable.
-
-## Quality bar
-
-The package is acceptable only if the release target and final candidate are unambiguous, publish operations are not accidentally performed, validation depth/target/locus is concrete, required obligation/evidence cases are explicit where release surfaces differ materially, prior milestone evidence is not mistaken for final-candidate proof, review is milestone-scoped, required public surfaces are covered, and the implementation agent does not need to read the external guide repository.
+Report the milestone location, target/version, actual required qualification targets and loci, known constraints, publication boundary, and requested transport/PR or ZIP path when available. Use the canonical implementation prompt for subsequent execution.

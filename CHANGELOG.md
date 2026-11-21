@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.0.0-rc.1 (release candidate)
+
+Migration required: yes for projects that adopted mandatory 0.9.x AI-executed ledger, evidence-case, validation-receipt, or consumer-at-milestone machinery; otherwise mostly metadata/routing alignment.
+
+Affected areas: milestone scope and autonomy, planning/implementation prompts, acceptance/evidence, validation and release boundaries, constrained execution, special workflows, profiles, templates and guide versioning.
+
+### Changed — agent-scaled planning
+
+- Prefer the largest coherent capability economical to implement, evaluate and discard; do not force human-sized vertical slices.
+- Distinguish reversible implementation experiments from high-consequence product risks.
+- Make execution decomposition and progress ledgers executor-owned and optional rather than planning-seeded.
+
+### Changed — risk-proportionate assurance
+
+- Distinguish focused feedback, milestone validation, and release-candidate qualification.
+- Preserve real-runtime integration where relevant, but move packaged/installed consumer and broad compatibility qualification to release by default.
+- Remove default acceptance/evidence-case one-to-one mapping, fingerprinted receipts, sharding, immutable proof records and exhaustive reconciliation.
+- Prohibit correction-cycle validation-infrastructure expansion without demonstrated material risk; provide a canonical implementation-review and correction prompt.
+- Permit PR-based human acceptance without a dedicated review command subsystem; structured human review remains optional.
+- Allow bounded reversible internal architecture alternatives with fixed invariants and evaluation criteria; record brief durable milestone completion notes.
+- Require final-artifact consumer checks for actively supported distribution mechanisms at release readiness; keep execution modes independent of scope size.
+
+### Migration
+
+Use `migrations/guide-system-v0.9.3-to-v1.0.0-rc.1.md`. ADR-0030 and ADR-0031 supersede conflicting defaults from historical decisions. This release candidate is intentionally breaking; it is not a stable 1.0.0 release.
+
 ## 0.9.3 (draft)
 
 Migration required: conditional for repositories with materially expensive validation suites or simulations that currently leak into routine tests; otherwise metadata-only/no-op.

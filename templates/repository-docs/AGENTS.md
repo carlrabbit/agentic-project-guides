@@ -7,7 +7,7 @@ This file routes agents to repository authority; it is not a milestone contract 
 For a ready implementation milestone, start with:
 
 1. the primary milestone document;
-2. its planning-seeded `.execution/<milestone-id>.md` ledger, when applicable;
+2. its optional `.execution/<milestone-id>.md` progress/resume note, if present and relevant;
 3. the project authority explicitly referenced by the milestone;
 4. relevant source, tests, and other repository context needed for the work.
 
@@ -17,7 +17,7 @@ Use documented repository engineering commands (`eng/` when applicable). The mil
 
 ## Authority boundaries
 
-- The ready milestone and referenced project authority define implementation scope and obligations. The execution ledger records progress and evidence; it does not override the milestone.
+- The ready milestone and referenced project authority define implementation scope and obligations. Optional execution progress notes track work; they do not override the milestone. An evidence-case or gate registry is not a default.
 - Planning metadata (`.guide-profile.json`, `.guide/profiles/`, `docs/PROJECT-GUIDANCE.md`, `.guide-sync/`) is not routine implementation authority. Consult it only when the assigned work requires it.
 - `docs/research/` is non-authoritative evidence, not a substitute for project decisions. Read it when an assigned investigation/evidence obligation calls for it.
 - `.review/` is relevant when the active work requires milestone-scoped review, migration, or synchronization.

@@ -3,7 +3,7 @@
 ## Core doctrine
 
 ```text
-eng/ defines the stable engineering API.
+When a repository exposes eng/, it defines a stable engineering API; a simple direct command is sufficient when appropriate.
 Platform scripts are thin launchers.
 Complex engineering semantics live in tested application code.
 Platform support is declared and tested.
@@ -21,7 +21,7 @@ Use for modest process orchestration without domain semantics.
 
 ### Level 3 — Engineering command host
 
-Use when commands require JSON parsing, workspace resolution, fingerprints, manifests, artifact generation, complex filtering, review state, or resumable validation.
+Use only when project-specific orchestration is genuinely complex enough to justify a separately maintained host (for example sophisticated manifests, artifact generation, or costly resumable suites). The mere possibility of fingerprints or validation receipts is not a reason to build one.
 
 A typical host is:
 
@@ -30,6 +30,8 @@ src/<Project>.Engineering
 ```
 
 or an existing product CLI with an `engineering` command group.
+
+Do not require a multi-stage validation host, machine-readable plan, receipt store, or per-tool pipeline for an ordinary milestone. Simple monorepo scripts are usually sufficient. Measure repeated validation cost before adding orchestration.
 
 ## Launcher model
 

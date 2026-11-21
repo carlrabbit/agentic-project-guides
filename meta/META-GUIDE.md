@@ -16,15 +16,18 @@ It does not define a single universal repository template or maintain a catalog 
 Guide repository owns methodology and reusable engineering shapes.
 Product repositories contain project truth and concrete specializations.
 Product repositories may retain selective non-authoritative planning research.
-Milestones separate planning from implementation.
+Milestones separate planning from implementation, with coherent agent-scaled scope and reversible experimentation.
 Planning may consume durable research and promote conclusions into project authority.
 Implementation agents read product repository authority and ready milestones, not planning context.
+Milestone assurance is risk-proportionate; distribution qualification belongs to release readiness by default.
 Planning and documentation-sync agents may use this guide system.
 ```
 
 ## Guide repository entrypoints
 
 The root `README.md` is a compact assigned-task router. It is **not** an authoritative summary of guide rules or a chronological release narrative. Route directly to the selected canonical prompt or appropriate meta model; avoid requiring an agent to read unrelated workflow or historical context.
+
+Implementation review and correction prompting uses `templates/prompts/review-milestone.md`; routine defect reviews must not create formal human-review machinery or ratchet up validation without demonstrated risk.
 
 `templates/PROMPTS.md` catalogs prompt selection. The actual workflow contract belongs in its canonical prompt and applicable authoritative models. Avoid duplicating operational rules in either navigation entrypoint; duplicated descriptions cannot override the current contract.
 
@@ -50,7 +53,7 @@ Planning must reconcile the base guide, applicable shared profiles, registered p
 
 Project guidance expresses objectives and local methodology or review obligations. Profiles express reusable engineering shapes and their mandatory/conditional obligations and project-owned decisions. Concrete engineering/specification/architecture authority supplies implementation-facing contracts. Material conflicts require explicit planning resolution; profile order never determines authority.
 
-A project may create a local profile during planning without updating the shared guide. Do not invent a local profile for a single runtime choice or formatting preference. Before `ready`, all implementation-affecting consequences and evidence requirements must be explicit in the milestone or normal project authority; ordinary implementation remains independent from this planning layer.
+A project may create a local profile during planning without updating the shared guide. Do not invent a local profile for a single runtime choice or formatting preference. Before `ready`, material implementation-affecting consequences and exceptional validation obligations must be explicit in the milestone or normal project authority; ordinary implementation remains independent from this planning layer.
 
 See `meta/PROFILE-MODEL.md` and `meta/DOCUMENTATION-LAYER-MODEL.md`.
 
@@ -201,13 +204,7 @@ Planning also decides whether investigation evidence should be persisted for fut
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
 
-For AI-executed milestones, planning also projects the finalized milestone contract into a non-authoritative execution-ledger skeleton before `ready`: stable obligation IDs, one separate pending row per independently verifiable obligation, and required validation gates. This is coverage initialization, not implementation decomposition. Work-package design, implementation mapping, evidence, status, and resume state remain implementation-owned.
-
-The execution ledger may compress work, but it must not compress milestone obligations.
-
-When one obligation spans materially distinct proof paths, planning may also seed stable evidence-case IDs. These cases define what must be independently proven without prescribing the executor's concrete test mechanics. They should be selective rather than a Cartesian product.
-
-After successful completion, the implementation phase preserves a compact durable obligation/evidence-case-to-proof reconciliation before mutable execution state is discarded under repository policy.
+For AI-executed milestones, planning defines concise, verifiable outcomes and proportionate milestone validation, not a default one-to-one criterion/evidence/gate registry. An execution ledger is optional when substantial work needs durable resume state; it is not a prerequisite for `ready`. Release qualification of distributable artifacts belongs to the release boundary unless the milestone explicitly requires otherwise for a material reason.
 
 Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
 
@@ -217,7 +214,7 @@ Ordinary implementation must not depend on `docs/research/` to recover operative
 
 The implementation handoff must not depend on the planning conversation. Everything required to execute must exist in the ready milestone or its referenced project authority.
 
-If implementation discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, profile-applicability/conflict, or specialization decision, the milestone returns to planning. Implementation must not silently create new project policy from research or other evidence.
+Implementation may explore and replace reversible approaches within the accepted goal and invariants. If it discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, profile-applicability/conflict, or specialization decision, that decision returns to planning. Implementation must not silently create new project policy from research or other evidence.
 
 Planning agents may also create:
 
