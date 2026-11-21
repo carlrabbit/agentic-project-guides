@@ -11,7 +11,7 @@ The guide permits broad AI execution in principle but its default workflow requi
 
 Plan the **largest coherent capability economical to implement, evaluate, and possibly discard**. Do not require multiple milestones because the change is large for a human, touches many files, or has multiple internal steps.
 
-Planning resolves material architecture, semantics, compatibility, invariants, acceptance, and execution authority. It does not prescribe disposable implementation mechanics. The executor owns decomposition, experiments, retries, and implementation replacement within the accepted product contract.
+Planning resolves product-level architecture, semantics, compatibility, invariants, acceptance, and execution authority. It may intentionally delegate a **bounded, reversible internal architectural choice** to the executor when invariant requirements, evaluation criteria, and the fallback/disposal boundary are settled. Trials between such candidates do not themselves require a diagnostic milestone. It does not prescribe disposable implementation mechanics. The executor owns decomposition, experiments, retries, and implementation replacement within the accepted product contract.
 
 Explicitly distinguish:
 - **reversible implementation risk** — cheap experimentation and branch disposal are legitimate;

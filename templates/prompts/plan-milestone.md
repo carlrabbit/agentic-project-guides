@@ -25,7 +25,7 @@ Inspect enough of the target repository to understand applicable project truth:
 
 Resolve applicable base/shared/local profiles and conflicts through concrete project authority. Do not invent a new central profile to express one SDK, runtime choice, or test strategy. Research is planning evidence, never active implementation authority. Promote durable, implementation-affecting conclusions to normal project truth.
 
-Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. Do not make detailed file lists or patch steps a prerequisite for `ready`.
+Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. Planning may intentionally delegate selection among **reversible internal architectures** when fixed product invariants, evaluation criteria, and rollback bounds make implementation trials cheaper than speculative upfront analysis. Do not make detailed file lists or patch steps a prerequisite for `ready`.
 
 ## Ready milestone contract
 
@@ -42,7 +42,7 @@ Acceptance is mandatory; **a distinct test/evidence case per criterion is not**.
 
 Make the contract complete for the project's baseline executor without relying on planning chat history or reading the guide. Do not reduce a coherent milestone merely because implementing it may be lengthy; the implementer can decompose and resume work internally.
 
-If a **material project decision** really cannot be made without evidence, research it or plan a focused diagnostic investigation. Do not treat cheap alternative implementation trials as an unresolved planning decision.
+If a **material project decision** really cannot be made without evidence, research it or plan a focused diagnostic investigation. A bounded, reversible internal architecture experiment with agreed comparison criteria is an implementer choice, not automatically a planning blocker. Do not treat cheap alternative implementation trials as an unresolved planning decision.
 
 ## Validation policy
 

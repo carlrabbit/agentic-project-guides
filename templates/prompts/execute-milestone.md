@@ -16,7 +16,7 @@ The ready milestone and actual project authority govern. Planning chat, external
 
 Own the concrete implementation: architecture *within resolved constraints*, types, files, algorithms, sequence, tests, and supporting edits. Prefer a coherent capability to artificial mini-slices. Large edits and broad but related refactorings are acceptable.
 
-You may build disposable prototypes, compare approaches, reverse a failed implementation, and try another **within the milestone's goal, invariants, and environment authorization**. Avoid unrelated expansion. You do not need planning approval for local implementation choices or implementation-derived decomposition.
+You may build disposable prototypes, compare approaches, reverse a failed implementation, and try another **within the milestone's goal, invariants, and environment authorization**. When planning deliberately delegates reversible architectural alternatives, evaluate them against the agreed criteria and preserve the chosen result without changing settled public contracts. Avoid unrelated expansion. You do not need planning approval for local implementation choices or implementation-derived decomposition.
 
 Escalate only a **material unresolved project decision** affecting required architecture, semantics, public/persisted compatibility, scope, acceptance, safety, validation authority, or specialization. Explain the decision and discovered evidence. Do not treat implementation difficulty alone as a reason to stop.
 
@@ -38,9 +38,9 @@ Exploratory/nondeterministic tests do not automatically enter the default suite.
 
 Review the resulting repository against the milestone's **entire acceptance contract** and invariants; tests alone cannot certify unexercised behavior. Check explicitly required artifacts, migrations, documentation, and material residual risks.
 
-Record briefly what behavior was delivered, tests actually run/results, important limitations, and release checks deferred. No mandatory acceptance-to-evidence table, ledger set equality, immutable completion proof, or independent reviewer sign-off is implied.
+Write a **brief durable completion note** in the milestone (or its project-defined completion record) covering delivered behavior, tests actually run/results, important limitations, and release checks deferred. Also summarize this in the final report. Do not turn the note into a criterion-by-criterion proof ledger. No mandatory acceptance-to-evidence table, ledger set equality, immutable completion proof, or independent reviewer sign-off is implied.
 
-When correcting a defect, implement the repair and perform the smallest credible focused verification. Do not expand acceptance or construct additional gates without a demonstrated material risk. If the prior validation strategy is excessive, reduce it rather than preserving sunk process costs.
+When correcting a defect, implement the repair and perform the smallest credible focused verification. Add a small permanent regression test when a reproducible defect is likely to recur and the test is economical; do not persist every one-off diagnostic. Do not expand acceptance or construct additional gates without a demonstrated material risk. If the prior validation strategy is excessive, reduce it rather than preserving sunk process costs.
 
 If the milestone explicitly requires a human decision, stop at that gate; never fabricate approval.
 

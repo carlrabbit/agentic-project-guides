@@ -24,13 +24,13 @@ Coding milestones follow:
 
 `draft/planning -> ready -> implementing -> done`
 
-Planning owns decisions that materially determine architecture, semantics, public or persisted compatibility, goal, non-goals, invariants, acceptance, and exceptional validation/review constraints. Project-local guidance and profiles apply during planning; conclusions needed by the executor must be reflected in the milestone or referenced project authority.
+Planning owns decisions that materially determine architecture, semantics, public or persisted compatibility, goal, non-goals, invariants, acceptance, and exceptional validation/review constraints. However, planning may deliberately leave a **reversible internal architectural choice** to implementation when the externally observable contract, invariants, comparison criteria, and fallback/disposal boundary are explicit. This is an implementation experiment, not permission to invent project policy. Project-local guidance and profiles apply during planning; conclusions needed by the executor must be reflected in the milestone or referenced project authority.
 
 A milestone is **ready** when the project's normal baseline executor can pursue the intended outcome from the ready handoff and live repository without inventing a new material project decision. Readiness does **not** require predicting file edits, concrete work packages, comprehensive proof topology, or an exact execution plan. Large implementation volume is not a readiness defect.
 
 If a decision genuinely requires outside evidence, perform limited planning research or a diagnostic milestone. Do not create diagnostic milestones solely to avoid implementation uncertainty that can be resolved through cheap, reversible experimentation.
 
-No generic model-specific capability tier is prescribed. Project configuration may identify a baseline implementation model, but the milestone must be self-contained for the chosen executor without depending on that agent's private planning conversation.
+No generic model-specific capability tier is prescribed. Project configuration may identify a baseline implementation model, but the milestone must be self-contained for the chosen executor without depending on that agent's private planning conversation. The metadata value `ai-executed` identifies **who implements**; milestone size and human acceptance are independent properties, not alternative execution modes.
 
 ## The ready contract
 
@@ -58,7 +58,7 @@ The implementer may:
 - add supporting edits needed to fulfill the agreed outcome.
 
 The implementer must not:
-- silently change public/persisted compatibility, required semantics, security constraints, or major architecture decisions;
+- silently change public/persisted compatibility, required semantics, security constraints, or **settled** major architecture decisions;
 - expand the product into unrelated capabilities;
 - treat a missing toolchain as permission to install persistent software or modify CI/shared infrastructure;
 - treat a failing check as permission to weaken an agreed product invariant.
@@ -86,7 +86,7 @@ At completion:
 - run focused automated checks and a small number of representative integrations appropriate to actual risks;
 - identify any known gaps and release-only checks that have been deferred;
 - update direct documentation or migration material explicitly in scope;
-- report the implementation, validation performed and results, and residual risks.
+- write a short **durable completion note** in the milestone or a project-defined completion record, then report the implementation, validation performed and results, and residual risks. This note is not a criterion-to-proof registry.
 
 Do not create a separate validation case for each acceptance clause merely to produce a complete table. Existing current test results may be reused when still relevant. A brief review of architecture and behavior is usually sufficient; mandatory independent human sign-off requires an explicit reason.
 
@@ -94,7 +94,7 @@ Release preparation owns final package/installation/consumer, compatibility, cro
 
 ### Correction discipline
 
-Review findings must describe concrete defects, why they matter, and a **smallest credible focused verification** of the repair. A correction prompt must not automatically grow acceptance criteria, evidence cases, validation stages, test infrastructure, or broad regression requirements. If a prior validation contract is disproportionate, simplify it instead of carrying accumulated gates forward. Expand the contract only for a newly demonstrated material risk or an explicitly requested product change.
+Review findings must describe concrete defects, why they matter, and a **smallest credible focused verification** of the repair. A correction prompt must not automatically grow acceptance criteria, evidence cases, validation stages, test infrastructure, or broad regression requirements. If a prior validation contract is disproportionate, simplify it instead of carrying accumulated gates forward. Expand the contract only for a newly demonstrated material risk or an explicitly requested product change. Add a small lasting regression check for a recurring, deterministic defect when worthwhile; otherwise a focused disposable verification may suffice. Use [the canonical review/correction prompt](../templates/prompts/review-milestone.md) when a separate reviewer prepares correction instructions.
 
 ### Terminal execution outcomes
 

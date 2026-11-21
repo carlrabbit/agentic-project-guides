@@ -10,7 +10,7 @@ Use the current guide methodology for planning; implementers must not need the e
 
 Release qualification is a deliberate **release-candidate** activity, not a validation gate inherited by every feature milestone. A release milestone establishes confidence in the integrated candidate **as actually consumed and supported**.
 
-Identify the target version, candidate commit/artifacts, supported distribution mechanism, intended consumers, supported platform/runtime matrix, relevant public contracts, and release/publish decisions. Distinguish qualification from publication.
+Identify the target version, candidate commit/artifacts, **each actively supported distribution mechanism**, intended consumers, supported platform/runtime matrix, relevant public contracts, and release/publish decisions. Qualification must exercise representative behavior through the actual candidate artifact for each supported mechanism; record an explicit project-policy justification for any excluded surface. Distinguish qualification from publication.
 
 Read the minimum relevant product authority: README, AGENTS, release/packaging engineering policy, API/compatibility baselines, public documentation/examples, candidate build config, directly relevant completed milestone evidence, and existing CI/installation scripts. Resolve important profile/scope and real-runtime details without making implementers read selection metadata.
 
@@ -21,7 +21,7 @@ Use the ordinary milestone template, with release-specific content:
 - **Invariants:** required API, persisted data, public CLI/configuration, platform/security and compatibility commitments.
 - **Scope:** packages/executables, documentation, examples, installers, relevant integrations; exclude publication unless specifically requested and authorized.
 - **Acceptance:** small number of meaningful final-candidate outcomes, not one case for every internal requirement.
-- **Qualification:** actual package or installed artifact, representative real consumer behavior, critical runtime/integration behavior, platform/compatibility and failure scenarios proportional to risk.
+- **Qualification:** actual package or installed artifact for each actively supported distribution mechanism, representative real consumer behavior, critical runtime/integration behavior, platform/compatibility and failure scenarios proportional to risk. Avoid exhaustive matrices unless product policy or consequences justify them.
 - **Authority:** execution loci, platform and credential permissions, clean isolation, and required human approval when actually needed.
 
 A release may legitimately need a richer validation plan than an ordinary milestone. Justify expensive gates by consumer consequence or release risk—not merely by artifact count or a historical test matrix.

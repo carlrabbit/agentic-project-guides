@@ -15,7 +15,7 @@ For each change, ask:
 4. What belongs to the final release candidate instead?
 5. What is the consequence of an undetected defect, and can the change be discarded safely?
 
-More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria.
+More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria. A permanent regression test is useful for a reproducible bug with plausible recurrence or significant failure consequence; not every one-off correction needs a permanent fixture.
 
 ## Validation boundaries
 
@@ -67,7 +67,7 @@ This preference does not mandate comprehensive real-repository or installed-tool
 
 ## Release and consumer qualification
 
-When a product is distributed through a package, generated launcher, installation, published executable, or library consumption boundary, **release preparation** should exercise representative behavior through that final consumer mechanism.
+When a product is distributed through a package, generated launcher, installation, published executable, or library consumption boundary, **release preparation must qualify each actively supported distribution mechanism** using representative behavior through the final consumer mechanism. Any excluded supported surface needs an explicit project release-policy justification; do not quietly replace a shipped-artifact check with source-only tests.
 
 Examples include consuming a built NuGet package from an isolated project, invoking an installed locally packed `dotnet tool` through its shim, or invoking the published executable rather than `dotnet run`. Qualify the actual intended release candidate, not a stale global install or unrelated source output.
 

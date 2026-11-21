@@ -10,7 +10,7 @@
 
 ## Architecture and invariants
 
-<Only material project decisions, existing contracts, important safety/security/compatibility boundaries, and required project authority. Avoid speculative implementation steps.>
+<Only material project decisions, existing contracts, important safety/security/compatibility boundaries, and required project authority. When alternatives are reversible, the planner may delegate a bounded architectural choice with explicit evaluation criteria and invariants. Avoid speculative implementation steps.>
 
 ## Scope and exclusions
 
@@ -42,4 +42,4 @@
 
 ## Completion note (filled after implementation)
 
-<Delivered outcome, focused checks/results, known limitations, and deferred release checks. No evidence-case ledger, proof register, or fingerprinted receipts by default.>
+<Write a concise durable record here, or link to the project-defined completion record: delivered outcome, focused checks/results, known limitations, and deferred release checks. No evidence-case ledger, proof register, or fingerprinted receipts by default.>

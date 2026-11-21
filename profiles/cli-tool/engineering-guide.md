@@ -94,7 +94,7 @@ Resolve behavior that materially depends on process context, including:
 - timeouts;
 - platform-specific process behavior.
 
-Do not claim cross-platform support from compilation alone. Representative command execution is required on the declared supported platforms where behavior materially differs.
+Do not claim cross-platform support from compilation alone. For a milestone affecting platform-sensitive behavior, test the relevant process path on a representative real target when the difference matters; qualifying the **full declared platform support** belongs to release readiness unless deferral carries material risk.
 
 ### Diagnostics
 
@@ -120,7 +120,7 @@ Version reporting should identify the distributed product/version according to p
 
 ## Validation
 
-CLI validation should exercise the process boundary rather than only command-handler/library methods.
+When a milestone changes observable CLI/process behavior, representative validation should exercise the real process boundary, not only command-handler/library methods. Purely internal CLI refactoring may rely on existing process coverage plus focused tests when that gives credible confidence.
 
 Use lower-level tests where they are materially cheaper, more exhaustive, or more diagnostic, but they do not replace representative command-level behavior.
 
@@ -142,7 +142,7 @@ Use a few representative process-boundary scenarios chosen for material behavior
 
 ## Consumer/distribution validation
 
-At **release readiness**, when the CLI is distributed, validation should invoke the actual candidate artifact through its intended installation/launch mechanism. An ordinary implementation milestone does not automatically qualify the installed tool. Earlier qualification requires explicit scope or a material risk-based justification.
+At **release readiness**, when the CLI is distributed, validation **must** invoke the actual candidate artifact through each actively supported installation/launch mechanism, unless project release authority explicitly excludes a mechanism with justification. An ordinary implementation milestone does not automatically qualify the installed tool. Earlier qualification requires explicit scope or a material risk-based justification.
 
 The generic shape is:
 
@@ -159,7 +159,7 @@ The validation must avoid accidental success through repository build output, st
 
 For a project distributed as a .NET global/local tool, project-local authority should resolve the concrete tool packaging details, including the supported command name and installation model.
 
-At release readiness, representative consumer validation should:
+At release readiness, representative consumer validation must:
 
 ```text
 pack the current tool package
