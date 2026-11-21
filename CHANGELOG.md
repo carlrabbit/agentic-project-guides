@@ -17,7 +17,10 @@ Affected areas: milestone scope and autonomy, planning/implementation prompts, a
 - Distinguish focused feedback, milestone validation, and release-candidate qualification.
 - Preserve real-runtime integration where relevant, but move packaged/installed consumer and broad compatibility qualification to release by default.
 - Remove default acceptance/evidence-case one-to-one mapping, fingerprinted receipts, sharding, immutable proof records and exhaustive reconciliation.
-- Prohibit correction-cycle validation-infrastructure expansion without a demonstrated material risk.
+- Prohibit correction-cycle validation-infrastructure expansion without demonstrated material risk; provide a canonical implementation-review and correction prompt.
+- Permit PR-based human acceptance without a dedicated review command subsystem; structured human review remains optional.
+- Allow bounded reversible internal architecture alternatives with fixed invariants and evaluation criteria; record brief durable milestone completion notes.
+- Require final-artifact consumer checks for actively supported distribution mechanisms at release readiness; keep execution modes independent of scope size.
 
 ### Migration
 

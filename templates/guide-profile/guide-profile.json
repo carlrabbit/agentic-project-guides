@@ -19,7 +19,7 @@
   "maturityStage": "implementation-ready",
   "executionModel": {
     "baselineImplementationModel": "<select-project-baseline-model>",
-    "defaultImplementationMode": "ai-executed-broad",
+    "defaultImplementationMode": "ai-executed",
     "documentationSync": "separate-pass",
     "releaseReadiness": "separate-pass",
     "humanReview": "milestone-scoped"

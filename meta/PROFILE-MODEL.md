@@ -176,7 +176,7 @@ For the affected milestone scope, planning loads the external base/shared profil
 
 A new project or planning task may author a local profile if an uncovered engineering shape merits a reusable contract; register it explicitly and resolve project authority before a milestone becomes ready. Do not require a central guide release to introduce a local profile.
 
-Ordinary implementation reads ready milestones and referenced normal project authority; it is not required to recompose guide, profile metadata, local profiles, or project meta-objectives. Planning must preserve the resulting relevant obligations and validation evidence in the handoff.
+Ordinary implementation reads ready milestones and referenced normal project authority; it is not required to recompose guide, profile metadata, local profiles, or project meta-objectives. Planning must preserve resulting material implementation obligations and proportionate validation constraints in the handoff; it need not seed an evidence registry.
 
 ## Conflict handling
 
