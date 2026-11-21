@@ -1,484 +1,79 @@
 # Prompt — Plan Milestone
 
-Our planning task is to convert the following work into a ready milestone for a disconnected implementation phase:
+Convert the requested capability into a ready milestone for a disconnected implementation agent:
 
-`{milestone}`
+\`{milestone}\`
 
-The active guide authority is external:
+Use \`carlrabbit/agentic-project-guides\` as **planning** methodology. Do not copy guide documents into product repositories or require ordinary implementers to read this guide.
 
-- Guide repository: `carlrabbit/agentic-project-guides`
+## Objective: agent-scaled, coherent delivery
 
-Do not copy guide documents into the target repository. Target repository documentation contains project truth only.
+Plan the **largest coherent capability economical to implement and evaluate**, not the smallest human-sized vertical slice. A milestone may implement an entire subsystem, cross-cutting feature, or structural migration. Do not split merely because many edits or tests are involved.
 
-## Planning responsibility
+Explicitly distinguish **reversible implementation uncertainty** (cheap to experiment, discard, and retry) from **consequential risks** (irreversible data, security, public/persisted compatibility, operational impact). Prefer enabling experimentation to preemptively shrinking reversible work. Split or stage only where independent outcomes, meaningful boundaries, unresolved material decisions, or expensive failure consequences justify it.
 
-Planning and implementation are separate phases.
+Optimize planning + implementation + validation + review + expected rework. Avoid process artifacts without demonstrated value.
 
-Your job is to remove implementation-affecting uncertainty, not to pre-implement the change in prose.
+## Planning authority and repository inspection
 
-Inspect enough repository truth and relevant planning knowledge to decide what must be fixed before implementation can safely choose concrete mechanics.
+Inspect enough of the target repository to understand applicable project truth:
+- \`AGENTS.md\`, \`README.md\`, relevant specs, engineering rules, architecture, decisions, milestones, and representative source/tests;
+- \`.guide-profile.json\` for applicable shared profiles, semantic scopes, execution metadata, and repository role;
+- \`docs/PROJECT-GUIDANCE.md\` and registered \`.guide/profiles/<id>/PROFILE.md\` for project-local planning extensions;
+- focused \`docs/research/\` only when relevant to material open questions;
+- review or sync metadata only if relevant to this assignment.
 
-Planning owns decisions that materially affect:
+Resolve applicable base/shared/local profiles and conflicts through concrete project authority. Do not invent a new central profile to express one SDK, runtime choice, or test strategy. Research is planning evidence, never active implementation authority. Promote durable, implementation-affecting conclusions to normal project truth.
 
-- architecture;
-- semantics and behavior;
-- public or persisted compatibility;
-- scope and non-goals;
-- cross-package or subsystem boundaries;
-- acceptance criteria;
-- validation and human-review policy;
-- applicable guide profiles/scopes and material conflicts between their obligations;
-- required project-local specializations for concrete runtimes, services, environments, packaging boundaries, or domain architecture.
+Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. Do not make detailed file lists or patch steps a prerequisite for \`ready\`.
 
-Planning also owns the research boundary: determine which unknowns require investigation, which evidence is worth persisting for future planning, which existing research must be revalidated, and which conclusions must be promoted into project authority before implementation.
+## Ready milestone contract
 
-The implementation phase owns concrete files, types, functions, refactorings, test structure, work-package decomposition, implementation sequence, supporting edits required by the contract, validation execution, evidence/status updates, persistent execution progress, and completion audit where those choices do not change the resolved contract.
+Produce a single primary milestone following \`templates/milestones/milestone-template.md\` with:
 
-For AI-executed milestones, planning owns the initial execution-ledger coverage structure: stable obligation IDs, one lossless pending row per individually verifiable milestone obligation, and the required validation gates. Planning does not assign implementation work packages or pre-fill implementation evidence/status.
+1. **Goal / target:** the observable capability and why it belongs together.
+2. **Architecture and invariants:** settled material decisions and preserved contracts.
+3. **Scope / exclusions:** inclusion and non-goals without a speculative edit allowlist.
+4. **Acceptance:** concise, verifiable outcomes covering the complete capability.
+5. **Validation:** a small, credible set of focused tests and representative integration behaviors; identify material consequence risks and checks deferred to release.
+6. **Required authority and exceptional obligations:** only where they matter, including direct docs, local specializations, permissions, or required human judgment.
 
-Do not require the implementation agent to reconstruct planning context or read the external guide repository.
+Acceptance is mandatory; **a distinct test/evidence case per criterion is not**. Do not produce a mandatory \`.execution/\` ledger, evidence-case registry, receipt plan, gate matrix, or immutable proof artifact. An optional lightweight progress/resume ledger may be prescribed only where long-running execution needs it.
 
-## Repository inspection
+Make the contract complete for the project's baseline executor without relying on planning chat history or reading the guide. Do not reduce a coherent milestone merely because implementing it may be lengthy; the implementer can decompose and resume work internally.
 
-Inspect the target repository before writing files.
+If a **material project decision** really cannot be made without evidence, research it or plan a focused diagnostic investigation. Do not treat cheap alternative implementation trials as an unresolved planning decision.
 
-Read the minimum project truth needed to plan correctly. Usually consider:
+## Validation policy
 
-- `README.md`;
-- `AGENTS.md`;
-- `.guide-profile.json` if present;
-- `docs/PROJECT-GUIDANCE.md` if present;
-- locally registered `.guide/profiles/<id>/PROFILE.md` definitions if present;
-- `docs/TERMINOLOGY.md`;
-- `docs/SPECS.md` and relevant specs;
-- `docs/ENGINEERING.md` and relevant engineering/specialization docs;
-- relevant architecture and decisions;
-- relevant current milestones;
-- source and tests needed to understand architectural boundaries and existing behavior.
+Use \`meta/VALIDATION-MODEL.md\`:
+- During implementation: affected build, static feedback, targeted tests.
+- At milestone completion: focused behavioral checks and a few representative integration fixtures; review architecture and invariants.
+- At release: final package/installed tool/real consumer, compatibility, broader operational and platform qualification where required.
 
-Read `.review/`, `.guide-sync/`, workflows, public docs, or legacy copied guides only when the topic requires them.
+A real integration boundary may matter at milestone stage even when installed-product qualification does not. State exceptional earlier consumer tests only where packaging/installation is itself the milestone outcome, project authority mandates it, or the risk of deferring is material.
 
-If `docs/RESEARCH.md` exists, use it as a non-authoritative discovery surface to locate research relevant to the current decision. Read only the research subjects that materially overlap the milestone or its unresolved questions.
+Do not make a general test matrix from every acceptance clause. Reuse relevant current evidence; do not add fingerprinting/sharding infrastructure unless repeated validation cost justifies it. Use the target/locus/platform detail necessary for meaningful real-boundary checks; integration need not run in CI. Authorized execution is not permission for new machine software or CI infrastructure.
 
-Treat `docs/research/` as non-authoritative planning knowledge. Do not treat research conclusions as project requirements unless they have been promoted into ordinary project authority.
+For reviews/corrections, prefer concrete defects and minimal focused rechecks. Never pre-author a policy that every correction must grow the validation contract.
 
-Treat copied guide documents under `docs/research/` as legacy/non-authoritative guide leakage, not research authority.
+## Project documentation and transport
 
-Use `.guide-profile.json` as guide-selection, applicability, and planning metadata only. Ordinary implementation agents must not be required to read it.
+Update engineering/specification/decision authority only when required to fix project truth. Add \`.guide-sync/pending/\` hints only for genuinely deferred documentation changes. Do not duplicate the implementation prompt in the package. Project-local planning research is optional and non-authoritative.
 
-When `.guide-profile.json` uses schema version 2, resolve which repository/component/surface-scoped profiles apply to the milestone using the semantic component/surface definitions in normal project authority. Unprefixed profile IDs select central profiles; `local:<id>` selects `.guide/profiles/<id>/PROFILE.md` in the project. Do not silently ignore missing local profile definitions or auto-activate unregistered ones.
+A milestone package may be written **directly into a branch/repository** or delivered as a ZIP containing repository-relative files, depending on the user's delivery request and available capabilities. ZIP is not a universal requirement. It is a transport mechanism, not a second source of authority.
 
-Treat `docs/PROJECT-GUIDANCE.md` as optional project-authored planning authority: evaluate its objectives, methodology clarifications, and additional planning/review obligations for the current work. It is not non-authoritative research, nor a blanket override for the guide. Promote any implementation-affecting conclusions into normal project authority or the ready milestone before handoff.
+Provide the primary milestone path, affected authority documents, any applied changes/transport instructions, key validation expectations, explicitly deferred release checks, human-review obligations if any, and a concise handoff using \`templates/prompts/execute-milestone.md\`. Do not promise a file artifact or PR that has not been created.
 
-Use `.guide-sync/` as deferred documentation synchronization metadata only. Ordinary implementation agents must not be required to read it unless explicitly assigned synchronization work.
+## Readiness check
 
-Treat `.execution/` as operational state, not planning authority.
+Before marking \`ready\`, verify:
+- material architectural, semantic, compatibility, security, and scope choices are resolved;
+- the outcome is coherent and appropriately ambitious for agent execution;
+- acceptance is observable and covers the actual requested capability;
+- validation is proportionate and release qualification is properly separated;
+- any required external target/authority is real and authorized;
+- an implementer can act independently using the ready milestone and project truth;
+- no mandatory ledger, validation-host, receipt, or human-review ceremony has been introduced without a specific justification.
 
-For AI-executed milestones, planning must create `.execution/<milestone-id>.md` before `ready` and seed only the contract-derived coverage structure:
-
-- primary milestone path;
-- stable obligation IDs;
-- one separate pending row for every individually verifiable acceptance criterion and material completion obligation;
-- required validation-gate IDs, target/locus, and the obligation IDs each gate is intended to prove.
-
-Do not seed work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those remain implementation-owned.
-
-The execution ledger may compress work. It must not compress obligations.
-
-## Effective planning contract
-
-Before setting a milestone to `ready`, reconcile the central base/shared profile obligations, any registered local profiles relevant to the affected semantic scope, local planning guidance, and concrete engineering/specification/architecture/decision authority.
-
-Distinguish mandatory and triggered conditional obligations from project-owned decisions. Objectives influence trade-offs but do not cancel requirements. Resolve conflicts explicitly, recording operative resolutions in normal project authority. Planning may create `docs/PROJECT-GUIDANCE.md` or a registered local profile when there is a real gap, but must not create empty scaffolding or technology-tag profiles. Preserve the resulting implementation-facing obligations, affected authority references, and validation/evidence requirements in the ready milestone and seeded execution-ledger coverage.
-
-Implementation must not need the external guide, `.guide-profile.json`, `.guide/profiles/`, or broad `docs/PROJECT-GUIDANCE.md` merely to reconstruct those decisions.
-
-## Research and planning knowledge
-
-Use `meta/RESEARCH-MODEL.md` when the milestone depends on investigation, external evidence, experiments, historical reconstruction, comparison work, or prior research.
-
-The purpose of research is to preserve reusable evidence, not to preserve the planning conversation.
-
-For each material unknown, decide whether to:
-
-```text
-resolve from current project authority
-reuse current relevant research
-revalidate prior research
-perform new investigation now
-create a diagnostic/investigation milestone because evidence cannot yet be obtained
-```
-
-Persist new research under `docs/research/` only when future planning would materially benefit and the evidence would be expensive, unreliable, or wasteful to rediscover.
-
-A durable research artifact should preserve, as applicable:
-
-- question and context;
-- scope;
-- evidence/provenance, including material versions or experiment conditions;
-- findings;
-- uncertainty, assumptions, and inferences;
-- implications for project decisions;
-- freshness/revalidation triggers;
-- resulting project-authority links.
-
-Use `templates/research/research-template.md` as the conceptual shape when useful. Do not require every trivial investigation to create a research file.
-
-Distinguish direct observations from inferred conclusions and unverified assumptions when that distinction matters to the planning decision.
-
-Do not persist:
-
-- planning transcripts or chain-of-thought style reasoning;
-- generic brainstorming;
-- implementation task lists;
-- copied guide methodology;
-- information already fully represented as current project authority when the underlying evidence has no continuing planning value.
-
-### Promotion rule
-
-Research is not implementation authority.
-
-If a conclusion constrains implementation, validation, compatibility, architecture, public behavior, supported environments, or another durable project contract, promote it into the appropriate specification, architecture, decision, engineering, milestone, or other authority document before the milestone is ready.
-
-The implementation handoff must remain valid if `docs/research/` is not read.
-
-Research may remain as provenance/evidence when it is still useful, and project authority may link to it for traceability. The operative rule itself must exist in project authority.
-
-### Freshness and retrieval
-
-Do not assume research is current solely because the file is recent or was once accepted.
-
-Revalidate material findings when a recorded trigger has occurred, contradictory evidence appears, or the current project/runtime/version context makes the prior evidence reasonably doubtful.
-
-Do not revalidate unrelated research and do not load the entire research corpus by default.
-
-### Research lifecycle
-
-At the end of planning, classify touched research pragmatically:
-
-```text
-retain current evidence
-mark/revise as needs-revalidation
-supersede when old evidence remains useful
-remove when no durable planning value remains
-```
-
-Git history is sufficient archival storage. Do not retain obsolete research merely as an archive.
-
-## Profiles and project specialization
-
-Use shared profiles for broad reusable engineering shapes. Registered local profiles may describe a distinct project-owned engineering shape with multiple coordinated obligations, but must not become feature tags. Do not model an operating system, local/CI execution, a test-strategy preference, one packaging mechanism, a named external vendor/runtime, or one concrete product architecture as a profile merely to make project composition more granular.
-
-A repository may combine a small number of profiles when multiple broad engineering shapes genuinely apply.
-
-For the milestone's affected scope, determine every applicable profile:
-
-```text
-repository-wide profiles
-+ matching component-scoped profiles
-+ matching surface-scoped profiles
-```
-
-Applicable profiles compose additively. Profile order has no semantic meaning. Do not assign primary/secondary precedence and do not let a narrower profile silently override a broader one.
-
-If applicable profile obligations materially conflict, planning must resolve the conflict into durable project-local authority before the milestone is ready.
-
-Component/surface IDs in guide metadata are semantic project-defined identifiers, not path-based architecture authority. Resolve their meaning from normal project documents.
-
-When generic guide concepts need concrete answers, record them as project-local authority in the repository's normal engineering, specification, architecture, or decision documents.
-
-For external/runtime-bound integration, use `meta/VALIDATION-MODEL.md` to identify the generic decision surface and `meta/SPECIALIZATION-MODEL.md` to decide what must become project truth. The implementation agent must receive the concrete specialization through referenced repository authority, not by reading those guide files.
-
-## Execution profile
-
-Select the execution profile during planning rather than choosing a different planning prompt.
-
-For ordinary coding milestones, choose the profile that best describes who will execute and how much implementation autonomy is appropriate:
-
-- `human-led`;
-- `ai-assisted`;
-- `ai-executed-human-reviewed`;
-- `ai-executed-broad`.
-
-Use the special planning prompts for engineering migration, documentation synchronization, or release-readiness work when their specialized authority and completion rules apply.
-
-Execution profile is orthogonal to lifecycle phase. Every coding milestone still crosses the same `ready` boundary before implementation.
-
-Execution profile does not describe model strength. Do not introduce `strong`, `frontier`, or similar execution profiles to compensate for unresolved planning.
-
-## Baseline implementation model
-
-Determine the project's baseline implementation model from `.guide-profile.json` when that metadata is present.
-
-The default ChatGPT-focused guide profile uses:
-
-```text
-GPT-5.6 Luna
-```
-
-A project may intentionally configure another baseline model.
-
-Planning must target the configured baseline when deciding whether the milestone is `ready`.
-
-The purpose of the milestone is to make difficult project-level reasoning a planning responsibility so the baseline implementation model can execute the result reliably.
-
-Do not solve baseline-model limitations by:
-
-- selecting a stronger executor for an otherwise under-specified milestone;
-- adding model-capability tiers to the milestone;
-- converting the milestone into exhaustive line-by-line implementation instructions.
-
-Instead, resolve the decisions that materially affect the project contract and make completion observable.
-
-If planning cannot settle a material decision without additional evidence, create a focused diagnostic or investigation milestone whose target state is that evidence. Use the result to return to planning, persist reusable research when justified, promote resulting conclusions into project authority, and produce or revise the final implementation milestone.
-
-Large execution volume is not by itself a reason to require a stronger model or split a coherent semantic milestone. Shape large work using coherent scope, observable obligations, bounded execution work packages that the implementation phase can derive, persistent execution state, resumable validation, and explicit evidence.
-
-## Ready milestone boundary
-
-The milestone is ready only when the configured baseline implementation model can proceed without making a new material decision about architecture, semantics, compatibility, scope, acceptance, validation policy/topology, applicable profile obligations/conflicts, or required project specialization and can maintain reliable execution coverage across the expected implementation volume.
-
-The ready milestone must contain, as applicable:
-
-1. goal;
-2. target state;
-3. execution profile and `ready` lifecycle state;
-4. baseline implementation model or an explicit statement that the project default applies;
-5. scope;
-6. non-goals;
-7. resolved decisions and constraints, including any material profile-conflict resolution;
-8. required project authority, including specialization/profile-scope authority when applicable;
-9. acceptance criteria with stable IDs for every independently verifiable criterion;
-10. other material completion obligations with stable IDs where they are not already acceptance criteria;
-11. explicit evidence cases with stable `EC-*` IDs when an obligation spans materially distinct proof paths;
-12. validation depth/tiers, stable validation-gate IDs, targets, execution loci, platform/capability requirements, concrete commands, execution mode, expected evidence, and the obligation/evidence-case IDs each gate is intended to prove;
-13. the planning-seeded execution-ledger path when the execution profile requires one;
-14. direct documentation impact;
-15. deferred documentation synchronization hints;
-16. human-review requirements;
-17. constrained-runtime requirements;
-18. durable completion-evidence destination (normally the milestone's `Completion Evidence` section);
-19. escalation boundary for unresolved material decisions.
-
-Research artifacts may be referenced separately as non-authoritative evidence when useful, but they are not substitutes for item 8. Every operative conclusion required by implementation must be recoverable from the ready milestone or project authority.
-
-Acceptance criteria and completion obligations must describe the milestone outcome, not merely the expected implementation activity. Where applicable, cover required artifacts, generated outputs, documentation, migrations, cleanup, compatibility behavior, external/runtime integration, and human-review gates in addition to automated tests.
-
-For AI-executed milestones, assign a stable ID to every individually verifiable acceptance criterion and every other material completion obligation. Several criteria may later map to one work package, but do not collapse separately provable behaviors into one broad obligation merely to shorten the milestone or ledger.
-
-For each obligation, ask whether evidence for one supported path could leave another materially different path unproven because it uses a different dispatch path, state scope, compatibility surface, provider/runtime path, inheritance path, or contractually distinct failure behavior.
-
-When yes, define stable evidence-case IDs (`EC-*`) for those paths. Evidence cases describe what must be proven, not the concrete test/file/mechanism.
-
-First split independently meaningful completion outcomes into separate obligation IDs. Use evidence cases only when one coherent obligation still requires multiple independent proof paths.
-
-Do not generate a Cartesian product of every dimension. Create separate evidence cases only for distinctions that could plausibly hide different defects or contract failures.
-
-Seed the execution ledger directly from the finalized milestone. Before `ready`, verify exact set equality between the milestone's applicable obligation IDs and the ledger's obligation rows and, where evidence cases exist, exact set equality between milestone and ledger evidence-case IDs. The ledger is a non-authoritative projection of the contract, not a second place to reinterpret it.
-
-For large or long-running milestones, the seeded obligations must be structured clearly enough that the implementation agent can group them into bounded work packages and attach criterion-specific evidence. Planning does not need to predict those concrete work packages.
-
-Do not require exhaustive file lists, predicted class/function changes, or detailed implementation sequences unless those details are themselves architecturally or compatibly significant.
-
-If the source work item uses focus areas, workstreams, or similar decomposition, do not turn them into an exhaustive edit allowlist unless that restriction is genuinely part of the contract.
-
-Do not retain planning scratch work, rejected alternatives, or discussion history merely because they were useful while reaching the decision. Preserve a rejected alternative only when knowing that rejection is necessary to prevent a likely incorrect implementation or when the underlying comparative evidence remains materially useful to future planning.
-
-## Validation planning
-
-Validation depth and execution location are separate concerns.
-
-Distinguish development feedback, investigative execution and acceptance gates. Plan the required evidence, not every test invocation. If a simulation or investigation is a milestone obligation, define the question, reproducible inputs, expected evidence and its separate status; otherwise do not put exploratory work in routine regression/CI.
-
-Assess material test/stage costs and setup overhead where relevant to planning. For expensive suites, consider independent stage evidence, dependency/fingerprint-based reuse, and conservative invalidation when a dependency cannot be bounded. Do not require a generic DAG, cache, or cost threshold for small suites. Milestone completion requires fresh valid evidence for all required gates, not unconditional re-execution of every gate.
-
-For each material validation obligation determine, as applicable:
-
-- tier/depth;
-- real validation target;
-- execution locus: local, CI, remote, or mixed;
-- platform/capability requirements;
-- provisioning/connection and cleanup/isolation constraints when these are project policy;
-- permissions for toolchain installation, persistent host changes, and creation/modification of CI/CD or external infrastructure when material;
-- permitted alternative host types/loci and their evidence equivalence, if any;
-- concrete invocation;
-- exact obligation/evidence-case IDs the validation is intended to prove;
-- expected evidence;
-- material validation-cost, safe evidence-reuse/freshness constraints, and any explicitly required investigative evidence;
-- fallback behavior when the authoritative target is unavailable;
-- consumer/release relationship.
-
-When one capability applies across an existing union of materially different surfaces (for example scalar/enum, sync/async, provider A/provider B, source/packaged consumer), inspect whether those surfaces use different implementation paths. If they do, require separate evidence rather than treating one member as representative of the union.
-
-Do not infer that Tier 3 integration validation belongs in PR/CI workflows. A local installed runtime, real database, browser, native subsystem, remote service, or other declared target may be authoritative.
-
-Do not weaken an integration target to a fake or shallow substitute merely because the real target is unavailable in CI. Instead, represent the actual locus/capability constraint and separate portable CI checks from authoritative integration evidence.
-
-Distinguish authority to run a gate from authority to provision its prerequisites or change infrastructure. If a required SDK, compiler, runtime, or other capability may be absent, resolve whether the executor may provision it (and at what persistence/permission scope), must use an existing authorized host, or must report `BLOCKED`. Do not use an ambiguous fallback such as "another supported host" without identifying whether local machines, existing CI, new CI workflows, or remote hosts are acceptable. Being allowed to validate in CI does not automatically authorize adding a CI workflow.
-
-An absent installed prerequisite does not alone prevent `ready` when the permitted remediation/blocked path and accepted evidence loci are defined. Do not pre-install the environment as a prerequisite to writing a sound milestone contract.
-
-If the project's testing policy is integration-first, do not introduce unit-test obligations merely to satisfy an assumed test pyramid. Require the evidence needed for the project's actual boundaries.
-
-## Baseline-executability audit
-
-Before marking the milestone `ready`, explicitly verify that:
-
-- architecture, semantics, compatibility, scope, acceptance, validation, applicable profile obligations/conflicts, specialization, and human-review policy are settled to the degree required by the work;
-- the milestone's affected components/surfaces and their applicable profiles are known where multiple scoped profiles exist;
-- every implementation-affecting conclusion discovered through research has been promoted into the ready milestone or project authority;
-- relevant retained research has sufficient provenance/freshness information for future planning where material;
-- no stale or contradicted research is being relied on without appropriate revalidation;
-- remaining choices are local implementation mechanics rather than new project policy;
-- acceptance criteria let the executor distinguish correct completion from partial implementation;
-- every independently verifiable acceptance criterion and material completion obligation has a stable ID when the milestone is AI-executed;
-- the planning-seeded ledger contains exactly the applicable milestone obligation IDs with no grouping, omission, duplication, or reinterpretation;
-- every material evidence case has a stable ID and is seeded losslessly when one obligation spans heterogeneous proof paths;
-- evidence cases are selective rather than a mechanical Cartesian product;
-- every required validation gate identifies the specific obligation/evidence-case IDs it is intended to prove;
-- every material completion obligation is explicit enough to be mapped to implementation work and criterion/evidence-case-specific evidence;
-- the milestone identifies where compact durable completion evidence will be preserved after successful reconciliation;
-- subjective acceptance is routed to human review instead of being left as vague executor judgment;
-- required external dependencies, validation targets, execution loci, platforms, credentials/capabilities, permitted provisioning, infrastructure-change authority, and accepted alternative-locus/fallback semantics are known where material;
-- large or long-running work can be decomposed during implementation into bounded coherent work packages without reopening planning;
-- long implementation can resume from repository-local execution state rather than depending on conversational memory;
-- long validation has a safe bounded/resumable shape where required;
-- materially expensive validation has a proportionate stage/cadence policy, without weakening gate coverage;
-- expensive aggregate/consumer/integration acceptance gates state observable execution triggers tied to readiness of the relevant implementation surface or prerequisites (independent stages may become ready before the full aggregate), justified diagnostic exceptions, and safe evidence reuse/freshness behavior rather than leaving timing implicit;
-- exploratory simulations do not silently become standard validation or CI gates;
-- no stronger implementation model is being relied on to resolve uncertainty that belongs in planning.
-
-If any item fails, keep the milestone in `draft/planning` or create a diagnostic milestone. Do not mark it `ready` merely because implementation could probably make progress.
-
-## Additional authority and research documents
-
-Create or update specs, architecture docs, decision records, engineering docs, project-local specialization docs, scenarios, artifact contracts, or public docs only when a planning conclusion must become durable project truth before implementation.
-
-Create or update `docs/research/` only when durable evidence is justified by the research model. Research is planning knowledge, not project authority.
-
-Do not duplicate complete authority-document bodies inside the milestone. Reference them.
-
-Do not create central-style technology profile documents in the product repository merely to mirror guide taxonomy. Use the repository's normal project-authority structure.
-
-## Deliverable boundary
-
-Create a planning/design package, not an implementation patch.
-
-The package may contain repository-relative project-truth Markdown, justified durable research artifacts, milestone metadata, the planning-seeded `.execution/<milestone-id>.md` required for an AI-executed ready milestone, `.review/` requests, or `.guide-sync/pending/` hints directly required to make the milestone ready.
-
-Do not include implementation source files, test files, generated code, workflow YAML, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or planner-authored work-package/task/evidence/status content inside `.execution/`.
-
-Do not create a bespoke per-milestone `EXECUTE-Mxxx.md` or equivalent file that repeats canonical execution methodology, milestone acceptance criteria, or project authority.
-
-An overlay ZIP is a transport mechanism for repository-relative planning changes. It is not separate planning authority.
-
-When an overlay requires application instructions, keep them limited to transport/application steps and identification of the primary ready milestone. Do not turn application instructions into a second execution contract.
-
-## Documentation impact
-
-Update documentation during planning only when a resolved decision must become project truth before implementation.
-
-If broader documentation work must survive handoff, create focused `.guide-sync/pending/` hints. Do not require the implementation agent to read deferred sync metadata.
-
-Research retention is independent of documentation synchronization: retain evidence because it has future planning value, not merely because a documentation pass is pending.
-
-## Human review
-
-Determine whether automated validation can decide acceptance for this milestone's outputs.
-
-Human review is owned by this milestone and acts only as a milestone completion gate.
-
-When human review applies, specify:
-
-- applicability: none, recommended, required, or blocking;
-- review class;
-- canonical review ID or allocation rule;
-- owning milestone;
-- review subject;
-- required evidence;
-- acceptance criteria;
-- reviewer role when relevant;
-- acceptable completion decisions;
-- waiver policy if any;
-- request/record locations;
-- exact milestone-scoped review-check command.
-
-Do not define perpetual re-review or future-commit staleness for completed reviews.
-
-## Constrained execution and validation
-
-Determine whether validation may exceed a constrained agent runtime or depend on a locus/capability unavailable in the current execution context.
-
-For resumable suites, specify the plan command, shard contract, receipt location, fingerprint scope, verifier command, and expected aggregate evidence. Never accept partial child output as aggregate success.
-
-For locus-constrained validation, distinguish a genuine external capability block from a product failure and from portable validation that can still run elsewhere.
-
-Distinguish capability-provider validation from capability-consumer product validation. Mixed/dogfood scope must be bounded and explicit.
-
-## Implementation tractability and closure expectation
-
-The ready milestone must support an executor that owns both reliable execution progress and milestone closure.
-
-The implementation phase will:
-
-```text
-read milestone, authority, and planning-seeded ledger
--> verify milestone obligation IDs == ledger obligation IDs
--> execution decomposition
--> map seeded obligations to work packages
--> implement a coherent work package
--> validate and update evidence/status
--> repeat
--> freshly reread milestone
--> reconcile milestone <-> ledger <-> repository/evidence
--> completion audit
--> continue or terminate
-```
-
-Do not design the milestone so that passing tests is the only implied completion condition when other obligations exist.
-
-Do not require the implementation agent to keep the entire execution plan in conversational memory. Planning seeds the lossless obligation registry; implementation extends that operational ledger with work decomposition, evidence, status, and resume state.
-
-The executor must be able to determine from the milestone, referenced project authority, execution ledger, live repository, and concrete evidence whether the outcome is actually complete, awaiting required human review, or externally blocked.
-
-## Deliverable
-
-Create a downloadable ZIP archive containing only new or replacement repository-relative files needed to make the milestone ready. If moves or deletions cannot be represented directly, include concise application instructions rather than preserving obsolete files.
-
-After creating the ZIP, respond with:
-
-1. download link;
-2. included file list and purpose, distinguishing project authority from non-authoritative research;
-3. confirmed or inferred applicable profiles/scopes, role, maturity, execution profile, and baseline implementation model;
-4. primary ready-milestone path;
-5. concise transport/application handoff when needed;
-6. documentation-sync hints created;
-7. human-review items and evidence expectations;
-8. validation target/locus and constrained-execution instructions if applicable;
-9. research created/revalidated/promoted when material;
-10. any unresolved issue that prevents the milestone from being marked ready.
-
-The canonical implementation methodology is `templates/prompts/execute-milestone.md`. Do not recreate it in the planning package.
-
-## Quality bar
-
-The package is acceptable only if:
-
-- the goal and target state are unambiguous;
-- material architectural, semantic, compatibility, scope, acceptance, validation, applicable-profile/conflict, and specialization decisions are resolved;
-- research used for material decisions is sufficiently grounded, current for the decision, and promoted where implementation depends on its conclusions;
-- the implementation handoff remains complete without requiring ordinary implementation to load planning research;
-- the milestone is executable by the configured baseline implementation model without relying on model escalation for unresolved project-level reasoning;
-- large/long execution is tractable through planning-seeded lossless obligation coverage plus implementation-owned bounded work packages and persistent execution state;
-- constraints and non-goals prevent likely scope drift without prohibiting necessary supporting work;
-- required project authority is explicit;
-- acceptance criteria are observable or verifiable and cover the actual milestone outcome;
-- validation is concrete about depth, target, locus, platform/capability, command, and evidence where material, but is not confused with milestone completion;
-- implementation can derive local mechanics from the live repository without the planning conversation or `.guide-profile.json`;
-- implementation is not burdened with planning scratch work, speculative edit instructions, or duplicated per-milestone execution methodology;
-- the selected execution profile is explicit and appropriate to the work;
-- human-review requirements are milestone-owned and explicit when automation cannot decide acceptance;
-- long validation is resumable where required;
-- old copied guides are not treated as active authority or as durable research;
-- no TBP or issue-template dependency is introduced;
-- a material unresolved decision prevents `ready` status rather than being silently delegated to implementation.
+Do not confuse implementation uncertainty with missing project policy. Return genuinely material unresolved decisions to planning.
