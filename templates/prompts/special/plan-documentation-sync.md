@@ -20,7 +20,7 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 ## Optional execution progress
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
+Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this documentation task is long-running enough to benefit. Acceptance remains defined by the primary milestone.
 
 ## Planning/implementation separation
 
@@ -70,7 +70,7 @@ Capability-provider repositories validate capability implementation. Capability-
 
 ## Mode requirements
 
-Execution mode: `documentation-sync`. This milestone may read `.guide-sync/pending/`. Do not include implementation source changes unless documentation metadata cannot be updated safely without them.
+Workflow type: `documentation-sync` (independent of the project's `defaultImplementationMode`). This milestone may read `.guide-sync/pending/`. Do not include implementation source changes unless documentation metadata cannot be updated safely without them.
 
 ## Deliverable
 

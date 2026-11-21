@@ -131,7 +131,7 @@ Mixed/dogfood repositories may do both, but dogfood scope must be bounded and ex
 
 ## Mode requirements
 
-Execution mode: `engineering-migration`.
+Workflow type: `engineering-migration` (independent of the project's `defaultImplementationMode`).
 
 Use this mode for:
 

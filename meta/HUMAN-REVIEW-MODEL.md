@@ -28,7 +28,7 @@ If explicit approval is mandatory and has not occurred, report `AWAITING HUMAN R
 
 Review requirements must identify the subject, reviewer/authority when material, acceptance expectations, and decision location. A milestone may request review without mandating particular tooling.
 
-A completed review is **historical**: later unrelated commits do not automatically invalidate it. An active milestone whose evidence changes materially before approval must present updated evidence. A future milestone decides whether it needs its own review. Do not impose perpetual project-wide approval or retroactive evidence-fingerprint checks.
+A completed review is **historical**: later unrelated commits do not automatically invalidate it. If the subject's evidence changes materially during an active milestone, present the changed evidence for approval; an earlier approval does not automatically cover a different subject or materially altered output. Unrelated changes do not trigger reapproval. A future milestone decides whether it needs its own review. Do not impose perpetual project-wide approval or retroactive evidence-fingerprint checks.
 
 ## Optional structured repository-local review system
 
