@@ -7,7 +7,7 @@ Common engineering blocks:
 - editorconfig;
 - explicit project test strategy;
 - validation tiers, targets, and execution loci;
-- package validation when public packages are active;
+- package-consumer qualification at release readiness when public packages are active;
 - public API validation when public API compatibility matters;
 - release validation when release-ready.
 
@@ -23,4 +23,4 @@ When integration correctness depends on a concrete external runtime or service, 
 
 ## Packages
 
-When public packages are active, validate the exact package produced by the current build through an isolated consumer path. Detailed behavior may remain in direct integration or focused tests; consumer-surface acceptance should stay representative.
+When public packages are active, **release qualification** validates the exact package candidate through an isolated consumer path. Ordinary feature milestones use focused and real-boundary integration tests; they do not automatically need packed-package consumption. Bring consumer qualification forward only when packaging itself is the milestone outcome or deferral is materially risky.

@@ -3,12 +3,13 @@
 ## Core principles
 
 ```text
-eng/ is the stable engineering API.
+eng/ may expose a stable engineering API; direct build/test scripts suffice when simple.
 Platform launchers stay thin.
 Complex orchestration lives in tested application code.
 Validation depth is independent of target and execution locus.
-Validation may be resumable.
-Human review is a repository-local milestone completion gate.
+Milestone validation is risk-proportionate; final consumer qualification belongs to releases.
+Validation may be resumable only when its cost justifies the machinery.
+Explicitly required human review is a repository-local milestone completion gate.
 ```
 
 ## Human review commands

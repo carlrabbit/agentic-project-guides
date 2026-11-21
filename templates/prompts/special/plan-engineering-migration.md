@@ -22,24 +22,9 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 If the target repository contains `.review/`, treat it as repository-local human-review state. Read it only when the milestone requires human review, engineering migration, documentation synchronization, or release readiness.
 
-## Planning-seeded execution ledger
+## Optional execution progress
 
-When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
-
-Seed only contract-derived coverage:
-
-- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
-- one separate pending ledger row per obligation;
-- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
-- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
-
-Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
-
-Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
-
-Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
-
-The execution ledger may compress work. It must not compress obligations.
+Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
 
 ## Planning/implementation separation
 
@@ -47,7 +32,7 @@ There is no direct synchronization between the planning AI and the implementatio
 
 Create an implementation-ready package. The later implementation agent must be able to:
 
-1. unpack the ZIP into the target repository;
+1. apply the package into the target repository;
 2. open the primary milestone document;
 3. read only the authority documents explicitly listed in that milestone;
 4. implement the focus areas;
@@ -82,7 +67,7 @@ Treat `docs/research/` and copied guides as non-authoritative legacy material un
 
 Create a planning/design package, not an implementation patch.
 
-The ZIP may contain repository-relative Markdown or metadata files such as:
+The package may contain repository-relative Markdown or metadata files such as:
 
 ```text
 docs/milestones/M00XX-xxx.md
@@ -95,7 +80,7 @@ docs/artifacts/xxx.md
 docs/review/xxx.md
 .review/pending/xxx.md
 .guide-sync/pending/xxx.md
-.execution/M00XX-<milestone>.md
+.execution/M00XX-<milestone>.md   # optional resume state, only if justified
 ```
 
 Only include files directly needed to make the milestone implementation-ready.
@@ -173,17 +158,7 @@ If future work may need review, state that the future milestone must declare its
 
 Determine whether any validation command may exceed a constrained agent runtime.
 
-For resumable suites, specify:
-
-- suite command;
-- `--plan-json` command;
-- shard execution contract;
-- receipt location;
-- fingerprint scope;
-- `--verify` command;
-- expected aggregate evidence.
-
-Do not accept partial child output as aggregate success.
+For materially expensive suites, use direct stage commands first; introduce receipt/fingerprint/verifier machinery only when its cost is justified. Do not impose a new validation pipeline on a normal migration milestone.
 
 ## Provider versus consumer distinction
 
@@ -217,13 +192,13 @@ Do not mix unrelated product feature implementation into the migration.
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
 
-After creating the ZIP, respond with:
+After preparing the package, respond with:
 
-1. download link;
+1. branch\/PR link or download link, as applicable;
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profile, role, maturity, and execution mode;
@@ -245,7 +220,7 @@ The package is acceptable only if:
 - direct documentation updates are separated from deferred synchronization;
 - provider and consumer responsibilities are not blurred;
 - human-review requirements are explicit, milestone-owned, and limited to the current milestone when automation cannot decide acceptance;
-- long validation is made resumable when the execution environment may terminate long-running commands;
+- long validation is made resumable only when its cost or execution limits justify additional machinery;
 - aggregate success is never inferred from partial output;
 - old copied guides are not treated as active authority;
 - no TBP or issue-template dependency is introduced;

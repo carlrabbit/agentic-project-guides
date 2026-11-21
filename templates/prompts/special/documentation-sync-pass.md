@@ -57,7 +57,7 @@ Do not treat old copied guides under `docs/research/` as authoritative unless th
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new, replacement, or deleted-file marker notes as appropriate for the documentation sync patch. Preserve repository-relative paths.
+Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new, replacement, or deleted-file marker notes as appropriate for the documentation sync patch. Preserve repository-relative paths.
 
 In chat, report:
 

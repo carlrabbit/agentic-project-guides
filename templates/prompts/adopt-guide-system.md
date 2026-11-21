@@ -176,42 +176,27 @@ When research is present, classify its treatment separately enough to distinguis
 
 Record the historical research-adoption decision (`none`, `selective`, or `reconstructive`) in the adoption work when the target model defines that capability. Treat it separately from required guide-system compliance.
 
-## Planning-seeded execution ledger
+## Optional execution progress
 
-When this workflow produces an AI-executed ready milestone, planning must create `.execution/<milestone-id>.md` as part of the planning package before the milestone becomes `ready`.
-
-Seed only contract-derived coverage:
-
-- stable IDs for every individually verifiable acceptance criterion and material completion obligation;
-- one separate pending ledger row per obligation;
-- stable `EC-*` evidence-case IDs when one obligation spans materially distinct proof paths;
-- required validation-gate IDs, target/locus, and the exact obligation/evidence-case IDs each gate is intended to prove.
-
-Do not create evidence cases as a Cartesian product. Use them only for distinctions that could hide a different implementation path, state mechanism, compatibility surface, or contract failure.
-
-Before handoff, verify exact set equality between the milestone's applicable obligation IDs and the seeded ledger registry and, where evidence cases exist, exact set equality for required evidence-case IDs.
-
-Do not seed implementation work packages, implementation tasks, concrete implementation evidence, validation results, completion status, or resume state. Those are implementation-owned.
-
-The execution ledger may compress work. It must not compress obligations.
+Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
 
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to unpack the ZIP, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context, reading the external guide repository, or depending on non-authoritative research for project rules.
+Create an implementation-ready package. The later implementation agent must be able to apply the package, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context, reading the external guide repository, or depending on non-authoritative research for project rules.
 
 Also generate a concise execution prompt in chat for the later implementation agent.
 
 ## Deliverable
 
-Create a downloadable ZIP archive containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or research scaffolding without durable evidence.
 
-After creating the ZIP, respond with:
+After preparing the package, respond with:
 
-1. download link;
+1. branch\/PR link or download link, as applicable;
 2. included file list;
 3. reason each file is included;
 4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;

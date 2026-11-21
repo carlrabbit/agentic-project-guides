@@ -138,11 +138,11 @@ Representative validation should cover the applicable contract, such as:
 - cancellation or timeout behavior when material;
 - representative failure diagnostics.
 
-Planning should create separate evidence cases when materially different paths can hide different defects—for example interactive/non-interactive, terminal/redirected, Windows/Linux, text/structured output, or multiple distribution surfaces. Do not create a Cartesian product when those paths are not materially independent.
+Use a few representative process-boundary scenarios chosen for material behavior risks. Separate evidence-case registries are not a default; add case distinctions only when they improve confidence enough to justify their cost.
 
 ## Consumer/distribution validation
 
-When the CLI is distributed, Tier 4 validation should invoke the exact artifact real consumers receive through the intended installation/launch mechanism.
+At **release readiness**, when the CLI is distributed, validation should invoke the actual candidate artifact through its intended installation/launch mechanism. An ordinary implementation milestone does not automatically qualify the installed tool. Earlier qualification requires explicit scope or a material risk-based justification.
 
 The generic shape is:
 
@@ -159,7 +159,7 @@ The validation must avoid accidental success through repository build output, st
 
 For a project distributed as a .NET global/local tool, project-local authority should resolve the concrete tool packaging details, including the supported command name and installation model.
 
-Representative consumer validation should:
+At release readiness, representative consumer validation should:
 
 ```text
 pack the current tool package
