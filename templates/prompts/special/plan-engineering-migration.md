@@ -111,30 +111,9 @@ Do not require the implementation agent to read `.guide-sync/`.
 
 ## Human review
 
-Determine whether automated validation can decide acceptance for this milestone's outputs.
+Apply a human-acceptance gate only when judgment is actually necessary or project authority explicitly requires approval. Specify the review subject, relevant evidence, required reviewer/authority, and acceptable decision. A PR approval or concise milestone-local decision is sufficient by default. Do not prescribe `.review/` registries, canonical review IDs, six review commands, a new engineering host, or fingerprints simply for one approval.
 
-Human review is owned by this milestone and acts only as a milestone completion gate. It must not be designed as a persistent project-wide approval.
-
-When human review applies, specify:
-
-- applicability: none, recommended, required, or blocking;
-- review class;
-- canonical review ID or allocation rule;
-- owning milestone ID and milestone path;
-- review subject;
-- required evidence;
-- acceptance criteria;
-- reviewer role when relevant;
-- acceptable decisions for completion;
-- waiver policy, if any;
-- review request and record locations under `.review/`;
-- the exact milestone-scoped review-check command.
-
-Do not define generic future-commit staleness or perpetual re-review triggers.
-
-Repository revision and evidence fingerprints may be recorded for provenance, but completed approval becomes historical evidence after this milestone completes.
-
-If future work may need review, state that the future milestone must declare its own review rather than reopening this milestone's completed record.
+Only when the repository **already uses** or deliberately needs the advanced structured review subsystem should the milestone reference its project-specific request/record locations, IDs, command contract, and scoped completion check. A future milestone owns any new review; completed decisions do not become stale after unrelated commits.
 
 ## Constrained execution and validation
 

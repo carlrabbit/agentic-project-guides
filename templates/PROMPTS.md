@@ -6,8 +6,11 @@ This is a compact router. The selected prompt and applicable meta models are aut
 
 1. Plan coherent agent-scaled capability work with `templates/prompts/plan-milestone.md`.
 2. Implement a **ready** milestone with `templates/prompts/execute-milestone.md`.
+3. Review implementation or prepare a correction with `templates/prompts/review-milestone.md`.
 
 The planner resolves material project decisions, acceptance, relevant risks, and project-local authority. The implementer chooses mechanics, may try reversible alternative approaches, uses focused feedback, and establishes the milestone's observable outcomes.
+
+Reviewers verify intended behavior and identify concrete defects; they do not introduce additional acceptance cases or validation infrastructure without newly demonstrated risk. PR/code review is distinct from an explicitly required formal human-acceptance gate.
 
 **A milestone is not a release gate.** Product package/installed-consumer/platform qualification normally belongs to release preparation. An exceptional milestone-level qualification must be justified.
 

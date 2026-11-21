@@ -9,6 +9,7 @@ Select the entrypoint for the **assigned task**. This repository supplies guide-
 | Assigned task | Start with |
 |---|---|
 | Plan a product milestone | `templates/prompts/plan-milestone.md` |
+| Review an implementation or prepare focused corrections | `templates/prompts/review-milestone.md` |
 | Bootstrap a new product repository | `templates/prompts/new-project.md` |
 | Implement a ready milestone | **Product repository:** ready milestone, its `.execution/<milestone-id>.md` when applicable, referenced project authority, and relevant code/tests. Use the canonical execution prompt supplied at handoff; ordinary Implementers do **not** load this guide repository. |
 | Adopt the guide in an existing repository | `templates/prompts/adopt-guide-system.md` |
