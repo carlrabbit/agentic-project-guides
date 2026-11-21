@@ -11,7 +11,7 @@ templates/prompts/adopt-guide-system.md
 templates/prompts/update-guide-system.md
 ```
 
-The planning phase resolves the latest version explicitly from the guide repository, inspects the changelog and relevant migration documents, assesses the target repository, and produces a ready migration milestone or equivalent implementation-ready package.
+The migration workflow resolves the target version, inspects the changelog and applicable migration chain, and assesses the target repository. It then either applies a straightforward update directly or prepares a ready milestone/package when substantial coordinated implementation is necessary.
 
 Migration is a special planning workflow. It is not a milestone execution mode.
 
