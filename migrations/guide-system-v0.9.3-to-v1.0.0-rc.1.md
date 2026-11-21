@@ -19,10 +19,10 @@ Use ADR-0030 (agent-scaled milestones), ADR-0031 (risk-proportionate assurance),
 
 ## Migration execution and verification
 
-Perform updates directly in the repository or through a repository-relative patch/ZIP. Do not create a mandatory migration ledger. A concise migration milestone is enough when implementation work is needed.
+Perform small, well-understood metadata/documentation updates directly in the authorized repository, with focused checks and a concise completion summary; no migration milestone is required. Use a ready milestone or repository-relative patch/ZIP when coordinated implementation work or material decisions justify it. Do not create a mandatory migration ledger. When upgrading across multiple versions, read relevant intermediate migrations but do not create artifacts required only by superseded versions unless preserving project data or operative authority genuinely depends on that transition.
 
 Inspect the target repository's applicable authority and agent entrypoints for contradictory requirements. Ensure implementation milestones use risk-proportionate checks, release qualification is assigned to the correct boundary, and optional progress/review machinery is not accidentally mandatory. Do not require hypothetical planner executions, fixed scenario suites, or model-behavior trials as a guide-migration acceptance gate. Confirm there are no contradictory inherited requirements in local profiles, `AGENTS.md`, or engineering docs.
 
 ## Release status
 
-This document describes the **release candidate** `1.0.0-rc.1`; stable `1.0.0` may include corrections following practical dogfood. Do not confuse publication of the guide candidate with qualification of a product using the guide.
+This document describes the **release candidate** `1.0.0-rc.1`; stable `1.0.0` follows when remaining concrete normative defects are corrected; no planner trials or dogfooding gate is implied. Do not confuse publication of the guide candidate with qualification of a product using the guide.

@@ -1,6 +1,6 @@
 # Prompt — Update Repository to Latest Agentic Project Guide System
 
-Our planning task is to create an implementation-ready migration package for updating a repository from any existing `carlrabbit/agentic-project-guides` version to the latest available guide-system version.
+Our task is to assess and update a repository from an existing `carlrabbit/agentic-project-guides` version to the latest available guide-system version. Apply straightforward metadata/documentation corrections directly when authorized; prepare a ready migration package only when coordinated implementation or material design decisions require it.
 
 The active guide authority is external:
 
@@ -37,11 +37,11 @@ Read at minimum:
 - relevant meta models introduced or changed by those migrations, including `meta/RESEARCH-MODEL.md` when applicable;
 - `templates/PROMPTS.md`.
 
-State both the current and resolved latest versions in the chat response and in the migration milestone.
+State both the current and resolved latest versions in the final report and in the migration milestone only if one is needed.
 
 Do not assume a hard-coded latest version.
 
-Migration documents are authoritative for version-to-version transformation semantics. Do not apply the current latest model directly to an old repository while skipping intermediate migration requirements.
+Read the applicable migration chain for version-to-version transformation semantics, then implement the **effective target-version requirements**. Do not reenact intermediate obligations that are superseded by the target version (such as 0.9 planning-seeded ledgers) merely to remove them immediately. Preserve intermediate transformations when needed to protect project data, historical evidence, compatibility, or active authority.
 
 ## Repository inspection
 
@@ -74,7 +74,7 @@ Derive required repository changes from the complete migration chain between the
 For every changed guide concept:
 
 - identify existing repository state shaped by the old model;
-- apply the relevant migration classification and transformation;
+- apply the effective target-state classification and transformation, retaining any indispensable intermediate data/authority preservation;
 - preserve concrete project truth rather than replacing it with copied guide methodology;
 - update coordination metadata only where the target guide version requires it;
 - keep the implementation handoff independent of external guide documents and planning conversation.
@@ -123,39 +123,15 @@ When a migration changes implementation handoff, required reading, validation ro
 
 For a ready milestone, route first to the milestone, explicitly referenced operative authority and optional execution progress notes when present, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
 
-Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a required direct documentation change when current instructions contradict the target handoff; conditional when navigation actually needs improvement; no-op when sound. Record the decision in the migration milestone. Keep validation cadence, stage receipts/fingerprints, simulation isolation, and concrete commands in milestone/project engineering authority rather than accumulating them in `AGENTS.md`.
+Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a required direct documentation change when current instructions contradict the target handoff; conditional when navigation actually needs improvement; no-op when sound. Record the decision in the migration report or milestone when one is needed. Keep validation cadence, stage receipts/fingerprints, simulation isolation, and concrete commands in milestone/project engineering authority rather than accumulating them in `AGENTS.md`.
 
-## Required output
+## Deliverable selection
 
-Create exactly one migration milestone under `docs/milestones/`.
+**Direct update (default for straightforward changes):** If the target state can be reached by small, well-understood metadata, configuration, or documentation edits without material design decisions or coordinated implementation, apply those changes directly in the authorized repository/branch. Examples include updating `.guide-profile.json`, fixing `AGENTS.md` routing, and removing obsolete guide-derived process statements. Do **not** create `docs/milestones/` entries, execution ledgers, implementation prompts, or migration scaffolding merely to administer those edits. Verify the affected text/configuration and summarize the achieved target state and any real residual work.
 
-The milestone must include:
+**Ready migration milestone (when warranted):** If the transition needs substantial coordinated changes, unresolved material architecture/contract decisions, or an independent implementation-agent handoff, produce **one** ready migration milestone under `docs/milestones/`. Include only the materially applicable current/target versions, profile/scope and execution metadata, required/conditional/deprecated/manual-review changes, relevant authority, acceptance, concrete validation, direct documentation impact, `AGENTS.md` reconciliation, optional transition choices, and recovery considerations. Omit sections with no purpose; do not fabricate validation matrices or an evidence registry.
 
-- current and target guide-system versions;
-- repository role and maturity;
-- applicable profiles and applicability scopes when required by the target model;
-- execution mode;
-- required, conditional, deprecated, manual-review, and no-op changes;
-- optional transition-capability decisions required by the migration chain;
-- authority documents;
-- likely affected files;
-- validation depth/tiers, targets/loci when required, and concrete commands;
-- human-review requirements;
-- constrained-execution implications;
-- direct documentation impact;
-- `AGENTS.md` entrypoint reconciliation (required / conditional / no-op, preserving local instructions);
-- deferred `.guide-sync/pending/` hints;
-- research/planning-knowledge migration treatment when materially affected by the migration chain;
-- acceptance criteria;
-- rollback or recovery notes where appropriate.
-
-Update `.guide-profile.json` only if the migration package includes that change.
-
-Create `.guide-sync/pending/` hints for deferred documentation synchronization.
-
-Do not copy guide documents into the target repository.
-
-Do not perform broad implementation work.
+Update `.guide-profile.json` and create `.guide-sync/pending/` hints only where the effective target state requires them. Do not copy guide documents into the target repository or perform unrelated product development.
 
 ## Human review
 
@@ -173,13 +149,13 @@ When migration validation is demonstrably expensive or constrained, consider ind
 
 ## Optional execution progress
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
+Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this migration is long-running enough to benefit. Acceptance comes from the ready milestone when one exists, or from the target-state requirements and focused verification for a direct update.
 
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to:
+For a substantial migration, create an implementation-ready package. The later implementation agent must be able to:
 
 1. apply the package into the target repository;
 2. open the primary milestone document;
@@ -190,15 +166,15 @@ Create an implementation-ready package. The later implementation agent must be a
 7. complete the current migration milestone's required human review or report its blocking status;
 8. finish without reconstructing planning context, reading the external guide repository, or depending on non-authoritative research for operative project rules.
 
-Also generate a concise execution prompt in chat for the later implementation agent.
+Only when an implementation handoff is needed, supply a concise execution prompt for the later implementation agent. Direct updates require no such prompt.
 
 ## Deliverable
 
-Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+For straightforward updates, deliver the authorized direct repository changes and a short verification report. For substantial migrations, deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files needed for the migration. Preserve repository-relative paths inside a ZIP.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or research scaffolding that the migration chain does not justify.
 
-After preparing the package, respond with:
+For direct updates, report the versions, changed files, target-state verification, and remaining issues. When a migration package is needed, additionally report:
 
 1. branch\/PR link or download link, as applicable;
 2. included file list;
@@ -213,13 +189,13 @@ After preparing the package, respond with:
 
 ## Quality bar
 
-The package is acceptable only if:
+A direct update is complete when the effective target-state changes are correctly applied and proportionately verified, without mandatory milestone creation. For a substantial migration package, it is acceptable only if:
 
 - the implementation goal is unambiguous;
 - required authority documents are explicitly listed;
 - the later implementation agent does not need to read the external guide repository;
 - the later implementation agent does not need to reconstruct project rules from planning research;
-- each guide-version transition follows its applicable migration contract rather than an ahistorical latest-model assumption;
+- applicable migrations are inspected, necessary intermediate preservation is performed, and superseded transient obligations are not reenacted;
 - optional historical reconstruction is not confused with required guide compliance;
 - validation expectations are concrete for the target model;
 - direct documentation updates are separated from deferred synchronization;

@@ -1,6 +1,6 @@
 # Migration Model
 
-Guide updates are applied through profile-aware migration planning, not vague implementation instructions.
+Guide updates are applied using profile-aware migration decisions, not vague implementation instructions. Straightforward metadata/documentation updates may be applied directly; coordinated implementation uses a ready migration milestone.
 
 Do not ask an implementation agent to simply "upgrade to the latest guide".
 
@@ -15,13 +15,15 @@ The planning phase resolves the latest version explicitly from the guide reposit
 
 Migration is a special planning workflow. It is not a milestone execution mode.
 
-When migration requires coding or repository changes, the resulting work follows the normal lifecycle:
+When migration requires substantial coordinated implementation or unresolved material architectural decisions, create a ready milestone and follow the normal lifecycle:
 
 ```text
 planning -> ready -> implementing -> done
 ```
 
-The execution profile for that milestone is selected independently from the migration workflow type.
+The execution profile for a migration milestone, when one is needed, is selected independently from the migration workflow type.
+
+**Target-state rule:** Read the applicable migration chain to identify meaningful transitions, but apply the effective requirements of the **target version**. Do not create intermediate ledgers, evidence registries, review machinery, or other artifacts whose requirements are superseded before the target version, unless an intermediate transformation is genuinely necessary to preserve data, historical evidence, or project authority. Do not skip necessary compatibility-sensitive data migrations.
 
 ## Migration flow
 
@@ -32,14 +34,14 @@ The execution profile for that milestone is selected independently from the migr
 4. Assess repository state.
 5. Resolve migration decisions and classify changes.
 6. Evaluate optional transition capabilities required/recommended by the migration chain.
-7. Create the ready migration milestone/package.
-8. Apply any planning-time overlay required to establish project truth.
-9. Execute the ready milestone with the canonical execution prompt.
-10. Run proportionate migration validation and any explicitly required milestone-owned human acceptance.
+7. Choose direct update for straightforward metadata/docs or a ready milestone for substantial coordinated implementation.
+8. Apply permitted direct changes or prepare the implementation-ready package.
+9. Execute a ready milestone with the canonical execution prompt only when a milestone was needed.
+10. Verify the target-state changes proportionately and obtain any explicitly required human acceptance.
 11. Run deferred documentation synchronization when applicable.
 ```
 
-A bespoke execution prompt is not required. `templates/prompts/execute-milestone.md` is the canonical executor entry point for ready milestones. A planning interface may provide a short handoff note that identifies the primary milestone path or overlay application instructions.
+For a ready milestone, `templates/prompts/execute-milestone.md` is the canonical executor entry point; a short handoff may identify the milestone path or overlay. A direct update needs no milestone or implementation-agent handoff, only a concise record of changes and focused verification.
 
 ## Change classification
 

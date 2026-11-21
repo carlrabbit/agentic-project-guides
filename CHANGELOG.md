@@ -21,6 +21,8 @@ Affected areas: milestone scope and autonomy, planning/implementation prompts, a
 - Permit PR-based human acceptance without a dedicated review command subsystem; structured human review remains optional.
 - Allow bounded reversible internal architecture alternatives with fixed invariants and evaluation criteria; record brief durable milestone completion notes.
 - Require final-artifact consumer checks for actively supported distribution mechanisms at release readiness; keep execution modes independent of scope size.
+- Clarify authorization for destructive mutations against persistent/external targets; apply target-state-aware guide migrations and allow straightforward direct updates without milestones.
+- Separate genuine project research from copied legacy guides, normalize human-review completion semantics, and clarify source-generator/library profile composition.
 
 ### Migration
 
