@@ -6,7 +6,7 @@ Authoritative for repository-local, milestone-scoped human review workflows.
 
 ## Purpose
 
-Human review is used when automated validation cannot determine whether evidence produced during a milestone is acceptable.
+**Formal** human review is optional by default and used when automated validation cannot determine whether evidence produced during a milestone is acceptable, or when project authority explicitly requires human approval. Ordinary engineering/PR review need not instantiate this record/command infrastructure.
 
 Human review is a completion gate owned by a milestone. It is not a perpetual project-wide quality gate.
 

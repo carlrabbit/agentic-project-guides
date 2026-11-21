@@ -2,12 +2,12 @@
   "schemaVersion": 2,
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "0.9.3"
+    "version": "1.0.0-rc.1"
   },
   "appliedProfiles": [
     {
       "id": "base",
-      "version": "0.9.3",
+      "version": "1.0.0-rc.1",
       "scopes": [
         {
           "kind": "repository"
@@ -18,8 +18,8 @@
   "repositoryRole": "capability-provider",
   "maturityStage": "implementation-ready",
   "executionModel": {
-    "baselineImplementationModel": "GPT-5.6 Luna",
-    "defaultImplementationMode": "ai-executed-human-reviewed",
+    "baselineImplementationModel": "<select-project-baseline-model>",
+    "defaultImplementationMode": "ai-executed-broad",
     "documentationSync": "separate-pass",
     "releaseReadiness": "separate-pass",
     "humanReview": "milestone-scoped"

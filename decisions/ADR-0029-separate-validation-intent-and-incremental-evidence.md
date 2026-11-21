@@ -1,5 +1,8 @@
 # ADR-0029 — Separate Validation Intent and Reuse Current Evidence Safely
 
+> **1.0.0-rc.1 applicability:** Historical rationale for an **optional advanced** validation mechanism. ADR-0031 and current models govern its risk/cost-justified use; it is not default milestone compliance.
+
+
 ## Status
 
 Accepted for guide-system v0.9.3 (draft).

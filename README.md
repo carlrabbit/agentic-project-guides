@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 0.9.3 (draft)
+Version: 1.0.0-rc.1
 
 Select the entrypoint for the **assigned task**. This repository supplies guide-system methodology for planning, migration, synchronization, and guide maintenance; product repositories own their implementation contracts. This README is a **navigation index**, not operative guidance.
 

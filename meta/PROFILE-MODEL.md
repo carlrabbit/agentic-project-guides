@@ -6,7 +6,7 @@ Authoritative for reusable profile selection, applicability, and composition.
 
 ## Purpose
 
-A profile is a reusable project category that activates documentation, engineering, validation, and release expectations.
+A profile is a reusable engineering shape that activates scoped documentation, engineering, validation, and release expectations. Profiles must not override risk-proportionate milestone assurance by imposing unconditional release qualification, evidence registries, or validation infrastructure on ordinary milestones.
 
 Profiles avoid one universal repository template while keeping concrete project technology and architecture in project-local authority.
 

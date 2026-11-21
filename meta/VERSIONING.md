@@ -22,7 +22,7 @@ Use semantic versioning.
 
 Until guide-system `1.0.0`, MINOR versions may intentionally include breaking model evolution when accompanied by explicit migration guidance. `0.x` repositories should not assume minor-version compatibility.
 
-After `1.0.0`:
+From the `1.0.0` stable release:
 
 ```text
 MAJOR
@@ -37,6 +37,10 @@ PATCH
   Clarification, typo, example improvement, or non-semantic wording.
   No repository migration expected.
 ```
+
+## Prereleases
+
+Use SemVer prerelease identifiers such as `1.0.0-rc.1` while qualifying a new major methodology. A release candidate is not stable `1.0.0`; migration guidance must name the exact prerelease version. Stable `1.0.0` follows after candidate corrections and must not be implied by a version bump alone.
 
 ## Changelog rules
 

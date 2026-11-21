@@ -1,5 +1,8 @@
 # ADR-0026 — Planning seeds lossless execution-ledger coverage
 
+> **1.0.0-rc.1 status:** Historical decision; its mandatory ordinary-milestone requirements are superseded by ADR-0030 and ADR-0031. See current normative milestone and validation models.
+
+
 ## Status
 
 Accepted for guide-system 0.9.0.
