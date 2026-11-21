@@ -4,8 +4,7 @@ reviewId: <canonical-review-id>
 milestone: <milestone-id>
 status: pending
 reviewClass: <semantic|visual|ux|creative|security|public-api|release|migration|artifact-quality>
-applicability: <recommended|required|blocking>
-blocking: <true|false>
+applicability: <recommended|required>
 sourceMilestone: <repository-relative milestone path>
 subject: <review subject>
 createdRevision: <revision-or-unknown>
@@ -15,13 +14,11 @@ createdRevision: <revision-or-unknown>
 
 ## Purpose
 
-State the judgment the human must make before the owning milestone can complete.
+State the human judgment being requested. Only `required` reviews gate milestone completion; `recommended` reviews do not.
 
 ## Milestone Completion Effect
 
-Explain whether this review is recommended, required, or blocking.
-
-For blocking review, state the exact acceptable final decisions, normally:
+State `recommended` (nonblocking) or `required` (blocking). No separate Boolean or `blocking` applicability class is authoritative. For a required review, acceptable final decisions are normally:
 
 ```text
 approved

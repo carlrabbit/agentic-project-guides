@@ -21,10 +21,11 @@ If explicit approval is mandatory and has not occurred, report `AWAITING HUMAN R
 
 ## Review applicability and completion
 
-- **none:** no human decision required.
+- **none:** no human decision required; no review request is needed.
 - **recommended:** helpful but not a completion gate.
-- **required:** record an affirmative decision before claiming completion, subject to the project's explicit waiver policy.
-- **blocking:** cannot complete until approved or validly waived under the declared contract.
+- **required:** a completion gate; the milestone cannot complete until the review is approved or explicitly waived under the project's declared waiver policy.
+
+There is **no independent `blocking` applicability class**. Any `blocking` flag used by an existing optional review system must be derived from applicability (`required` = true, `recommended` = false), never treated as separate authority. Reject conflicting values for active reviews. Historical records remain historical; no retroactive migration of completed decisions is implied.
 
 Review requirements must identify the subject, reviewer/authority when material, acceptance expectations, and decision location. A milestone may request review without mandating particular tooling.
 

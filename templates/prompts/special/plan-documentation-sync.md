@@ -44,7 +44,7 @@ Inspect the target repository before writing files. Read the minimum required ta
 - relevant `docs/engineering/*`;
 - relevant existing milestones and decisions.
 
-Treat `docs/research/` and old copied guides as non-authoritative legacy material unless explicitly marked otherwise.
+Treat genuine `docs/research/` artifacts as non-authoritative planning evidence, not as legacy material simply because they are research. Treat copied guide-system documents separately as legacy guide leakage unless the project deliberately assigned them another role. Do not remove current research during documentation cleanup merely because it is non-authoritative.
 
 ## Required milestone document
 

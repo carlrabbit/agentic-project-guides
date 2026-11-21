@@ -4,7 +4,7 @@ reviewId: <canonical-review-id>
 milestone: <milestone-id>
 status: <approved|changes-requested|rejected|waived|superseded>
 reviewClass: <review-class>
-blocking: <true|false>
+applicability: <recommended|required>
 reviewer: <reviewer identity>
 reviewedRevision: <revision-or-unknown>
 sourceMilestone: <repository-relative milestone path>
@@ -24,7 +24,7 @@ recordedAt: <timestamp>
 
 ## Milestone Completion Effect
 
-State whether this decision satisfies the owning milestone's human-review gate.
+A `required` review gates completion until approved or validly waived under the owning milestone's policy. A `recommended` review does not gate completion. There is no independent blocking flag.
 
 ## Evidence Reviewed
 

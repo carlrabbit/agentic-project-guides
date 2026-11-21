@@ -2,7 +2,7 @@
 
 Use this profile when a repository or bounded repository scope ships a Roslyn analyzer/source-generator surface as a first-class deliverable.
 
-This profile commonly composes with `dotnet-library` when the generator is distributed as a NuGet package.
+A NuGet package that delivers a compile-time generator/analyzer does **not** by itself activate `dotnet-library`. Compose with `dotnet-library` only when the applicable repository scope also exposes a separately supported reusable .NET library/API surface, such as a runtime companion library.
 
 In a mixed repository, scope this profile to the generator components or compile-time consumer surface rather than applying it repository-wide without evidence.
 

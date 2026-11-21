@@ -32,7 +32,7 @@ Useful validation targets include:
 
 Detailed generator logic may also use focused/internal tests where they are cheaper or more diagnostic. Those tests do not replace representative compile-time consumer validation.
 
-When the source generator is also a NuGet library/package surface, compose this profile with `dotnet-library` rather than duplicating generic package/release guidance here.
+A NuGet-delivered compile-time generator/analyzer is not automatically a reusable .NET library/API surface. Compose this profile with `dotnet-library` only when a separately supported .NET library/API also exists in the applicable scope; keep generator packaging and compile-time consumption rules here.
 
 ## Packaging
 

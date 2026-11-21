@@ -26,7 +26,7 @@ For artifact-first projects, human review commonly applies to:
 
 A review is owned by the milestone that produced the evidence.
 
-Only explicitly required or blocking human review gates that milestone's completion; optional engineering review need not produce a formal record. Once the milestone completes, the record remains historical and is not revalidated against later repository changes.
+Only explicitly `required` human review gates that milestone's completion; `recommended` review is nonblocking and ordinary engineering review need not produce a formal record. Once the milestone completes, the record remains historical and is not revalidated against later repository changes.
 
 A provider repository validates review-system mechanics.
 

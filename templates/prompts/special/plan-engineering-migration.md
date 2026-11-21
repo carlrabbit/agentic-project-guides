@@ -61,7 +61,7 @@ Read the minimum target-repository documentation needed to design the milestone 
 
 Read architecture, public docs, workflows, `.review/`, `.guide-sync/`, research, or old copied guides only when the topic requires them.
 
-Treat `docs/research/` and copied guides as non-authoritative legacy material unless explicitly marked otherwise.
+Treat genuine `docs/research/` artifacts as current non-authoritative planning evidence, to inspect when relevant; they are not inherently legacy or candidates for deletion. Separately, treat copied guide-system documents as legacy guide leakage unless the project deliberately gave them another authoritative role.
 
 ## Deliverable boundary
 
