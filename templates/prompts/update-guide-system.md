@@ -159,22 +159,11 @@ Do not perform broad implementation work.
 
 ## Human review
 
-Inspect whether the target repository uses human review and which guide version shaped that implementation.
+Apply relevant historical migration rules only to the versions traversed. Under 1.0.0-rc.1, formal human acceptance is optional unless explicitly required by the milestone or project. A normal PR review or concise milestone-local decision may satisfy required acceptance; do not create new review registries, aliases, command hosts or review-check launchers for one approval.
 
-Apply the human-review migration semantics from the relevant migration documents rather than assuming the latest structure was always present.
+Existing repositories with a deliberately adopted structured review subsystem may retain their project-owned contract. Preserve completed decisions as historical rather than demanding reapproval after unrelated commits. Classify an ambiguous active legacy review for manual resolution.
 
-For migration through versions that use the milestone-scoped human-review model:
-
-- require pending reviews to identify one owning milestone;
-- treat human review as a milestone completion gate;
-- preserve completed records as historical evidence;
-- remove generic repository-wide approval staleness;
-- do not require humans to reapprove completed milestones because later commits occurred;
-- keep canonical IDs and ephemeral interactive aliases;
-- require milestone-scoped `review-check` behavior;
-- classify ambiguous legacy pending requests as manual-review migration items.
-
-When the migration milestone itself requires human judgment, create a review request owned by the migration milestone. Do not create an ongoing project-wide review gate.
+When the migration milestone itself requires human judgment, specify the subject and evidence and record the decision in an already supported location. Do not create an ongoing repository-wide review gate.
 
 ## Constrained execution
 

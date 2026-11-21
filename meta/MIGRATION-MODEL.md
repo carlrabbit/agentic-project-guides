@@ -35,7 +35,7 @@ The execution profile for that milestone is selected independently from the migr
 7. Create the ready migration milestone/package.
 8. Apply any planning-time overlay required to establish project truth.
 9. Execute the ready milestone with the canonical execution prompt.
-10. Run validation and milestone-owned review gates.
+10. Run proportionate migration validation and any explicitly required milestone-owned human acceptance.
 11. Run deferred documentation synchronization when applicable.
 ```
 

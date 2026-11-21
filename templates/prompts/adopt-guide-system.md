@@ -32,8 +32,8 @@ Read at minimum:
 - `meta/SPECIALIZATION-MODEL.md` when present;
 - `meta/RESEARCH-MODEL.md` when present;
 - `meta/VALIDATION-MODEL.md`;
-- `decisions/`;
-- `migrations/`;
+- only relevant current ADRs needed to resolve migration decisions, not the entire historical `decisions/` directory;
+- only the applicable migration chain, not every historical migration;
 - `templates/PROMPTS.md`.
 
 State the resolved latest version in the chat response and in the migration milestone.
@@ -144,7 +144,7 @@ Reconcile applicable central/local profile obligations and project guidance into
 
 Inspect existing root `AGENTS.md` as a routing document, not as a second guide or a place to paste the latest implementation methodology. If absent and the project needs an agent entrypoint, create a concise project-specific one. Otherwise preserve valid existing instructions while removing outdated required-reading lists, copied generic execution rules, or routing that conflicts with the adopted milestone handoff.
 
-For an assigned implementation milestone, `AGENTS.md` should route first to the ready milestone, then its applicable seeded ledger, explicitly referenced operative authority, and relevant source/tests. It must not force the Implementer to reconstruct planning from guide documents, planning-only metadata, or research. Non-milestone agents should use their assigned workflows. Keep detailed validation cadence, evidence-freshness policy, simulations, and concrete commands in the execution contract or project engineering authority; do not blindly replace a customized `AGENTS.md` with the template.
+For an assigned implementation milestone, `AGENTS.md` should route first to the ready milestone, then explicitly referenced operative authority, any useful optional progress note, and relevant source/tests. It must not force the Implementer to reconstruct planning from guide documents, planning-only metadata, or research. Non-milestone agents should use their assigned workflows. Keep material validation requirements, optional evidence-reuse policy, and concrete commands in the execution contract or project engineering authority; do not blindly replace a customized `AGENTS.md` with the template.
 
 Classify an `AGENTS.md` edit as required only when existing routing is incorrect or incompatible; otherwise record no-op. Include necessary entrypoint changes as direct, in-scope migration documentation rather than deferring a broken routing contract to broad documentation sync.
 
