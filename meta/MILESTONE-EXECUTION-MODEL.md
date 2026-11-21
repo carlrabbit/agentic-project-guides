@@ -22,7 +22,7 @@ Experimentation, disposable prototypes, and competing candidate implementations 
 
 Coding milestones follow:
 
-\`draft/planning -> ready -> implementing -> done\`
+`draft/planning -> ready -> implementing -> done`
 
 Planning owns decisions that materially determine architecture, semantics, public or persisted compatibility, goal, non-goals, invariants, acceptance, and exceptional validation/review constraints. Project-local guidance and profiles apply during planning; conclusions needed by the executor must be reflected in the milestone or referenced project authority.
 
@@ -71,7 +71,7 @@ Ordinary implementers read the milestone, referenced project truth, and relevant
 
 Implement a coherent outcome; use focused feedback during edits; inspect implementation and run proportionate milestone checks near completion. Do not run full release or aggregate suites after every small change.
 
-An execution ledger is **optional operational state**, useful for genuinely long, interrupted, multi-agent, or difficult-to-resume work. If used, \`.execution/<milestone-id>.md\` is a suggested path, and [the optional template](../templates/milestones/execution-ledger-template.md) provides a lightweight starting point. It never overrides the milestone and is not required before \`ready\`.
+An execution ledger is **optional operational state**, useful for genuinely long, interrupted, multi-agent, or difficult-to-resume work. If used, `.execution/<milestone-id>.md` is a suggested path, and [the optional template](../templates/milestones/execution-ledger-template.md) provides a lightweight starting point. It never overrides the milestone and is not required before `ready`.
 
 A ledger can summarize progress and resume context; it does not need one row per acceptance criterion, evidence case, or validation gate. No exact set-equality reconciliation, fingerprinted proof registry, work-package mapping, or immutable completion-evidence artifact is mandatory by default. Where a project has an explicit auditable-traceability requirement, define its scope and cost justification in project authority.
 

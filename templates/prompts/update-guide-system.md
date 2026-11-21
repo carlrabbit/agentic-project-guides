@@ -121,7 +121,7 @@ Do not mechanically create either layer or reclassify technology-specific engine
 
 When a migration changes implementation handoff, required reading, validation routing, or authority boundaries, compare existing root `AGENTS.md` with the target model. It is an agent navigation entrypoint, not a second generic execution prompt. Preserve valid project-specific instructions; remove stale or conflicting requirements and unnecessary copies of methodology. If absent, create an entrypoint only when useful for the project's agent workflow.
 
-For a ready milestone, route first to the milestone, applicable planning-seeded execution ledger, explicitly referenced operative authority, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
+For a ready milestone, route first to the milestone, explicitly referenced operative authority and optional execution progress notes when present, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
 
 Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a required direct documentation change when current instructions contradict the target handoff; conditional when navigation actually needs improvement; no-op when sound. Record the decision in the migration milestone. Keep validation cadence, stage receipts/fingerprints, simulation isolation, and concrete commands in milestone/project engineering authority rather than accumulating them in `AGENTS.md`.
 
@@ -180,13 +180,7 @@ When the migration milestone itself requires human judgment, create a review req
 
 Inspect engineering commands for long aggregate wrappers or agent-harness sensitivity.
 
-When migration validation may exceed runtime limits, require resumable validation with:
-
-- `--plan-json`;
-- bounded `--shard <id>` commands;
-- atomic fingerprinted receipts;
-- fast `--verify`;
-- no inference from partial output.
+When migration validation is demonstrably expensive or constrained, consider independently runnable stages. Add resumability, receipts, or a verifier only where these mechanisms reduce total cost and project authority specifies reliable stage success criteria. Do not infer success from partial output.
 
 ## Optional execution progress
 

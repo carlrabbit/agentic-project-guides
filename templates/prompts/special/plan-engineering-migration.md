@@ -91,25 +91,7 @@ Do not include implementation source files, test files, generated code, workflow
 
 Create exactly one primary milestone document under `docs/milestones/`.
 
-The milestone must include:
-
-1. goal;
-2. repository role and maturity assumptions;
-3. execution mode;
-4. scope;
-5. non-goals;
-6. focus areas;
-7. implementation constraints;
-8. required authority documents;
-9. files or areas likely affected;
-10. validation tiers and concrete commands;
-11. validation execution mode: direct, resumable-sharded, CI-only, or human-review;
-12. acceptance criteria;
-13. direct documentation impact;
-14. deferred documentation synchronization hints;
-15. human-review requirements;
-16. constrained-runtime handling;
-17. out-of-scope guide migration work if applicable.
+The milestone must define a coherent target, important architecture/invariants, scope/exclusions, verifiable acceptance outcomes, and focused milestone validation with release-only checks clearly deferred. Record applicable project authority, constraints, documentation-sync hints, authorization, and human judgment only where material. Do not create a file-edit forecast, evidence registry, or elaborate gate plan just to complete a template.
 
 ## Additional authority documents
 

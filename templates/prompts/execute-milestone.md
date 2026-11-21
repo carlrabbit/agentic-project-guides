@@ -2,13 +2,13 @@
 
 You are the implementation agent for a **ready** milestone. Implement the capability and close the milestone without redoing planning.
 
-Start here: \`{primary-milestone-path}\`
+Start here: `{primary-milestone-path}`
 
 ## Read
 
 1. Read the primary milestone and **only** the project authority it references.
-2. Inspect the live source, tests, relevant \`AGENTS.md\`, and documented engineering commands.
-3. Read an optional \`.execution/<milestone-id>.md\` only when provided or useful for resuming long work.
+2. Inspect the live source, tests, relevant `AGENTS.md`, and documented engineering commands.
+3. Read an optional `.execution/<milestone-id>.md` only when provided or useful for resuming long work.
 
 The ready milestone and actual project authority govern. Planning chat, external guide repository, guide selection metadata, or research archives are not required implementation input. Research is non-authoritative except as explicitly relevant evidence.
 
@@ -30,7 +30,7 @@ Near completion, run focused automated tests and a few representative integratio
 
 **Do not perform release qualification by default.** Installed/package consumer smoke tests, full compatibility suites, real repository dogfood, or final distribution verification belong to release readiness unless explicitly in scope for this milestone for a justified reason. Existing current evidence may be reused when still applicable.
 
-Avoid introducing validation infrastructure merely to orchestrate checks. A direct test command or small \`eng/\` script is normally sufficient. Expensive sharding, dependency fingerprints, receipt caches, evidence-case registries, and aggregate verifiers are optional.
+Avoid introducing validation infrastructure merely to orchestrate checks. A direct test command or small `eng/` script is normally sufficient. Expensive sharding, dependency fingerprints, receipt caches, evidence-case registries, and aggregate verifiers are optional.
 
 Exploratory/nondeterministic tests do not automatically enter the default suite.
 
@@ -48,10 +48,10 @@ If the milestone explicitly requires a human decision, stop at that gate; never 
 
 Begin the completion report with one of:
 
-- \`Milestone status: COMPLETE\` — acceptance met and milestone-level validation credible.
-- \`Milestone status: AWAITING HUMAN REVIEW\` — only an explicit human decision remains.
-- \`Milestone status: BLOCKED\` — an actual external dependency or unresolved material decision prevents completion.
+- `Milestone status: COMPLETE` — acceptance met and milestone-level validation credible.
+- `Milestone status: AWAITING HUMAN REVIEW` — only an explicit human decision remains.
+- `Milestone status: BLOCKED` — an actual external dependency or unresolved material decision prevents completion.
 
 Then state: implemented outcome; significant files/architectural changes; focused validation commands, target/locus where relevant, and results; known limitations and **deferred release qualification**; direct documentation changes; and any real blockers or review requests.
 
-Ordinary failing tests, fixable defects, or incomplete source edits are work to resolve, not reasons to claim \`BLOCKED\`. Do not report \`COMPLETE\` on compilation alone when required behavior has not been established.
+Ordinary failing tests, fixable defects, or incomplete source edits are work to resolve, not reasons to claim `BLOCKED`. Do not report `COMPLETE` on compilation alone when required behavior has not been established.

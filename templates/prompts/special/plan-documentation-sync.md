@@ -50,23 +50,7 @@ Treat `docs/research/` and old copied guides as non-authoritative legacy materia
 
 Create exactly one primary milestone document under `docs/milestones/`.
 
-The milestone must include:
-
-1. goal;
-2. repository role and maturity assumptions;
-3. execution mode;
-4. scope;
-5. non-goals;
-6. focus areas;
-7. implementation constraints;
-8. required authority documents;
-9. files or areas likely affected;
-10. validation tiers and concrete repository commands;
-11. acceptance criteria;
-12. direct documentation impact;
-13. deferred documentation synchronization hints;
-14. human review requirements if applicable;
-15. out-of-scope guide migration work if applicable.
+Define the documentation target, project authority to reconcile, scope/exclusions, observable acceptance, and lightweight checks for correctness and links. Add project-specific constraints, deferred sync hints, or human judgment only when material. Do not require evidence-case tracking or release-style validation for ordinary documentation synchronization.
 
 ## Deferred documentation synchronization hints
 

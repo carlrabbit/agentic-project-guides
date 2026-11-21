@@ -2,7 +2,7 @@
 
 Create a release-readiness milestone package for:
 
-\`{milestone}\`
+`{milestone}`
 
 Use the current guide methodology for planning; implementers must not need the external guide or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
 
@@ -30,7 +30,7 @@ A release may legitimately need a richer validation plan than an ordinary milest
 
 Qualify the **current candidate artifact**, avoiding accidental resolution of developer build products, global installations, stale caches, or unpublished substitutions. Examples:
 - NuGet library: packed package consumed by isolated client.
-- .NET tool: local package installed through \`dotnet tool\` and invoked by generated command/shim.
+- .NET tool: local package installed through `dotnet tool` and invoked by generated command/shim.
 - Standalone executable: published executable invoked outside the source-project run path.
 - Generator: relevant compiled consumer and actual shipped package layout.
 
@@ -44,7 +44,7 @@ Prefer direct scripts and focused consumer smoke scenarios. Resumable shards, re
 
 The release milestone closes when its declared candidate qualification is credibly met, required artifacts/docs are prepared, and approvals are resolved. Publication remains a separately authorized action. Record passed checks, known limitations, and any unqualified supported surface clearly.
 
-Do not seed a mandatory \`.execution/\` ledger, acceptance/evidence-case registry, or one-to-one proof table. A lightweight progress note is optional for long release qualification.
+Do not seed a mandatory `.execution/` ledger, acceptance/evidence-case registry, or one-to-one proof table. A lightweight progress note is optional for long release qualification.
 
 ## Deliverable
 

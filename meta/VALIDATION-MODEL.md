@@ -69,7 +69,7 @@ This preference does not mandate comprehensive real-repository or installed-tool
 
 When a product is distributed through a package, generated launcher, installation, published executable, or library consumption boundary, **release preparation** should exercise representative behavior through that final consumer mechanism.
 
-Examples include consuming a built NuGet package from an isolated project, invoking an installed locally packed \`dotnet tool\` through its shim, or invoking the published executable rather than \`dotnet run\`. Qualify the actual intended release candidate, not a stale global install or unrelated source output.
+Examples include consuming a built NuGet package from an isolated project, invoking an installed locally packed `dotnet tool` through its shim, or invoking the published executable rather than `dotnet run`. Qualify the actual intended release candidate, not a stale global install or unrelated source output.
 
 Check the important release properties for that product: installation or packaging, command discovery/startup, representative successful behavior, public failure semantics where material, public documentation/samples, compatibility and required operating environments. Scope is risk-based, not an exhaustive matrix by default.
 

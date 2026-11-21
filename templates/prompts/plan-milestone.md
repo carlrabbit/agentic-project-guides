@@ -2,9 +2,9 @@
 
 Convert the requested capability into a ready milestone for a disconnected implementation agent:
 
-\`{milestone}\`
+`{milestone}`
 
-Use \`carlrabbit/agentic-project-guides\` as **planning** methodology. Do not copy guide documents into product repositories or require ordinary implementers to read this guide.
+Use `carlrabbit/agentic-project-guides` as **planning** methodology. Do not copy guide documents into product repositories or require ordinary implementers to read this guide.
 
 ## Objective: agent-scaled, coherent delivery
 
@@ -17,19 +17,19 @@ Optimize planning + implementation + validation + review + expected rework. Avoi
 ## Planning authority and repository inspection
 
 Inspect enough of the target repository to understand applicable project truth:
-- \`AGENTS.md\`, \`README.md\`, relevant specs, engineering rules, architecture, decisions, milestones, and representative source/tests;
-- \`.guide-profile.json\` for applicable shared profiles, semantic scopes, execution metadata, and repository role;
-- \`docs/PROJECT-GUIDANCE.md\` and registered \`.guide/profiles/<id>/PROFILE.md\` for project-local planning extensions;
-- focused \`docs/research/\` only when relevant to material open questions;
+- `AGENTS.md`, `README.md`, relevant specs, engineering rules, architecture, decisions, milestones, and representative source/tests;
+- `.guide-profile.json` for applicable shared profiles, semantic scopes, execution metadata, and repository role;
+- `docs/PROJECT-GUIDANCE.md` and registered `.guide/profiles/<id>/PROFILE.md` for project-local planning extensions;
+- focused `docs/research/` only when relevant to material open questions;
 - review or sync metadata only if relevant to this assignment.
 
 Resolve applicable base/shared/local profiles and conflicts through concrete project authority. Do not invent a new central profile to express one SDK, runtime choice, or test strategy. Research is planning evidence, never active implementation authority. Promote durable, implementation-affecting conclusions to normal project truth.
 
-Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. Do not make detailed file lists or patch steps a prerequisite for \`ready\`.
+Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. Do not make detailed file lists or patch steps a prerequisite for `ready`.
 
 ## Ready milestone contract
 
-Produce a single primary milestone following \`templates/milestones/milestone-template.md\` with:
+Produce a single primary milestone following `templates/milestones/milestone-template.md` with:
 
 1. **Goal / target:** the observable capability and why it belongs together.
 2. **Architecture and invariants:** settled material decisions and preserved contracts.
@@ -38,7 +38,7 @@ Produce a single primary milestone following \`templates/milestones/milestone-te
 5. **Validation:** a small, credible set of focused tests and representative integration behaviors; identify material consequence risks and checks deferred to release.
 6. **Required authority and exceptional obligations:** only where they matter, including direct docs, local specializations, permissions, or required human judgment.
 
-Acceptance is mandatory; **a distinct test/evidence case per criterion is not**. Do not produce a mandatory \`.execution/\` ledger, evidence-case registry, receipt plan, gate matrix, or immutable proof artifact. An optional lightweight progress/resume ledger may be prescribed only where long-running execution needs it.
+Acceptance is mandatory; **a distinct test/evidence case per criterion is not**. Do not produce a mandatory `.execution/` ledger, evidence-case registry, receipt plan, gate matrix, or immutable proof artifact. An optional lightweight progress/resume ledger may be prescribed only where long-running execution needs it.
 
 Make the contract complete for the project's baseline executor without relying on planning chat history or reading the guide. Do not reduce a coherent milestone merely because implementing it may be lengthy; the implementer can decompose and resume work internally.
 
@@ -46,7 +46,7 @@ If a **material project decision** really cannot be made without evidence, resea
 
 ## Validation policy
 
-Use \`meta/VALIDATION-MODEL.md\`:
+Use `meta/VALIDATION-MODEL.md`:
 - During implementation: affected build, static feedback, targeted tests.
 - At milestone completion: focused behavioral checks and a few representative integration fixtures; review architecture and invariants.
 - At release: final package/installed tool/real consumer, compatibility, broader operational and platform qualification where required.
@@ -59,15 +59,15 @@ For reviews/corrections, prefer concrete defects and minimal focused rechecks. N
 
 ## Project documentation and transport
 
-Update engineering/specification/decision authority only when required to fix project truth. Add \`.guide-sync/pending/\` hints only for genuinely deferred documentation changes. Do not duplicate the implementation prompt in the package. Project-local planning research is optional and non-authoritative.
+Update engineering/specification/decision authority only when required to fix project truth. Add `.guide-sync/pending/` hints only for genuinely deferred documentation changes. Do not duplicate the implementation prompt in the package. Project-local planning research is optional and non-authoritative.
 
 A milestone package may be written **directly into a branch/repository** or delivered as a ZIP containing repository-relative files, depending on the user's delivery request and available capabilities. ZIP is not a universal requirement. It is a transport mechanism, not a second source of authority.
 
-Provide the primary milestone path, affected authority documents, any applied changes/transport instructions, key validation expectations, explicitly deferred release checks, human-review obligations if any, and a concise handoff using \`templates/prompts/execute-milestone.md\`. Do not promise a file artifact or PR that has not been created.
+Provide the primary milestone path, affected authority documents, any applied changes/transport instructions, key validation expectations, explicitly deferred release checks, human-review obligations if any, and a concise handoff using `templates/prompts/execute-milestone.md`. Do not promise a file artifact or PR that has not been created.
 
 ## Readiness check
 
-Before marking \`ready\`, verify:
+Before marking `ready`, verify:
 - material architectural, semantic, compatibility, security, and scope choices are resolved;
 - the outcome is coherent and appropriately ambitious for agent execution;
 - acceptance is observable and covers the actual requested capability;
