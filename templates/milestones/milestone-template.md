@@ -10,7 +10,7 @@
 
 ## Architecture and invariants
 
-<Only material project decisions, existing contracts, important safety/security/compatibility boundaries, and required project authority. When alternatives are reversible, the planner may delegate a bounded architectural choice with explicit evaluation criteria and invariants. Avoid speculative implementation steps.>
+<Only material project decisions, existing contracts, important safety/security/compatibility boundaries, and required project authority. For consequential external or persistent mutations, identify authorized targets/actions and proportionate recovery/isolation precautions when in scope; implementation alone never implies execution authority. When alternatives are reversible, the planner may delegate a bounded architectural choice with explicit evaluation criteria and invariants. Avoid speculative implementation steps.>
 
 ## Scope and exclusions
 

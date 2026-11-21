@@ -16,7 +16,7 @@ The default planning question is: *What is the largest coherent capability we ca
 - Scope remains bounded by product intent and authority, not by a prescribed number of edits, tests, or work packages.
 - Evaluate implementation risk separately from consequence risk. Reversible attempts may be ambitious; irreversible data, security, public-contract, or operational consequences require stronger controls.
 
-Experimentation, disposable prototypes, and competing candidate implementations are allowed within the agreed capability and environment authority. The executor may discard a local approach and try another without a new planning cycle when the required outcome and invariants are unchanged.
+Experimentation, disposable prototypes, and competing candidate implementations are allowed within the agreed capability and environment authority. **Authorization to implement a destructive capability is not authorization to execute destructive effects on non-disposable data, shared resources, or external systems.** Access to a connection string, credentials, or executable commands is not itself target-specific execution permission. Mutating those targets requires explicit authorization for the target and action, with isolation, backup/recovery, or rollback precautions proportionate to the consequences. Without such authority, use authorized disposable environments and report any blocked external execution; do not block safe implementation work. The executor may discard a local approach and try another without a new planning cycle when the required outcome and invariants are unchanged.
 
 ## Lifecycle and readiness
 
@@ -61,6 +61,7 @@ The implementer must not:
 - silently change public/persisted compatibility, required semantics, security constraints, or **settled** major architecture decisions;
 - expand the product into unrelated capabilities;
 - treat a missing toolchain as permission to install persistent software or modify CI/shared infrastructure;
+- execute destructive or consequential mutations against non-disposable/shared/external state without explicit target and execution authorization;
 - treat a failing check as permission to weaken an agreed product invariant.
 
 If live repository discoveries invalidate a material decision, resolve that decision with planning. An unexpected local implementation detail does not automatically require replanning.

@@ -20,7 +20,7 @@ You may build disposable prototypes, compare approaches, reverse a failed implem
 
 Escalate only a **material unresolved project decision** affecting required architecture, semantics, public/persisted compatibility, scope, acceptance, safety, validation authority, or specialization. Explain the decision and discovered evidence. Do not treat implementation difficulty alone as a reason to stop.
 
-Preserve existing work. Do not assume technical access permits persistent software installation, CI workflow changes, secret changes, or infrastructure provisioning; use documented project authority.
+Preserve existing work. Do not assume technical access permits persistent software installation, CI workflow changes, secret changes, or infrastructure provisioning; use documented project authority. **Implementing a destructive capability does not authorize executing its effects on non-disposable data or shared/external systems.** Credentials and connection strings are not permission. Require explicit target/action authority and proportionate isolation, recovery, or rollback. Use authorized disposable test targets when possible; report the specific blocked operation instead of running it or halting otherwise safe implementation.
 
 ## Validation during implementation
 
