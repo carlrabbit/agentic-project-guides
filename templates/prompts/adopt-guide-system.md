@@ -1,8 +1,8 @@
 # Prompt — Adopt Latest Agentic Project Guide System
 
-Our planning task is to create an implementation-ready migration package for adopting the latest available `carlrabbit/agentic-project-guides` model in a repository that currently uses any older local setup/engineering guide model.
+Our task is to adopt the selected stable `carlrabbit/agentic-project-guides` model in a repository that currently uses an older local setup/engineering guide model. Apply straightforward adoption directly when authorized; prepare a ready migration milestone/package only when material decisions or coordinated implementation justify it.
 
-During initial adoption, obtain the selected stable upstream Git tag and install its full pinned guide tree at `.guide/system/`. That snapshot becomes the repository's authoritative shared planning methodology; record the exact tag and peeled commit SHA in `.guide-profile.json`. This is the **one intentional guide copy**. Never customize it in place or treat old guide copies in `docs/research/` as the snapshot. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md`.
+During initial adoption, **temporarily load the selected target tagged guide from upstream** for the adoption workflow and migration contract; no local snapshot is available yet. Its target-version instructions govern this explicit transition, even when older local guides forbid shared guide copies. Install the selected tag's full pinned tree at `.guide/system/`, then record its tag and peeled commit SHA in `.guide-profile.json`. The installed snapshot becomes the repository's authoritative shared planning methodology. This is the **one intentional guide copy**. Never customize it or treat old copies in `docs/research/` as the snapshot. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md`.
 
 Target repository documentation must contain project truth and concrete project specialization only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
@@ -30,7 +30,7 @@ Read at minimum:
 - only the applicable migration chain, not every historical migration;
 - `templates/PROMPTS.md`.
 
-State the resolved target version, tag, and commit in the chat response and in the migration milestone.
+State the resolved target version, tag, and commit in the final report and in a migration milestone only if one is warranted.
 
 Do not assume a hard-coded latest version.
 
@@ -146,13 +146,13 @@ For an assigned substantive implementation milestone, `AGENTS.md` should route f
 
 Classify an `AGENTS.md` edit as required only when existing routing is incorrect or incompatible; otherwise record no-op. Include necessary entrypoint changes as direct, in-scope migration documentation rather than deferring a broken routing contract to broad documentation sync.
 
-## Required output
+## Deliverable selection
 
-Create one migration milestone under `docs/milestones/`.
+**Direct adoption:** If installing the full tagged snapshot, recording its pin, and reconciling existing project authority/routing are straightforward and require neither a material design decision nor coordinated implementation, apply the changes directly in the authorized repository or branch. Do **not** create a migration milestone, obligation ledger, or implementation handoff merely to administer this work. Verify the installed snapshot and recorded pin, routing, and any modified project authority; report the actual changes.
 
-Create or update `.guide-profile.json` when useful.
+**Substantive adoption:** When material architecture/contract choices, significant repository migration, or independent implementation-agent coordination genuinely require it, create one ready migration milestone under `docs/milestones/`, with a planner-seeded material-obligation ledger before `ready` and a concise implementation handoff.
 
-Create or update `.guide-sync/pending/` hints for deferred documentation cleanup.
+Install the complete `.guide/system/` snapshot and create or update `.guide-profile.json` in either case. Add `.guide-sync/pending/` hints only for genuinely deferred documentation cleanup.
 
 Update target-repository docs only when needed to repair `AGENTS.md` entrypoint routing, remove guide leakage, localize concrete specialization, define semantic profile scopes, resolve profile conflicts, promote research-derived project rules, preserve genuinely useful planning evidence, or make the migration implementation-ready.
 
@@ -176,29 +176,18 @@ Record the historical research-adoption decision (`none`, `selective`, or `recon
 
 ## Obligation completeness
 
-For a substantive adoption milestone, planning seeds a lightweight `.execution/<milestone-id>.md` inventory of stable material obligations before `ready`, including snapshot installation and necessary project-authority changes. Preserve and reconcile it during implementation. Do not create evidence-case mappings, per-row validation gates, or fingerprinted receipts by default.
+For a substantive adoption milestone, planning seeds a lightweight `.execution/<milestone-id>.md` inventory of stable material obligations before `ready`, including snapshot installation and necessary project-authority changes. Preserve and reconcile it during implementation. Direct adoption without a milestone needs no ledger. Do not create evidence-case mappings, per-row validation gates, or fingerprinted receipts by default.
 
 ## Planning/implementation separation
 
 There is no direct synchronization between the planning AI and the implementation AI.
 
-Create an implementation-ready package. The later implementation agent must be able to apply the package, open the primary milestone document, read only the authority documents explicitly listed in that milestone, implement the focus areas, run the specified validation against the declared targets/loci, and finish without reconstructing planning context, reading the external guide repository, or depending on non-authoritative research for project rules.
-
-Also generate a concise execution prompt in chat for the later implementation agent.
+Only for substantive adoption requiring an implementation handoff, create an implementation-ready package. The later agent must be able to apply it, open the primary milestone and seeded ledger, read only referenced project authority, implement the agreed outcomes, perform the specified proportionate checks, and finish without reconstructing planning or reading the upstream guide or non-authoritative research for operative rules. Only then generate a concise execution prompt in chat. Direct adoption requires neither a milestone package nor a separate implementation prompt.
 
 ## Deliverable
 
-Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+For direct adoption, deliver the authorized repository changes and a concise completion report. For substantive adoption, deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested), including the ready milestone and ledger. Preserve repository-relative paths inside a ZIP.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged guide copies outside `.guide/system/`**, planning transcripts, or research scaffolding without durable evidence.
 
-After preparing the package, respond with:
-
-1. branch\/PR link or download link, as applicable;
-2. included file list;
-3. reason each file is included;
-4. confirmed or inferred profiles and applicability scopes, role, maturity, execution mode, and material specialization assumptions;
-5. research-adoption mode, source material actually available, and research retained/revalidated/promoted/superseded/removed when material;
-6. deferred reconstructive research-adoption work, if any;
-7. a filled execution prompt for the later implementation agent;
-8. documentation-sync hints and the `.guide-sync/pending/` files created.
+After applying the direct adoption or preparing the substantive package, report the branch/PR or package path, installed tag and peeled commit, changed files and why, material profile/scope and specialization decisions, applicable research-adoption treatment and any deferred work, and documentation-sync hints if needed. Include the primary milestone and a filled implementation prompt **only when** the substantive path requires a handoff.

@@ -74,7 +74,7 @@ docs/artifacts/xxx.md
 docs/review/xxx.md
 .review/pending/xxx.md
 .guide-sync/pending/xxx.md
-.execution/M00XX-<milestone>.md   # optional resume state, only if justified
+.execution/M00XX-<milestone>.md   # planner-seeded obligations; required for substantive milestones
 ```
 
 Only include files directly needed to make the milestone implementation-ready.
