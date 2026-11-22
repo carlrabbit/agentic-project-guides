@@ -18,6 +18,11 @@ Affected areas: planning authority, guide installation/upgrade, profile resoluti
 - The implementer preserves every planned obligation and reconciles delivered outcomes before completion. This prevents forgotten work; it does **not** mandate one test per requirement, evidence-case registries, proof maps, receipts, or stronger milestone validation.
 - Preserve coherent agent-sized milestones, reversible internal experiments, focused real integration, review/correction economy, and independent final-artifact release qualification.
 
+### Clarified — rigorous planning and authorized change boundaries
+
+- Substantive milestone planners investigate materially affected existing contracts, distinguish intended changes from tolerated consequences and protected invariants, and resolve consequential interactions before `ready`. This shifts intellectual effort upstream to reduce implementer ambiguity and correction cycles; planning effort/length is not a target for minimization.
+- Plan high-information checks against plausible boundary violations and cross-mode inconsistencies where material, rather than primarily happy-path existence tests. Maintain proportionate implementation validation and no mandatory per-obligation tests, proof registries, or blanket semantics-preservation requirement.
+
 ### Clarified — transport-independent planning handoffs
 
 - An authorized Git planning commit or repository-relative ZIP overlay carries the same ready contract; no mandatory archive or PR.

@@ -6,7 +6,7 @@ Authoritative for milestone sizing, readiness, implementation ownership, executi
 
 ## Purpose and economics
 
-Plan **coherent capabilities at agent scale**, not human-sized increments. Optimize planning, implementation, verification, review, and expected rework together. The cost of discarding a reversible branch is often lower than the cost of repeated incremental planning and exhaustive proof machinery.
+Plan **coherent capabilities at agent scale**, not human-sized increments. Invest substantial planning effort when needed to resolve material decisions and prevent implementer ambiguity, omitted constraints, and correction cycles. Optimize the **total outcome and downstream execution cost**, not planner time, token count, or document length independently. Economical implementation and validation do not mean shallow planning. The cost of discarding a reversible branch is often lower than the cost of repeated incremental implementation and exhaustive proof machinery.
 
 The default planning question is: *What is the largest coherent capability we can implement, evaluate, and, if necessary, discard at acceptable cost?*
 
@@ -26,23 +26,35 @@ Coding milestones follow:
 
 `draft/planning -> ready -> implementing -> done`
 
-Planning owns decisions that materially determine architecture, semantics, public or persisted compatibility, goal, non-goals, invariants, acceptance, and exceptional validation/review constraints. However, planning may deliberately leave a **reversible internal architectural choice** to implementation when the externally observable contract, invariants, comparison criteria, and fallback/disposal boundary are explicit. This is an implementation experiment, not permission to invent project policy. Project-local guidance and profiles apply during planning; conclusions needed by the executor must be reflected in the milestone or referenced project authority.
+Planning owns decisions that materially determine architecture, semantics, public or persisted compatibility, goal, non-goals, invariants, acceptance, and exceptional validation/review constraints. For substantive work it must **investigate the change impact and resolve material change boundaries before `ready`**, including important contracts already present in the repository; broad scope or authorized breaking changes do not remove that obligation. However, planning may deliberately leave a **reversible internal architectural choice** to implementation when the externally observable contract, invariants, comparison criteria, and fallback/disposal boundary are explicit. This is an implementation experiment, not permission to invent project policy. Project-local guidance and profiles apply during planning; conclusions needed by the executor must be reflected in the milestone or referenced project authority.
 
 A milestone is **ready** when the project's normal baseline executor can pursue the intended outcome from the ready handoff and live repository without inventing a new material project decision. Readiness does **not** require predicting file edits, concrete work packages, comprehensive proof topology, or an exact execution plan. Large implementation volume is not a readiness defect. The delivery identifies the repository state containing the ready contract via an exact Git planning commit or an applied ZIP overlay; see [Planning Handoff Transport Model](HANDOFF-TRANSPORT-MODEL.md).
 
-If a decision genuinely requires outside evidence, perform limited planning research or a diagnostic milestone. Do not create diagnostic milestones solely to avoid implementation uncertainty that can be resolved through cheap, reversible experimentation.
+If a material planning decision requires evidence, perform the source inspection, research, comparison, or focused diagnostic work needed to resolve it, regardless of whether that investigation is longer than the expected implementation. Use a diagnostic milestone where an independent investigation is genuinely necessary; do not use one merely to postpone a cheap, reversible internal implementation choice.
 
 No generic model-specific capability tier is prescribed. Project configuration may identify a baseline implementation model, but the milestone must be self-contained for the chosen executor without depending on that agent's private planning conversation. The metadata value `ai-executed` identifies **who implements**; milestone size and human acceptance are independent properties, not alternative execution modes.
+
+## Change-impact investigation and readiness
+
+For a **substantive code or system change**, planning must investigate the materially affected existing behavior and contracts before deciding the milestone is ready. Make the following distinctions explicit in the milestone or its referenced operative project authority wherever they affect correct implementation:
+
+- **Intended changes:** capabilities, semantics, interfaces, or behavior that must become different.
+- **Permitted consequences:** tolerated secondary changes, accepted incompatibilities, or intentionally temporary limitations (for example, a change that may require subsequent consumer repair). Permission for one consequence is not permission for unrelated breakage.
+- **Protected invariants:** existing behavior and properties that must remain intact, such as relevant data integrity, security/access boundaries, public or persisted contracts, and source/artifact integrity.
+- **Affected interactions:** neighboring behavior, similar-but-ineligible inputs, related operating modes (such as preview/check versus mutation), and integration surfaces that could disagree or regress.
+- **Plausible material failures:** incorrect interpretations or defects that ordinary successful examples or a passing build could miss; identify which deserve discriminating checks.
+
+This is an **investigation and decision obligation**, not an instruction to minimize planning work or to write a universal inventory of unrelated system properties. Inspect code, tests, specifications, documentation, and other evidence as deeply as needed. Resolve consequential ambiguities in the ready contract rather than delegating product semantics to the implementer. Do not turn these dimensions into mandatory extra milestone sections, per-invariant ledger rows, or exhaustive test matrices. The implementation agent remains free to choose mechanisms and reversible approaches within the resolved boundaries. Not all changes require semantic equivalence or compilable intermediate artifacts: the explicitly authorized contract determines what is protected.
 
 ## The ready contract
 
 Use [the milestone template](../templates/milestones/milestone-template.md). A ready milestone ordinarily needs:
 
 1. **Goal and target capability:** observable end state.
-2. **Architecture and invariants:** project-level decisions and boundaries the executor must preserve.
+2. **Architecture and invariants:** project-level decisions, intended behavioral changes, permitted consequences, affected interactions, and protected contracts established by change-impact analysis.
 3. **Scope and exclusions:** meaningful limits; not an exhaustive file allowlist.
-4. **Acceptance:** concise verifiable outcomes, not a test-case inventory.
-5. **Validation:** cheapest credible checks and important known risks; explicitly identify any exceptional milestone-stage qualification.
+4. **Acceptance:** independently deliverable, verifiable outcomes; not a test-case inventory or artificially compressed summary.
+5. **Validation:** discriminating focused checks for plausible consequential defects and boundary violations; explicitly identify any exceptional milestone-stage qualification.
 
 Reference only project authority needed to implement the change. Include documentation impact, migration, or required human judgment where material. The acceptance contract must preserve all independently deliverable, material obligations; do not collapse distinct outcomes merely to shorten the document. For a substantive milestone, assign stable IDs to those obligations (including required documentation or migration deliverables) and seed the same IDs in a lightweight execution ledger before `ready`. A genuinely trivial, indivisible task may omit a ledger with a short rationale. No evidence-case registry, test matrix, or one-to-one acceptance-to-test mapping is implied.
 

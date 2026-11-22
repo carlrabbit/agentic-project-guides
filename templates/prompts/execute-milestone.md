@@ -16,7 +16,7 @@ The ready milestone and actual project authority govern. Planning chat, external
 
 ## Implement at agent scale
 
-Own the concrete implementation: architecture *within resolved constraints*, types, files, algorithms, sequence, tests, and supporting edits. Prefer a coherent capability to artificial mini-slices. Large edits and broad but related refactorings are acceptable.
+Own the concrete implementation: architecture *within resolved constraints*, types, files, algorithms, sequence, tests, and supporting edits. Respect the milestone's intended changes, permitted consequences, **protected invariants**, and related behavioral/mode contracts; broad scope or explicit permission for some breakage is not a blanket waiver of other boundaries. Prefer a coherent capability to artificial mini-slices. Large edits and broad but related refactorings are acceptable.
 
 You may build disposable prototypes, compare approaches, reverse a failed implementation, and try another **within the milestone's goal, invariants, and environment authorization**. When planning deliberately delegates reversible architectural alternatives, evaluate them against the agreed criteria and preserve the chosen result without changing settled public contracts. Avoid unrelated expansion. You do not need planning approval for local implementation choices or implementation-derived decomposition.
 

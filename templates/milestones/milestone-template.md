@@ -10,7 +10,7 @@
 
 ## Architecture and invariants
 
-<Only material project decisions, existing contracts, important safety/security/compatibility boundaries, and required project authority. For consequential external or persistent mutations, identify authorized targets/actions and proportionate recovery/isolation precautions when in scope; implementation alone never implies execution authority. When alternatives are reversible, the planner may delegate a bounded architectural choice with explicit evaluation criteria and invariants. Avoid speculative implementation steps.>
+<Document the results of rigorous change-impact analysis where material: intended behavioral changes, explicitly permitted secondary consequences or incompatibilities, protected existing contracts/invariants, and interactions among affected subsystems or operating modes. Make consequential boundaries precise; permission for a broad rewrite is not permission for unrelated changes. For consequential external or persistent mutations, identify authorized targets/actions and proportionate recovery/isolation precautions; implementation alone never implies execution authority. Bounded reversible architectural alternatives may be delegated with evaluation criteria and invariants. Do not prescribe speculative implementation mechanics or invent extra sections merely to record analysis.>
 
 ## Scope and exclusions
 
@@ -34,9 +34,9 @@
 
 ## Validation
 
-**Milestone:** <Focused build/tests, a few representative integration fixtures, and review of critical invariants. Name real targets/loci only where consequential.>
+**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Do not require one test per invariant or universal semantic equivalence. Name targets/loci only where consequential.>
 
-**Important risks:** <Plausible defect/failure and focused mitigation, where material.>
+**Important risks:** <Plausible incorrect behaviors and protected-boundary violations that the chosen checks should expose; include focused mitigation where material.>
 
 **Deferred to release:** <Packaged/installed consumer, real-repository, compatibility or platform qualification when applicable; otherwise none.>
 

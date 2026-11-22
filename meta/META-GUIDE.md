@@ -16,7 +16,7 @@ It does not define a single universal repository template or maintain a catalog 
 Guide repository owns methodology and reusable engineering shapes.
 Product repositories contain project truth and concrete specializations.
 Product repositories may retain selective non-authoritative planning research.
-Milestones separate planning from implementation, with coherent agent-scaled scope, reversible experimentation, and a small planner-seeded obligation ledger for substantive work to prevent dropped requirements.
+Milestones separate rigorous planning from economical agent-scale implementation: planning investigates material change impacts and resolves intended outcomes, permitted consequences, protected invariants, and affected interactions before the handoff. Reversible implementation experimentation remains allowed; a small planner-seeded obligation ledger prevents dropped requirements.
 Planning may consume durable research and promote conclusions into project authority.
 Implementation agents read product repository authority and ready milestones, not planning context.
 Milestone assurance is risk-proportionate; distribution qualification belongs to release readiness by default.
@@ -191,8 +191,9 @@ Planning agents read the task-specific guidance from the product repository's pi
 Planning owns decisions that materially affect:
 
 - architecture;
-- semantics;
-- compatibility;
+- semantics, including intended behavioral changes and permitted secondary consequences;
+- protected invariants and existing contracts, including those that must survive a broad rewrite;
+- compatibility and cross-component or cross-mode interactions;
 - scope and non-goals;
 - acceptance criteria;
 - validation and review policy;
@@ -206,7 +207,7 @@ Planning may create or update durable project-truth documents when those decisio
 
 For substantive AI-executed milestones, planning preserves every independently deliverable material obligation under a stable ID and seeds a compact `.execution/<milestone-id>.md` ledger before `ready`; a trivial indivisible task may explicitly omit it. This prevents dropped work, **not** a one-to-one criterion/test/evidence/gate registry. Release qualification of distributable artifacts belongs to the release boundary unless the milestone explicitly requires otherwise for material risk.
 
-Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
+Planning should investigate material product and behavioral consequences thoroughly rather than shifting unresolved semantics to implementation. **Do not optimize for reduced planner effort or short planning documents.** Deep investigation and precise handoff authority may be valuable even when implementation and validation are deliberately inexpensive. Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
 
 Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not load the vendored methodology or external guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
 
