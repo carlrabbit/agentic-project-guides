@@ -16,7 +16,7 @@ It does not define a single universal repository template or maintain a catalog 
 Guide repository owns methodology and reusable engineering shapes.
 Product repositories contain project truth and concrete specializations.
 Product repositories may retain selective non-authoritative planning research.
-Milestones separate planning from implementation, with coherent agent-scaled scope and reversible experimentation.
+Milestones separate planning from implementation, with coherent agent-scaled scope, reversible experimentation, and a small planner-seeded obligation ledger for substantive work to prevent dropped requirements.
 Planning may consume durable research and promote conclusions into project authority.
 Implementation agents read product repository authority and ready milestones, not planning context.
 Milestone assurance is risk-proportionate; distribution qualification belongs to release readiness by default.

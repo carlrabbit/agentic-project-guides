@@ -1,6 +1,6 @@
 # ADR-0030 — Plan Coherent Agent-Scaled Capabilities
 
-**Status:** Accepted for 1.0.0-rc.1
+**Status:** Accepted for 1.0.0-rc.1; the optional-only ledger decision is superseded for stable 1.0 by ADR-0033. Coherent agent-scale scope and reversible experiments remain operative.
 **Supersedes in ordinary milestone planning:** human-sized incremental slicing and mandatory lossless execution-ledger scaffolding in ADR-0019 and ADR-0026; amends the applicability of ADR-0020/0021.
 
 ## Context

@@ -11,7 +11,7 @@ templates/prompts/adopt-guide-system.md
 templates/prompts/update-guide-system.md
 ```
 
-The migration workflow reads the repository's existing snapshot pin, resolves the requested tagged target upstream, inspects the changelog and applicable migration chain, and assesses the target repository. It then either applies a straightforward update directly or prepares a ready milestone/package when substantial coordinated implementation is necessary.
+The migration workflow reads the repository's existing snapshot pin (or metadata for pre-1.0 external-only repositories), resolves the requested tagged target upstream, inspects the changelog and applicable migration chain, and assesses the target repository. It then either applies a straightforward update directly or prepares a ready milestone/package when substantial coordinated implementation is necessary.
 
 Migration is a special planning workflow. It is not a milestone execution mode.
 

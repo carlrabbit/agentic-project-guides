@@ -74,7 +74,7 @@ Create root `AGENTS.md` as a **small repository entrypoint**, not as a copy of t
 
 Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
 
-Do not include copied guide documents.
+Do not include unmanaged copied guide documents outside the intentional `.guide/system/` snapshot.
 
 ## Research initialization
 

@@ -1,6 +1,6 @@
 # ADR-0031 — Risk-Proportionate Milestone Assurance and Release Qualification
 
-**Status:** Accepted for 1.0.0-rc.1
+**Status:** Accepted for 1.0.0 and retained, with the distinction that the small planner-seeded **obligation ledger** is restored by ADR-0033 while evidence-case/test-proof machinery remains optional.
 **Supersedes as defaults:** mandatory evidence topology (ADR-0027), compulsory release/consumer checks during ordinary feature milestones, and unconditional application of receipt/sharding requirements from ADR-0014–0018/0029.
 
 ## Context
