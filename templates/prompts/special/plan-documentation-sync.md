@@ -68,7 +68,7 @@ Workflow type: `documentation-sync` (independent of the project's `defaultImplem
 
 ## Deliverable
 
-Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver the permitted planning-owned repository-relative files under `meta/HANDOFF-TRANSPORT-MODEL.md`: an authorized Git planning commit or ZIP overlay. For Git, report the **exact accepted planning commit SHA**, primary milestone path and whether implementation continues on that branch or branches from the commit. For ZIP, preserve paths and state the intended base when known plus application instructions for moves/deletions.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or unmanaged copied guide documents outside `.guide/system/`.
 

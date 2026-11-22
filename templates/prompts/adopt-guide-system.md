@@ -186,7 +186,7 @@ Only for substantive adoption requiring an implementation handoff, create an imp
 
 ## Deliverable
 
-For direct adoption, deliver the authorized repository changes and a concise completion report. For substantive adoption, deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested), including the ready milestone and ledger. Preserve repository-relative paths inside a ZIP.
+For direct adoption, deliver the authorized repository changes and a concise completion report, including the **actual resulting commit SHA** if changed through Git; no separate implementation baseline is needed. For substantive adoption, deliver the ready milestone, seeded ledger and permitted project authority using `meta/HANDOFF-TRANSPORT-MODEL.md`: authorized Git planning commit with **exact accepted baseline SHA**, milestone path and implementation branch relationship; or a repository-relative ZIP overlay with base/application instructions when relevant. Neither transport changes the project authority or mandates a PR.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged guide copies outside `.guide/system/`**, planning transcripts, or research scaffolding without durable evidence.
 

@@ -41,7 +41,7 @@ The execution profile for a migration milestone, when one is needed, is selected
 11. Run deferred documentation synchronization when applicable.
 ```
 
-For a ready milestone, `templates/prompts/execute-milestone.md` is the canonical executor entry point; a short handoff may identify the milestone path or overlay. A direct update needs no milestone or implementation-agent handoff, only a concise record of changes and focused verification.
+For a ready milestone, `templates/prompts/execute-milestone.md` remains the canonical executor entry point. Follow [Planning Handoff Transport Model](HANDOFF-TRANSPORT-MODEL.md): Git delivery identifies the exact accepted planning commit and milestone path, while ZIP delivery identifies the intended base when known and overlay instructions. A direct update needs no milestone or implementation handoff; report the actual resulting commit when delivered via Git, and focused verification.
 
 ## Change classification
 

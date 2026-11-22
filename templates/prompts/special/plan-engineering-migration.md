@@ -147,7 +147,7 @@ Do not mix unrelated product feature implementation into the migration.
 
 ## Deliverable
 
-Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver only the permitted planning-owned repository-relative files under `meta/HANDOFF-TRANSPORT-MODEL.md`: prefer an authorized dedicated Git planning branch and commit, or use a ZIP overlay. Report the **exact accepted planning commit SHA** (not merely the branch/PR), primary milestone path and implementation-branch relationship for Git; for ZIP, preserve target paths and identify the intended base when known and required move/deletion instructions.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or unmanaged copied guide documents outside `.guide/system/`.
 

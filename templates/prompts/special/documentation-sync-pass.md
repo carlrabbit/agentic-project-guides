@@ -55,7 +55,7 @@ Do not treat old copied guides under `docs/research/` as authoritative unless th
 
 ## Deliverable
 
-Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new, replacement, or deleted-file marker notes as appropriate for the documentation sync patch. Preserve repository-relative paths.
+Follow `meta/HANDOFF-TRANSPORT-MODEL.md` to deliver authorized direct documentation changes on a Git branch, or as a repository-relative ZIP overlay. Report the **actual resulting Git commit SHA** (not an artificial milestone baseline) or the ZIP target revision when known and clear application instructions for changed, moved, or deleted files. Do not leave obsolete files because ZIP cannot encode deletion; no new milestone is implied.
 
 In chat, report:
 

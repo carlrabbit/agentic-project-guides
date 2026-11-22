@@ -4,7 +4,7 @@ Review the implementation or pull request for:
 
 `{milestone-or-pr}`
 
-Use the ready milestone, its referenced project authority, changed code/tests, relevant existing checks, and—for substantive work—the planner-seeded `.execution/<milestone-id>.md` obligation ledger. This is **engineering review**, not automatically a formal human-acceptance gate. Do not require the implementation agent to read the pinned guide snapshot or external upstream repository.
+Use the ready milestone, its referenced project authority, changed code/tests, relevant existing checks, and—for substantive work—the planner-seeded `.execution/<milestone-id>.md` obligation ledger. When an exact accepted planning-baseline commit is supplied, distinguish that handoff from later branch/PR changes and check material contract changes were reconciled rather than silently substituted. This is **engineering review**, not automatically a formal human-acceptance gate. Do not require the implementation agent to read the pinned guide snapshot or external upstream repository.
 
 ## Objective
 

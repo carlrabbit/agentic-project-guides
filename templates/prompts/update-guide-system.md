@@ -166,7 +166,7 @@ Only when an implementation handoff is needed, supply a concise execution prompt
 
 ## Deliverable
 
-For straightforward updates, deliver the authorized direct repository changes and a short verification report. For substantial migrations, deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files needed for the migration. Preserve repository-relative paths inside a ZIP.
+For straightforward updates, deliver authorized direct changes and a concise report with the resulting commit SHA when Git was used; do not manufacture an implementation baseline. For substantive migrations, follow `meta/HANDOFF-TRANSPORT-MODEL.md` for planning-only Git or ZIP delivery. Git handoffs identify the **exact accepted planning commit SHA**, primary milestone, and whether implementation continues on the planning branch or branches from that commit; ZIP overlays identify their target base when known and any move/deletion/application instructions.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged guide copies outside `.guide/system/`**, planning transcripts, or research scaffolding that the migration chain does not justify.
 
