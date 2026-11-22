@@ -15,7 +15,7 @@ For each change, ask:
 4. What belongs to the final release candidate instead?
 5. What is the consequence of an undetected defect, and can the change be discarded safely?
 
-More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria. A permanent regression test is useful for a reproducible bug with plausible recurrence or significant failure consequence; not every one-off correction needs a permanent fixture.
+Planner-seeded **obligation accounting** establishes that work items are not silently forgotten; **validation evidence** establishes credible correctness. A completion ledger does not require one test, evidence-case ID, or gate per row. More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria. A permanent regression test is useful for a reproducible bug with plausible recurrence or significant failure consequence; not every one-off correction needs a permanent fixture.
 
 ## Validation boundaries
 
@@ -83,7 +83,7 @@ A release milestone can require stronger evidence and additional gates, but that
 
 A brief engineering review is normal. Formal human sign-off is an explicit milestone/release requirement when automated judgment is insufficient; it is not a generic quality gate attached to all work.
 
-A milestone should usually record the checks actually run, their results, known limitations, and deferred release checks. No mandatory one-to-one acceptance-to-proof register, fingerprinted receipts, or immutable reconciliation artifact is implied. Those mechanisms may be opted into when auditability or the cost of reruns demonstrably justifies them.
+A milestone should usually record checks actually run, results, limitations, and deferred release checks. For substantive implementation milestones, the separate lightweight ledger reconciles planned obligation IDs with delivered outcomes; that does **not** imply a one-to-one acceptance-to-test proof register, fingerprinted receipts, or immutable evidence artifacts. Those mechanisms may be opted into when auditability or the cost of reruns demonstrably justifies them.
 
 ## Expensive suites
 

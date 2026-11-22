@@ -17,7 +17,7 @@ Use documented repository engineering commands (`eng/` when applicable). The mil
 
 ## Authority boundaries
 
-- The ready milestone and referenced project authority define implementation scope and obligations. Optional execution progress notes track work; they do not override the milestone. An evidence-case or gate registry is not a default.
+- The ready milestone and referenced project authority define implementation scope and obligations. For substantive milestones, the planner-seeded `.execution/<milestone-id>.md` tracks all material obligations through completion and must be read. It never overrides the milestone or requires evidence-case/test-gate registries.
 - Planning metadata (`.guide-profile.json`, `.guide/profiles/`, `docs/PROJECT-GUIDANCE.md`, `.guide-sync/`) is not routine implementation authority. Consult it only when the assigned work requires it.
 - `docs/research/` is non-authoritative evidence, not a substitute for project decisions. Read it when an assigned investigation/evidence obligation calls for it.
 - `.review/` is relevant when the active work requires milestone-scoped review, migration, or synchronization.
