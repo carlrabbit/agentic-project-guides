@@ -13,7 +13,7 @@
 | AC-02 | <Second independently deliverable requirement> | pending | |
 | DOC-01 | <Required documentation or migration deliverable, if any> | pending | |
 
-Planning seeds **all** material obligations before `ready`; IDs correspond to the milestone and cannot be compressed, deleted, or renumbered by implementation. Status: `pending`, `in-progress`, `done`, `blocked`. Omit example rows that do not apply; do not invent rows for individual tests.
+Planning seeds **all** material obligations before `ready`; IDs correspond to the milestone and cannot be compressed, deleted, or renumbered by implementation. Status: `pending`, `in progress`, `done`, `blocked`. Omit example rows that do not apply; do not invent rows for individual tests.
 
 ## Implementation progress / resume context (when useful)
 

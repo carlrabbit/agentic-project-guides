@@ -204,7 +204,7 @@ Planning also decides whether investigation evidence should be persisted for fut
 
 Planning may create or update durable project-truth documents when those decisions need repository authority.
 
-For AI-executed milestones, planning defines concise, verifiable outcomes and proportionate milestone validation, not a default one-to-one criterion/evidence/gate registry. An execution ledger is optional when substantial work needs durable resume state; it is not a prerequisite for `ready`. Release qualification of distributable artifacts belongs to the release boundary unless the milestone explicitly requires otherwise for a material reason.
+For substantive AI-executed milestones, planning preserves every independently deliverable material obligation under a stable ID and seeds a compact `.execution/<milestone-id>.md` ledger before `ready`; a trivial indivisible task may explicitly omit it. This prevents dropped work, **not** a one-to-one criterion/test/evidence/gate registry. Release qualification of distributable artifacts belongs to the release boundary unless the milestone explicitly requires otherwise for material risk.
 
 Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
 

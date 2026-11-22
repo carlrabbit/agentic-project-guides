@@ -12,7 +12,7 @@ If the target repository contains `.guide-profile.json`, use it as guide-selecti
 
 If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
 
-## Optional execution progress
+## Planner-seeded obligation completeness
 
 For a substantive documentation synchronization milestone, seed `.execution/<milestone-id>.md` before `ready` with stable IDs for every material documentation deliverable. The implementer preserves and reconciles the entries. Do not require evidence cases, test-to-criterion mappings, validation-gate tables, or proof receipts.
 

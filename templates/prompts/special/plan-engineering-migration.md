@@ -16,7 +16,7 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 If the target repository contains `.review/`, treat it as repository-local human-review state. Read it only when the milestone requires human review, engineering migration, documentation synchronization, or release readiness.
 
-## Optional execution progress
+## Planner-seeded obligation completeness
 
 For a substantive engineering migration, seed `.execution/<milestone-id>.md` before `ready` with stable IDs for every material acceptance and documentation/migration obligation. The implementer preserves and reconciles all entries. This is completeness accounting, not a test matrix; no evidence-case registry, proof mapping, validation-gate table, or receipt infrastructure by default.
 

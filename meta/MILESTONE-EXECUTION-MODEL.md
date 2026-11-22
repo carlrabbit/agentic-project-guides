@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for milestone sizing, readiness, implementation ownership, execution outcomes, and completion. See [Validation Model](VALIDATION-MODEL.md) for assurance boundaries. This model supersedes mandatory execution-ledger/evidence-case policies in ADR-0019, ADR-0026, and ADR-0027.
+Authoritative for milestone sizing, readiness, implementation ownership, execution outcomes, and completion. See [Validation Model](VALIDATION-MODEL.md) for assurance boundaries. This model replaces ADR-0019/ADR-0026/ADR-0027 proof machinery while preserving the lossless planner-seeded obligation inventory, as specified by ADR-0033.
 
 ## Purpose and economics
 
@@ -110,7 +110,7 @@ These describe the execution run; they do not add lifecycle states. An agent mus
 
 ## Workflow types and review
 
-Normal feature, migration, diagnostic, documentation synchronization, and release-readiness work can use dedicated planning prompts where their delivery boundary differs. Special prompts must not silently reinstate generic mandatory ledgers or evidence registries.
+Normal feature, migration, diagnostic, documentation synchronization, and release-readiness work can use dedicated planning prompts where their delivery boundary differs. Special prompts use the lightweight planner-seeded obligation ledger for substantive milestones but must not reinstate evidence-case registries, per-criterion testing gates, or other proof machinery.
 
 Milestone-scoped human review is optional unless required by the project or milestone. Approved reviews are historical decisions, not rolling approval of future changes. See [Human Review Model](HUMAN-REVIEW-MODEL.md).
 

@@ -117,7 +117,7 @@ Do not mechanically create either layer or reclassify technology-specific engine
 
 When a migration changes implementation handoff, required reading, validation routing, or authority boundaries, compare existing root `AGENTS.md` with the target model. It is an agent navigation entrypoint, not a second generic execution prompt. Preserve valid project-specific instructions; remove stale or conflicting requirements and unnecessary copies of methodology. If absent, create an entrypoint only when useful for the project's agent workflow.
 
-For a ready milestone, route first to the milestone, explicitly referenced operative authority and optional execution progress notes when present, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
+For a substantive ready milestone, route first to the milestone, its planner-seeded obligation ledger, explicitly referenced operative authority, then relevant code/tests. For other tasks, route to the assigned workflow. Do not require ordinary Implementers to consult the external guide, planning-only project guidance/profiles, or research to reconstruct an operative rule.
 
 Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a required direct documentation change when current instructions contradict the target handoff; conditional when navigation actually needs improvement; no-op when sound. Record the decision in the migration report or milestone when one is needed. Keep validation cadence, stage receipts/fingerprints, simulation isolation, and concrete commands in milestone/project engineering authority rather than accumulating them in `AGENTS.md`.
 
@@ -131,7 +131,7 @@ Update `.guide-profile.json` with matching snapshot source/commit metadata; crea
 
 ## Human review
 
-Apply relevant historical migration rules only to the versions traversed. Under 1.0.0-rc.1, formal human acceptance is optional unless explicitly required by the milestone or project. A normal PR review or concise milestone-local decision may satisfy required acceptance; do not create new review registries, aliases, command hosts or review-check launchers for one approval.
+Apply relevant historical migration rules only to the versions traversed. Under stable 1.0.0, formal human acceptance is optional unless explicitly required by the milestone or project. A normal PR review or concise milestone-local decision may satisfy required acceptance; do not create new review registries, aliases, command hosts or review-check launchers for one approval.
 
 Existing repositories with a deliberately adopted structured review subsystem may retain their project-owned contract. Preserve completed decisions as historical rather than demanding reapproval after unrelated commits. Classify an ambiguous active legacy review for manual resolution.
 

@@ -13,7 +13,7 @@ Normalize repository documentation after implementation or migration work.
 
 ## Rules
 
-- Do not copy guide documents into the repository.
+- Do not duplicate guide documents in project-owned documentation; the pinned `.guide/system/` tree is installed and updated only by the guide-version workflow.
 - Do not add external guide documents to implementation-agent required reading.
 - Localize rules into repository docs.
 - Prefer deleting stale meta-process references over preserving them.

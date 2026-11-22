@@ -59,7 +59,6 @@ README.md
 AGENTS.md
 .guide-profile.json
 .guide/system/                # full pinned upstream guide tree
-.guide-sync/pending/.gitkeep
 docs/TERMINOLOGY.md
 docs/SPECS.md
 docs/ENGINEERING.md
@@ -72,7 +71,7 @@ Add optional `docs/PROJECT-GUIDANCE.md` only when actual project meta objectives
 
 Create root `AGENTS.md` as a **small repository entrypoint**, not as a copy of the generic Implementer prompt. Route planning, guide updates and documentation synchronization through `.guide/system/README.md`; route implementation to the ready milestone, its planner-seeded obligation ledger for substantive work, referenced project authority, and needed code/tests. Keep implementation specifics and validation policy in `docs/ENGINEERING.md`, other operative documents, or the ready milestone; do not require reading project planning metadata or the external guide for ordinary implementation. Check that entrypoint instructions do not conflict with the generated milestone package. Do not mechanically insert detailed guide methodology into `AGENTS.md`.
 
-Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
+Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage. Create `.guide-sync/pending/` only when there are genuine deferred documentation hints; do not scaffold an empty coordination folder.
 
 Do not include unmanaged copied guide documents outside the intentional `.guide/system/` snapshot.
 
