@@ -6,6 +6,10 @@ They are not all mandatory.
 
 Project-local specialization normally uses these ordinary authority layers rather than introducing a separate central-style specialization hierarchy.
 
+## Repository-local guide methodology
+
+`.guide/system/` is a pinned, upstream-owned snapshot supplying *planning methodology*, not project specifications. It is authoritative for shared guide rules in the consuming repository and must not be edited to express local policies. Resolve shared profiles there and project-local profiles in `.guide/profiles/`; see [Repository-Local Guide Snapshot Model](LOCAL-GUIDE-SNAPSHOT-MODEL.md). Root `AGENTS.md` routes planning tasks to the snapshot; implementation tasks remain independent of it.
+
 ## Authority layers
 
 Common project-authority layers:
@@ -67,5 +71,5 @@ See `meta/RESEARCH-MODEL.md`.
 - `docs/TBPS.md`;
 - `docs/tbps/`;
 - `.github/ISSUE_TEMPLATE/`;
-- copied guide documents under `docs/research/`;
+- copied guide documents under `docs/research/` or elsewhere outside the deliberate `.guide/system/` snapshot;
 - research files that merely archive planning conversations or duplicate current project authority.

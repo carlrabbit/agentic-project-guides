@@ -1,6 +1,6 @@
 # Migration Model
 
-Guide updates are applied using profile-aware migration decisions, not vague implementation instructions. Straightforward metadata/documentation updates may be applied directly; coordinated implementation uses a ready migration milestone.
+Guide updates replace the repository-local pinned `.guide/system/` snapshot and apply profile-aware target-state migration decisions, not vague implementation instructions. Straightforward metadata/documentation updates may be applied directly; coordinated implementation uses a ready migration milestone.
 
 Do not ask an implementation agent to simply "upgrade to the latest guide".
 
@@ -11,7 +11,7 @@ templates/prompts/adopt-guide-system.md
 templates/prompts/update-guide-system.md
 ```
 
-The migration workflow resolves the target version, inspects the changelog and applicable migration chain, and assesses the target repository. It then either applies a straightforward update directly or prepares a ready milestone/package when substantial coordinated implementation is necessary.
+The migration workflow reads the repository's existing snapshot pin, resolves the requested tagged target upstream, inspects the changelog and applicable migration chain, and assesses the target repository. It then either applies a straightforward update directly or prepares a ready milestone/package when substantial coordinated implementation is necessary.
 
 Migration is a special planning workflow. It is not a milestone execution mode.
 
@@ -21,7 +21,7 @@ When migration requires substantial coordinated implementation or unresolved mat
 planning -> ready -> implementing -> done
 ```
 
-The execution profile for a migration milestone, when one is needed, is selected independently from the migration workflow type.
+The execution profile for a migration milestone, when one is needed, is selected independently from the migration workflow type. Snapshot installation or replacement and matching metadata are ordinary versioned repository changes; no silent remote synchronization, locally edited shared-guide fork, or published artifact is involved. See [Repository-Local Guide Snapshot Model](LOCAL-GUIDE-SNAPSHOT-MODEL.md).
 
 **Target-state rule:** Read the applicable migration chain to identify meaningful transitions, but apply the effective requirements of the **target version**. Do not create intermediate ledgers, evidence registries, review machinery, or other artifacts whose requirements are superseded before the target version, unless an intermediate transformation is genuinely necessary to preserve data, historical evidence, or project authority. Do not skip necessary compatibility-sensitive data migrations.
 

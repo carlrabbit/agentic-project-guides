@@ -20,7 +20,7 @@ Milestones separate planning from implementation, with coherent agent-scaled sco
 Planning may consume durable research and promote conclusions into project authority.
 Implementation agents read product repository authority and ready milestones, not planning context.
 Milestone assurance is risk-proportionate; distribution qualification belongs to release readiness by default.
-Planning and documentation-sync agents may use this guide system.
+Planning and documentation-sync agents use this guide system through the product repository's pinned `.guide/system/` snapshot. The upstream guide repository uses its root directly for its own maintenance.
 ```
 
 ## Guide repository entrypoints
@@ -35,9 +35,9 @@ Keep historical changes in `CHANGELOG.md`, version-to-version instructions in `m
 
 ## Product repository boundary
 
-Product repositories must not copy guide documents as active authority.
+Product repositories intentionally vendor one **read-only, version-pinned full guide snapshot** under `.guide/system/`. This is their authoritative shared planning methodology. They must not copy or customize upstream guides elsewhere as active authority. The upstream guide repository itself uses its root rather than nesting a copy. See [Repository-Local Guide Snapshot Model](LOCAL-GUIDE-SNAPSHOT-MODEL.md).
 
-A product repository may contain `.guide-profile.json` for traceability and `.guide-sync/pending/` for deferred documentation synchronization hints.
+A product repository records the upstream Git tag and peeled source commit SHA of `.guide/system/` in `.guide-profile.json`; `.guide-sync/pending/` remains optional for deferred documentation synchronization hints.
 
 These files are coordination metadata, not ordinary implementation authority.
 
@@ -186,7 +186,7 @@ See `meta/PROFILE-MODEL.md`, `meta/SPECIALIZATION-MODEL.md`, and `meta/VALIDATIO
 
 Milestone work has two distinct phases independent of the human, model, interface, or tool used for either phase.
 
-Planning agents may read this guide repository. They inspect enough product-repository truth and relevant planning research to resolve implementation-affecting uncertainty and produce a ready milestone.
+Planning agents read the task-specific guidance from the product repository's pinned `.guide/system/` snapshot (or this repository's root when maintaining the guide itself). They inspect product-repository truth and relevant planning research to resolve implementation-affecting uncertainty and produce a ready milestone.
 
 Planning owns decisions that materially affect:
 
@@ -208,7 +208,7 @@ For AI-executed milestones, planning defines concise, verifiable outcomes and pr
 
 Planning should not prescribe concrete implementation mechanics that a capable executor can derive from the live repository unless those mechanics are themselves part of the required contract.
 
-Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not read this guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
+Implementation agents execute a ready milestone. They inspect the live source and tests, derive concrete edits, implement, validate, and produce evidence. They should not load the vendored methodology or external guide repository unless explicitly assigned planning, guide migration, documentation synchronization, or release documentation work.
 
 Ordinary implementation must not depend on `docs/research/` to recover operative project rules. Research may be read only when explicitly relevant to an investigation/evidence obligation or when the ready milestone deliberately references it for non-authoritative evidence.
 
