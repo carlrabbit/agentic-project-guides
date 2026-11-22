@@ -18,6 +18,12 @@ Affected areas: planning authority, guide installation/upgrade, profile resoluti
 - The implementer preserves every planned obligation and reconciles delivered outcomes before completion. This prevents forgotten work; it does **not** mandate one test per requirement, evidence-case registries, proof maps, receipts, or stronger milestone validation.
 - Preserve coherent agent-sized milestones, reversible internal experiments, focused real integration, review/correction economy, and independent final-artifact release qualification.
 
+### Clarified — transport-independent planning handoffs
+
+- An authorized Git planning commit or repository-relative ZIP overlay carries the same ready contract; no mandatory archive or PR.
+- Git handoffs record the exact accepted planning commit SHA, milestone path and implementation-branch relationship; moving branches require explicit baseline reconciliation. ZIP overlays identify target revision when known and application steps for moves/deletions.
+- Planning-only commits, approval/merge, implementation and direct guide/documentation updates remain distinct. No evidence-case or proof machinery returns. See ADR-0034.
+
 ### Migration
 
 Use `migrations/guide-system-v1.0.0-rc.1-to-v1.0.0.md` for RC1 adopters; earlier adopters should inspect the applicable historical chain but implement the effective stable 1.0 target state. See ADR-0032 and ADR-0033.

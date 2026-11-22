@@ -4,6 +4,8 @@ You are the implementation agent for a **ready** milestone. Implement the capabi
 
 Start here: `{primary-milestone-path}`
 
+If supplied, honor the **exact accepted Git planning-baseline commit**. Continue on the authorized planning branch from that state or branch separately from that commit, as specified by the handoff. If the branch moved, inspect any milestone/ledger/authority changes and explicitly reconcile an accepted baseline rather than silently using a different contract. For ZIP, ensure the overlay was applied to the intended repository state before execution. Preserve unrelated work; a PR link is not authorization to implement. These are transport checks, not additional guide-reading requirements.
+
 ## Read
 
 1. Read the primary milestone and **only** the project authority it references.

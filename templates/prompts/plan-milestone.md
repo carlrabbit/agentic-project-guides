@@ -61,9 +61,9 @@ For reviews/corrections, prefer concrete defects and minimal focused rechecks. N
 
 Update engineering/specification/decision authority only when required to fix project truth. Add `.guide-sync/pending/` hints only for genuinely deferred documentation changes. Do not duplicate the implementation prompt in the package. Project-local planning research is optional and non-authoritative.
 
-A milestone package may be written **directly into a branch/repository** or delivered as a ZIP containing repository-relative files, depending on the user's delivery request and available capabilities. ZIP is not a universal requirement. It is a transport mechanism, not a second source of authority.
+Follow `meta/HANDOFF-TRANSPORT-MODEL.md`. Prefer an authorized dedicated Git planning branch when practical; otherwise deliver a repository-relative ZIP overlay. A Git handoff identifies the **exact accepted planning-baseline commit SHA**, not just the branch/PR, and whether implementation continues there or branches from that commit. A ZIP identifies its target repository/base revision when known and any move/deletion instructions. Planning commits, PRs, merges, and implementation are separate actions; transport is not a second contract.
 
-Provide the primary milestone path, affected authority documents, any applied changes/transport instructions, key validation expectations, explicitly deferred release checks, human-review obligations if any, and a concise handoff using `templates/prompts/execute-milestone.md`. Do not promise a file artifact or PR that has not been created.
+Provide the primary milestone path, affected authority documents, actual Git branch/commit or ZIP instructions, key validation expectations, deferred release checks, required human-review obligations if any, and a concise handoff using `templates/prompts/execute-milestone.md`. Do not promise a file artifact or PR that has not been created.
 
 ## Readiness check
 

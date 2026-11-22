@@ -216,11 +216,4 @@ The implementation handoff must not depend on the planning conversation. Everyth
 
 Implementation may explore and replace reversible approaches within the accepted goal and invariants. If it discovers a material unresolved architectural, semantic, compatibility, scope, acceptance, validation, profile-applicability/conflict, or specialization decision, that decision returns to planning. Implementation must not silently create new project policy from research or other evidence.
 
-Planning agents may also create:
-
-- documentation packages;
-- migration packages;
-- optional overlays when planning itself requires repository-relative file additions, replacements, moves, or deletions;
-- concise execution prompts when a disconnected execution interface benefits from one.
-
-An overlay is a transport mechanism, not a second source of planning authority.
+Planning may deliver repository-relative milestone, documentation, or migration work using **authorized Git commits** or **ZIP overlays** under [Planning Handoff Transport Model](HANDOFF-TRANSPORT-MODEL.md). A Git milestone handoff identifies the exact accepted planning commit rather than only a mutable branch name. A ZIP handoff identifies its target base when known and provides move/deletion instructions. Neither transport changes the milestone, obligation ledger, or permission to implement. A planning PR or merge is not implied by using Git.
