@@ -50,7 +50,7 @@ Resolve the desired **stable, tagged** guide-system version from `carlrabbit/age
 
 ## Goal
 
-Create a repository-relative initialization package including the full upstream guide snapshot at `.guide/system/` and project-owned files. Follow `meta/HANDOFF-TRANSPORT-MODEL.md`: use an authorized Git planning commit once an initial Git commit exists, or a ZIP overlay for an empty/unavailable Git repository or an explicitly requested archive. Identify the exact accepted planning commit in any Git implementation handoff (not just a branch or PR). Install the snapshot with Git subtree (`--squash`) or an exact tracked tree copy when subtree is unavailable; do not filter upstream files or create a custom distribution.
+Create a repository-relative initialization package including the full upstream guide snapshot at `.guide/system/` and project-owned files. Follow `meta/HANDOFF-TRANSPORT-MODEL.md`: an authorized Git initialization package **may itself be the first root planning commit** in a truly empty repository; it does not need a placeholder initial commit. Otherwise use an authorized existing-branch Git commit or a ZIP overlay when Git delivery is unavailable/inappropriate or explicitly requested. Identify the exact accepted planning commit in any Git implementation handoff (not just a branch or PR). Install the snapshot with Git subtree (`--squash`) or an exact tracked tree copy when subtree is unavailable; do not filter upstream files or create a custom distribution.
 
 Usually include:
 
