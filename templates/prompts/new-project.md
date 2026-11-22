@@ -10,13 +10,7 @@ Our planning task is to create a repository initialization package for a complet
 - Primary stack: `{primary-stack}`
 - Concrete runtime/environment/integration constraints: `{project-specialization-constraints}`
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, and release readiness.
+Shared guide authority is **installed locally**: bootstrap the complete, exact upstream tagged snapshot at `.guide/system/`, and record its tag plus peeled commit SHA in `.guide-profile.json`. Before a new repository exists, use the upstream guide to initialize it; subsequent planning uses `.guide/system/`. Do not edit the snapshot for local customization, scatter other copied guide documents into project docs, or require routine implementers to read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md`.
 
 Target repository documentation must contain project truth only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
@@ -52,11 +46,11 @@ If the target repository contains `.guide-profile.json`, use it as guide-selecti
 
 If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
 
-Resolve the latest guide-system version from `carlrabbit/agentic-project-guides` before creating files.
+Resolve the desired **stable, tagged** guide-system version from `carlrabbit/agentic-project-guides` before creating files. Resolve its peeled commit SHA; do not use unpinned upstream `main` or a historical draft snapshot as an implicit default.
 
 ## Goal
 
-Create a repository-relative package that can be applied to an empty repository, directly or as a ZIP when requested to establish the initial project documentation and planning substrate.
+Create a repository-relative package that can be applied to an empty repository, directly or as a ZIP when requested, including the full upstream guide snapshot at `.guide/system/` and project-owned initialization files. Install the snapshot with Git subtree (`--squash`) or an exact tracked tree copy when subtree is unavailable; do not filter upstream files or generate a separate package format. A package without the snapshot is an incomplete self-contained bootstrap.
 
 Usually include:
 
@@ -64,18 +58,19 @@ Usually include:
 README.md
 AGENTS.md
 .guide-profile.json
+.guide/system/                # full pinned upstream guide tree
 .guide-sync/pending/.gitkeep
 docs/TERMINOLOGY.md
 docs/SPECS.md
 docs/ENGINEERING.md
 docs/MILESTONES.md
 docs/milestones/M0001-initialization.md
-.execution/M0001-initialization.md   # optional for genuinely long-running work
+.execution/M0001-initialization.md   # planner-seeded obligations for substantive first milestone
 ```
 
 Add optional `docs/PROJECT-GUIDANCE.md` only when actual project meta objectives or planning-methodology clarifications warrant it; do not add it as a mandatory placeholder. Add local profile definitions only for genuinely selected `local:<id>` entries, and capture operative consequences in normal project authority.
 
-Create root `AGENTS.md` as a **small repository entrypoint**, not as a copy of the generic Implementer prompt. Its milestone route begins with the primary ready milestone, then explicitly referenced project authority and any relevant optional progress note, followed by needed code/tests. Route non-milestone work to its assigned workflow. Keep implementation specifics and validation policy in `docs/ENGINEERING.md`, other operative documents, or the ready milestone; do not require reading project planning metadata or the external guide for ordinary implementation. Check that entrypoint instructions do not conflict with the generated milestone package. Do not mechanically insert detailed guide methodology into `AGENTS.md`.
+Create root `AGENTS.md` as a **small repository entrypoint**, not as a copy of the generic Implementer prompt. Route planning, guide updates and documentation synchronization through `.guide/system/README.md`; route implementation to the ready milestone, its planner-seeded obligation ledger for substantive work, referenced project authority, and needed code/tests. Keep implementation specifics and validation policy in `docs/ENGINEERING.md`, other operative documents, or the ready milestone; do not require reading project planning metadata or the external guide for ordinary implementation. Check that entrypoint instructions do not conflict with the generated milestone package. Do not mechanically insert detailed guide methodology into `AGENTS.md`.
 
 Add specs, architecture docs, decisions, public docs, or focused engineering/specialization docs only when required for the selected profiles, profile scopes, project constraints, and maturity stage.
 
@@ -139,9 +134,9 @@ If the project intentionally uses integration-first testing, record that policy 
 
 Where expensive validation or investigation is expected, initialize only justified project authority: cheap feedback commands, required acceptance gates, separate optional experiment entry points, and safe stage freshness/reuse rules. Optional project guidance may prioritize economical iteration; implementation-facing commands and criteria belong in engineering authority or the milestone. Do not create simulation/efficient-testing profiles, a mandatory caching framework, or canonical regression entries for exploratory workloads by default.
 
-## Optional execution progress
+## Obligation completeness
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this initialization work is long-running enough to benefit. Acceptance remains defined by the primary milestone.
+For a substantive initialization milestone, seed `.execution/<milestone-id>.md` with stable IDs for all material deliverables before `ready`. The implementer tracks and reconciles these obligations; no evidence cases, per-criterion test mapping, receipt system, or validation-gate registry is required. Only a genuinely trivial indivisible initialization task may omit the ledger with an explicit rationale.
 
 ## Planning/implementation separation
 
@@ -155,7 +150,7 @@ Also generate a concise execution prompt in chat for the later implementation ag
 
 Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, or research scaffolding without durable evidence.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged copied guide documents outside `.guide/system/`**, or research scaffolding without durable evidence.
 
 After preparing the package, respond with:
 

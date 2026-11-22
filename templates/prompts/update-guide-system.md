@@ -2,13 +2,7 @@
 
 Our task is to assess and update a repository from an existing `carlrabbit/agentic-project-guides` version to the latest available guide-system version. Apply straightforward metadata/documentation corrections directly when authorized; prepare a ready migration package only when coordinated implementation or material design decisions require it.
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, review, and release readiness.
+Use the repository's existing `.guide/system/` snapshot as its **current** shared guide authority. For an explicitly requested upgrade, consult upstream *tags* to resolve the target version and peeled commit SHA; install or replace the full pinned snapshot at `.guide/system/` and reconcile project authority. Do not edit the shared snapshot for customization, copy guides into other project docs, or silently follow upstream `main`. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md`.
 
 Target repository documentation must contain project truth only, plus non-authoritative planning knowledge when the applicable guide version explicitly defines such a layer and durable evidence warrants retention.
 
@@ -22,9 +16,7 @@ If the target repository contains `.review/`, treat it as repository-local human
 
 ## Resolve current and latest guide versions
 
-Read the target repository's `.guide-profile.json` if present to identify the current recorded guide-system version.
-
-Then inspect the guide repository to determine the latest available version.
+Read the target repository's `.guide-profile.json` and existing `.guide/system/` snapshot, if present, to establish the current effective guide version. Resolve the requested stable **target tag** upstream and its peeled commit SHA. Do not treat a drifting upstream `main` branch as a version. If migrating from an external-only repository, install the first local snapshot as part of this update.
 
 Read at minimum:
 
@@ -37,11 +29,11 @@ Read at minimum:
 - relevant meta models introduced or changed by those migrations, including `meta/RESEARCH-MODEL.md` when applicable;
 - `templates/PROMPTS.md`.
 
-State both the current and resolved latest versions in the final report and in the migration milestone only if one is needed.
+State the current and target versions, target Git tag, and source commit in the final report and in any migration milestone.
 
 Do not assume a hard-coded latest version.
 
-Read the applicable migration chain for version-to-version transformation semantics, then implement the **effective target-version requirements**. Do not reenact intermediate obligations that are superseded by the target version (such as 0.9 planning-seeded ledgers) merely to remove them immediately. Preserve intermediate transformations when needed to protect project data, historical evidence, compatibility, or active authority.
+Read the applicable migration chain for version-to-version semantics, then implement the **effective target-version requirements**. Do not reenact superseded intermediate process machinery merely to remove it. The 1.0 target deliberately restores **lightweight planner-seeded material-obligation ledgers** while discarding obsolete evidence-case/proof registries. Preserve intermediate transformations needed to protect project data, historical evidence, compatibility, or active authority.
 
 ## Repository inspection
 
@@ -66,6 +58,10 @@ Usually read:
 If `docs/RESEARCH.md` exists and a migration introduces or changes research/planning-knowledge semantics, use it as a discovery surface and inspect only research subjects relevant to the migration decisions.
 
 Treat copied guides under `docs/research/` as non-authoritative legacy material unless explicitly marked otherwise. Do not assume every file under `docs/research/` has the same role: the applicable migration may distinguish genuine project research/evidence from copied guide leakage or obsolete notes.
+
+## Replace the local guide snapshot
+
+Install or upgrade the complete, unmodified tagged upstream tree at `.guide/system/` (prefer `git subtree add/pull --squash`, or an exact tracked copy). Update `.guide-profile.json` source tag, peeled revision, version, and path **in the same change** as snapshot replacement and applicable project-authority migration. Do not automatically synchronize or change unrelated project files. If a nonstandard local change exists in the snapshot, report it as an authority conflict rather than overwriting it silently.
 
 ## Apply version-specific model changes
 
@@ -127,11 +123,11 @@ Do not mechanically replace `AGENTS.md` on every guide update. Classify it as a 
 
 ## Deliverable selection
 
-**Direct update (default for straightforward changes):** If the target state can be reached by small, well-understood metadata, configuration, or documentation edits without material design decisions or coordinated implementation, apply those changes directly in the authorized repository/branch. Examples include updating `.guide-profile.json`, fixing `AGENTS.md` routing, and removing obsolete guide-derived process statements. Do **not** create `docs/milestones/` entries, execution ledgers, implementation prompts, or migration scaffolding merely to administer those edits. Verify the affected text/configuration and summarize the achieved target state and any real residual work.
+**Direct update (default for straightforward changes):** If the target state can be reached by a straightforward tagged snapshot replacement plus small, well-understood metadata, configuration, or documentation edits without material design decisions or coordinated implementation, apply those changes directly in the authorized repository/branch. Examples include updating `.guide-profile.json`, fixing `AGENTS.md` routing, and removing obsolete guide-derived process statements. Do **not** create `docs/milestones/` entries, implementation prompts, or execution scaffolding merely to administer those edits. Verify the affected text/configuration and summarize the achieved target state and any real residual work.
 
-**Ready migration milestone (when warranted):** If the transition needs substantial coordinated changes, unresolved material architecture/contract decisions, or an independent implementation-agent handoff, produce **one** ready migration milestone under `docs/milestones/`. Include only the materially applicable current/target versions, profile/scope and execution metadata, required/conditional/deprecated/manual-review changes, relevant authority, acceptance, concrete validation, direct documentation impact, `AGENTS.md` reconciliation, optional transition choices, and recovery considerations. Omit sections with no purpose; do not fabricate validation matrices or an evidence registry.
+**Ready migration milestone (when warranted):** If the transition needs substantive coordinated changes, unresolved material architecture/contract decisions, or an independent implementation-agent handoff, produce **one** ready migration milestone under `docs/milestones/` and seed a compact obligation ledger before `ready`. Include only the materially applicable current/target versions, profile/scope and execution metadata, required/conditional/deprecated/manual-review changes, relevant authority, acceptance, concrete validation, direct documentation impact, `AGENTS.md` reconciliation, optional transition choices, and recovery considerations. Omit sections with no purpose; do not fabricate validation matrices or an evidence registry.
 
-Update `.guide-profile.json` and create `.guide-sync/pending/` hints only where the effective target state requires them. Do not copy guide documents into the target repository or perform unrelated product development.
+Update `.guide-profile.json` with matching snapshot source/commit metadata; create `.guide-sync/pending/` hints only where the effective target state requires them. Do not copy unmanaged guide documents outside `.guide/system/` or perform unrelated product development.
 
 ## Human review
 
@@ -147,9 +143,9 @@ Inspect engineering commands for long aggregate wrappers or agent-harness sensit
 
 When migration validation is demonstrably expensive or constrained, consider independently runnable stages. Add resumability, receipts, or a verifier only where these mechanisms reduce total cost and project authority specifies reliable stage success criteria. Do not infer success from partial output.
 
-## Optional execution progress
+## Obligation completeness
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this migration is long-running enough to benefit. Acceptance comes from the ready milestone when one exists, or from the target-state requirements and focused verification for a direct update.
+For a substantive migration milestone, planning must seed `.execution/<milestone-id>.md` with every independently deliverable material obligation before `ready`. The implementer preserves IDs and reconciles outcomes. Direct lightweight guide updates need no milestone or ledger. Do not introduce evidence-case registries, validation-gate maps, or proof receipts by default.
 
 ## Planning/implementation separation
 
@@ -172,7 +168,7 @@ Only when an implementation handoff is needed, supply a concise execution prompt
 
 For straightforward updates, deliver the authorized direct repository changes and a short verification report. For substantial migrations, deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files needed for the migration. Preserve repository-relative paths inside a ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or research scaffolding that the migration chain does not justify.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged guide copies outside `.guide/system/`**, planning transcripts, or research scaffolding that the migration chain does not justify.
 
 For direct updates, report the versions, changed files, target-state verification, and remaining issues. When a migration package is needed, additionally report:
 

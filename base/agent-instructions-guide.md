@@ -8,5 +8,5 @@ Recommended rule:
 
 ```text
 Implementation agents read localized repository docs only.
-Planning and documentation-sync agents may use guide repository context.
+Planning and documentation-sync agents use the pinned `.guide/system/` snapshot (or the guide repository root when maintaining the guide). Root `AGENTS.md` should route these tasks there without making implementation agents read methodology.
 ```

@@ -4,7 +4,7 @@ Convert the requested capability into a ready milestone for a disconnected imple
 
 `{milestone}`
 
-Use `carlrabbit/agentic-project-guides` as **planning** methodology. Do not copy guide documents into product repositories or require ordinary implementers to read this guide.
+Use the product repository's pinned `.guide/system/` as **planning** methodology (or this repository's root when planning guide maintenance). Consult `.guide/system/README.md` for task routing and selectively load applicable models and shared profiles. Do not use drifting upstream `main`, copy guides into project docs, or require ordinary implementers to load the snapshot.
 
 ## Objective: agent-scaled, coherent delivery
 

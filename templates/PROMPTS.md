@@ -14,9 +14,13 @@ Reviewers verify intended behavior and identify concrete defects; they do not in
 
 **A milestone is not a release gate.** Product package/installed-consumer/platform qualification normally belongs to release preparation. An exceptional milestone-level qualification must be justified.
 
-The ready milestone and referenced project truth are the durable handoff. A `.execution/` progress ledger is optional for resumable work; planning need not seed one. Evidence-case registries, fingerprinted receipts, mandatory one-to-one proof tracking, and per-criterion gate matrices are not defaults. Do not create bespoke per-milestone copies of the canonical implementation prompt.
+The ready milestone and referenced project truth are the durable handoff. For substantive implementation milestones, planning seeds `.execution/<milestone-id>.md` with stable IDs for every material delivery obligation before `ready`; implementation preserves and reconciles those IDs. This prevents forgotten requirements, not testing gaps. Evidence-case registries, fingerprinted receipts, acceptance-to-test proof mapping, and per-criterion validation gate matrices are not defaults. Do not create bespoke per-milestone copies of the canonical implementation prompt.
 
 Milestone lifecycle: `draft/planning -> ready -> implementing -> done`. Execution outcomes: `COMPLETE`, `AWAITING HUMAN REVIEW`, `BLOCKED`. Review is a milestone-owned gate only when explicitly required. Implementers must not claim completion from green tests alone without evaluating the milestone contract, nor prolong work by inventing irrelevant validation infrastructure.
+
+## Local guide authority
+
+In a product repository, this catalog is at `.guide/system/templates/PROMPTS.md`. The pinned `.guide/system/` snapshot supplies shared planning methodology, while project authority and `docs/research/` stay local. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` relative to the guide root. Routine implementers do not load it.
 
 ## Repository setup / updates
 

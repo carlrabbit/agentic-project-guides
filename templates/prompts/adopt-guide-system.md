@@ -2,13 +2,7 @@
 
 Our planning task is to create an implementation-ready migration package for adopting the latest available `carlrabbit/agentic-project-guides` model in a repository that currently uses any older local setup/engineering guide model.
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, and release readiness.
+During initial adoption, obtain the selected stable upstream Git tag and install its full pinned guide tree at `.guide/system/`. That snapshot becomes the repository's authoritative shared planning methodology; record the exact tag and peeled commit SHA in `.guide-profile.json`. This is the **one intentional guide copy**. Never customize it in place or treat old guide copies in `docs/research/` as the snapshot. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md`.
 
 Target repository documentation must contain project truth and concrete project specialization only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
@@ -20,7 +14,7 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 ## Resolve latest guide version
 
-Before creating files, inspect the guide repository and determine the latest guide-system version.
+Before creating files, inspect upstream tags and choose the target **stable** guide-system version; resolve its peeled commit SHA. An archival draft tag or unpinned branch tip is not a default adoption version.
 
 Read at minimum:
 
@@ -36,7 +30,7 @@ Read at minimum:
 - only the applicable migration chain, not every historical migration;
 - `templates/PROMPTS.md`.
 
-State the resolved latest version in the chat response and in the migration milestone.
+State the resolved target version, tag, and commit in the chat response and in the migration milestone.
 
 Do not assume a hard-coded latest version.
 
@@ -55,6 +49,10 @@ Use this prompt when the target repository has one or more of:
 - mixed repository shapes whose profile applicability is currently implicit;
 - research/notes that may contain useful planning evidence or de-facto implementation rules;
 - surviving historical planning chats, documents, experiments, or other evidence that may be worth adopting as durable planning knowledge.
+
+## Install the pinned methodology
+
+Include a tracked, unmodified copy of the full selected upstream tagged tree at `.guide/system/` as part of the adoption package or direct repository changes. Prefer `git subtree add --prefix=.guide/system <guide-remote> <tag> --squash`; an exact tracked copy is acceptable when necessary. Keep shared profiles inside the snapshot; preserve separate project-owned `.guide/profiles/`. Populate `.guide-profile.json` with `guideSystem.repository`, `version`, `tag`, `revision` (peeled commit SHA), and `localPath`. The target state must be self-contained for subsequent planning without upstream access. Do not create synchronization tooling or fetch upstream for every planning task.
 
 ## Repository inspection
 
@@ -176,9 +174,9 @@ When research is present, classify its treatment separately enough to distinguis
 
 Record the historical research-adoption decision (`none`, `selective`, or `reconstructive`) in the adoption work when the target model defines that capability. Treat it separately from required guide-system compliance.
 
-## Optional execution progress
+## Obligation completeness
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
+For a substantive adoption milestone, planning seeds a lightweight `.execution/<milestone-id>.md` inventory of stable material obligations before `ready`, including snapshot installation and necessary project-authority changes. Preserve and reconcile it during implementation. Do not create evidence-case mappings, per-row validation gates, or fingerprinted receipts by default.
 
 ## Planning/implementation separation
 
@@ -192,7 +190,7 @@ Also generate a concise execution prompt in chat for the later implementation ag
 
 Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, copied guide documents, planning transcripts, or research scaffolding without durable evidence.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged guide copies outside `.guide/system/`**, planning transcripts, or research scaffolding without durable evidence.
 
 After preparing the package, respond with:
 

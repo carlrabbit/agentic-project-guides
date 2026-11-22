@@ -18,4 +18,4 @@ Optionally add `docs/PROJECT-GUIDANCE.md` when the project has durable agentic-d
 
 Add `docs/research/` and an optional `docs/RESEARCH.md` discovery surface only when durable planning evidence actually exists and is materially useful to future planning. Do not create research scaffolding by default.
 
-Product repositories contain localized project truth and concrete specializations, and may retain selective non-authoritative planning research. Do not copy guide documents into product repositories as active documentation or research.
+Product repositories contain localized project truth and concrete specializations, may retain selective non-authoritative planning research, and vendor **one pinned, unmodified upstream guide snapshot** at `.guide/system/` for self-contained planning. Do not copy shared guide documents into other project documentation or research.
