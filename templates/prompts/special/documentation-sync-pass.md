@@ -2,13 +2,7 @@
 
 Our task is to perform a documentation synchronization pass for the target repository.
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, and release readiness.
+Use the product repository's pinned `.guide/system/` snapshot as shared planning methodology (or the upstream guide's root when maintaining that repository). Project-specific authority and research stay local. Do not edit the pinned guide, duplicate it elsewhere, or make implementers read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` within the guide root.
 
 Target repository documentation must contain project truth only.
 
@@ -17,6 +11,10 @@ If the target repository contains old copied setup or engineering guides, treat 
 If the target repository contains `.guide-profile.json`, use it as guide-selection metadata. Ordinary implementation agents must not be required to read `.guide-profile.json`.
 
 If the target repository contains `.guide-sync/`, treat it as deferred documentation synchronization metadata. Ordinary implementation agents must not be required to read `.guide-sync/`.
+
+## Work state
+
+This direct synchronization pass does not automatically create a milestone. Track existing `.guide-sync/pending/` hints. If executing an already ready substantive milestone, read and preserve its planner-seeded `.execution/<milestone-id>.md` obligation ledger. No new evidence-case registries or validation-gate maps.
 
 ## Goal
 
@@ -51,7 +49,7 @@ Do not treat old copied guides under `docs/research/` as authoritative unless th
 - Delete resolved hint files from `.guide-sync/pending/`.
 - If a hint cannot be completed, update it with current status, completed parts, remaining blockers, and next recommended action.
 - Keep durable project truth in `docs/`, `public-docs/`, `README.md`, `AGENTS.md`, and relevant project docs.
-- Do not copy external guide documents into the repository.
+- Do not duplicate upstream guide documents in project documentation; `.guide/system/` changes only through explicit guide-version updates.
 - Do not add TBPs or issue templates unless explicitly requested.
 - Do not perform implementation source changes unless explicitly required for documentation metadata.
 

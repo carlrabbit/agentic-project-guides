@@ -2,13 +2,7 @@
 
 Our planning task is to create a documentation synchronization milestone package: `{milestone}`.
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, and release readiness.
+Use the product repository's pinned `.guide/system/` snapshot as shared planning methodology (or the upstream guide's root when maintaining that repository). Project-specific authority and research stay local. Do not edit the pinned guide, duplicate it elsewhere, or make implementers read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` within the guide root.
 
 Target repository documentation must contain project truth only.
 
@@ -20,7 +14,7 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 ## Optional execution progress
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this documentation task is long-running enough to benefit. Acceptance remains defined by the primary milestone.
+For a substantive documentation synchronization milestone, seed `.execution/<milestone-id>.md` before `ready` with stable IDs for every material documentation deliverable. The implementer preserves and reconciles the entries. Do not require evidence cases, test-to-criterion mappings, validation-gate tables, or proof receipts.
 
 ## Planning/implementation separation
 
@@ -76,7 +70,7 @@ Workflow type: `documentation-sync` (independent of the project's `defaultImplem
 
 Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or unmanaged copied guide documents outside `.guide/system/`.
 
 After preparing the package, respond with:
 

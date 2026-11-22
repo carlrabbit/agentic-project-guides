@@ -25,11 +25,11 @@ Keep these layers distinct:
 
 | Layer | Purpose | Authority | Normal consumer |
 |---|---|---|---|
-| Guide repository | Reusable methodology and engineering shapes | Guide-system authority | Planning/migration/sync work |
+| Pinned `.guide/system/` (upstream root when maintaining the guide) | Reusable methodology and engineering shapes | Shared guide authority for this repository | Planning/migration/sync work |
 | Planning conversation | Transient investigation and reasoning | No | Current planner |
 | `docs/research/` | Durable planning knowledge and evidence | No | Planning/research work |
 | Project specs/architecture/decisions/engineering docs | Concrete project truth | Yes | Planning and implementation |
-| `.execution/` | Mutable implementation progress/evidence routing | No | Current implementation |
+| `.execution/` | Planner-seeded obligation-completeness inventory and mutable implementation progress | No (milestone remains authoritative) | Planning handoff and implementation |
 
 Research is therefore project-local knowledge, but it is not ordinary project authority.
 
