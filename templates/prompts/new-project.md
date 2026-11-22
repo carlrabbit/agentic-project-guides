@@ -50,7 +50,7 @@ Resolve the desired **stable, tagged** guide-system version from `carlrabbit/age
 
 ## Goal
 
-Create a repository-relative package that can be applied to an empty repository, directly or as a ZIP when requested, including the full upstream guide snapshot at `.guide/system/` and project-owned initialization files. Install the snapshot with Git subtree (`--squash`) or an exact tracked tree copy when subtree is unavailable; do not filter upstream files or generate a separate package format. A package without the snapshot is an incomplete self-contained bootstrap.
+Create a repository-relative initialization package including the full upstream guide snapshot at `.guide/system/` and project-owned files. Follow `meta/HANDOFF-TRANSPORT-MODEL.md`: an authorized Git initialization package **may itself be the first root planning commit** in a truly empty repository; it does not need a placeholder initial commit. Otherwise use an authorized existing-branch Git commit or a ZIP overlay when Git delivery is unavailable/inappropriate or explicitly requested. Identify the exact accepted planning commit in any Git implementation handoff (not just a branch or PR). Install the snapshot with Git subtree (`--squash`) or an exact tracked tree copy when subtree is unavailable; do not filter upstream files or create a custom distribution.
 
 Usually include:
 
@@ -147,7 +147,7 @@ Also generate a concise execution prompt in chat for the later implementation ag
 
 ## Deliverable
 
-Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
+Deliver the permitted repository-relative initialization files by an authorized Git planning commit or ZIP overlay following `meta/HANDOFF-TRANSPORT-MODEL.md`. For Git, supply the repository, branch, **exact accepted planning-baseline commit SHA**, milestone path, and whether implementation will continue on that branch or branch from that commit. For ZIP, preserve target paths and identify the intended base when known, plus any needed application instructions.
 
 Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, **unmanaged copied guide documents outside `.guide/system/`**, or research scaffolding without durable evidence.
 

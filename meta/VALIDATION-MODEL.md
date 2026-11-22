@@ -6,14 +6,15 @@ Authoritative for risk-proportionate validation, milestone versus release bounda
 
 ## Principle
 
-Optimize **implementation + validation + review + expected rework**, not the number of tests, gates, or proof artifacts. Test to reduce meaningful uncertainty. A milestone need not qualify a release.
+Invest enough **planning analysis** to identify material failure modes and choose checks with high diagnostic value. Then optimize **implementation + validation + review + expected rework**, not the number of tests, gates, or proof artifacts. Planning effort is not itself a budget to minimize; the goal is fewer missed contracts and expensive correction cycles. Test to reduce meaningful uncertainty. A milestone need not qualify a release.
 
 For each change, ask:
-1. What behavior or invariant changes, and what plausible defect matters?
-2. Which existing evidence already exercises it?
-3. What is the cheapest credible new check?
-4. What belongs to the final release candidate instead?
-5. What is the consequence of an undetected defect, and can the change be discarded safely?
+1. Which intended changes, permitted consequences, and protected invariants define correctness?
+2. Which plausible incorrect implementations might still pass ordinary successful examples or a build?
+3. Which boundary, contrasting input, or cross-mode consistency property (if material) would expose them?
+4. Which existing evidence already exercises the relevant contract, and what is the cheapest credible additional check?
+5. What belongs to the final release candidate instead?
+6. What is the consequence of an undetected defect, and can the change be discarded safely?
 
 Planner-seeded **obligation accounting** establishes that work items are not silently forgotten; **validation evidence** establishes credible correctness. A completion ledger does not require one test, evidence-case ID, or gate per row. More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria. A permanent regression test is useful for a reproducible bug with plausible recurrence or significant failure consequence; not every one-off correction needs a permanent fixture.
 
@@ -33,7 +34,7 @@ Do not defer every real integration test to release. Where correctness depends o
 
 ## Risk-proportionate milestones
 
-Use the fewest representative scenarios that credibly exercise the new behavior and important failure modes. Prefer behavior over test-count quotas, happy/negative-case matrices, or one test per acceptance criterion.
+Choose **high-information, discriminating** scenarios that challenge the plausible failure modes identified during planning, not merely confirm that the feature exists. Where relevant, contrast an eligible case with a similar ineligible one, exercise a protected property, or compare related operating modes against their shared observable contract. These are candidate techniques, **not** a mandatory positive/negative/cross-mode checklist or a test for each obligation. Use the smallest focused set that credibly addresses the important risks; one fixture may exercise multiple boundaries. Intentional breaking changes need checks against the **authorized** invariants, not a blanket semantic-equivalence or always-compiles requirement. Prefer behavior over test-count quotas, exhaustive matrices, or one test per acceptance criterion.
 
 Where an existing relevant suite already covers an unchanged contract, reuse that evidence rather than reimplementing the suite in a new harness. Focused validation should normally run after the relevant changes; unnecessary reruns after unrelated edits add no confidence. Evidence is not permanent: rerun a check when material inputs have changed or a result is no longer applicable.
 

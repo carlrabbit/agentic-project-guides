@@ -18,6 +18,17 @@ Affected areas: planning authority, guide installation/upgrade, profile resoluti
 - The implementer preserves every planned obligation and reconciles delivered outcomes before completion. This prevents forgotten work; it does **not** mandate one test per requirement, evidence-case registries, proof maps, receipts, or stronger milestone validation.
 - Preserve coherent agent-sized milestones, reversible internal experiments, focused real integration, review/correction economy, and independent final-artifact release qualification.
 
+### Clarified — rigorous planning and authorized change boundaries
+
+- Substantive milestone planners investigate materially affected existing contracts, distinguish intended changes from tolerated consequences and protected invariants, and resolve consequential interactions before `ready`. This shifts intellectual effort upstream to reduce implementer ambiguity and correction cycles; planning effort/length is not a target for minimization.
+- Plan high-information checks against plausible boundary violations and cross-mode inconsistencies where material, rather than primarily happy-path existence tests. Maintain proportionate implementation validation and no mandatory per-obligation tests, proof registries, or blanket semantics-preservation requirement.
+
+### Clarified — transport-independent planning handoffs
+
+- An authorized Git planning commit or repository-relative ZIP overlay carries the same ready contract; no mandatory archive or PR.
+- Git handoffs record the exact accepted planning commit SHA, milestone path and implementation-branch relationship; moving branches require explicit baseline reconciliation. ZIP overlays identify target revision when known and application steps for moves/deletions.
+- Planning-only commits, approval/merge, implementation and direct guide/documentation updates remain distinct. No evidence-case or proof machinery returns. See ADR-0034.
+
 ### Migration
 
 Use `migrations/guide-system-v1.0.0-rc.1-to-v1.0.0.md` for RC1 adopters; earlier adopters should inspect the applicable historical chain but implement the effective stable 1.0 target state. See ADR-0032 and ADR-0033.

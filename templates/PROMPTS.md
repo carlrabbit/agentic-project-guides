@@ -16,6 +16,8 @@ Reviewers verify intended behavior and identify concrete defects; they do not in
 
 The ready milestone and referenced project truth are the durable handoff. For substantive implementation milestones, planning seeds `.execution/<milestone-id>.md` with stable IDs for every material delivery obligation before `ready`; implementation preserves and reconciles those IDs. This prevents forgotten requirements, not testing gaps. Evidence-case registries, fingerprinted receipts, acceptance-to-test proof mapping, and per-criterion validation gate matrices are not defaults. Do not create bespoke per-milestone copies of the canonical implementation prompt.
 
+Follow `meta/HANDOFF-TRANSPORT-MODEL.md`: an authorized Git handoff identifies the exact accepted planning-baseline commit, milestone path, and implementation-branch relationship; a ZIP identifies its intended base when known and application instructions. Neither implies a mandatory PR.
+
 Milestone lifecycle: `draft/planning -> ready -> implementing -> done`. Execution outcomes: `COMPLETE`, `AWAITING HUMAN REVIEW`, `BLOCKED`. Review is a milestone-owned gate only when explicitly required. Implementers must not claim completion from green tests alone without evaluating the milestone contract, nor prolong work by inventing irrelevant validation infrastructure.
 
 ## Local guide authority

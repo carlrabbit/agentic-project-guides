@@ -4,11 +4,11 @@ Review the implementation or pull request for:
 
 `{milestone-or-pr}`
 
-Use the ready milestone, its referenced project authority, changed code/tests, relevant existing checks, and—for substantive work—the planner-seeded `.execution/<milestone-id>.md` obligation ledger. This is **engineering review**, not automatically a formal human-acceptance gate. Do not require the implementation agent to read the pinned guide snapshot or external upstream repository.
+Use the ready milestone, its referenced project authority, changed code/tests, relevant existing checks, and—for substantive work—the planner-seeded `.execution/<milestone-id>.md` obligation ledger. When an exact accepted planning-baseline commit is supplied, distinguish that handoff from later branch/PR changes and check material contract changes were reconciled rather than silently substituted. This is **engineering review**, not automatically a formal human-acceptance gate. Do not require the implementation agent to read the pinned guide snapshot or external upstream repository.
 
 ## Objective
 
-Determine whether the intended **whole coherent capability** and important invariants are actually delivered. Inspect architecture, observable behavior, failure consequences, relevant integrations, direct documentation, and implementation defects. A green suite does not prove unexercised behavior; the existence of many possible cases does not justify testing all of them.
+Determine whether the intended **whole coherent capability** is delivered within its authorized change boundaries. Examine intended behavior, expressly permitted consequences, protected invariants, related modes/integrations, architecture, documentation, and plausible defects. A build or green happy-path suite does not establish that protected boundaries survived; look for high-information boundary or cross-mode evidence where material. Do not treat intentionally permitted breakage as a defect, nor require an exhaustive test matrix.
 
 For a substantive milestone, compare the ledger's stable obligation IDs with the ready milestone, and inspect whether **each material deliverable is actually present**. A `done` status without the deliverable is not completion; a missing or compressed obligation is a real handoff defect. This is completeness accounting, not a requirement for one test or proof artifact per row.
 

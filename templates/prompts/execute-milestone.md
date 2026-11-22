@@ -4,6 +4,8 @@ You are the implementation agent for a **ready** milestone. Implement the capabi
 
 Start here: `{primary-milestone-path}`
 
+If supplied, honor the **exact accepted Git planning-baseline commit**. Continue on the authorized planning branch from that state or branch separately from that commit, as specified by the handoff. If the branch moved, inspect milestone/ledger/authority changes **and relevant source/test divergence capable of invalidating planning assumptions**, then reconcile the accepted baseline if needed rather than silently using a different contract. This is a targeted review of material differences, not a requirement to compare or revalidate the entire repository. **If a planning PR was merged by squash/rebase and the original commit is unavailable or unsuitable,** check the merged result for semantic equivalence of the milestone, ledger and referenced authority **and for materially relevant source/test changes that could invalidate the planned implementation**; only then use the merged commit as the new implementation baseline. Material changes require planning reconciliation. For ZIP, compare with the intended base when available and reconcile divergent or overlapping project-authority changes before applying the overlay; never overwrite them silently. Verify the applied result and any move/deletion instructions. Preserve unrelated work; a PR link is not authorization to implement. These are transport checks, not additional guide-reading requirements.
+
 ## Read
 
 1. Read the primary milestone and **only** the project authority it references.
@@ -14,7 +16,7 @@ The ready milestone and actual project authority govern. Planning chat, external
 
 ## Implement at agent scale
 
-Own the concrete implementation: architecture *within resolved constraints*, types, files, algorithms, sequence, tests, and supporting edits. Prefer a coherent capability to artificial mini-slices. Large edits and broad but related refactorings are acceptable.
+Own the concrete implementation: architecture *within resolved constraints*, types, files, algorithms, sequence, tests, and supporting edits. Respect the milestone's intended changes, permitted consequences, **protected invariants**, and related behavioral/mode contracts; broad scope or explicit permission for some breakage is not a blanket waiver of other boundaries. Prefer a coherent capability to artificial mini-slices. Large edits and broad but related refactorings are acceptable.
 
 You may build disposable prototypes, compare approaches, reverse a failed implementation, and try another **within the milestone's goal, invariants, and environment authorization**. When planning deliberately delegates reversible architectural alternatives, evaluate them against the agreed criteria and preserve the chosen result without changing settled public contracts. Avoid unrelated expansion. You do not need planning approval for local implementation choices or implementation-derived decomposition.
 
