@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.0.0 (stable)
+
+Migration required: yes for product repositories adopting the repository-local pinned planning methodology; active substantive milestones also need lossless material-obligation accounting. Existing completed milestone history is not rewritten.
+
+Affected areas: planning authority, guide installation/upgrade, profile resolution and routing, bootstrap/adoption/update/special prompts, execution obligation handoff, execution ledger template, and version traceability.
+
+### Changed — self-contained planning
+
+- Vendor one **complete, unmodified, pinned upstream Git tree** at `.guide/system/` in each product repository; normal planning uses this local authority instead of drifting upstream `main`. The upstream guide itself stays at its root.
+- Record source Git tag, peeled commit SHA, version and local path in schema-version-2 `.guide-profile.json`. Shared profiles resolve from the snapshot; `.guide/profiles/` and project guidance remain project-owned. Research remains non-authoritative.
+- Use Git subtree with squashed upstream history or an exact tracked-tree copy, with explicit target-state-aware upgrades; no guide package, GitHub Release, automatic synchronization, or custom packaging infrastructure is required.
+
+### Changed — completeness without validation overengineering
+
+- Restore **planner-seeded, stable material-obligation IDs** and a lightweight `.execution/<milestone-id>.md` ledger as the default for substantive implementation, documentation, migration and release-readiness milestones. Permit omission for genuinely trivial indivisible work.
+- The implementer preserves every planned obligation and reconciles delivered outcomes before completion. This prevents forgotten work; it does **not** mandate one test per requirement, evidence-case registries, proof maps, receipts, or stronger milestone validation.
+- Preserve coherent agent-sized milestones, reversible internal experiments, focused real integration, review/correction economy, and independent final-artifact release qualification.
+
+### Migration
+
+Use `migrations/guide-system-v1.0.0-rc.1-to-v1.0.0.md` for RC1 adopters; earlier adopters should inspect the applicable historical chain but implement the effective stable 1.0 target state. See ADR-0032 and ADR-0033.
+
+
 ## 1.0.0-rc.1 (release candidate)
 
 Migration required: yes for projects that adopted mandatory 0.9.x AI-executed ledger, evidence-case, validation-receipt, or consumer-at-milestone machinery; otherwise mostly metadata/routing alignment.

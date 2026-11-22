@@ -4,13 +4,7 @@ Use this workflow to establish or improve a repository's durable planning-knowle
 
 This is a planning/research workflow, not ordinary implementation.
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Read `meta/RESEARCH-MODEL.md` before performing the workflow.
-
-Do not copy guide documents into the target repository.
+Read `meta/RESEARCH-MODEL.md` from the pinned `.guide/system/` snapshot (or the upstream guide root when maintaining it). Keep project research in `docs/research/` and do not copy upstream methodology there; `.guide/system/` is the one intentional upstream snapshot.
 Do not copy planning conversations wholesale into `docs/research/`.
 Do not treat historical material as project authority merely because it influenced earlier decisions.
 

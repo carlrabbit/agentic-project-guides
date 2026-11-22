@@ -25,7 +25,7 @@ A profile defines a broad reusable engineering shape. It may define applicabilit
 
 ## Shared and project-local profile sources
 
-Shared profiles are maintained in this guide repository under `profiles/<id>/`.
+Shared profiles are maintained upstream under `profiles/<id>/` and resolved by product planning from the pinned `.guide/system/profiles/<id>/` snapshot. The upstream guide itself resolves its root `profiles/<id>/` directly. Never silently mix profiles from an unpinned upstream branch with a consuming repository's snapshot.
 
 A consuming project may define additional **local profiles** under:
 
@@ -125,7 +125,7 @@ Repository-wide example:
 ```json
 {
   "id": "dotnet-library",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "scopes": [
     { "kind": "repository" }
   ]
@@ -148,7 +148,7 @@ Scoped example:
 ```json
 {
   "id": "source-generator",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "scopes": [
     {
       "kind": "component",
@@ -172,7 +172,7 @@ Legacy schema-version-1 profile entries without scope metadata are interpreted a
 
 ## Planning discovery and implementation boundary
 
-For the affected milestone scope, planning loads the external base/shared profiles, resolves registered `local:<id>` files, reads optional `docs/PROJECT-GUIDANCE.md`, and inspects the relevant project engineering/specification/architecture/decision authority. All applicable mandatory and triggered conditional obligations must be accounted for. Objectives guide planning choices; they do not automatically override explicit requirements.
+For the affected milestone scope, planning loads base/shared profiles from the pinned `.guide/system/`, resolves registered `local:<id>` files, reads optional `docs/PROJECT-GUIDANCE.md`, and inspects relevant project engineering/specification/architecture/decision authority. All applicable mandatory and triggered conditional obligations must be accounted for. Objectives guide planning choices; they do not automatically override explicit requirements.
 
 A new project or planning task may author a local profile if an uncovered engineering shape merits a reusable contract; register it explicitly and resolve project authority before a milestone becomes ready. Do not require a central guide release to introduce a local profile.
 

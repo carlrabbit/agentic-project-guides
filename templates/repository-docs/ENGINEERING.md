@@ -52,7 +52,7 @@ Resolve as applicable:
 - fallback validation when the target is unavailable;
 - release and consumer-surface relationship.
 
-Use a focused `docs/engineering/<topic>.md`, spec, architecture document, or decision record when this becomes too detailed for this file. Do not copy the external guide's specialization model into the repository.
+Use a focused `docs/engineering/<topic>.md`, spec, architecture document, or decision record when this becomes too detailed for this file. Do not duplicate the pinned guide's specialization methodology in project-owned engineering docs; `.guide/system/` is the separate, versioned methodology snapshot.
 
 ## Research boundary
 

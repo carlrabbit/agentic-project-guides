@@ -18,13 +18,19 @@
 
 **Not in scope:** <real exclusions, not a file allowlist>
 
-## Acceptance
+## Acceptance and material obligations
 
-- <Observable result A>
-- <Observable result B>
-- <Observable result C>
+- **AC-01:** <Independently deliverable observable outcome A>
+- **AC-02:** <Independently deliverable observable outcome B>
+- **DOC-01:** <Direct documentation/migration deliverable, only if required>
 
-<Describe all required outcomes, not a test-case catalog. A single test or review may establish several results. Add IDs only when useful.>
+<Preserve each material obligation, including separately required non-code deliverables. For substantive implementation milestones, seed exactly these applicable IDs in `.execution/<milestone-id>.md` before `ready`. For a genuinely trivial indivisible task, explicitly record why no ledger is needed. The IDs are a completeness inventory, not a one-test-per-criterion matrix.>
+
+## Execution obligation ledger
+
+**Ledger:** `.execution/<milestone-id>.md` <planner-seeded for substantive implementation milestones; or briefly justify omission for a genuinely trivial indivisible task>.
+
+<Ensure all independently deliverable acceptance obligations are represented with the same stable IDs before `ready`. Implementers may choose implementation steps; they cannot silently discard seeded obligations.>
 
 ## Validation
 

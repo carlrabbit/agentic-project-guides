@@ -4,7 +4,7 @@ Create a release-readiness milestone package for:
 
 `{milestone}`
 
-Use the current guide methodology for planning; implementers must not need the external guide or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
+Use the pinned `.guide/system/` methodology for planning; implementers must not need the guide snapshot, external upstream repository, or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
 
 ## Distinct release boundary
 
@@ -44,10 +44,10 @@ Prefer direct scripts and focused consumer smoke scenarios. Resumable shards, re
 
 The release milestone closes when its declared candidate qualification is credibly met, required artifacts/docs are prepared, and approvals are resolved. Publication remains a separately authorized action. Record passed checks, known limitations, and any unqualified supported surface clearly.
 
-Do not seed a mandatory `.execution/` ledger, acceptance/evidence-case registry, or one-to-one proof table. A lightweight progress note is optional for long release qualification.
+For a substantive release-readiness milestone, seed `.execution/<milestone-id>.md` with all material qualification and documentation obligation IDs before `ready`; reconcile delivered outcomes at completion. This does not require one test per row, evidence cases, proof registries, or fingerprinted receipts.
 
 ## Deliverable
 
-Prepare the primary ready milestone and only essential new/updated project authority, release documents, migration items, or review requests. Do not include product implementation, generated packages, copied guide docs, broad unrelated cleanup, or speculative CI pipelines.
+Prepare the primary ready milestone and only essential new/updated project authority, release documents, migration items, or review requests. Do not include product implementation, generated packages, unmanaged copied guide docs outside `.guide/system/`, broad unrelated cleanup, or speculative CI pipelines.
 
 Report the milestone location, target/version, actual required qualification targets and loci, known constraints, publication boundary, and requested transport/PR or ZIP path when available. Use the canonical implementation prompt for subsequent execution.

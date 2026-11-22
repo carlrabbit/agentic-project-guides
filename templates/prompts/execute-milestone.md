@@ -8,7 +8,7 @@ Start here: `{primary-milestone-path}`
 
 1. Read the primary milestone and **only** the project authority it references.
 2. Inspect the live source, tests, relevant `AGENTS.md`, and documented engineering commands.
-3. Read an optional `.execution/<milestone-id>.md` only when provided or useful for resuming long work.
+3. For a substantive milestone, read the planner-seeded `.execution/<milestone-id>.md` before implementation. Confirm its IDs cover all independently deliverable milestone obligations, including documentation/migration work. If an expected ledger is missing or collapses requirements, repair the inventory from the milestone without changing its contract; escalate genuine scope ambiguity to planning. A trivial milestone may explicitly omit the ledger.
 
 The ready milestone and actual project authority govern. Planning chat, external guide repository, guide selection metadata, or research archives are not required implementation input. Research is non-authoritative except as explicitly relevant evidence.
 
@@ -21,6 +21,10 @@ You may build disposable prototypes, compare approaches, reverse a failed implem
 Escalate only a **material unresolved project decision** affecting required architecture, semantics, public/persisted compatibility, scope, acceptance, safety, validation authority, or specialization. Explain the decision and discovered evidence. Do not treat implementation difficulty alone as a reason to stop.
 
 Preserve existing work. Do not assume technical access permits persistent software installation, CI workflow changes, secret changes, or infrastructure provisioning; use documented project authority. **Implementing a destructive capability does not authorize executing its effects on non-disposable data or shared/external systems.** Credentials and connection strings are not permission. Require explicit target/action authority and proportionate isolation, recovery, or rollback. Use authorized disposable test targets when possible; report the specific blocked operation instead of running it or halting otherwise safe implementation.
+
+## Obligation completeness during implementation
+
+Keep the planner-seeded obligation rows intact and current. You own implementation tasks and sequencing but may not silently drop, merge, renumber, or reinterpret the seeded obligations. Mark `done` only for outcomes actually delivered. If a planned outcome becomes invalid or materially changes, return that decision to planning; do not quietly waive it. Prior to completion, reconcile milestone and ledger obligation IDs and inspect the real result for every applicable row. This accounting is **not** a requirement for one test or evidence record per row.
 
 ## Validation during implementation
 
@@ -36,9 +40,9 @@ Exploratory/nondeterministic tests do not automatically enter the default suite.
 
 ## Completion, review, and correction
 
-Review the resulting repository against the milestone's **entire acceptance contract** and invariants; tests alone cannot certify unexercised behavior. Check explicitly required artifacts, migrations, documentation, and material residual risks.
+Reconcile every applicable planner-seeded obligation to the milestone and delivered repository; tests alone cannot certify unexercised behavior. Review the entire acceptance contract and invariants. Check explicitly required artifacts, migrations, documentation, and material residual risks.
 
-Write a **brief durable completion note** in the milestone (or its project-defined completion record) covering delivered behavior, tests actually run/results, important limitations, and release checks deferred. Also summarize this in the final report. Do not turn the note into a criterion-by-criterion proof ledger. No mandatory acceptance-to-evidence table, ledger set equality, immutable completion proof, or independent reviewer sign-off is implied.
+Write a **brief durable completion note** in the milestone (or its project-defined completion record) covering delivered behavior, tests actually run/results, important limitations, and release checks deferred. Also summarize this in the final report. Do not turn the note into a criterion-by-criterion proof ledger. Ledger-to-milestone obligation-ID reconciliation is required for substantive milestones, but no acceptance-to-test evidence table, immutable completion proof, or independent reviewer sign-off is implied.
 
 When correcting a defect, implement the repair and perform the smallest credible focused verification. Add a small permanent regression test when a reproducible defect is likely to recur and the test is economical; do not persist every one-off diagnostic. Do not expand acceptance or construct additional gates without a demonstrated material risk. If the prior validation strategy is excessive, reduce it rather than preserving sunk process costs.
 

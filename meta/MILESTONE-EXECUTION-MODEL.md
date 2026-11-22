@@ -2,7 +2,7 @@
 
 ## Status
 
-Authoritative for milestone sizing, readiness, implementation ownership, execution outcomes, and completion. See [Validation Model](VALIDATION-MODEL.md) for assurance boundaries. This model supersedes mandatory execution-ledger/evidence-case policies in ADR-0019, ADR-0026, and ADR-0027.
+Authoritative for milestone sizing, readiness, implementation ownership, execution outcomes, and completion. See [Validation Model](VALIDATION-MODEL.md) for assurance boundaries. This model replaces ADR-0019/ADR-0026/ADR-0027 proof machinery while preserving the lossless planner-seeded obligation inventory, as specified by ADR-0033.
 
 ## Purpose and economics
 
@@ -44,9 +44,9 @@ Use [the milestone template](../templates/milestones/milestone-template.md). A r
 4. **Acceptance:** concise verifiable outcomes, not a test-case inventory.
 5. **Validation:** cheapest credible checks and important known risks; explicitly identify any exceptional milestone-stage qualification.
 
-Reference only project authority needed to implement the change. Include documentation impact, migration, or required human judgment where material. A milestone's acceptance contract is mandatory, but a ledger, evidence-case registry, validation matrix, and one-to-one acceptance-to-test mapping are not.
+Reference only project authority needed to implement the change. Include documentation impact, migration, or required human judgment where material. The acceptance contract must preserve all independently deliverable, material obligations; do not collapse distinct outcomes merely to shorten the document. For a substantive milestone, assign stable IDs to those obligations (including required documentation or migration deliverables) and seed the same IDs in a lightweight execution ledger before `ready`. A genuinely trivial, indivisible task may omit a ledger with a short rationale. No evidence-case registry, test matrix, or one-to-one acceptance-to-test mapping is implied.
 
-Acceptance criteria may be enumerated for clarity. Stable machine IDs are optional unless a concrete integration requires them. One test or architectural inspection may support multiple outcomes. A passing test suite alone never excuses ignoring requirements that it does not cover.
+**Completeness and correctness are separate concerns.** The obligation inventory prevents the executor from losing planned work; focused validation establishes credible behavior. One test or architectural inspection may support multiple outcomes. A passing test suite alone never excuses ignoring an obligation it does not cover.
 
 ## Planning and implementation separation
 
@@ -70,22 +70,23 @@ If live repository discoveries invalidate a material decision, resolve that deci
 
 Ordinary implementers read the milestone, referenced project truth, and relevant code/tests. They do not need the guide repository, planning research corpus, or planning conversation to reconstruct the contract.
 
-## Execution and optional progress state
+## Planner-seeded obligation ledger and execution progress
 
-Implement a coherent outcome; use focused feedback during edits; inspect implementation and run proportionate milestone checks near completion. Do not run full release or aggregate suites after every small change.
+For every **substantive implementation milestone**, planning seeds a compact `.execution/<milestone-id>.md` ledger **before** declaring `ready`. Its purpose is lossless transfer of material work obligations, not proof collection. This default does not depend on expected elapsed time or whether the implementer is likely to be interrupted. Omission is appropriate only for a genuinely trivial, indivisible task where a second inventory provides no benefit; record that decision briefly in the milestone.
 
-An execution ledger is **optional operational state**, useful for genuinely long, interrupted, multi-agent, or difficult-to-resume work. If used, `.execution/<milestone-id>.md` is a suggested path, and [the optional template](../templates/milestones/execution-ledger-template.md) provides a lightweight starting point. It never overrides the milestone and is not required before `ready`.
+- Seed one pending entry per independently deliverable material milestone obligation, retaining the same stable ID and meaning as the milestone. Include direct documentation, migration, and setup deliverables where they are part of acceptance; do not generate rows for speculative implementation steps or each possible test.
+- Planning owns the inventory. The implementer may add its own work tasks, progress details, and new discovered implementation steps, but may not silently merge, renumber, delete, reword away, or mark an unfulfilled planner-seeded obligation not applicable. Material scope changes return to planning.
+- During implementation, keep seeded entries current (pending / in progress / done / blocked) and use the ledger for optional resume information. It is operational state subordinate to the ready milestone, not an independent source of policy.
+- Before `COMPLETE`, reconcile the set of applicable milestone obligation IDs with the seeded ledger IDs and account for each entry against the delivered result. An entry is `done` only when the actual outcome is present; a green aggregate test or assertion of completion alone is insufficient. Unfinished entries require correction or a genuine blocker, never silent omission.
 
-A ledger can summarize progress and resume context; it does not need one row per acceptance criterion, evidence case, or validation gate. No exact set-equality reconciliation, fingerprinted proof registry, work-package mapping, or immutable completion-evidence artifact is mandatory by default. Where a project has an explicit auditable-traceability requirement, define its scope and cost justification in project authority.
-
-Maintain sufficient progress information to survive interruption when interruption is plausible. Avoid creating files, generators, or scripts just to administer short-lived execution state.
+Use [the compact ledger template](../templates/milestones/execution-ledger-template.md). Do **not** mandate evidence-case IDs, per-obligation proof links, validation gate IDs, work-package mappings, receipt fingerprints, or immutable acceptance-to-proof registries. This is a lightweight completeness check, not a release or testing gate. Keep the ledger through implementation and review; afterward retain or archive it according to project policy, with a short durable milestone completion note.
 
 ## Completion and review
 
 Completion establishes that the delivered capability meets the milestone's acceptance contract with credible evidence, not that its distributable product has completed release qualification.
 
 At completion:
-- inspect the resulting behavior against every substantive outcome and invariant;
+- reconcile planned obligation IDs to the ledger, ensure every applicable deliverable is actually complete, and inspect the resulting behavior against every substantive outcome and invariant;
 - run focused automated checks and a small number of representative integrations appropriate to actual risks;
 - identify any known gaps and release-only checks that have been deferred;
 - update direct documentation or migration material explicitly in scope;
@@ -109,7 +110,7 @@ These describe the execution run; they do not add lifecycle states. An agent mus
 
 ## Workflow types and review
 
-Normal feature, migration, diagnostic, documentation synchronization, and release-readiness work can use dedicated planning prompts where their delivery boundary differs. Special prompts must not silently reinstate generic mandatory ledgers or evidence registries.
+Normal feature, migration, diagnostic, documentation synchronization, and release-readiness work can use dedicated planning prompts where their delivery boundary differs. Special prompts use the lightweight planner-seeded obligation ledger for substantive milestones but must not reinstate evidence-case registries, per-criterion testing gates, or other proof machinery.
 
 Milestone-scoped human review is optional unless required by the project or milestone. Approved reviews are historical decisions, not rolling approval of future changes. See [Human Review Model](HUMAN-REVIEW-MODEL.md).
 

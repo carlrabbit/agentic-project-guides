@@ -4,7 +4,7 @@ Convert the requested capability into a ready milestone for a disconnected imple
 
 `{milestone}`
 
-Use `carlrabbit/agentic-project-guides` as **planning** methodology. Do not copy guide documents into product repositories or require ordinary implementers to read this guide.
+Use the product repository's pinned `.guide/system/` as **planning** methodology (or this repository's root when planning guide maintenance). Consult `.guide/system/README.md` for task routing and selectively load applicable models and shared profiles. Do not use drifting upstream `main`, copy guides into project docs, or require ordinary implementers to load the snapshot.
 
 ## Objective: agent-scaled, coherent delivery
 
@@ -38,7 +38,7 @@ Produce a single primary milestone following `templates/milestones/milestone-tem
 5. **Validation:** a small, credible set of focused tests and representative integration behaviors; identify material consequence risks and checks deferred to release.
 6. **Required authority and exceptional obligations:** only where they matter, including direct docs, local specializations, permissions, or required human judgment.
 
-Acceptance is mandatory; **a distinct test/evidence case per criterion is not**. Do not produce a mandatory `.execution/` ledger, evidence-case registry, receipt plan, gate matrix, or immutable proof artifact. An optional lightweight progress/resume ledger may be prescribed only where long-running execution needs it.
+**Seed a lightweight obligation ledger by default for substantive implementation milestones**, even if the agent expects to finish in one session. Give each independently deliverable material acceptance obligation a stable ID, including direct documentation/migration work, and seed one pending row with that same ID and meaning in `.execution/<milestone-id>.md` **before** `ready`. Do not compress distinct requirements into one vague row. A genuinely trivial indivisible task may omit the ledger with a brief rationale. Do not require test/evidence cases per criterion, receipts, gate matrices, or proof registries: obligation completeness is not exhaustive validation.
 
 Make the contract complete for the project's baseline executor without relying on planning chat history or reading the guide. Do not reduce a coherent milestone merely because implementing it may be lengthy; the implementer can decompose and resume work internally.
 
@@ -74,6 +74,6 @@ Before marking `ready`, verify:
 - validation is proportionate and release qualification is properly separated;
 - any required external target/authority is real and authorized;
 - an implementer can act independently using the ready milestone and project truth;
-- no mandatory ledger, validation-host, receipt, or human-review ceremony has been introduced without a specific justification.
+- every material deliverable obligation has survived into the seeded ledger when applicable, without creating validation-host, receipt, test-mapping, or human-review ceremony.
 
 Do not confuse implementation uncertainty with missing project policy. Return genuinely material unresolved decisions to planning.

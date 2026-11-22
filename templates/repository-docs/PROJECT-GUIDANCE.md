@@ -22,4 +22,4 @@
 
 ## Boundaries
 
-This document guides planning. It is not research, a duplicate of the external guide, or required reading for ordinary implementation. Before a milestone is ready, project rules affecting implementation and validation must appear in the ready milestone or referenced operative project authority.
+This document guides planning. It is not research, a duplicate of the pinned `.guide/system/` shared methodology, or required reading for ordinary implementation. Before a milestone is ready, project rules affecting implementation and validation must appear in the ready milestone or referenced operative project authority.

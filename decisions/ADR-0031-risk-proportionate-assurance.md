@@ -1,6 +1,6 @@
 # ADR-0031 — Risk-Proportionate Milestone Assurance and Release Qualification
 
-**Status:** Accepted for 1.0.0-rc.1
+**Status:** Accepted for 1.0.0 and retained, with the distinction that the small planner-seeded **obligation ledger** is restored by ADR-0033 while evidence-case/test-proof machinery remains optional.
 **Supersedes as defaults:** mandatory evidence topology (ADR-0027), compulsory release/consumer checks during ordinary feature milestones, and unconditional application of receipt/sharding requirements from ADR-0014–0018/0029.
 
 ## Context
@@ -17,7 +17,7 @@ Evaluate confidence at three delivery boundaries:
 
 The ordinary milestone requires levels 1–2. Move release qualification forward only when its boundary is the milestone's goal, project authority explicitly requires it, or deferral creates material risk. Real integration (database, runtime, process) can still be the cheapest milestone evidence; it is distinct from installed-distribution qualification.
 
-Acceptance outcomes remain mandatory but a one-to-one map to evidence cases, individual tests, separate gates, or immutable proof records is not. Existing relevant evidence can be reused when valid. Detailed ledgers, fingerprinted receipts, and resumable execution are optional cost-saving mechanisms justified by measured cost or audit needs.
+Acceptance outcomes remain mandatory but a one-to-one map to evidence cases, individual tests, separate gates, or immutable proof records is not. Existing relevant evidence can be reused when valid. A compact planner-seeded **obligation inventory** is required for substantive milestones under ADR-0033, but detailed evidence/proof ledgers, fingerprinted receipts and expensive resumability machinery remain optional cost-saving mechanisms justified by demonstrated need.
 
 **Corrections must not ratchet up infrastructure.** Fix concrete defects and run focused checks. Add obligations or validation stages only for demonstrated material risk. Remove excessive existing machinery when possible.
 

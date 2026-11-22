@@ -4,13 +4,7 @@ Our planning task is to create an implementation-ready engineering migration mil
 
 `{milestone}`
 
-The active guide authority is external:
-
-- Guide repository: `carlrabbit/agentic-project-guides`
-
-Do not copy guide documents into the target repository.
-Do not make target repository documentation reference guide documents as operational authority.
-Use the guide system only for planning, migration, documentation synchronization, review, and release readiness.
+Use the product repository's pinned `.guide/system/` snapshot as shared planning methodology (or the upstream guide's root when maintaining that repository). Project-specific authority and research stay local. Do not edit the pinned guide, duplicate it elsewhere, or make implementers read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` within the guide root.
 
 Target repository documentation must contain project truth only.
 
@@ -22,9 +16,9 @@ If the target repository contains `.guide-sync/`, treat it as deferred documenta
 
 If the target repository contains `.review/`, treat it as repository-local human-review state. Read it only when the milestone requires human review, engineering migration, documentation synchronization, or release readiness.
 
-## Optional execution progress
+## Planner-seeded obligation completeness
 
-Do not initialize a mandatory `.execution/` ledger, obligation/evidence-case registry, or validation-gate mapping. Use a small repository-local resume note only when this particular migration or planning job is long-running enough to benefit. Acceptance remains defined by the primary milestone.
+For a substantive engineering migration, seed `.execution/<milestone-id>.md` before `ready` with stable IDs for every material acceptance and documentation/migration obligation. The implementer preserves and reconciles all entries. This is completeness accounting, not a test matrix; no evidence-case registry, proof mapping, validation-gate table, or receipt infrastructure by default.
 
 ## Planning/implementation separation
 
@@ -80,12 +74,12 @@ docs/artifacts/xxx.md
 docs/review/xxx.md
 .review/pending/xxx.md
 .guide-sync/pending/xxx.md
-.execution/M00XX-<milestone>.md   # optional resume state, only if justified
+.execution/M00XX-<milestone>.md   # planner-seeded obligations; required for substantive milestones
 ```
 
 Only include files directly needed to make the milestone implementation-ready.
 
-Do not include implementation source files, test files, generated code, workflow YAML, broad documentation synchronization edits, TBPs, issue templates, or copied guide documents.
+Do not include implementation source files, test files, generated code, workflow YAML, broad documentation synchronization edits, TBPs, issue templates, or unmanaged copied guide documents outside `.guide/system/`.
 
 ## Required milestone document
 
@@ -155,7 +149,7 @@ Do not mix unrelated product feature implementation into the migration.
 
 Deliver a repository-relative package (directly in the requested branch/repository, or as a ZIP if requested) containing only new or replacement files that should be added to the target repository. Preserve repository-relative paths inside the ZIP.
 
-Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or copied guide documents.
+Do not include implementation source files, generated code, broad unrelated documentation cleanup, TBPs, issue templates, or unmanaged copied guide documents outside `.guide/system/`.
 
 After preparing the package, respond with:
 
