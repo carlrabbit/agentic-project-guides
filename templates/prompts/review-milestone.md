@@ -4,11 +4,13 @@ Review the implementation or pull request for:
 
 `{milestone-or-pr}`
 
-Use the ready milestone, its referenced project authority, changed code/tests, and relevant existing checks. This is **engineering review**, not automatically a formal human-acceptance gate. Do not require the implementation agent to read the external guide.
+Use the ready milestone, its referenced project authority, changed code/tests, relevant existing checks, and—for substantive work—the planner-seeded `.execution/<milestone-id>.md` obligation ledger. This is **engineering review**, not automatically a formal human-acceptance gate. Do not require the implementation agent to read the pinned guide snapshot or external upstream repository.
 
 ## Objective
 
 Determine whether the intended **whole coherent capability** and important invariants are actually delivered. Inspect architecture, observable behavior, failure consequences, relevant integrations, direct documentation, and implementation defects. A green suite does not prove unexercised behavior; the existence of many possible cases does not justify testing all of them.
+
+For a substantive milestone, compare the ledger's stable obligation IDs with the ready milestone, and inspect whether **each material deliverable is actually present**. A `done` status without the deliverable is not completion; a missing or compressed obligation is a real handoff defect. This is completeness accounting, not a requirement for one test or proof artifact per row.
 
 Review at agent scale. Do not penalize a broad but coherent change merely because it contains many edits or would be large for a human team.
 

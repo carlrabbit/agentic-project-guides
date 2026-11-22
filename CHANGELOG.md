@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (stable guide specification; Git tag pending merge)
+## 1.0.0 (stable)
 
 Migration required: yes for product repositories adopting the repository-local pinned planning methodology; active substantive milestones also need lossless material-obligation accounting. Existing completed milestone history is not rewritten.
 
