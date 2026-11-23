@@ -36,7 +36,7 @@ Qualify the **current candidate artifact**, avoiding accidental resolution of de
 
 Cover important public command behavior, API/diagnostics, examples, and supported environments. Do not repeat all internal unit/integration tests through every consumer. Reuse applicable current milestone integration evidence if candidate inputs and behavior remain equivalent; rerun checks whose results can no longer establish the final candidate.
 
-Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. Missing required targets are blockers, not license to create new CI infrastructure without authorization.
+Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. **Before declaring a release-readiness milestone `ready`,** critically verify the planned executor can obtain the actual candidate artifact and use the required installation mechanisms, runtimes, consumers, platforms, target systems and credentials at specified, authorized loci; distinguish observed facts, authoritative declarations and unverified assumptions. If a required target is unavailable, identify and authorize a feasible alternative or keep the milestone in planning until resolved. A theoretical CI runner or someone's local machine is not established agent access. Missing required targets are blockers, not license to create new CI infrastructure without authorization. These are feasibility checks during planning, not a demand to run release qualification prematurely.
 
 ## Cost and completion
 

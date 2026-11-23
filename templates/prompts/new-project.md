@@ -127,7 +127,7 @@ Resolve as applicable:
 - fallback/failure semantics, including accepted alternative loci and evidence equivalence;
 - consumer/release relationship.
 
-During bootstrap, explicitly check which toolchain/runtime capabilities the first milestone needs and whether a missing prerequisite can be provisioned in an authorized disposable/user-scoped environment, must be supplied by the environment owner, or should result in `BLOCKED`. Do not silently substitute GitHub Actions or another execution location for local validation. An absent prerequisite is compatible with a ready milestone when authority, evidence location, and the blocked path are settled; it is not a license for infrastructure creation.
+During bootstrap, assess the **actual intended executor and execution/verification environments** against the first milestone's required toolchain, runtime, integration targets, permissions, and repository commands; distinguish observed facts, authoritative documentation, and assumptions. A missing material prerequisite must have a concrete, feasible, **authorized** setup or alternative locus before the milestone becomes `ready`; otherwise retain it as a planning draft and state the blocker. An ordinary low-risk uncertainty may be a named initial preflight with fallback. Do not silently substitute GitHub Actions or another execution location for local validation or assume the implementer may install persistent software. Critically review the first milestone and seeded ledger before handoff, following `meta/MILESTONE-EXECUTION-MODEL.md`.
 
 If the project intentionally uses integration-first testing, record that policy in project engineering authority. Do not create unit-test requirements merely because of an assumed generic test pyramid.
 

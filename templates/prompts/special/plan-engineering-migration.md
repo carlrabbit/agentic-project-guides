@@ -85,7 +85,7 @@ Do not include implementation source files, test files, generated code, workflow
 
 Create exactly one primary milestone document under `docs/milestones/`.
 
-The milestone must define a coherent target, important architecture/invariants, scope/exclusions, verifiable acceptance outcomes, and focused milestone validation with release-only checks clearly deferred. Record applicable project authority, constraints, documentation-sync hints, authorization, and human judgment only where material. Do not create a file-edit forecast, evidence registry, or elaborate gate plan just to complete a template.
+The milestone must define a coherent target, important architecture/invariants, scope/exclusions, verifiable acceptance outcomes, and focused milestone validation with release-only checks clearly deferred. **Before `ready`, critically assess the draft against the real intended executor:** check relevant tools/SDKs, runtime and integration access, repository commands, permissions, execution loci and constraints; distinguish observed, documented and unverified capabilities; resolve any unavailable material prerequisite and ensure the focused checks can run. Apply `meta/MILESTONE-EXECUTION-MODEL.md` and `meta/VALIDATION-MODEL.md`, not merely a theoretical test plan. Record project authority, constraints, documentation hints, authorization, and human judgment only where material. Do not create a file-edit forecast, environment registry, evidence matrix, or elaborate gate plan just to complete a template.
 
 ## Additional authority documents
 
