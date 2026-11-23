@@ -9,7 +9,7 @@ If supplied, honor the **exact accepted Git planning-baseline commit**. Continue
 ## Read
 
 1. Read the primary milestone and **only** the project authority it references.
-2. Inspect the live source, tests, relevant `AGENTS.md`, and documented engineering commands.
+2. Inspect the live source, tests, relevant `AGENTS.md`, documented engineering commands, and the milestone's declared execution/verification prerequisites. Confirm any specifically assigned initial environment preflight; do not assume planner-observed tools exist in this executor environment.
 3. For a substantive milestone, read the planner-seeded `.execution/<milestone-id>.md` before implementation. Confirm its IDs cover all independently deliverable milestone obligations, including documentation/migration work. If an expected ledger is missing or collapses requirements, repair the inventory from the milestone without changing its contract; escalate genuine scope ambiguity to planning. A trivial milestone may explicitly omit the ledger.
 
 The ready milestone and actual project authority govern. Planning chat, external guide repository, guide selection metadata, or research archives are not required implementation input. Research is non-authoritative except as explicitly relevant evidence.
@@ -20,7 +20,7 @@ Own the concrete implementation: architecture *within resolved constraints*, typ
 
 You may build disposable prototypes, compare approaches, reverse a failed implementation, and try another **within the milestone's goal, invariants, and environment authorization**. When planning deliberately delegates reversible architectural alternatives, evaluate them against the agreed criteria and preserve the chosen result without changing settled public contracts. Avoid unrelated expansion. You do not need planning approval for local implementation choices or implementation-derived decomposition.
 
-Escalate only a **material unresolved project decision** affecting required architecture, semantics, public/persisted compatibility, scope, acceptance, safety, validation authority, or specialization. Explain the decision and discovered evidence. Do not treat implementation difficulty alone as a reason to stop.
+Escalate only a **material unresolved project decision or unavailable essential execution/verification prerequisite without an authorized workaround** affecting required architecture, semantics, public/persisted compatibility, scope, acceptance, safety, validation authority, or specialization. Explain the decision and discovered evidence. Do not treat implementation difficulty alone as a reason to stop.
 
 Preserve existing work. Do not assume technical access permits persistent software installation, CI workflow changes, secret changes, or infrastructure provisioning; use documented project authority. **Implementing a destructive capability does not authorize executing its effects on non-disposable data or shared/external systems.** Credentials and connection strings are not permission. Require explicit target/action authority and proportionate isolation, recovery, or rollback. Use authorized disposable test targets when possible; report the specific blocked operation instead of running it or halting otherwise safe implementation.
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.1 (planned patch)
+
+Migration required: no mandatory project restructuring. Product repositories adopting 1.0.1 replace their pinned guide snapshot and update the tag/peeled-commit metadata together. Apply the improved readiness assessment to new planning; inspect an active ready milestone only when material executor/verification assumptions may be invalid.
+
+Affected areas: milestone readiness, validation feasibility, planner-owned quality review, canonical planning/execution prompts, milestone template and relevant special planning workflows. No changes to the obligation-ledger contract or milestone/release qualification boundaries.
+
+### Clarified — executable implementation-ready milestones
+
+- For substantive milestones, the planner establishes a credible implementation **and milestone-level verification** route for the intended executor, with relevant toolchain, permissions, dependencies, actual execution loci and target access investigated before `ready`.
+- Distinguish verified capabilities, authoritative documentation, and assumptions; unresolved critical prerequisites are planning work, not problems silently delegated to implementation. Ordinary bounded preflights may be left as explicit executor first steps with fallback.
+- Require the planner to critically assess and repair its own draft before claiming readiness. Verification design is mandatory, while checks remain selective, high-information, and economical; no environment registry, one-test-per-obligation proof, release-level tests, or secondary review gate is introduced.
+
+### Migration
+
+See `migrations/guide-system-v1.0.0-to-v1.0.1.md`. The `v1.0.1` tag is created after merge, not on the planning branch.
+
+---
+
 ## 1.0.0 (stable)
 
 Migration required: yes for product repositories adopting the repository-local pinned planning methodology; active substantive milestones also need lossless material-obligation accounting. Existing completed milestone history is not rewritten.

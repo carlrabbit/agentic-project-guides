@@ -34,7 +34,9 @@
 
 ## Validation
 
-**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Do not require one test per invariant or universal semantic equivalence. Name targets/loci only where consequential.>
+**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Do not require one test per invariant or universal semantic equivalence. Name real targets/loci where material.>
+
+**Execution and verification feasibility:** <For substantive work, state the intended executor/locus, materially necessary tools/commands, services, access and permissions, authorized setup or alternative locus, and any bounded initial preflight/fallback. Distinguish checked capabilities from documentation and unverified assumptions. The planner must resolve material prerequisites before `ready`; do not require a generic environment inventory.>
 
 **Important risks:** <Plausible incorrect behaviors and protected-boundary violations that the chosen checks should expose; include focused mitigation where material.>
 

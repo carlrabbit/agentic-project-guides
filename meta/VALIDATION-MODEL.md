@@ -46,6 +46,14 @@ Exploratory simulations, fault injection, and temporary diagnostic tests are inv
 
 A review finding should identify the concrete defect and the narrowest check that could detect recurrence. Do not add gates, receipt systems, evidence cases, or new engineering hosts by default. Earlier excessive requirements may be removed or reduced during correction. Escalate only where a demonstrated material risk warrants it.
 
+## Executable verification is a readiness requirement
+
+For a substantive milestone, the planner **must** establish that its proposed focused checks are implementable and runnable by the intended executor or a specifically available, authorized execution locus. Choosing the **smallest credible** verification is discretionary; whether credible verification is needed is **not**. For material checks, identify the actual applicable tool/command (or focused check the implementer will create), target/fixture and execution locus, and necessary permissions or dependencies. Separate observed availability, current authoritative declarations, and assumptions. Do not cite a CI runner, desktop session, service, SDK or external API as available without a credible access path.
+
+When a check is important but the planner cannot access the future executor's environment, use reliable project evidence and specify a bounded initial preflight if its uncertainty is routine; if its availability is materially uncertain and has no authorized resolution, the milestone is not `ready`. Do not replace a required real integration with a pretend equivalent, move required milestone verification to release merely because the executor lacks access, or require provisioning that the executor is not permitted to perform.
+
+This is **validation design before implementation**, not a requirement to run the entire planned suite while planning. Focused checks may be implemented during the milestone. Do not restore one-test-per-obligation proof, exhaustive infrastructure discovery or release-grade qualification as ordinary milestone defaults.
+
 ## Integration targets and execution locus
 
 Validation depth, real target, and execution locus are independent. A real database or graphics runtime may run locally; CI is neither universally required nor automatically authoritative.
