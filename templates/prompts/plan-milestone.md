@@ -27,6 +27,14 @@ Resolve applicable base/shared/local profiles and conflicts through concrete pro
 
 Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. For changes that may mutate non-disposable data or shared/external systems, explicitly distinguish permission to implement/test on disposable targets from permission to execute against the actual named target; declare authorized actions and required recovery/isolation precautions where relevant. Planning may intentionally delegate selection among **reversible internal architectures** when fixed product invariants, evaluation criteria, and rollback bounds make implementation trials cheaper than speculative upfront analysis. Do not make detailed file lists or patch steps a prerequisite for `ready`.
 
+## Active decision discovery and delegation
+
+Apply the three responsibility levels in `meta/MILESTONE-EXECUTION-MODEL.md`: product/architectural decisions, quality-critical technical design, and technical realization. Identify **unmade** decisions, including internal algorithm, concurrency/lifecycle, recovery, resource, abstraction or verification choices where materially different outcomes are possible and sound selection requires substantial context or technical reasoning. These examples are not a mandatory design matrix.
+
+Ask: could two competent implementers satisfy the literal milestone yet deliver materially different-quality results? If unresolved criteria, missing context or the baseline executor's capabilities explain the difference, resolve the quality-critical choice at planning time. Specify the concrete approach, relevant constraints and verification design to the necessary depth. Preserve bounded reversible experimentation when criteria, boundaries and fallback enable the executor to select an outcome; return unresolved material trade-offs to planning. Leave local equivalent choices and integration mechanics free.
+
+Translate applicable project guidance into operative decisions; inspect representative implementations and existing conformance/contract tests rather than assuming "analogous to X" is sufficient. Existing patterns are evidence, not automatic policy. Retain only context necessary for the decision, implementation, drift detection or validation. Accessible project authority may be referenced directly when precise enough; do not delegate interpretation of unresolved material choices or leak shared guide/research reading into implementation. Consider a reviewed technical seed for a difficult core design or representative test when it communicates the approach better than prose; identify binding vs adaptable elements, verify actual APIs/versions and disclose non-executed or uncompiled seeds. Keep seeds outside active product/test inputs in planning-only handoffs.
+
 ## Change-impact analysis — planning responsibility
 
 For substantive milestones, investigate the affected implementation and product context rigorously enough to identify and resolve:
@@ -71,7 +79,7 @@ If a **material project decision** really cannot be made without evidence, resea
 
 ## Validation policy
 
-Use `meta/VALIDATION-MODEL.md`. **Design** checks during planning using the plausible wrong behaviors from change-impact analysis; a passing happy path alone may not distinguish correct from incorrect behavior. Select a small number of high-information checks, such as adjacent ineligible inputs or cross-mode consistency where material, without creating a default case matrix.
+Use `meta/VALIDATION-MODEL.md`. **Design** checks during planning using the plausible wrong behaviors from change-impact analysis; a passing happy path alone may not distinguish correct from incorrect behavior. For nontrivial checks, define the discriminating initial state/input, action, relevant test boundary/double, independent oracle and material side effects where needed; do not delegate their evidentiary meaning. Preserve applicable existing test guarantees and real boundaries in migrations, and specify comparable conditions for material measurements. The executor realizes the checks; no exhaustive test design or per-obligation mapping is required. Select a small number of high-information checks, such as adjacent ineligible inputs or cross-mode consistency where material, without creating a default case matrix.
 - During implementation: affected build, static feedback, targeted tests.
 - At milestone completion: focused behavioral checks and a few representative integration fixtures; review architecture and protected invariants.
 - At release: final package/installed tool/real consumer, compatibility, broader operational and platform qualification where required.
@@ -92,8 +100,8 @@ Provide the primary milestone path, affected authority documents, actual Git bra
 
 ## Planner-owned readiness review
 
-Critically inspect and revise the **initial milestone draft** against the actual repository and intended executor. Do not hand a questionable draft to the user or implementation agent as if it were ready. Before marking `ready`, verify:
-- material architectural, semantic, compatibility, security, and scope choices are resolved;
+Critically inspect and revise the **initial milestone draft** against the actual repository and intended executor. Do not hand a questionable draft to the user or implementation agent as if it were ready. Review from two distinct perspectives (target-state completeness/feasibility and conformance with project authority/protected conventions), within this same self-review; no separate artifact or approval. Before marking `ready`, verify:
+- material architectural, semantic, compatibility, security, scope and quality-critical technical/verification choices are resolved or explicitly bounded by a credible evaluation; applicable rules, ownership, existing evidence and any seeds are sound; no material decision is merely forwarded as context;
 - affected behavior/contracts have been investigated, with intended changes, tolerated secondary consequences, protected invariants, and interactions made unambiguous where material;
 - plausible consequential failures that a happy path or build might miss have been considered when selecting discriminating checks;
 - the outcome is coherent and appropriately ambitious for agent execution;

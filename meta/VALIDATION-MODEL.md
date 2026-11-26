@@ -18,6 +18,12 @@ For each change, ask:
 
 Planner-seeded **obligation accounting** establishes that work items are not silently forgotten; **validation evidence** establishes credible correctness. A completion ledger does not require one test, evidence-case ID, or gate per row. More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria. A permanent regression test is useful for a reproducible bug with plausible recurrence or significant failure consequence; not every one-off correction needs a permanent fixture.
 
+### Planner-owned verification design
+
+For nontrivial or quality-critical checks, planning owns the discriminatory power, not only the selection of a test level or command. Specify enough of the plausible wrong behavior, distinguishing initial conditions/inputs, triggering action, relevant real boundary or double, independent expected results (oracle), and material side effects or absence thereof that the intended executor can realize a check that would actually fail for the wrong implementation. Choose relevant details, not a mandatory per-test template. For example, a pagination-reset test must begin away from the first page; a passing reset from page one to page one establishes nothing. An oracle must not merely reproduce the implementation's own logic or let a double manufacture the result being tested.
+
+Inspect existing contract, architecture, conformance and integration checks for applicable conventions and reusable coverage. When migrating tests, decide which behavioral guarantees and independent real boundaries must survive, which evidence remains applicable and which may intentionally be replaced or retired; do not delegate these material coverage decisions to the implementer. When a comparison or benchmark is material, define the baseline, comparable conditions, measured property, interpretation and handling of infeasible evidence. For difficult tests, provide a representative seed when prose is insufficient, subject to the seed review and disclosure rules in the [Milestone Execution Model](MILESTONE-EXECUTION-MODEL.md). The executor owns test implementation details within the resolved design. None of this mandates more tests, exhaustive cases, test-by-test evidence, or running them during planning.
+
 ## Validation boundaries
 
 | Boundary | Normal purpose | Default |

@@ -6,6 +6,8 @@ Our planning task is to create an implementation-ready engineering migration mil
 
 Use the product repository's pinned `.guide/system/` snapshot as shared planning methodology (or the upstream guide's root when maintaining that repository). Project-specific authority and research stay local. Do not edit the pinned guide, duplicate it elsewhere, or make implementers read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` within the guide root.
 
+Apply the decision-discovery, competence-appropriate delegation, decision translation and two-perspective planner self-review rules in `meta/MILESTONE-EXECUTION-MODEL.md` and nontrivial verification-design rules in `meta/VALIDATION-MODEL.md` to any substantive milestone produced by this workflow. Resolve quality-critical choices and applicable project rules to the depth needed by the intended executor; preserve bounded reversible evaluation and proportionate checks. Direct lightweight changes do not acquire a milestone or extra readiness artifacts merely from these rules.
+
 Target repository documentation must contain project truth only.
 
 If the target repository contains old copied setup or engineering guides, treat them as legacy/non-authoritative unless the repository explicitly marks them as active project documentation.

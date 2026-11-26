@@ -6,6 +6,8 @@ Create a release-readiness milestone package for:
 
 Use the pinned `.guide/system/` methodology for planning; implementers must not need the guide snapshot, external upstream repository, or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
 
+Apply the decision-discovery, competence-appropriate delegation, decision translation and two-perspective planner self-review rules in `meta/MILESTONE-EXECUTION-MODEL.md` and nontrivial verification-design rules in `meta/VALIDATION-MODEL.md` to any substantive milestone produced by this workflow. Resolve quality-critical choices and applicable project rules to the depth needed by the intended executor; preserve bounded reversible evaluation and proportionate checks. Direct lightweight changes do not acquire a milestone or extra readiness artifacts merely from these rules.
+
 ## Distinct release boundary
 
 Release qualification is a deliberate **release-candidate** activity, not a validation gate inherited by every feature milestone. A release milestone establishes confidence in the integrated candidate **as actually consumed and supported**.

@@ -2,15 +2,21 @@
 
 ## 1.0.1 (planned patch)
 
-Migration required: no mandatory project restructuring. Product repositories adopting 1.0.1 replace their pinned guide snapshot and update the tag/peeled-commit metadata together. Apply the improved readiness assessment to new planning; inspect an active ready milestone only when material executor/verification assumptions may be invalid.
+Migration required: no mandatory project restructuring. Product repositories adopting 1.0.1 replace their pinned guide snapshot and update the tag/peeled-commit metadata together. Apply the improved readiness assessment to new planning; inspect an active ready milestone only when material executor/verification assumptions, unresolved quality-critical decisions or insufficient obligation coverage make its readiness doubtful.
 
-Affected areas: milestone readiness, validation feasibility, planner-owned quality review, canonical planning/execution prompts, milestone template and relevant special planning workflows. No changes to the obligation-ledger contract or milestone/release qualification boundaries.
+Affected areas: milestone readiness, validation feasibility, planner-owned quality review, canonical planning/execution prompts, milestone template and relevant special planning workflows. No new ledger type, proof machinery or milestone/release qualification boundaries; controlled substantive amendments refine existing obligations when necessary.
 
 ### Clarified — executable implementation-ready milestones
 
 - For substantive milestones, the planner establishes a credible implementation **and milestone-level verification** route for the intended executor, with relevant toolchain, permissions, dependencies, actual execution loci and target access investigated before `ready`.
 - Distinguish verified capabilities, authoritative documentation, and assumptions; unresolved critical prerequisites are planning work, not problems silently delegated to implementation. Ordinary bounded preflights may be left as explicit executor first steps with fallback.
 - Require the planner to critically assess and repair its own draft before claiming readiness. Verification design is mandatory, while checks remain selective, high-information, and economical; no environment registry, one-test-per-obligation proof, release-level tests, or secondary review gate is introduced.
+
+### Clarified — decision-complete planning and substantive corrections
+
+- Actively discover unmade quality-critical technical and verification decisions; distinguish them from local interchangeable mechanics. Resolve them or define a bounded evaluation with decision criteria and fallback. Translate relevant project context into concrete obligations; preserve applicable conventions and existing evidence.
+- Design nontrivial checks with independent oracles and discriminating conditions, and use reviewed, explicitly scoped technical seeds where helpful; do not include active implementation patches in planning-only handoffs.
+- Review readiness from target-state/feasibility and conformance perspectives without another gate or artifact. For material or recurring correction findings, repair the underlying planning deficiency; version substantive contract/inventory amendments and reconcile existing stable ledger obligations rather than relying on oversized chat prompts.
 
 ### Added — optional retrospective planner feedback
 
