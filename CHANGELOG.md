@@ -12,6 +12,10 @@ Affected areas: milestone readiness, validation feasibility, planner-owned quali
 - Distinguish verified capabilities, authoritative documentation, and assumptions; unresolved critical prerequisites are planning work, not problems silently delegated to implementation. Ordinary bounded preflights may be left as explicit executor first steps with fallback.
 - Require the planner to critically assess and repair its own draft before claiming readiness. Verification design is mandatory, while checks remain selective, high-information, and economical; no environment registry, one-test-per-obligation proof, release-level tests, or secondary review gate is introduced.
 
+### Added — optional retrospective planner feedback
+
+- When later evidence reveals a material planning omission or an earlier review oversight, capture a single concise project-local `PLAN`/`REVIEW` entry in `docs/agent-feedback/planner.log`. Create it on first use, without retrospective backfill, mandatory feedback reporting, or any new review/validation gate.
+
 ### Migration
 
 See `migrations/guide-system-v1.0.0-to-v1.0.1.md`. The `v1.0.1` tag is created after merge, not on the planning branch.

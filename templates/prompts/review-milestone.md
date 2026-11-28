@@ -31,6 +31,10 @@ Add a lasting regression test when a reproducible bug can plausibly recur and a 
 
 Expand the milestone contract or require stronger validation **only** for a newly demonstrated material product risk, an explicit product requirement, or a truly changed public/integration boundary. Explain that justification. Package, installed-consumer, real-repository dogfood, and broad compatibility checks normally remain at release readiness.
 
+## Retrospective planner feedback (only if warranted)
+
+If concrete later evidence shows a material omission in the **ready planning handoff** or an avoidable miss/overreach by an **earlier implementation reviewer**, follow the compact project-local feedback convention in `meta/MILESTONE-EXECUTION-MODEL.md`. Do not log ordinary implementation defects found on first review, hypothetical risks, or entries merely to show that a review occurred. If this review is read-only, propose the single log line in the response rather than editing the repository. No log entry or feedback section is needed when there is no substantiated prior planning/review miss.
+
 ## Outcome
 
 Report **Accept**, **Corrections required**, or **Blocked on material decision**. Cite exact evidence from code and checks for findings; acknowledge unverified areas without manufacturing defects. When corrections are required, provide a concise actionable correction prompt for the implementer and the specific focused rechecks. Do not require an independent approval subsystem unless the milestone explicitly needs human judgment.

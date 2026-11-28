@@ -124,6 +124,16 @@ Release preparation owns final package/installation/consumer, compatibility, cro
 
 Review findings must describe concrete defects, why they matter, and a **smallest credible focused verification** of the repair. A correction prompt must not automatically grow acceptance criteria, evidence cases, validation stages, test infrastructure, or broad regression requirements. If a prior validation contract is disproportionate, simplify it instead of carrying accumulated gates forward. Expand the contract only for a newly demonstrated material risk or an explicitly requested product change. Add a small lasting regression check for a recurring, deterministic defect when worthwhile; otherwise a focused disposable verification may suffice. Use [the canonical review/correction prompt](../templates/prompts/review-milestone.md) when a separate reviewer prepares correction instructions.
 
+### Retrospective planner feedback
+
+When later concrete evidence establishes a material omission in a ready milestone (**PLAN**) or an avoidable oversight or disproportionate demand in a previous implementation review (**REVIEW**), preserve a concise observation in the product repository's append-only plain-text `docs/agent-feedback/planner.log`. Create the file only with the first qualifying entry. Use one line per distinct miss:
+
+```text
+YYYY-MM-DD | <milestone-or-PR> | PLAN|REVIEW | <specific observable miss> | <evidence reference>
+```
+
+Record what the planner or earlier reviewer could reasonably have recognized, not a speculative root cause. A defect first discovered by a review is normal review output, **not** automatically planner feedback; neither are unforeseeable failures or hypothetical risks. Keep evidence references traceable, but do not add severity schemas, root-cause reports, mandatory log reviews, automated analysis, or new gates. This log is non-authoritative retrospective data for selective later analysis, not required milestone/implementation context or acceptance evidence. Do not backfill past milestones. In an explicitly read-only review, suggest a qualifying line without modifying repository files.
+
 ### Terminal execution outcomes
 
 - **COMPLETE** — acceptance is credibly met, proportionate milestone validation succeeded, and required documentation/review is satisfied.
