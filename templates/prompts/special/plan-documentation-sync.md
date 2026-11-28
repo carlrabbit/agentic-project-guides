@@ -4,6 +4,8 @@ Our planning task is to create a documentation synchronization milestone package
 
 Use the product repository's pinned `.guide/system/` snapshot as shared planning methodology (or the upstream guide's root when maintaining that repository). Project-specific authority and research stay local. Do not edit the pinned guide, duplicate it elsewhere, or make implementers read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` within the guide root.
 
+For any substantive milestone this workflow produces, apply the planning rules in `meta/MILESTONE-EXECUTION-MODEL.md` (decision discovery, executor feasibility, self-review) and the verification-design rules in `meta/VALIDATION-MODEL.md`. Direct lightweight changes stay direct.
+
 Target repository documentation must contain project truth only.
 
 If the target repository contains old copied setup or engineering guides, treat them as legacy/non-authoritative unless the repository explicitly marks them as active project documentation.
@@ -44,7 +46,7 @@ Treat genuine `docs/research/` artifacts as non-authoritative planning evidence,
 
 Create exactly one primary milestone document under `docs/milestones/`.
 
-Define the documentation target, project authority to reconcile, scope/exclusions, observable acceptance, and lightweight checks for correctness and links. Add project-specific constraints, deferred sync hints, or human judgment only when material. Do not require evidence-case tracking or release-style validation for ordinary documentation synchronization.
+Define the documentation target, project authority to reconcile, scope/exclusions, observable acceptance, and lightweight **executable** checks for correctness and links. Before `ready`, confirm the executor can edit the actual documentation sources and run the chosen link/content checks; a missing checker or an inaccessible private documentation service is a planning blocker, not an implementation task. Add project-specific constraints, deferred sync hints, or human judgment only when material. Do not require an environment inventory, evidence cases or release-style validation.
 
 ## Deferred documentation synchronization hints
 

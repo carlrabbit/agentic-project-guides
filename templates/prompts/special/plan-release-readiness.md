@@ -6,6 +6,8 @@ Create a release-readiness milestone package for:
 
 Use the pinned `.guide/system/` methodology for planning; implementers must not need the guide snapshot, external upstream repository, or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
 
+For any substantive milestone this workflow produces, apply the planning rules in `meta/MILESTONE-EXECUTION-MODEL.md` (decision discovery, executor feasibility, self-review) and the verification-design rules in `meta/VALIDATION-MODEL.md`. Direct lightweight changes stay direct.
+
 ## Distinct release boundary
 
 Release qualification is a deliberate **release-candidate** activity, not a validation gate inherited by every feature milestone. A release milestone establishes confidence in the integrated candidate **as actually consumed and supported**.
@@ -36,7 +38,7 @@ Qualify the **current candidate artifact**, avoiding accidental resolution of de
 
 Cover important public command behavior, API/diagnostics, examples, and supported environments. Do not repeat all internal unit/integration tests through every consumer. Reuse applicable current milestone integration evidence if candidate inputs and behavior remain equivalent; rerun checks whose results can no longer establish the final candidate.
 
-Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. Missing required targets are blockers, not license to create new CI infrastructure without authorization.
+Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. **Before `ready`,** confirm the executor can obtain the actual candidate artifact and use the required installation mechanisms, runtimes, consumers, platforms, target systems and credentials at named, authorized loci. A CI runner that exists, or someone else's machine, is not agent access. A missing required target keeps the milestone in planning until an authorized alternative is found; it is not license to build new CI infrastructure. This is a planning feasibility check, not early release qualification.
 
 ## Cost and completion
 

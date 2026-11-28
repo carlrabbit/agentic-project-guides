@@ -10,7 +10,7 @@
 
 ## Architecture and invariants
 
-<Document the results of rigorous change-impact analysis where material: intended behavioral changes, explicitly permitted secondary consequences or incompatibilities, protected existing contracts/invariants, and interactions among affected subsystems or operating modes. Make consequential boundaries precise; permission for a broad rewrite is not permission for unrelated changes. For consequential external or persistent mutations, identify authorized targets/actions and proportionate recovery/isolation precautions; implementation alone never implies execution authority. Bounded reversible architectural alternatives may be delegated with evaluation criteria and invariants. Do not prescribe speculative implementation mechanics or invent extra sections merely to record analysis.>
+<Document the results of rigorous change-impact analysis where material: intended behavioral changes, explicitly permitted secondary consequences or incompatibilities, protected existing contracts/invariants, and interactions among affected subsystems or operating modes. Make consequential boundaries precise; permission for a broad rewrite is not permission for unrelated changes. For consequential external or persistent mutations, identify authorized targets/actions and proportionate recovery/isolation precautions; implementation alone never implies execution authority. Bounded reversible architectural alternatives may be delegated with evaluation criteria and invariants. Resolve quality-critical internal design choices when material and specify the required approach, criteria or reviewed seed; distinguish binding design from adaptable details. Translate applicable rules into concrete obligations or precise accessible authority. Do not prescribe speculative implementation mechanics or invent extra sections merely to record analysis.>
 
 ## Scope and exclusions
 
@@ -34,7 +34,9 @@
 
 ## Validation
 
-**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Do not require one test per invariant or universal semantic equivalence. Name targets/loci only where consequential.>
+**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Do not require one test per invariant or universal semantic equivalence. Name real targets/loci where material. For nontrivial verification specify distinguishing inputs/state, action, test boundary/doubles, independent oracle and relevant side effects where needed; retain material prior test guarantees and comparable measurement conditions when applicable.>
+
+**Execution and verification feasibility:** <For substantive work: the intended executor and locus; the tools/commands, services, access and permissions it needs, stating briefly which are checked, documented or assumed; any authorized setup or alternative locus; and any routine initial preflight with its fallback. Material prerequisites are resolved before `ready`. No generic environment inventory.>
 
 **Important risks:** <Plausible incorrect behaviors and protected-boundary violations that the chosen checks should expose; include focused mitigation where material.>
 

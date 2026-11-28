@@ -12,6 +12,8 @@ Our planning task is to create a repository initialization package for a complet
 
 Shared guide authority is **installed locally**: bootstrap the complete, exact upstream tagged snapshot at `.guide/system/`, and record its tag plus peeled commit SHA in `.guide-profile.json`. Before a new repository exists, use the upstream guide to initialize it; subsequent planning uses `.guide/system/`. Do not edit the snapshot for local customization, scatter other copied guide documents into project docs, or require routine implementers to read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md`.
 
+For any substantive milestone this workflow produces, apply the planning rules in `meta/MILESTONE-EXECUTION-MODEL.md` (decision discovery, executor feasibility, self-review) and the verification-design rules in `meta/VALIDATION-MODEL.md`. Direct lightweight changes stay direct.
+
 Target repository documentation must contain project truth only, plus optional non-authoritative planning research when durable evidence genuinely warrants retention.
 
 Shared profiles describe broad reusable engineering shapes. Projects may also register `local:<id>` profiles under `.guide/profiles/<id>/PROFILE.md` for distinct project-owned engineering shapes with multiple coordinated obligations. A local profile may be authored during initialization without first adding it to the central guide. Do not invent a central-style project type or feature-tag profile for operating system, local/CI execution, integration-first testing, a packaging mechanism, a named external product/service, or one concrete product architecture.
@@ -127,7 +129,7 @@ Resolve as applicable:
 - fallback/failure semantics, including accepted alternative loci and evidence equivalence;
 - consumer/release relationship.
 
-During bootstrap, explicitly check which toolchain/runtime capabilities the first milestone needs and whether a missing prerequisite can be provisioned in an authorized disposable/user-scoped environment, must be supplied by the environment owner, or should result in `BLOCKED`. Do not silently substitute GitHub Actions or another execution location for local validation. An absent prerequisite is compatible with a ready milestone when authority, evidence location, and the blocked path are settled; it is not a license for infrastructure creation.
+During bootstrap, check the first milestone's toolchain, runtime, integration targets, permissions and repository commands against the **actual intended executor and its environment**, as `meta/MILESTONE-EXECUTION-MODEL.md` describes. A new repository often has no working build yet: a missing material prerequisite needs an authorized setup step or alternative locus before `ready`; otherwise keep the milestone as a draft and state the blocker. Do not silently substitute GitHub Actions or another locus for local validation, or assume the implementer may install persistent software. Review the first milestone and seeded ledger before handoff.
 
 If the project intentionally uses integration-first testing, record that policy in project engineering authority. Do not create unit-test requirements merely because of an assumed generic test pyramid.
 

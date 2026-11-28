@@ -150,7 +150,7 @@ Classify an `AGENTS.md` edit as required only when existing routing is incorrect
 
 **Direct adoption:** If installing the full tagged snapshot, recording its pin, and reconciling existing project authority/routing are straightforward and require neither a material design decision nor coordinated implementation, apply the changes directly in the authorized repository or branch. Do **not** create a migration milestone, obligation ledger, or implementation handoff merely to administer this work. Verify the installed snapshot and recorded pin, routing, and any modified project authority; report the actual changes.
 
-**Substantive adoption:** When material architecture/contract choices, significant repository migration, or independent implementation-agent coordination genuinely require it, create one ready migration milestone under `docs/milestones/`, with a planner-seeded material-obligation ledger before `ready` and a concise implementation handoff.
+**Substantive adoption:** When material architecture/contract choices, significant repository migration, or independent implementation-agent coordination genuinely require it, create one migration milestone under `docs/milestones/`. Plan it under `meta/MILESTONE-EXECUTION-MODEL.md` and `meta/VALIDATION-MODEL.md` (decision discovery, executor feasibility, verification design, self-review) and seed the material-obligation ledger before `ready`; then deliver the concise implementation handoff. Straightforward direct adoption stays direct.
 
 Install the complete `.guide/system/` snapshot and create or update `.guide-profile.json` in either case. Add `.guide-sync/pending/` hints only for genuinely deferred documentation cleanup.
 

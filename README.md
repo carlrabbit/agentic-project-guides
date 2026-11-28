@@ -1,6 +1,6 @@
 # Agentic Project Guides
 
-Version: 1.0.0
+Version: 1.1.0
 
 Select the entrypoint for the **assigned task**. In a product repository, this file is vendored unchanged as `.guide/system/README.md`, the router for its pinned shared planning methodology. In the upstream guide repository it lives at the root. Project-specific policy, research, and implementation contracts belong to the consuming repository. This README is a **navigation index**, not operative guidance.
 

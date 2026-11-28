@@ -18,6 +18,12 @@ For each change, ask:
 
 Planner-seeded **obligation accounting** establishes that work items are not silently forgotten; **validation evidence** establishes credible correctness. A completion ledger does not require one test, evidence-case ID, or gate per row. More tests are justified by higher consequence or insufficient confidence, **not** automatically by more acceptance criteria. A permanent regression test is useful for a reproducible bug with plausible recurrence or significant failure consequence; not every one-off correction needs a permanent fixture.
 
+### Planner-owned verification design
+
+For nontrivial or quality-critical checks, planning decides what makes the check discriminating, not only the test level or command. Specify as much as the executor needs to write a check that would fail for a plausible wrong implementation: the wrong behavior to catch, the starting state or inputs, the triggering action, the boundary (real or double), an independent expected result (oracle), and material side effects or their absence. Pick the parts that matter; this is not a per-test template. For example, a pagination-reset test must start away from page one: resetting from page one to page one proves nothing. An oracle must not just repeat the implementation's logic, and a double must not produce the result under test.
+
+Check existing contract, architecture, conformance and integration tests for conventions and reusable coverage. When migrating tests, decide which behavioral guarantees and real boundaries must survive and which may be replaced or retired; do not leave that decision to the implementer. When a comparison or benchmark matters, define the baseline, comparable conditions, the measured property, how to interpret the result, and what to do if it cannot be measured. A representative test seed can help for difficult checks (see *Technical seeds* in the [Milestone Execution Model](MILESTONE-EXECUTION-MODEL.md)). The executor writes the tests within this design. None of this requires more tests, exhaustive cases, per-test evidence, or running tests during planning.
+
 ## Validation boundaries
 
 | Boundary | Normal purpose | Default |
@@ -45,6 +51,14 @@ Exploratory simulations, fault injection, and temporary diagnostic tests are inv
 ### Corrections
 
 A review finding should identify the concrete defect and the narrowest check that could detect recurrence. Do not add gates, receipt systems, evidence cases, or new engineering hosts by default. Earlier excessive requirements may be removed or reduced during correction. Escalate only where a demonstrated material risk warrants it.
+
+## Executable verification is a readiness requirement
+
+For a substantive milestone, the planner **must** confirm that the proposed checks can be written and run by the intended executor, or at a specific authorized locus the executor can use. How small the verification is remains a judgment call; whether credible verification exists is **not**. For each material check, name the tool or command (or the focused check to be written), the target or fixture, the locus, and the permissions or dependencies it needs, labeled *checked*, *documented* or *assumed* as in the [Milestone Execution Model](MILESTONE-EXECUTION-MODEL.md#executor-feasibility-and-pre-ready-assessment). Do not cite a CI runner, desktop session, service, SDK or external API as available without a credible access path.
+
+If the planner cannot see the executor's environment, use reliable project evidence. A routine uncertainty may become a bounded initial preflight; a materially uncertain prerequisite with no authorized resolution means the milestone is not `ready`. Missing access never justifies faking a required integration, moving required verification to release, or expecting provisioning the executor is not permitted to perform.
+
+This is verification **design**, not running the suite during planning; focused checks may be written during the milestone. It does not bring back per-obligation proof, exhaustive infrastructure discovery or release-grade qualification as milestone defaults.
 
 ## Integration targets and execution locus
 

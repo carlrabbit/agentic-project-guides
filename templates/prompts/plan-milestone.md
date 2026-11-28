@@ -27,6 +27,14 @@ Resolve applicable base/shared/local profiles and conflicts through concrete pro
 
 Planning owns target capability, meaningful architectural/semantic/compatibility decisions, invariants, scope, acceptance, exceptional validation/review, and authorization for any non-routine environment changes. For changes that may mutate non-disposable data or shared/external systems, explicitly distinguish permission to implement/test on disposable targets from permission to execute against the actual named target; declare authorized actions and required recovery/isolation precautions where relevant. Planning may intentionally delegate selection among **reversible internal architectures** when fixed product invariants, evaluation criteria, and rollback bounds make implementation trials cheaper than speculative upfront analysis. Do not make detailed file lists or patch steps a prerequisite for `ready`.
 
+## Active decision discovery and delegation
+
+Apply *Planning and implementation separation* in `meta/MILESTONE-EXECUTION-MODEL.md`. In short:
+
+- Find decisions that are still **unmade**, including internal ones such as algorithms, concurrency/lifecycle, recovery, resources, abstractions and verification. Ask: could two competent implementers both meet the written milestone yet deliver materially different quality? If so, decide now and write the approach, constraints and verification design into the contract, or define a bounded reversible experiment with deciding criteria and a fallback. Leave equivalent local choices free.
+- Turn applicable project guidance, representative implementations and existing contract tests into concrete obligations. "Analogous to X" is not a decision.
+- Use a reviewed technical seed when prose would not convey a difficult design or test. In a planning-only handoff, keep it outside active product and test inputs.
+
 ## Change-impact analysis — planning responsibility
 
 For substantive milestones, investigate the affected implementation and product context rigorously enough to identify and resolve:
@@ -41,6 +49,17 @@ Inspect relevant implementation, tests, contracts, and research; investigate com
 
 Record the material conclusions in the existing architecture/invariants, scope, acceptance, validation, or referenced project-authority sections. Detailed analysis is welcome; it need not become a separate document, checklist, or exhaustive matrix. A complete handoff and complete ledger obligations matter more than brevity.
 
+## Implementation and verification feasibility — planning responsibility
+
+Apply *Executor feasibility and pre-ready assessment* in `meta/MILESTONE-EXECUTION-MODEL.md` and *Executable verification is a readiness requirement* in `meta/VALIDATION-MODEL.md`. In short:
+
+1. Identify the actual executor, where it runs, and the OS, tools, runtimes, services, repository commands, permissions and limits this milestone needs. Inspect code and scripts, and probe safely where you can. A model name is not an execution environment.
+2. Label each material capability *checked*, *documented* or *assumed*. Your own environment is not the executor's.
+3. Define a runnable milestone verification route, including the real integration where it decides correctness. You need not run the tests or predict how they are written.
+4. Resolve missing prerequisites now, or keep the milestone in `draft`. Only a routine low-risk uncertainty may become a named initial preflight with a fallback.
+
+A plan that relies on unavailable tools, CI access the executor does not have, unauthorized provisioning, or a mandatory check nobody can run is **not ready**, however good its acceptance criteria. Record the conclusions in the existing milestone sections; no separate inventory or test matrix.
+
 ## Ready milestone contract
 
 Produce a single primary milestone following `templates/milestones/milestone-template.md` with:
@@ -49,7 +68,7 @@ Produce a single primary milestone following `templates/milestones/milestone-tem
 2. **Architecture and invariants:** settled material decisions, permitted consequences, protected contracts, and affected interactions.
 3. **Scope / exclusions:** inclusion and non-goals without a speculative edit allowlist.
 4. **Acceptance:** independently verifiable outcomes covering the entire intended capability; do not compress material obligations for brevity.
-5. **Validation:** high-information focused checks derived from plausible failure modes, including contrasting boundaries and cross-mode invariants where material; identify consequence risks and checks deferred to release.
+5. **Validation:** high-information focused checks derived from plausible failure modes and runnable with the executor's actual tools, targets and loci, including contrasting boundaries and cross-mode invariants where material; identify consequence risks and legitimate checks deferred to release.
 6. **Required authority and exceptional obligations:** only where they matter, including direct docs, local specializations, permissions, or required human judgment.
 
 **Seed a lightweight obligation ledger by default for substantive implementation milestones**, even if the agent expects to finish in one session. Give each independently deliverable material acceptance obligation a stable ID, including direct documentation/migration work, and seed one pending row with that same ID and meaning in `.execution/<milestone-id>.md` **before** `ready`. Do not compress distinct requirements into one vague row. A genuinely trivial indivisible task may omit the ledger with a brief rationale. Do not require test/evidence cases per criterion, receipts, gate matrices, or proof registries: obligation completeness is not exhaustive validation.
@@ -60,7 +79,7 @@ If a **material project decision** really cannot be made without evidence, resea
 
 ## Validation policy
 
-Use `meta/VALIDATION-MODEL.md`. **Design** checks during planning using the plausible wrong behaviors from change-impact analysis; a passing happy path alone may not distinguish correct from incorrect behavior. Select a small number of high-information checks, such as adjacent ineligible inputs or cross-mode consistency where material, without creating a default case matrix.
+Use `meta/VALIDATION-MODEL.md`, including *Planner-owned verification design*. **Design** checks from the plausible wrong behaviors found in change-impact analysis; a passing happy path may not tell correct from incorrect behavior. For nontrivial checks, decide what makes them discriminating instead of leaving it to the executor. Select a small number of high-information checks, such as adjacent ineligible inputs or cross-mode consistency where material, without a default case matrix or per-obligation mapping.
 - During implementation: affected build, static feedback, targeted tests.
 - At milestone completion: focused behavioral checks and a few representative integration fixtures; review architecture and protected invariants.
 - At release: final package/installed tool/real consumer, compatibility, broader operational and platform qualification where required.
@@ -79,17 +98,19 @@ Follow `meta/HANDOFF-TRANSPORT-MODEL.md`. Prefer an authorized dedicated Git pla
 
 Provide the primary milestone path, affected authority documents, actual Git branch/commit or ZIP instructions, key validation expectations, deferred release checks, required human-review obligations if any, and a concise handoff using `templates/prompts/execute-milestone.md`. Do not promise a file artifact or PR that has not been created.
 
-## Readiness check
+## Planner-owned readiness review
 
-Before marking `ready`, verify:
-- material architectural, semantic, compatibility, security, and scope choices are resolved;
+Critically review and revise your **initial draft** against the actual repository and intended executor; do not hand over a questionable draft as ready. Review from both perspectives in `meta/MILESTONE-EXECUTION-MODEL.md` (target state, and conformance with project authority). This is your own review, not a separate artifact or approval. Before marking `ready`, check that:
+- material architectural, semantic, compatibility, security, scope and quality-critical technical/verification choices are decided or bounded by a credible evaluation; applicable rules, ownership, existing evidence and any seeds are sound; nothing material is merely forwarded as context;
 - affected behavior/contracts have been investigated, with intended changes, tolerated secondary consequences, protected invariants, and interactions made unambiguous where material;
 - plausible consequential failures that a happy path or build might miss have been considered when selecting discriminating checks;
 - the outcome is coherent and appropriately ambitious for agent execution;
 - acceptance is observable and covers the actual requested capability;
 - validation is proportionate and release qualification is properly separated;
-- any required external target/authority is real and authorized;
+- each milestone check can run at its stated locus with the tools, access and authority it needs, or is a well-defined focused check for the implementer to write; checked, documented and assumed capabilities are not conflated; remaining low-risk preflights have a first step and a fallback;
 - an implementer can act independently using the ready milestone and project truth;
 - every material deliverable obligation has survived into the seeded ledger when applicable, without creating validation-host, receipt, test-mapping, or human-review ceremony.
+
+If any condition fails, revise the draft or resolve the prerequisite; do not assert readiness or leave the implementer to invent an environment.
 
 Do not confuse implementation uncertainty with missing project policy. Return genuinely material unresolved decisions to planning.

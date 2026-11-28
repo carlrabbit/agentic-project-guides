@@ -1,5 +1,59 @@
 # Changelog
 
+## 1.1.0 (planned minor)
+
+Migration required: conditional. Every adopting repository updates its pinned snapshot and metadata. Active milestones need review only if their readiness is in doubt under the new rules; completed milestones are not touched.
+
+Affected areas: milestone readiness, validation design, planner self-review, correction amendments, execution ledger template, canonical planning/execution/review prompts, milestone template, bootstrap, adoption/update and special planning workflows.
+
+Affected product repositories: all repositories that pin the guide system and plan substantive milestones.
+
+Why minor, not patch: this release changes when a milestone counts as `ready`, adds a template section, ledger statuses, an amendment protocol and an optional feedback log. Under [Versioning](meta/VERSIONING.md) that is new guidance, not a clarification.
+
+### Changed — a milestone is ready only if it can be built and verified
+
+- For substantive milestones, the planner confirms before `ready` that the intended executor can implement **and verify** the work where it actually runs: toolchain, runtime, services, permissions, execution locus and target access.
+- Each material capability is labeled *checked*, *documented* or *assumed*. The planner's machine is not the implementer's. Missing material prerequisites are resolved in planning; only routine low-risk uncertainties may become an initial executor preflight with a fallback.
+- The planner reviews its own draft from two perspectives (target state; conformance with project authority) and fixes it before handoff. No environment registry, per-obligation test, release-level test or extra review gate is added.
+
+### Changed — planning resolves quality-critical design
+
+- Planning finds and resolves unmade quality-critical technical and verification decisions, or bounds them as reversible experiments with criteria and fallback. Test: could two competent implementers meet the written contract yet deliver materially different quality?
+- Planning turns applicable project guidance into concrete obligations, designs nontrivial checks with discriminating conditions and independent oracles, and may include reviewed, explicitly scoped technical seeds. Seeds stay out of active product/test inputs in planning-only handoffs.
+
+### Added — milestone amendments and ledger statuses
+
+- For material corrections, a versioned amendment to the milestone replaces oversized chat prompts. An amendment is planning work: a reviewer who writes one acts as planner; otherwise the reviewer proposes it.
+- The execution ledger gains `reopened` and `superseded` statuses and an *Amendments* section. Planning owns obligation identity and meaning; the implementer owns status and may reopen a `done` entry on new evidence. Original IDs are kept; refined obligations get traceable sub-IDs (for example `AC-03.1`) and new ones the next free ID. Completion requires all effective (non-superseded) obligations to be `done`; superseded entries are covered by their replacements.
+
+### Added — optional retrospective planner feedback
+
+- When later evidence shows a material planning omission or an earlier review miss, append one `PLAN`/`REVIEW` line to `docs/agent-feedback/planner.log` (path overridable in `docs/PROJECT-GUIDANCE.md`). Created on first use; no backfill, no gate.
+
+### Required migration
+
+- Update the vendored `.guide/system/` snapshot and `.guide-profile.json` pin together.
+
+### Conditional migration
+
+- Revisit an active, not yet completed `ready` milestone only if executor/verification feasibility, an open quality-critical decision or obligation coverage is in doubt.
+- Existing ledgers keep working; the new statuses and *Amendments* section are used only when an amendment happens.
+
+### Deprecated concepts
+
+- None. The earlier bootstrap guidance that an absent prerequisite could coexist with a `ready` milestone is replaced by the readiness rule above.
+
+### Manual review points
+
+- Check that the project's baseline executor and execution loci are stated where `.guide-profile.json` or project guidance defines them.
+- Decide whether the default planner feedback log path suits the repository.
+
+### Migration
+
+See `migrations/guide-system-v1.0.0-to-v1.1.0.md`. The `v1.1.0` tag is created after merge, not on the planning branch.
+
+---
+
 ## 1.0.0 (stable)
 
 Migration required: yes for product repositories adopting the repository-local pinned planning methodology; active substantive milestones also need lossless material-obligation accounting. Existing completed milestone history is not rewritten.

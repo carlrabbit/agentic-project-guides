@@ -125,7 +125,7 @@ Repository-wide example:
 ```json
 {
   "id": "dotnet-library",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scopes": [
     { "kind": "repository" }
   ]
@@ -148,7 +148,7 @@ Scoped example:
 ```json
 {
   "id": "source-generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scopes": [
     {
       "kind": "component",
