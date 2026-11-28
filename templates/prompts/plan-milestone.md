@@ -29,11 +29,11 @@ Planning owns target capability, meaningful architectural/semantic/compatibility
 
 ## Active decision discovery and delegation
 
-Apply the three responsibility levels in `meta/MILESTONE-EXECUTION-MODEL.md`: product/architectural decisions, quality-critical technical design, and technical realization. Identify **unmade** decisions, including internal algorithm, concurrency/lifecycle, recovery, resource, abstraction or verification choices where materially different outcomes are possible and sound selection requires substantial context or technical reasoning. These examples are not a mandatory design matrix.
+Apply *Planning and implementation separation* in `meta/MILESTONE-EXECUTION-MODEL.md`. In short:
 
-Ask: could two competent implementers satisfy the literal milestone yet deliver materially different-quality results? If unresolved criteria, missing context or the baseline executor's capabilities explain the difference, resolve the quality-critical choice at planning time. Specify the concrete approach, relevant constraints and verification design to the necessary depth. Preserve bounded reversible experimentation when criteria, boundaries and fallback enable the executor to select an outcome; return unresolved material trade-offs to planning. Leave local equivalent choices and integration mechanics free.
-
-Translate applicable project guidance into operative decisions; inspect representative implementations and existing conformance/contract tests rather than assuming "analogous to X" is sufficient. Existing patterns are evidence, not automatic policy. Retain only context necessary for the decision, implementation, drift detection or validation. Accessible project authority may be referenced directly when precise enough; do not delegate interpretation of unresolved material choices or leak shared guide/research reading into implementation. Consider a reviewed technical seed for a difficult core design or representative test when it communicates the approach better than prose; identify binding vs adaptable elements, verify actual APIs/versions and disclose non-executed or uncompiled seeds. Keep seeds outside active product/test inputs in planning-only handoffs.
+- Find decisions that are still **unmade**, including internal ones such as algorithms, concurrency/lifecycle, recovery, resources, abstractions and verification. Ask: could two competent implementers both meet the written milestone yet deliver materially different quality? If so, decide now and write the approach, constraints and verification design into the contract, or define a bounded reversible experiment with deciding criteria and a fallback. Leave equivalent local choices free.
+- Turn applicable project guidance, representative implementations and existing contract tests into concrete obligations. "Analogous to X" is not a decision.
+- Use a reviewed technical seed when prose would not convey a difficult design or test. In a planning-only handoff, keep it outside active product and test inputs.
 
 ## Change-impact analysis — planning responsibility
 
@@ -51,14 +51,14 @@ Record the material conclusions in the existing architecture/invariants, scope, 
 
 ## Implementation and verification feasibility — planning responsibility
 
-Establish the **actual operational path**, not just a complete specification:
+Apply *Executor feasibility and pre-ready assessment* in `meta/MILESTONE-EXECUTION-MODEL.md` and *Executable verification is a readiness requirement* in `meta/VALIDATION-MODEL.md`. In short:
 
-1. Identify the designated implementation surface or project baseline executor and the materially relevant OS, SDK/tools, runtime/service targets, repository build/test commands, permissions, isolation, connectivity and execution constraints. Read existing authority and inspect code/scripts; perform safe, focused capability probes when accessible. A model name alone is not an execution environment.
-2. Record which prerequisites are **verified in the applicable environment**, documented by a current source, or unverified. Never project the planner's installed software or access onto a separate executor. Name a different CI/remote/workstation locus only with a credible, authorized path for the implementer to use it.
-3. Design a **runnable, high-information milestone verification route**, including the relevant real integration where it determines correctness. Specify concrete existing commands or the focused checks to implement, plus necessary targets, fixtures, setup and authority. The planner need not execute tests or predict the internal test implementation.
-4. Resolve missing material capabilities **during planning**: authorized setup, an established alternative execution environment, a viable change of verification route that still meets the contract, or an explicit `draft`/blocked planning outcome. Ordinary low-risk uncertainties may be delegated as named initial preflights with a defined fallback; do not disguise an unknown required runtime as a preflight and call the milestone `ready`.
+1. Identify the actual executor, where it runs, and the OS, tools, runtimes, services, repository commands, permissions and limits this milestone needs. Inspect code and scripts, and probe safely where you can. A model name is not an execution environment.
+2. Label each material capability *checked*, *documented* or *assumed*. Your own environment is not the executor's.
+3. Define a runnable milestone verification route, including the real integration where it decides correctness. You need not run the tests or predict how they are written.
+4. Resolve missing prerequisites now, or keep the milestone in `draft`. Only a routine low-risk uncertainty may become a named initial preflight with a fallback.
 
-A plan that assumes unavailable tooling, fictitious CI access, unauthorized infrastructure provisioning, or an unexecutable mandatory check is **not ready**, even with excellent acceptance criteria. Record only relevant conclusions in existing project authority, architecture/invariants, or validation fields; no separate inventory or test matrix is needed.
+A plan that relies on unavailable tools, CI access the executor does not have, unauthorized provisioning, or a mandatory check nobody can run is **not ready**, however good its acceptance criteria. Record the conclusions in the existing milestone sections; no separate inventory or test matrix.
 
 ## Ready milestone contract
 
@@ -68,7 +68,7 @@ Produce a single primary milestone following `templates/milestones/milestone-tem
 2. **Architecture and invariants:** settled material decisions, permitted consequences, protected contracts, and affected interactions.
 3. **Scope / exclusions:** inclusion and non-goals without a speculative edit allowlist.
 4. **Acceptance:** independently verifiable outcomes covering the entire intended capability; do not compress material obligations for brevity.
-5. **Validation:** high-information focused checks derived from plausible failure modes and grounded in accessible executor tools, targets and loci, including contrasting boundaries and cross-mode invariants where material; identify consequence risks and legitimate checks deferred to release.
+5. **Validation:** high-information focused checks derived from plausible failure modes and runnable with the executor's actual tools, targets and loci, including contrasting boundaries and cross-mode invariants where material; identify consequence risks and legitimate checks deferred to release.
 6. **Required authority and exceptional obligations:** only where they matter, including direct docs, local specializations, permissions, or required human judgment.
 
 **Seed a lightweight obligation ledger by default for substantive implementation milestones**, even if the agent expects to finish in one session. Give each independently deliverable material acceptance obligation a stable ID, including direct documentation/migration work, and seed one pending row with that same ID and meaning in `.execution/<milestone-id>.md` **before** `ready`. Do not compress distinct requirements into one vague row. A genuinely trivial indivisible task may omit the ledger with a brief rationale. Do not require test/evidence cases per criterion, receipts, gate matrices, or proof registries: obligation completeness is not exhaustive validation.
@@ -79,7 +79,7 @@ If a **material project decision** really cannot be made without evidence, resea
 
 ## Validation policy
 
-Use `meta/VALIDATION-MODEL.md`. **Design** checks during planning using the plausible wrong behaviors from change-impact analysis; a passing happy path alone may not distinguish correct from incorrect behavior. For nontrivial checks, define the discriminating initial state/input, action, relevant test boundary/double, independent oracle and material side effects where needed; do not delegate their evidentiary meaning. Preserve applicable existing test guarantees and real boundaries in migrations, and specify comparable conditions for material measurements. The executor realizes the checks; no exhaustive test design or per-obligation mapping is required. Select a small number of high-information checks, such as adjacent ineligible inputs or cross-mode consistency where material, without creating a default case matrix.
+Use `meta/VALIDATION-MODEL.md`, including *Planner-owned verification design*. **Design** checks from the plausible wrong behaviors found in change-impact analysis; a passing happy path may not tell correct from incorrect behavior. For nontrivial checks, decide what makes them discriminating instead of leaving it to the executor. Select a small number of high-information checks, such as adjacent ineligible inputs or cross-mode consistency where material, without a default case matrix or per-obligation mapping.
 - During implementation: affected build, static feedback, targeted tests.
 - At milestone completion: focused behavioral checks and a few representative integration fixtures; review architecture and protected invariants.
 - At release: final package/installed tool/real consumer, compatibility, broader operational and platform qualification where required.
@@ -100,19 +100,17 @@ Provide the primary milestone path, affected authority documents, actual Git bra
 
 ## Planner-owned readiness review
 
-Critically inspect and revise the **initial milestone draft** against the actual repository and intended executor. Do not hand a questionable draft to the user or implementation agent as if it were ready. Review from two distinct perspectives (target-state completeness/feasibility and conformance with project authority/protected conventions), within this same self-review; no separate artifact or approval. Before marking `ready`, verify:
-- material architectural, semantic, compatibility, security, scope and quality-critical technical/verification choices are resolved or explicitly bounded by a credible evaluation; applicable rules, ownership, existing evidence and any seeds are sound; no material decision is merely forwarded as context;
+Critically review and revise your **initial draft** against the actual repository and intended executor; do not hand over a questionable draft as ready. Review from both perspectives in `meta/MILESTONE-EXECUTION-MODEL.md` (target state, and conformance with project authority). This is your own review, not a separate artifact or approval. Before marking `ready`, check that:
+- material architectural, semantic, compatibility, security, scope and quality-critical technical/verification choices are decided or bounded by a credible evaluation; applicable rules, ownership, existing evidence and any seeds are sound; nothing material is merely forwarded as context;
 - affected behavior/contracts have been investigated, with intended changes, tolerated secondary consequences, protected invariants, and interactions made unambiguous where material;
 - plausible consequential failures that a happy path or build might miss have been considered when selecting discriminating checks;
 - the outcome is coherent and appropriately ambitious for agent execution;
 - acceptance is observable and covers the actual requested capability;
 - validation is proportionate and release qualification is properly separated;
-- required executor tools, environment capabilities, target access, provisioning authority and resource constraints have a credible, grounded execution path;
-- milestone-level checks are actually executable at the stated locus or have a well-defined implementer-owned focused check to create, with material preconditions resolved;
-- verified, documented and assumed capabilities have not been conflated; outstanding low-risk preflights have an explicit first step and fallback;
+- each milestone check can run at its stated locus with the tools, access and authority it needs, or is a well-defined focused check for the implementer to write; checked, documented and assumed capabilities are not conflated; remaining low-risk preflights have a first step and a fallback;
 - an implementer can act independently using the ready milestone and project truth;
 - every material deliverable obligation has survived into the seeded ledger when applicable, without creating validation-host, receipt, test-mapping, or human-review ceremony.
 
-If any material readiness condition fails, revise the draft or resolve the prerequisite; do not simply assert readiness or ask the implementer to invent an environment.
+If any condition fails, revise the draft or resolve the prerequisite; do not assert readiness or leave the implementer to invent an environment.
 
 Do not confuse implementation uncertainty with missing project policy. Return genuinely material unresolved decisions to planning.

@@ -6,7 +6,7 @@ Our planning task is to create an implementation-ready engineering migration mil
 
 Use the product repository's pinned `.guide/system/` snapshot as shared planning methodology (or the upstream guide's root when maintaining that repository). Project-specific authority and research stay local. Do not edit the pinned guide, duplicate it elsewhere, or make implementers read it. See `meta/LOCAL-GUIDE-SNAPSHOT-MODEL.md` within the guide root.
 
-Apply the decision-discovery, competence-appropriate delegation, decision translation and two-perspective planner self-review rules in `meta/MILESTONE-EXECUTION-MODEL.md` and nontrivial verification-design rules in `meta/VALIDATION-MODEL.md` to any substantive milestone produced by this workflow. Resolve quality-critical choices and applicable project rules to the depth needed by the intended executor; preserve bounded reversible evaluation and proportionate checks. Direct lightweight changes do not acquire a milestone or extra readiness artifacts merely from these rules.
+For any substantive milestone this workflow produces, apply the planning rules in `meta/MILESTONE-EXECUTION-MODEL.md` (decision discovery, executor feasibility, self-review) and the verification-design rules in `meta/VALIDATION-MODEL.md`. Direct lightweight changes stay direct.
 
 Target repository documentation must contain project truth only.
 
@@ -87,7 +87,7 @@ Do not include implementation source files, test files, generated code, workflow
 
 Create exactly one primary milestone document under `docs/milestones/`.
 
-The milestone must define a coherent target, important architecture/invariants, scope/exclusions, verifiable acceptance outcomes, and focused milestone validation with release-only checks clearly deferred. **Before `ready`, critically assess the draft against the real intended executor:** check relevant tools/SDKs, runtime and integration access, repository commands, permissions, execution loci and constraints; distinguish observed, documented and unverified capabilities; resolve any unavailable material prerequisite and ensure the focused checks can run. Apply `meta/MILESTONE-EXECUTION-MODEL.md` and `meta/VALIDATION-MODEL.md`, not merely a theoretical test plan. Record project authority, constraints, documentation hints, authorization, and human judgment only where material. Do not create a file-edit forecast, environment registry, evidence matrix, or elaborate gate plan just to complete a template.
+The milestone must define a coherent target, important architecture/invariants, scope/exclusions, verifiable acceptance outcomes, and focused milestone validation with release-only checks clearly deferred. Before `ready`, confirm the executor can run both the old and the new tooling the migration needs (SDKs, build and test commands, integration access) at the stated loci, so the focused checks are runnable rather than theoretical. Record project authority, constraints, documentation hints, authorization, and human judgment only where material. Do not create a file-edit forecast, environment registry, evidence matrix, or elaborate gate plan just to complete a template.
 
 ## Additional authority documents
 

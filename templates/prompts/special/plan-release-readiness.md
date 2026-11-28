@@ -6,7 +6,7 @@ Create a release-readiness milestone package for:
 
 Use the pinned `.guide/system/` methodology for planning; implementers must not need the guide snapshot, external upstream repository, or planning conversation. The package may be committed directly to the requested branch or supplied as a repository-relative ZIP. Never publish merely because release readiness was requested.
 
-Apply the decision-discovery, competence-appropriate delegation, decision translation and two-perspective planner self-review rules in `meta/MILESTONE-EXECUTION-MODEL.md` and nontrivial verification-design rules in `meta/VALIDATION-MODEL.md` to any substantive milestone produced by this workflow. Resolve quality-critical choices and applicable project rules to the depth needed by the intended executor; preserve bounded reversible evaluation and proportionate checks. Direct lightweight changes do not acquire a milestone or extra readiness artifacts merely from these rules.
+For any substantive milestone this workflow produces, apply the planning rules in `meta/MILESTONE-EXECUTION-MODEL.md` (decision discovery, executor feasibility, self-review) and the verification-design rules in `meta/VALIDATION-MODEL.md`. Direct lightweight changes stay direct.
 
 ## Distinct release boundary
 
@@ -38,7 +38,7 @@ Qualify the **current candidate artifact**, avoiding accidental resolution of de
 
 Cover important public command behavior, API/diagnostics, examples, and supported environments. Do not repeat all internal unit/integration tests through every consumer. Reuse applicable current milestone integration evidence if candidate inputs and behavior remain equivalent; rerun checks whose results can no longer establish the final candidate.
 
-Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. **Before declaring a release-readiness milestone `ready`,** critically verify the planned executor can obtain the actual candidate artifact and use the required installation mechanisms, runtimes, consumers, platforms, target systems and credentials at specified, authorized loci; distinguish observed facts, authoritative declarations and unverified assumptions. If a required target is unavailable, identify and authorize a feasible alternative or keep the milestone in planning until resolved. A theoretical CI runner or someone's local machine is not established agent access. Missing required targets are blockers, not license to create new CI infrastructure without authorization. These are feasibility checks during planning, not a demand to run release qualification prematurely.
+Integration depth and execution locus are independent. Real-boundary validation may happen on a workstation while publication uses CI. **Before `ready`,** confirm the executor can obtain the actual candidate artifact and use the required installation mechanisms, runtimes, consumers, platforms, target systems and credentials at named, authorized loci. A CI runner that exists, or someone else's machine, is not agent access. A missing required target keeps the milestone in planning until an authorized alternative is found; it is not license to build new CI infrastructure. This is a planning feasibility check, not early release qualification.
 
 ## Cost and completion
 
