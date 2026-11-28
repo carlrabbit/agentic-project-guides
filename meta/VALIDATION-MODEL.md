@@ -6,7 +6,7 @@ Authoritative for risk-proportionate validation, milestone versus release bounda
 
 ## Principle
 
-Invest enough **planning analysis** to identify material failure modes and choose checks with high diagnostic value. Then optimize **implementation + validation + review + expected rework**, not the number of tests, gates, or proof artifacts. Planning effort is not itself a budget to minimize; the goal is fewer missed contracts and expensive correction cycles. Test to reduce meaningful uncertainty. A milestone need not qualify a release.
+Invest enough **planning analysis** to identify material failure modes and choose checks with high diagnostic value. Optimize **implementation + validation + review + expected rework** through fewer missed contracts and expensive correction cycles. Test to reduce meaningful uncertainty; apply [methodological economy](META-GUIDE.md#methodological-economy). Milestone verification and release qualification have distinct purposes.
 
 For each change, ask:
 1. Which intended changes, permitted consequences, and protected invariants define correctness?
@@ -40,7 +40,7 @@ Do not defer every real integration test to release. Where correctness depends o
 
 ## Risk-proportionate milestones
 
-Choose **high-information, discriminating** scenarios that challenge the plausible failure modes identified during planning, not merely confirm that the feature exists. Where relevant, contrast an eligible case with a similar ineligible one, exercise a protected property, or compare related operating modes against their shared observable contract. These are candidate techniques, **not** a mandatory positive/negative/cross-mode checklist or a test for each obligation. Use the smallest focused set that credibly addresses the important risks; one fixture may exercise multiple boundaries. Intentional breaking changes need checks against the **authorized** invariants, not a blanket semantic-equivalence or always-compiles requirement. Prefer behavior over test-count quotas, exhaustive matrices, or one test per acceptance criterion.
+Choose **high-information, discriminating** scenarios that challenge the plausible failure modes identified during planning. Select techniques that suit the risk: contrast adjacent eligible and ineligible cases, exercise a protected property, or compare related operating modes against their shared observable contract. Use the smallest focused set that credibly addresses the important risks; one fixture may exercise multiple boundaries. Intentional breaking changes need checks against the **authorized** invariants, not a blanket semantic-equivalence or always-compiles requirement. Test selection follows behavior and risk rather than case quotas or obligation counts.
 
 Where an existing relevant suite already covers an unchanged contract, reuse that evidence rather than reimplementing the suite in a new harness. Focused validation should normally run after the relevant changes; unnecessary reruns after unrelated edits add no confidence. Evidence is not permanent: rerun a check when material inputs have changed or a result is no longer applicable.
 
@@ -50,7 +50,7 @@ Exploratory simulations, fault injection, and temporary diagnostic tests are inv
 
 ### Corrections
 
-A review finding should identify the concrete defect and the narrowest check that could detect recurrence. Do not add gates, receipt systems, evidence cases, or new engineering hosts by default. Earlier excessive requirements may be removed or reduced during correction. Escalate only where a demonstrated material risk warrants it.
+A review finding should identify the concrete defect and the narrowest check that could detect recurrence. Use existing checks and infrastructure where sufficient; reduce earlier excessive requirements. Escalate only where a demonstrated material risk warrants it.
 
 ## Executable verification is a readiness requirement
 
@@ -58,13 +58,13 @@ For a substantive milestone, the planner **must** confirm that the proposed chec
 
 If the planner cannot see the executor's environment, use reliable project evidence. A routine uncertainty may become a bounded initial preflight; a materially uncertain prerequisite with no authorized resolution means the milestone is not `ready`. Missing access never justifies faking a required integration, moving required verification to release, or expecting provisioning the executor is not permitted to perform.
 
-This is verification **design**, not running the suite during planning; focused checks may be written during the milestone. It does not bring back per-obligation proof, exhaustive infrastructure discovery or release-grade qualification as milestone defaults.
+This is verification **design**: focused checks may be written and run during the milestone. Record only the material feasibility facts and select checks appropriate to the milestone boundary.
 
 ## Integration targets and execution locus
 
 Validation depth, real target, and execution locus are independent. A real database or graphics runtime may run locally; CI is neither universally required nor automatically authoritative.
 
-When external behavior materially determines correctness, identify the necessary target and (only as needed) its version, platform/capability, location, setup, isolation, cleanup, invocation, and failure interpretation in project authority. Do not create a lengthy topology matrix for a simple local check.
+When external behavior materially determines correctness, identify the necessary target and (only as needed) its version, platform/capability, location, setup, isolation, cleanup, invocation, and failure interpretation in project authority. For a simple local check, a brief statement of the target and locus is sufficient.
 
 Supported loci may be local, CI, remote, or mixed. A known unavailability does not authorize substituting a fake for a mandatory target or pretending that a different host is equivalent.
 
@@ -88,7 +88,7 @@ When a product is distributed through a package, generated launcher, installatio
 
 Examples include consuming a built NuGet package from an isolated project, invoking an installed locally packed `dotnet tool` through its shim, or invoking the published executable rather than `dotnet run`. Qualify the actual intended release candidate, not a stale global install or unrelated source output.
 
-Check the important release properties for that product: installation or packaging, command discovery/startup, representative successful behavior, public failure semantics where material, public documentation/samples, compatibility and required operating environments. Scope is risk-based, not an exhaustive matrix by default.
+Check the important release properties for that product: installation or packaging, command discovery/startup, representative successful behavior, public failure semantics where material, public documentation/samples, compatibility and required operating environments. Choose scope according to risk.
 
 Do not require every internal behavior test through the installed consumer. Reuse milestone integration evidence for behaviors unaffected by packaging; reserve the packaging path for questions it can uniquely answer.
 
@@ -98,7 +98,7 @@ A release milestone can require stronger evidence and additional gates, but that
 
 A brief engineering review is normal. Formal human sign-off is an explicit milestone/release requirement when automated judgment is insufficient; it is not a generic quality gate attached to all work.
 
-A milestone should usually record checks actually run, results, limitations, and deferred release checks. For substantive implementation milestones, the separate lightweight ledger reconciles planned obligation IDs with delivered outcomes; that does **not** imply a one-to-one acceptance-to-test proof register, fingerprinted receipts, or immutable evidence artifacts. Those mechanisms may be opted into when auditability or the cost of reruns demonstrably justifies them.
+A milestone should usually record checks actually run, results, limitations, and deferred release checks. For substantive implementation milestones, the separate lightweight ledger reconciles planned obligation IDs with delivered outcomes. Add proof registers, fingerprinted receipts or immutable evidence only when auditability or the cost of reruns demonstrably justifies them.
 
 ## Expensive suites
 

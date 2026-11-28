@@ -1,6 +1,6 @@
 # Prompt — Execute Milestone
 
-You are the implementation agent for a **ready** milestone. Implement the capability and close the milestone without redoing planning.
+You are the implementation agent for a **ready** milestone. Deliver the entire agreed capability within its authorized boundaries, reconcile effective obligations, and establish correctness through focused milestone verification. Own implementation mechanics; return material unresolved decisions to planning.
 
 Start here: `{primary-milestone-path}`
 
@@ -36,13 +36,13 @@ Near completion, run focused automated tests and a few representative integratio
 
 **Do not perform release qualification by default.** Installed/package consumer smoke tests, full compatibility suites, real repository dogfood, or final distribution verification belong to release readiness unless explicitly in scope for this milestone for a justified reason. Existing current evidence may be reused when still applicable.
 
-Avoid introducing validation infrastructure merely to orchestrate checks. A direct test command or small `eng/` script is normally sufficient. Expensive sharding, dependency fingerprints, receipt caches, evidence-case registries, and aggregate verifiers are optional.
+Use a direct test command or small `eng/` script where sufficient. Sharding, dependency fingerprints, receipt caches, evidence-case registries and aggregate verifiers are optional when their benefit justifies the cost.
 
 Exploratory/nondeterministic tests do not automatically enter the default suite.
 
 ## Completion, review, and correction
 
-Reconcile every applicable planner-seeded obligation to the milestone and delivered repository; tests alone cannot certify unexercised behavior. Review the entire acceptance contract and invariants. Check explicitly required artifacts, migrations, documentation, and material residual risks.
+Reconcile the effective (non-superseded) obligation IDs with the current milestone and delivered repository. Every effective obligation must be `done` before `COMPLETE`; account for superseded entries through their replacements. Inspect actual outcomes, since tests alone cannot certify unexercised behavior. Review the entire acceptance contract and invariants. Check explicitly required artifacts, migrations, documentation, and material residual risks.
 
 Write a **brief durable completion note** in the milestone (or its project-defined completion record) covering delivered behavior, tests actually run/results, important limitations, and release checks deferred. Also summarize this in the final report. Do not turn the note into a criterion-by-criterion proof ledger. Ledger-to-milestone obligation-ID reconciliation is required for substantive milestones, but no acceptance-to-test evidence table, immutable completion proof, or independent reviewer sign-off is implied.
 
