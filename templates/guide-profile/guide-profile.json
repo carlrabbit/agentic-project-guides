@@ -2,15 +2,15 @@
   "schemaVersion": 2,
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "1.0.1",
-    "tag": "v1.0.1",
+    "version": "1.1.0",
+    "tag": "v1.1.0",
     "revision": "<full-peeled-commit-sha>",
     "localPath": ".guide/system"
   },
   "appliedProfiles": [
     {
       "id": "base",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "scopes": [
         {
           "kind": "repository"
