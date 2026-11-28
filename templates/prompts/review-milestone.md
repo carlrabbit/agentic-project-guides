@@ -41,6 +41,6 @@ Apply *Correction discipline* and *Retrospective planner feedback* in `meta/MILE
 
 ## Retrospective planner feedback (only if warranted)
 
-If concrete later evidence shows a material omission in the **ready planning handoff** or an avoidable miss or overreach by an **earlier implementation reviewer**, add one line to the project's planner feedback log as the execution model describes. Do not log defects you are finding for the first time, hypothetical risks, or entries that only show a review happened. In a read-only review, propose the line instead.
+If concrete later evidence shows a material omission in the **ready planning handoff** or an avoidable miss or overreach by an **earlier implementation reviewer**, add one line to the project's planner feedback log as the execution model describes. This applies even in a first review when it establishes that planning omitted a material requirement. Do not log ordinary implementation defects, unforeseeable failures, hypothetical risks, or entries that only show a review happened. In a read-only review, propose the line instead.
 
 Report **Accept**, **Corrections required**, or **Blocked on material decision**. Cite exact evidence from code and checks for findings; acknowledge unverified areas without manufacturing defects. When corrections are required, provide a concise actionable correction prompt (or an amendment handoff when required) for the implementer and the specific focused rechecks. Do not require an independent approval subsystem unless the milestone explicitly needs human judgment.

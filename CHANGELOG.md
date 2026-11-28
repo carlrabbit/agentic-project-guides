@@ -24,7 +24,7 @@ Why minor, not patch: this release changes when a milestone counts as `ready`, a
 ### Added — milestone amendments and ledger statuses
 
 - For material corrections, a versioned amendment to the milestone replaces oversized chat prompts. An amendment is planning work: a reviewer who writes one acts as planner; otherwise the reviewer proposes it.
-- The execution ledger gains `reopened` and `superseded` statuses and an *Amendments* section. Original IDs are kept; refined obligations get traceable sub-IDs (for example `AC-03.1`) and new ones the next free ID.
+- The execution ledger gains `reopened` and `superseded` statuses and an *Amendments* section. Planning owns obligation identity and meaning; the implementer owns status and may reopen a `done` entry on new evidence. Original IDs are kept; refined obligations get traceable sub-IDs (for example `AC-03.1`) and new ones the next free ID. Completion requires all effective (non-superseded) obligations to be `done`; superseded entries are covered by their replacements.
 
 ### Added — optional retrospective planner feedback
 
