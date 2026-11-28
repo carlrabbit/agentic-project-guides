@@ -27,8 +27,8 @@ Store the source repository, guide version, Git tag, peeled commit SHA, and snap
 {
   "guideSystem": {
     "repository": "carlrabbit/agentic-project-guides",
-    "version": "1.1.0",
-    "tag": "v1.1.0",
+    "version": "1.1.1",
+    "tag": "v1.1.1",
     "revision": "<full-peeled-commit-sha>",
     "localPath": ".guide/system"
   }
@@ -37,7 +37,7 @@ Store the source repository, guide version, Git tag, peeled commit SHA, and snap
 
 These fields extend the existing schema-version-2 metadata object; local profile versions remain independent. The recorded pin must match the vendored contents. A mismatch is a migration/authority defect; do not silently update from upstream or treat an arbitrary local edit as shared methodology.
 
-Use `git subtree add --prefix=.guide/system <guide-remote> v1.1.0 --squash` for initial installation, and `git subtree pull --prefix=.guide/system <guide-remote> <new-tag> --squash` when upgrading if the repository already uses subtree. A tracked file copy of the exact tagged tree is acceptable where subtree tooling is unavailable; **do not introduce a package manager, generator, or live-submodule requirement** just to install Markdown. For either method, verify the source tag/commit and resulting tree, update the metadata, and commit the snapshot and direct project-authority migration together. An upgrade must not override unrelated local content.
+Use `git subtree add --prefix=.guide/system <guide-remote> v1.1.1 --squash` for initial installation, and `git subtree pull --prefix=.guide/system <guide-remote> <new-tag> --squash` when upgrading if the repository already uses subtree. A tracked file copy of the exact tagged tree is acceptable where subtree tooling is unavailable; **do not introduce a package manager, generator, or live-submodule requirement** just to install Markdown. For either method, verify the source tag/commit and resulting tree, update the metadata, and commit the snapshot and direct project-authority migration together. An upgrade must not override unrelated local content.
 
 The snapshot includes the upstream guide tree unchanged and should retain relative Markdown links. No attempt to filter active profiles, rewrite internal references, or synthesize a partial guide distribution is required. Avoid loading the entire snapshot into model context: read only the task router, selected prompt, applicable models/profiles, and relevant project research.
 

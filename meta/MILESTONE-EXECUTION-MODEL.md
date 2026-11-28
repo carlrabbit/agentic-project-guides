@@ -6,12 +6,12 @@ Authoritative for milestone sizing, readiness, implementation ownership, executi
 
 ## Purpose and economics
 
-Plan **coherent capabilities at agent scale**, not human-sized increments. Invest substantial planning effort when needed to resolve material decisions and prevent implementer ambiguity, omitted constraints, and correction cycles. Optimize the **total outcome and downstream execution cost**, not planner time, token count, or document length independently. Economical implementation and validation do not mean shallow planning. The cost of discarding a reversible branch is often lower than the cost of repeated incremental implementation and exhaustive proof machinery.
+Plan **coherent capabilities at agent scale**. Invest the planning effort needed to resolve material decisions, prevent ambiguity and missed obligations, and reduce correction cycles. Optimize the **total outcome and downstream execution cost**. A disposable implementation branch can be cheaper than incremental delivery and extensive proof machinery. Apply [methodological economy](META-GUIDE.md#methodological-economy) throughout.
 
 The default planning question is: *What is the largest coherent capability we can implement, evaluate, and, if necessary, discard at acceptable cost?*
 
 - A milestone may span substantial refactoring, cross-component implementation, or a complete subsystem.
-- Do not split work simply because it involves many files, requires hours of agent execution, or would be large for a human developer.
+- Keep a coherent capability together even when it spans many files, requires hours of agent execution, or would be large for a human developer.
 - Split when the outcomes are independent, the capability becomes semantically incoherent, a material decision requires separate investigation, or failure consequences make a smaller boundary economically preferable.
 - Scope remains bounded by product intent and authority, not by a prescribed number of edits, tests, or work packages.
 - Evaluate implementation risk separately from consequence risk. Reversible attempts may be ambitious; irreversible data, security, public-contract, or operational consequences require stronger controls.
@@ -44,7 +44,7 @@ For a **substantive code or system change**, planning must investigate the mater
 - **Affected interactions:** neighboring behavior, similar-but-ineligible inputs, related operating modes (such as preview/check versus mutation), and integration surfaces that could disagree or regress.
 - **Plausible material failures:** incorrect interpretations or defects that ordinary successful examples or a passing build could miss; identify which deserve discriminating checks.
 
-This is an **investigation and decision obligation**, not an instruction to minimize planning work or to write a universal inventory of unrelated system properties. Inspect code, tests, specifications, documentation, and other evidence as deeply as needed. Resolve consequential ambiguities in the ready contract rather than delegating product semantics to the implementer. Do not turn these dimensions into mandatory extra milestone sections, per-invariant ledger rows, or exhaustive test matrices. The implementation agent remains free to choose mechanisms and reversible approaches within the resolved boundaries. Not all changes require semantic equivalence or compilable intermediate artifacts: the explicitly authorized contract determines what is protected.
+This is an **investigation and decision obligation**. Inspect relevant code, tests, specifications, documentation and evidence as deeply as needed. Resolve consequential ambiguities in the ready contract. Record material conclusions in existing milestone sections or project authority; the ledger inventories deliverable outcomes, not individual invariants. Choose verification under the Validation Model. The implementation agent remains free to choose mechanisms and reversible approaches within the resolved boundaries. Not all changes require semantic equivalence or compilable intermediate artifacts: the explicitly authorized contract determines what is protected.
 
 ## Executor feasibility and pre-ready assessment
 
@@ -56,7 +56,9 @@ For every **substantive milestone**, the planner confirms before `ready` that th
 - **Resolve missing prerequisites before `ready`:** find an authorized provisioning step or an available alternative executor or locus, or keep the milestone in `draft`. Only a routine, low-risk uncertainty may become an initial executor preflight, and it needs a stated fallback. Missing access never justifies moving required milestone checks to release or replacing a required real boundary with a mock.
 - **Review your own draft before `ready`** from two perspectives: (1) *target state* — design choices resolved, obligations covered, implementation and verification feasible; (2) *conformance* — project authority, existing contracts and conventions, ownership, existing evidence, and the quality of any seeds. Fix what you find. This is the planner's existing self-review, not a separate reviewer or gate.
 
-Record the conclusions and any remaining preflights in the existing milestone sections. This adds no environment inventory, test matrix or readiness artifact; implementation mechanics remain the executor's choice.
+Record the conclusions and remaining preflights in the existing milestone sections. Leave implementation mechanics to the executor.
+
+Example: the designated Windows executor's SDK and local build route are established by current project authority. An isolated test database is documented and authorized; only its routine availability at execution time is uncertain. Specify a connection preflight and an already-authorized equivalent disposable fallback (or report a blocker if it fails). In contrast, an unverified ability to access the only required real integration target leaves the milestone in `draft`.
 
 ## The ready contract
 
@@ -68,7 +70,7 @@ Use [the milestone template](../templates/milestones/milestone-template.md). A r
 4. **Acceptance:** independently deliverable, verifiable outcomes; not a test-case inventory or artificially compressed summary.
 5. **Validation and execution feasibility:** discriminating checks for plausible consequential defects and boundary violations, with the executor capabilities, prerequisites and loci needed to run them; explicitly identify any exceptional milestone-stage qualification.
 
-Reference only project authority needed to implement the change. Include documentation impact, migration, or required human judgment where material. The acceptance contract must preserve all independently deliverable, material obligations; do not collapse distinct outcomes merely to shorten the document. For a substantive milestone, assign stable IDs to those obligations (including required documentation or migration deliverables) and seed the same IDs in a lightweight execution ledger before `ready`. A genuinely trivial, indivisible task may omit a ledger with a short rationale. No evidence-case registry, test matrix, or one-to-one acceptance-to-test mapping is implied.
+Reference only project authority needed to implement the change. Include documentation impact, migration, or required human judgment where material. The acceptance contract must preserve all independently deliverable, material obligations; do not collapse distinct outcomes merely to shorten the document. For a substantive milestone, assign stable IDs to those obligations (including required documentation or migration deliverables) and seed the same IDs in a lightweight execution ledger before `ready`. A genuinely trivial, indivisible task may omit a ledger with a short rationale. Use the ledger for deliverable accounting and the Validation Model to select checks.
 
 **Completeness and correctness are separate concerns.** The obligation inventory prevents the executor from losing planned work; focused validation establishes credible behavior. One test or architectural inspection may support multiple outcomes. A passing test suite alone never excuses ignoring an obligation it does not cover.
 
@@ -115,7 +117,7 @@ For every **substantive implementation milestone**, planning seeds a compact `.e
 - The ledger keeps every ID ever issued (the history). The **effective** obligations are the entries that are not `superseded`; they must match the obligation IDs of the current, possibly amended milestone. A `superseded` entry names the IDs that replace it and is accounted for by them; it never hides unfinished work.
 - Before `COMPLETE`, reconcile the effective obligations with the current milestone and account for each entry against the delivered result. Every effective obligation must be `done`; a genuine blocker ends the run as `BLOCKED`, not `COMPLETE`. An entry is `done` only when the actual outcome is present; a green aggregate test or assertion of completion alone is insufficient. Unfinished entries require correction or a genuine blocker, never silent omission.
 
-Use [the compact ledger template](../templates/milestones/execution-ledger-template.md). Do **not** mandate evidence-case IDs, per-obligation proof links, validation gate IDs, work-package mappings, receipt fingerprints, or immutable acceptance-to-proof registries. This is a lightweight completeness check, not a release or testing gate. Keep the ledger through implementation and review; afterward retain or archive it according to project policy, with a short durable milestone completion note.
+Use [the compact ledger template](../templates/milestones/execution-ledger-template.md) for completeness accounting; keep correctness evidence separate under the Validation Model. Per-obligation proof machinery is outside the default ledger contract. Keep the ledger through implementation and review; afterward retain or archive it according to project policy, with a short durable milestone completion note.
 
 ## Completion and review
 
@@ -126,15 +128,15 @@ At completion:
 - run focused automated checks and a small number of representative integrations appropriate to actual risks;
 - identify any known gaps and release-only checks that have been deferred;
 - update direct documentation or migration material explicitly in scope;
-- write a short **durable completion note** in the milestone or a project-defined completion record, then report the implementation, validation performed and results, and residual risks. This note is not a criterion-to-proof registry.
+- write a short **durable completion note** in the milestone or a project-defined completion record, then report the implementation, validation performed and results, and residual risks. Summarize the outcome and material evidence rather than mapping proof to every criterion.
 
-Do not create a separate validation case for each acceptance clause merely to produce a complete table. Existing current test results may be reused when still relevant. A brief review of architecture and behavior is usually sufficient; mandatory independent human sign-off requires an explicit reason.
+Select checks by diagnostic value across acceptance clauses and reuse current results when still relevant. A brief review of architecture and behavior is usually sufficient; mandatory independent human sign-off requires an explicit reason.
 
 Release preparation owns final package/installation/consumer, compatibility, cross-platform, and operational qualification of the integrated release candidate unless the milestone itself is about those boundaries or a material risk justifies earlier qualification.
 
 ### Correction discipline
 
-Review findings must describe concrete defects, why they matter, and a **smallest credible focused verification** of the repair. A correction prompt must not automatically grow acceptance criteria, evidence cases, validation stages, test infrastructure, or broad regression requirements. If a prior validation contract is disproportionate, simplify it instead of carrying accumulated gates forward. Expand the contract only for a newly demonstrated material risk or an explicitly requested product change. Add a small lasting regression check for a recurring, deterministic defect when worthwhile; otherwise a focused disposable verification may suffice. Use [the canonical review/correction prompt](../templates/prompts/review-milestone.md) when a separate reviewer prepares correction instructions.
+Review findings must describe concrete defects, why they matter, and a **smallest credible focused verification** of the repair. Keep the existing contract and focused verification by default. Simplify disproportionate inherited validation. Expand the contract only for a newly demonstrated material risk or an explicitly requested product change. Add a small lasting regression check for a recurring, deterministic defect when worthwhile; otherwise a focused disposable verification may suffice. Use [the canonical review/correction prompt](../templates/prompts/review-milestone.md) when a separate reviewer prepares correction instructions.
 
 For material or recurring findings, first classify the cause: a clear contract was violated; the contract was ambiguous or incomplete; technical or verification design was wrongly delegated; a feasibility assumption was wrong; or obligations were too coarse. Fix the cause instead of repeating an inadequate instruction. Before writing corrections, inspect the current milestone (with any amendments), relevant authority, the actual branch and ledger, and the findings. Keep unaffected decisions and still-valid evidence.
 
@@ -147,7 +149,9 @@ If the existing contract and obligations are sufficient, use a short correction 
 - identify the amendment in the ledger by a local label, and give the exact amended revision (for example the commit SHA) in the execution instruction instead of restating the amendment in chat;
 - get authorization for material scope changes, and open a new milestone only for an independent delivery outcome.
 
-A defect repair alone needs no new ID. There is no second ledger, proof registry or separate amendment artifact type. The implementer confirms ledger statuses against live results, not against earlier claims.
+A defect repair alone needs no new ID. Record amendments in the existing milestone and ledger. The implementer confirms ledger statuses against live results, not against earlier claims.
+
+Example: a regression in delivered transformation support reopens AC-03 directly. If review instead establishes that the contract omitted independently deliverable syntax and semantic transformation requirements, the authorized planner amends AC-03 into AC-03.1 and AC-03.2, marks the parent superseded, and records the local amendment label A1. The executor receives the exact amended revision and completes both effective obligations.
 
 ### Retrospective planner feedback
 
@@ -157,7 +161,10 @@ When later evidence shows a material omission in a ready milestone (**PLAN**) or
 YYYY-MM-DD | <milestone-or-PR> | <PLAN-or-REVIEW> | <specific observable miss> | <evidence reference>
 ```
 
-Record what the planner or earlier reviewer could reasonably have seen, not a guessed root cause. Whether to log depends on whose miss it was, not on when it was found: a first review that establishes a material planning omission logs a `PLAN` line, while ordinary implementation defects (normal review output), unforeseeable failures and hypothetical risks are not logged. The log is optional retrospective data: it is not milestone context, acceptance evidence or a gate, and nobody is required to read or analyze it. Do not backfill past milestones. In a read-only review, propose the line instead of writing it.
+Record the observable miss that the planner or earlier reviewer could reasonably have seen, with concrete evidence rather than a guessed root cause.
+
+Example (illustrative identifiers): `2026-11-28 | M0042 | PLAN | Reset test specified page one as its initial state, so missing reset behavior would pass | PR #42 review: test PaginationReset`.
+ Whether to log depends on whose miss it was, not on when it was found: a first review that establishes a material planning omission logs a `PLAN` line, while ordinary implementation defects (normal review output), unforeseeable failures and hypothetical risks are not logged. The log is optional retrospective data: it is not milestone context, acceptance evidence or a gate, and nobody is required to read or analyze it. Do not backfill past milestones. In a read-only review, propose the line instead of writing it.
 
 ### Terminal execution outcomes
 
@@ -169,7 +176,7 @@ These describe the execution run; they do not add lifecycle states. An agent mus
 
 ## Workflow types and review
 
-Normal feature, migration, diagnostic, documentation synchronization, and release-readiness work can use dedicated planning prompts where their delivery boundary differs. Special prompts use the lightweight planner-seeded obligation ledger for substantive milestones but must not reinstate evidence-case registries, per-criterion testing gates, or other proof machinery.
+Normal feature, migration, diagnostic, documentation synchronization, and release-readiness work can use dedicated planning prompts where their delivery boundary differs. Special prompts apply the same substantive-milestone ledger and proportionate validation rules.
 
 Milestone-scoped human review is optional unless required by the project or milestone. Approved reviews are historical decisions, not rolling approval of future changes. See [Human Review Model](HUMAN-REVIEW-MODEL.md).
 

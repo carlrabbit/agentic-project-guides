@@ -34,9 +34,9 @@
 
 ## Validation
 
-**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Do not require one test per invariant or universal semantic equivalence. Name real targets/loci where material. For nontrivial verification specify distinguishing inputs/state, action, test boundary/doubles, independent oracle and relevant side effects where needed; retain material prior test guarantees and comparable measurement conditions when applicable.>
+**Milestone:** <Discriminating focused checks chosen from plausible consequential failures; when relevant, contrast allowed/disallowed cases and check cross-mode consistency or protected properties, with representative real integration fixtures. Choose checks across obligations by diagnostic value and against the authorized invariants. Name real targets/loci where material. For nontrivial verification specify distinguishing inputs/state, action, test boundary/doubles, independent oracle and relevant side effects where needed; retain material prior test guarantees and comparable measurement conditions when applicable.>
 
-**Execution and verification feasibility:** <For substantive work: the intended executor and locus; the tools/commands, services, access and permissions it needs, stating briefly which are checked, documented or assumed; any authorized setup or alternative locus; and any routine initial preflight with its fallback. Material prerequisites are resolved before `ready`. No generic environment inventory.>
+**Execution and verification feasibility:** <For substantive work: the intended executor and locus; the tools/commands, services, access and permissions it needs, stating briefly which are checked, documented or assumed; any authorized setup or alternative locus; and any routine initial preflight with its fallback. Material prerequisites are resolved before `ready`. Record only material feasibility facts.>
 
 **Important risks:** <Plausible incorrect behaviors and protected-boundary violations that the chosen checks should expose; include focused mitigation where material.>
 

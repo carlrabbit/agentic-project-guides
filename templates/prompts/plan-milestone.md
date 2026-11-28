@@ -4,15 +4,17 @@ Convert the requested capability into a ready milestone for a disconnected imple
 
 `{milestone}`
 
+**Ready means:** a complete, self-contained implementation contract with resolved material decisions (or bounded experiments), a credible authorized implementation and verification route for the intended executor, and a planner-seeded obligation ledger for substantive work. Critically review the draft against the repository and executor before accepting it as ready.
+
 Use the product repository's pinned `.guide/system/` as **planning** methodology (or this repository's root when planning guide maintenance). Consult `.guide/system/README.md` for task routing and selectively load applicable models and shared profiles. Do not use drifting upstream `main`, copy guides into project docs, or require ordinary implementers to load the snapshot.
 
 ## Objective: agent-scaled, coherent delivery
 
-Plan the **largest coherent capability economical to implement and evaluate**, not the smallest human-sized vertical slice. A milestone may implement an entire subsystem, cross-cutting feature, or structural migration. Do not split merely because many edits or tests are involved.
+Plan the **largest coherent capability economical to implement and evaluate**. A milestone may implement an entire subsystem, cross-cutting feature or structural migration, even if it involves many edits or tests.
 
 Explicitly distinguish **reversible implementation uncertainty** (cheap to experiment, discard, and retry) from **consequential risks** (irreversible data, security, public/persisted compatibility, operational impact). Prefer enabling experimentation to preemptively shrinking reversible work. Split or stage only where independent outcomes, meaningful boundaries, unresolved material decisions, or expensive failure consequences justify it.
 
-Invest as much planning investigation and decision work as material consequences require. **Do not optimize for minimal planner effort, tokens, or document length.** The objective is to prevent implementer ambiguity, lost requirements, and costly correction cycles, while keeping implementation and verification efficient. Avoid process artifacts that do not improve the resulting contract.
+Invest as much planning investigation and decision work as material consequences require. Optimize the total development outcome: prevent ambiguity, lost requirements and costly correction cycles while keeping execution and verification efficient. Apply *Methodological economy* in `meta/META-GUIDE.md`.
 
 ## Planning authority and repository inspection
 
@@ -47,7 +49,7 @@ For substantive milestones, investigate the affected implementation and product 
 
 Inspect relevant implementation, tests, contracts, and research; investigate competing interpretations rather than silently choosing the simplest. Resolve consequential ambiguity before `ready`, including through deep planning research where useful. Deliberately delegate only **implementation mechanics or bounded reversible choices**, not unsettled product semantics. Do not impose a blanket semantic-equivalence, compilability, or compatibility requirement where the product explicitly permits otherwise.
 
-Record the material conclusions in the existing architecture/invariants, scope, acceptance, validation, or referenced project-authority sections. Detailed analysis is welcome; it need not become a separate document, checklist, or exhaustive matrix. A complete handoff and complete ledger obligations matter more than brevity.
+Record the material conclusions in the existing architecture/invariants, scope, acceptance, validation or referenced project-authority sections. Prioritize a complete handoff and obligation inventory over brevity.
 
 ## Implementation and verification feasibility — planning responsibility
 
@@ -58,7 +60,7 @@ Apply *Executor feasibility and pre-ready assessment* in `meta/MILESTONE-EXECUTI
 3. Define a runnable milestone verification route, including the real integration where it decides correctness. You need not run the tests or predict how they are written.
 4. Resolve missing prerequisites now, or keep the milestone in `draft`. Only a routine low-risk uncertainty may become a named initial preflight with a fallback.
 
-A plan that relies on unavailable tools, CI access the executor does not have, unauthorized provisioning, or a mandatory check nobody can run is **not ready**, however good its acceptance criteria. Record the conclusions in the existing milestone sections; no separate inventory or test matrix.
+A plan that relies on unavailable tools, CI access the executor does not have, unauthorized provisioning, or a mandatory check nobody can run is **not ready**, however good its acceptance criteria. Record the conclusions concisely in the existing milestone sections.
 
 ## Ready milestone contract
 
@@ -71,7 +73,7 @@ Produce a single primary milestone following `templates/milestones/milestone-tem
 5. **Validation:** high-information focused checks derived from plausible failure modes and runnable with the executor's actual tools, targets and loci, including contrasting boundaries and cross-mode invariants where material; identify consequence risks and legitimate checks deferred to release.
 6. **Required authority and exceptional obligations:** only where they matter, including direct docs, local specializations, permissions, or required human judgment.
 
-**Seed a lightweight obligation ledger by default for substantive implementation milestones**, even if the agent expects to finish in one session. Give each independently deliverable material acceptance obligation a stable ID, including direct documentation/migration work, and seed one pending row with that same ID and meaning in `.execution/<milestone-id>.md` **before** `ready`. Do not compress distinct requirements into one vague row. A genuinely trivial indivisible task may omit the ledger with a brief rationale. Do not require test/evidence cases per criterion, receipts, gate matrices, or proof registries: obligation completeness is not exhaustive validation.
+**Seed a lightweight obligation ledger by default for substantive implementation milestones**, even if the agent expects to finish in one session. Give each independently deliverable material acceptance obligation a stable ID, including direct documentation/migration work, and seed one pending row with that same ID and meaning in `.execution/<milestone-id>.md` **before** `ready`. Do not compress distinct requirements into one vague row. A genuinely trivial indivisible task may omit the ledger with a brief rationale. Use the ledger for obligation completeness and the validation plan for correctness evidence.
 
 Make the contract complete for the project's baseline executor without relying on planning chat history or reading the guide. Do not reduce a coherent milestone merely because implementing it may be lengthy; the implementer can decompose and resume work internally.
 
@@ -86,9 +88,9 @@ Use `meta/VALIDATION-MODEL.md`, including *Planner-owned verification design*. *
 
 A real integration boundary may matter at milestone stage even when installed-product qualification does not. State exceptional earlier consumer tests only where packaging/installation is itself the milestone outcome, project authority mandates it, or the risk of deferring is material.
 
-Do not make a general test matrix from every acceptance clause. Reuse relevant current evidence; do not add fingerprinting/sharding infrastructure unless repeated validation cost justifies it. Use the target/locus/platform detail necessary for meaningful real-boundary checks; integration need not run in CI. Authorized execution is not permission for new machine software or CI infrastructure.
+Reuse relevant current evidence and choose checks across obligations by diagnostic value; add fingerprinting/sharding infrastructure only when repeated validation cost justifies it. Use the target/locus/platform detail necessary for meaningful real-boundary checks; integration need not run in CI. Authorized execution is not permission for new machine software or CI infrastructure.
 
-For reviews/corrections, prefer concrete defects and minimal focused rechecks. Never pre-author a policy that every correction must grow the validation contract.
+For reviews/corrections, prefer concrete defects and minimal focused rechecks within the existing contract; expand it only under the correction rules.
 
 ## Project documentation and transport
 
@@ -100,7 +102,7 @@ Provide the primary milestone path, affected authority documents, actual Git bra
 
 ## Planner-owned readiness review
 
-Critically review and revise your **initial draft** against the actual repository and intended executor; do not hand over a questionable draft as ready. Review from both perspectives in `meta/MILESTONE-EXECUTION-MODEL.md` (target state, and conformance with project authority). This is your own review, not a separate artifact or approval. Before marking `ready`, check that:
+Critically review and revise your **initial draft** against the actual repository and intended executor before handing it over as ready. Review from both perspectives in `meta/MILESTONE-EXECUTION-MODEL.md` (target state, and conformance with project authority). This is your own review, not a separate artifact or approval. Before marking `ready`, check that:
 - material architectural, semantic, compatibility, security, scope and quality-critical technical/verification choices are decided or bounded by a credible evaluation; applicable rules, ownership, existing evidence and any seeds are sound; nothing material is merely forwarded as context;
 - affected behavior/contracts have been investigated, with intended changes, tolerated secondary consequences, protected invariants, and interactions made unambiguous where material;
 - plausible consequential failures that a happy path or build might miss have been considered when selecting discriminating checks;

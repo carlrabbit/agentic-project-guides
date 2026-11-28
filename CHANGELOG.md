@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.1 (planned patch)
+
+Migration required: no project-contract or structural migration. Adopting repositories update the complete pinned `.guide/system/` snapshot and matching `.guide-profile.json` metadata together through the direct guide-update workflow. Existing milestones and ledgers remain valid.
+
+### Editorial — LLM-oriented instruction clarity
+
+- Prefer actionable objectives and concise reasons; consolidate recurring process-economy disclaimers while retaining concrete authority boundaries, mandatory readiness and verification requirements, and decision-boundary reminders.
+- Add short illustrative preflight, amendment and planner-feedback examples; preserve the distinction between historical and effective obligations and strengthen their visibility in the self-contained execution/review instructions.
+- Put the definition of readiness at the start of the planning prompt and retain the closing self-review. Preserve independent implementation handoffs and all 1.1.0 methodology; no new gates, requirements or evaluation infrastructure.
+
+Editorial changes are hypotheses about instruction effectiveness, not empirically demonstrated improvements. Tag `v1.1.1` after the patch is merged, following 1.1.0.
+
+---
+
 ## 1.1.0 (planned minor)
 
 Migration required: conditional. Every adopting repository updates its pinned snapshot and metadata. Active milestones need review only if their readiness is in doubt under the new rules; completed milestones are not touched.
